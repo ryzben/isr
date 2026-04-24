@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My account — Islamic School Review</title>
+  <meta name="description" content="Your Islamic School Review dashboard — saved schools, reviews you've written, inquiries you've sent, and account settings." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/account.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:title" content="My account — Islamic School Review" />
+  <meta property="og:description" content="Manage your saved schools, reviews, inquiries, and settings." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="My account — Islamic School Review" />
+  <meta name="twitter:description" content="Manage your saved schools, reviews, inquiries, and settings." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* ========== Account shell ========== */
+    .account-hero {
+      padding: 56px 0 28px;
+      background:
+        radial-gradient(900px 380px at 90% 0%, var(--primary-soft) 0%, transparent 55%),
+        radial-gradient(700px 340px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .account-hero .container {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .account-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);
+      color: #fff;
+      display: grid; place-items: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(15,81,50,0.25);
+    }
+    .account-hero__meta { flex: 1; min-width: 220px; }
+    .account-hero .eyebrow { display: inline-block; margin-bottom: 6px; }
+    .account-hero h1 {
+      font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+      margin: 0 0 6px;
+      line-height: 1.15;
+    }
+    .account-hero__sub {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .account-hero__sub span { color: var(--muted); margin: 0 6px; }
+    .account-hero__actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* ========== Tabs ========== */
+    .account-tabs-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 64px;
+      z-index: 5;
+    }
+    .account-tabs {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .account-tabs button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      padding: 16px 18px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color .15s ease, border-color .15s ease;
+    }
+    .account-tabs button:hover { color: var(--ink); }
+    .account-tabs button.is-active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 600;
+    }
+    .account-tabs .pill-count {
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    /* ========== Panel base ========== */
+    .account-section { padding: 40px 0 72px; }
+    .panel { display: none; }
+    .panel.is-active { display: block; }
+    .panel-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .panel-header h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+    }
+    .panel-header p { color: var(--ink-soft); margin: 0; font-size: 0.95rem; }
+
+    /* ========== Saved schools grid ========== */
+    .saved-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .saved-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .15s ease, transform .15s ease;
+      position: relative;
+    }
+    .saved-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .saved-card__banner {
+      height: 90px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+    .saved-card__banner--af { background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%); }
+    .saved-card__banner--my { background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%); }
+    .saved-card__banner--az { background: linear-gradient(135deg, #5c2e2e 0%, #894848 100%); }
+    .saved-card__banner--ti { background: linear-gradient(135deg, #2d4a5e 0%, #467089 100%); }
+    .saved-card__remove {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 28px; height: 28px;
+      background: rgba(255,255,255,0.9);
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      display: grid; place-items: center;
+      transition: background .15s ease, color .15s ease;
+    }
+    .saved-card__remove:hover { background: #fff; color: #c0392b; }
+    .saved-card__body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .saved-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--ink);
+    }
+    .saved-card h3 a { color: inherit; text-decoration: none; }
+    .saved-card h3 a:hover { text-decoration: underline; }
+    .saved-card__loc { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+    .saved-card__meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .saved-card__meta .stars { color: var(--accent); letter-spacing: 0.5px; font-size: 0.95rem; }
+    .saved-card__footer {
+      display: flex;
+      gap: 8px;
+      padding: 12px 18px;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .saved-card__footer a {
+      flex: 1;
+      text-align: center;
+      padding: 8px 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .saved-card__footer .primary { background: var(--primary); color: #fff; }
+    .saved-card__footer .primary:hover { background: #0a3a24; }
+    .saved-card__footer .ghost { background: transparent; color: var(--ink-soft); border: 1px solid var(--line); }
+    .saved-card__footer .ghost:hover { background: var(--surface); color: var(--ink); }
+
+    .empty-add-card {
+      background: var(--bg);
+      border: 2px dashed var(--line);
+      border-radius: var(--r-lg);
+      display: grid; place-items: center;
+      min-height: 220px;
+      text-align: center;
+      padding: 24px;
+      text-decoration: none;
+      color: var(--ink-soft);
+      transition: border-color .15s ease, color .15s ease;
+    }
+    .empty-add-card:hover { border-color: var(--primary); color: var(--primary); }
+    .empty-add-card__plus {
+      font-size: 2rem;
+      font-weight: 300;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* ========== Reviews list ========== */
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      margin-bottom: 14px;
+    }
+    .review-item__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .review-item h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      margin: 0 0 4px;
+    }
+    .review-item h3 a { color: inherit; text-decoration: none; }
+    .review-item h3 a:hover { text-decoration: underline; color: var(--primary); }
+    .review-item__school {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .review-item__school a { color: var(--primary); text-decoration: none; }
+    .review-item__school a:hover { text-decoration: underline; }
+    .review-item__stars { color: var(--accent); font-size: 1.05rem; letter-spacing: 1px; margin-bottom: 8px; }
+    .review-item__body {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.6;
+      margin: 0 0 12px;
+    }
+    .review-item__foot {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .review-item__foot a { color: var(--primary); text-decoration: none; }
+    .review-item__foot a:hover { text-decoration: underline; }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .status-chip--live { background: #DCFCE7; color: #14532D; }
+    .status-chip--pending { background: #FEF3C7; color: #854D0E; }
+    .status-chip--draft { background: #E0E7FF; color: #3730A3; }
+    .status-chip--closed { background: #F3F4F6; color: #4B5563; }
+
+    /* ========== Inquiries ========== */
+    .inquiry-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 18px 22px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+    .inquiry-item__head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .inquiry-item__mark {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: grid; place-items: center;
+      color: #fff;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .inquiry-item__mark--af { background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%); }
+    .inquiry-item__mark--my { background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%); }
+    .inquiry-item__mark--ti { background: linear-gradient(135deg, #2d4a5e 0%, #467089 100%); }
+    .inquiry-item h3 {
+      font-family: "Inter", sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin: 0 0 2px;
+    }
+    .inquiry-item h3 a { color: var(--ink); text-decoration: none; }
+    .inquiry-item h3 a:hover { color: var(--primary); }
+    .inquiry-item__sub {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .inquiry-item__body {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      margin: 0 0 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .inquiry-item__date {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .inquiry-item__right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    /* ========== Settings ========== */
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .settings-side {
+      position: sticky;
+      top: 130px;
+    }
+    .settings-side ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .settings-side a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-radius: 8px;
+      border-left: 3px solid transparent;
+    }
+    .settings-side a:hover { background: var(--surface); color: var(--ink); }
+    .settings-side a.is-active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-left-color: var(--primary);
+      font-weight: 500;
+    }
+    .settings-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 26px 28px;
+      margin-bottom: 20px;
+    }
+    .settings-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.2rem;
+      margin: 0 0 4px;
+    }
+    .settings-card > p.helper { color: var(--ink-soft); font-size: 0.9rem; margin: 0 0 18px; }
+    .settings-row {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+    .settings-row:first-of-type { border-top: 0; }
+    .settings-row label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+    .settings-row .val { color: var(--ink-soft); font-size: 0.92rem; }
+    .settings-row input[type="email"],
+    .settings-row input[type="text"] {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font: inherit;
+      font-size: 0.92rem;
+    }
+    .toggle {
+      display: inline-block;
+      position: relative;
+      width: 42px;
+      height: 24px;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle__slider {
+      position: absolute; inset: 0;
+      background: #CBD5E1;
+      border-radius: 999px;
+      transition: background .2s ease;
+      cursor: pointer;
+    }
+    .toggle__slider::before {
+      content: "";
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform .2s ease;
+    }
+    .toggle input:checked + .toggle__slider { background: var(--primary); }
+    .toggle input:checked + .toggle__slider::before { transform: translateX(18px); }
+
+    .danger-zone {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+    }
+    .danger-zone h3 { color: #991B1B; }
+    .danger-zone .btn--danger {
+      background: #DC2626;
+      color: #fff;
+      border: 0;
+      padding: 9px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .danger-zone .btn--danger:hover { background: #B91C1C; }
+
+    /* ========== Empty states ========== */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--surface);
+      border: 1px dashed var(--line);
+      border-radius: var(--r-lg);
+    }
+    .empty-state__icon {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    .empty-state h3 {
+      font-family: "Fraunces", Georgia, serif;
+      margin: 0 0 6px;
+    }
+    .empty-state p {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      max-width: 44ch;
+      margin: 0 auto 16px;
+    }
+
+    @media (max-width: 860px) {
+      .settings-layout { grid-template-columns: 1fr; gap: 24px; }
+      .settings-side { position: static; }
+      .settings-side ul { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+      .settings-row { grid-template-columns: 1fr; gap: 8px; }
+      .inquiry-item { grid-template-columns: 1fr; }
+      .inquiry-item__right { flex-direction: row; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="account.html" class="btn btn--ghost btn--sm" aria-current="page">My account</a>
+      <a href="index.html" class="btn btn--primary btn--sm">Sign out</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="account-hero">
+  <div class="container">
+    <div class="account-avatar" aria-hidden="true">AB</div>
+    <div class="account-hero__meta">
+      <span class="eyebrow">My account</span>
+      <h1>Assalamu alaikum, Aisha.</h1>
+      <p class="account-hero__sub">Member since March 2026 <span>·</span> Parent <span>·</span> Jacksonville, FL</p>
+    </div>
+    <div class="account-hero__actions">
+      <a href="directory.html" class="btn btn--primary btn--sm">Browse schools</a>
+      <a href="write-review.html" class="btn btn--ghost btn--sm">Write a review</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TABS ========== -->
+<div class="account-tabs-bar">
+  <div class="container">
+    <div class="account-tabs" role="tablist">
+      <button type="button" role="tab" class="is-active" data-target="saved" aria-selected="true">
+        <span>Saved schools</span><span class="pill-count">4</span>
+      </button>
+      <button type="button" role="tab" data-target="reviews" aria-selected="false">
+        <span>My reviews</span><span class="pill-count">2</span>
+      </button>
+      <button type="button" role="tab" data-target="inquiries" aria-selected="false">
+        <span>Inquiries</span><span class="pill-count">3</span>
+      </button>
+      <button type="button" role="tab" data-target="settings" aria-selected="false">
+        <span>Settings</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PANELS ========== -->
+<section class="account-section">
+  <div class="container">
+
+    <!-- SAVED SCHOOLS -->
+    <div class="panel is-active" id="panel-saved" role="tabpanel">
+      <div class="panel-header">
+        <div>
+          <h2>Saved schools</h2>
+          <p>Your shortlist. Open a school to read reviews, request info, or remove it.</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <a href="compare.html" class="btn btn--ghost btn--sm">Compare selected</a>
+          <a href="directory.html" class="btn btn--primary btn--sm">+ Add more</a>
+        </div>
+      </div>
+
+      <div class="saved-grid">
+
+        <article class="saved-card">
+          <button class="saved-card__remove" type="button" aria-label="Remove Al-Furqan Academy">×</button>
+          <div class="saved-card__banner saved-card__banner--af">AF</div>
+          <div class="saved-card__body">
+            <h3><a href="school.html">Al-Furqan Academy</a></h3>
+            <p class="saved-card__loc">Jacksonville, FL · K – 12 · Full-time day</p>
+            <div class="saved-card__meta">
+              <span class="stars">—</span>
+              <span>Reviews coming soon</span>
+            </div>
+          </div>
+          <div class="saved-card__footer">
+            <a href="school.html" class="ghost">View profile</a>
+            <a href="school.html#inquire" class="primary">Request info</a>
+          </div>
+        </article>
+
+        <article class="saved-card">
+          <button class="saved-card__remove" type="button" aria-label="Remove MY Academy">×</button>
+          <div class="saved-card__banner saved-card__banner--my">MY</div>
+          <div class="saved-card__body">
+            <h3><a href="school.html">MY Academy</a></h3>
+            <p class="saved-card__loc">Jacksonville, FL · VPK – 12 · Full-time day</p>
+            <div class="saved-card__meta">
+              <span class="stars">—</span>
+              <span>Reviews coming soon</span>
+            </div>
+          </div>
+          <div class="saved-card__footer">
+            <a href="school.html" class="ghost">View profile</a>
+            <a href="school.html#inquire" class="primary">Request info</a>
+          </div>
+        </article>
+
+        <article class="saved-card">
+          <button class="saved-card__remove" type="button" aria-label="Remove Al-Zahra Academy">×</button>
+          <div class="saved-card__banner saved-card__banner--az">AZ</div>
+          <div class="saved-card__body">
+            <h3><a href="school.html">Al-Zahra Academy</a></h3>
+            <p class="saved-card__loc">Jacksonville, FL · K – 8 · Full-time day</p>
+            <div class="saved-card__meta">
+              <span class="stars">—</span>
+              <span>Reviews coming soon</span>
+            </div>
+          </div>
+          <div class="saved-card__footer">
+            <a href="school.html" class="ghost">View profile</a>
+            <a href="school.html#inquire" class="primary">Request info</a>
+          </div>
+        </article>
+
+        <article class="saved-card">
+          <button class="saved-card__remove" type="button" aria-label="Remove Universal Academy of Florida">×</button>
+          <div class="saved-card__banner saved-card__banner--ti">UAF</div>
+          <div class="saved-card__body">
+            <h3><a href="school.html">Universal Academy of Florida</a></h3>
+            <p class="saved-card__loc">Tampa, FL · PreK – 12 · Full-time day</p>
+            <div class="saved-card__meta">
+              <span class="stars">—</span>
+              <span>Reviews coming soon</span>
+            </div>
+          </div>
+          <div class="saved-card__footer">
+            <a href="school.html" class="ghost">View profile</a>
+            <a href="school.html#inquire" class="primary">Request info</a>
+          </div>
+        </article>
+
+        <a href="directory.html" class="empty-add-card">
+          <div>
+            <span class="empty-add-card__plus">+</span>
+            <strong style="display:block; color: var(--ink); margin-bottom: 4px;">Add another school</strong>
+            <span style="font-size: 0.88rem;">Browse the directory to save schools you're considering.</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="panel" id="panel-reviews" role="tabpanel">
+      <div class="panel-header">
+        <div>
+          <h2>My reviews</h2>
+          <p>Reviews you've written. You can edit within 30 days of posting.</p>
+        </div>
+        <a href="write-review.html" class="btn btn--primary btn--sm">+ Write a review</a>
+      </div>
+
+      <article class="review-item">
+        <div class="review-item__top">
+          <div>
+            <h3><a href="school.html">A warm community and serious about Quran.</a></h3>
+            <p class="review-item__school">For <a href="school.html">Al-Furqan Academy</a> · Jacksonville, FL</p>
+          </div>
+          <span class="status-chip status-chip--live">✓ Published</span>
+        </div>
+        <div class="review-item__stars">★★★★★</div>
+        <p class="review-item__body">My son has been at Al-Furqan for two years now and the transformation has been beautiful, mashallah. The Quran program is the main reason we chose it — teachers are patient but expect real effort. Academics are solid; math and science are strong. Tuition is reasonable compared to what we looked at. We'd like to see more extracurriculars and a dedicated gym space.</p>
+        <div class="review-item__foot">
+          <span>Posted March 14, 2026</span>
+          <span>·</span>
+          <span>24 helpful votes</span>
+          <span>·</span>
+          <a href="write-review.html">Edit review</a>
+          <span>·</span>
+          <a href="#">Remove</a>
+        </div>
+      </article>
+
+      <article class="review-item">
+        <div class="review-item__top">
+          <div>
+            <h3><a href="school.html">Draft — save and finish later</a></h3>
+            <p class="review-item__school">For <a href="school.html">MY Academy</a> · Jacksonville, FL</p>
+          </div>
+          <span class="status-chip status-chip--draft">Draft</span>
+        </div>
+        <div class="review-item__stars">★★★★☆</div>
+        <p class="review-item__body">Started writing this after our open-house visit. The principal took time to walk us through the Quran program and the teachers seemed calm with the kids. Need to come back and add more about the facilities and the PTA…</p>
+        <div class="review-item__foot">
+          <span>Draft saved April 2, 2026</span>
+          <span>·</span>
+          <a href="write-review.html">Continue draft</a>
+          <span>·</span>
+          <a href="#">Discard</a>
+        </div>
+      </article>
+
+      <div class="empty-state" style="margin-top: 28px;">
+        <div class="empty-state__icon">✍️</div>
+        <h3>Help another family</h3>
+        <p>You've saved 4 schools. An honest review — good or critical — helps the next parent make a better decision.</p>
+        <a href="write-review.html" class="btn btn--accent btn--sm">Write a review</a>
+      </div>
+    </div>
+
+    <!-- INQUIRIES -->
+    <div class="panel" id="panel-inquiries" role="tabpanel">
+      <div class="panel-header">
+        <div>
+          <h2>Inquiries</h2>
+          <p>Messages you've sent to schools. Replies come to your email as well as here.</p>
+        </div>
+        <a href="directory.html" class="btn btn--primary btn--sm">+ New inquiry</a>
+      </div>
+
+      <article class="inquiry-item">
+        <div>
+          <div class="inquiry-item__head">
+            <span class="inquiry-item__mark inquiry-item__mark--af" aria-hidden="true">AF</span>
+            <div>
+              <h3><a href="school.html">Al-Furqan Academy</a></h3>
+              <p class="inquiry-item__sub">Tour request for Grade 3 · 2 replies</p>
+            </div>
+          </div>
+          <p class="inquiry-item__body">Assalamu alaikum — we're a family new to Jacksonville and interested in a fall tour. Our son is going into 3rd grade, hafiz-in-progress. Also wondering about your Arabic curriculum and whether mid-year transfers are possible.</p>
+          <p class="inquiry-item__date">Sent April 8, 2026</p>
+        </div>
+        <div class="inquiry-item__right">
+          <span class="status-chip status-chip--live">Replied</span>
+          <a href="#" style="font-size: 0.85rem; color: var(--primary); text-decoration: none;">View thread →</a>
+        </div>
+      </article>
+
+      <article class="inquiry-item">
+        <div>
+          <div class="inquiry-item__head">
+            <span class="inquiry-item__mark inquiry-item__mark--my" aria-hidden="true">MY</span>
+            <div>
+              <h3><a href="school.html">MY Academy</a></h3>
+              <p class="inquiry-item__sub">Admissions info · 1 reply</p>
+            </div>
+          </div>
+          <p class="inquiry-item__body">Salam, we'd like information on tuition, scholarships for siblings, and the admissions timeline for the 2026 – 27 school year. We have two children (Grade 1 and PreK).</p>
+          <p class="inquiry-item__date">Sent March 22, 2026</p>
+        </div>
+        <div class="inquiry-item__right">
+          <span class="status-chip status-chip--live">Replied</span>
+          <a href="#" style="font-size: 0.85rem; color: var(--primary); text-decoration: none;">View thread →</a>
+        </div>
+      </article>
+
+      <article class="inquiry-item">
+        <div>
+          <div class="inquiry-item__head">
+            <span class="inquiry-item__mark inquiry-item__mark--ti" aria-hidden="true">UAF</span>
+            <div>
+              <h3><a href="school.html">Universal Academy of Florida</a></h3>
+              <p class="inquiry-item__sub">General question</p>
+            </div>
+          </div>
+          <p class="inquiry-item__body">We're relocating to the Tampa Bay area this summer and exploring schools. Could you share info on your high-school program and availability for 9th grade?</p>
+          <p class="inquiry-item__date">Sent April 18, 2026</p>
+        </div>
+        <div class="inquiry-item__right">
+          <span class="status-chip status-chip--pending">Awaiting reply</span>
+          <a href="#" style="font-size: 0.85rem; color: var(--primary); text-decoration: none;">View thread →</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings" role="tabpanel">
+      <div class="panel-header">
+        <div>
+          <h2>Settings</h2>
+          <p>Manage your profile, password, notifications, and privacy preferences.</p>
+        </div>
+      </div>
+
+      <div class="settings-layout">
+        <aside class="settings-side">
+          <ul>
+            <li><a href="#profile" class="is-active">Profile</a></li>
+            <li><a href="#password">Password &amp; security</a></li>
+            <li><a href="#notifications">Notifications</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#danger">Close account</a></li>
+          </ul>
+        </aside>
+
+        <div>
+          <form class="settings-card" id="profile" onsubmit="event.preventDefault(); alert('Saved.');">
+            <h3>Profile</h3>
+            <p class="helper">This is how we greet you and what schools see on your reviews.</p>
+
+            <div class="settings-row">
+              <label for="display-name">Display name</label>
+              <input type="text" id="display-name" value="Aisha B." />
+              <span></span>
+            </div>
+            <div class="settings-row">
+              <label for="email-address">Email</label>
+              <input type="email" id="email-address" value="ryzben@gmail.com" />
+              <span></span>
+            </div>
+            <div class="settings-row">
+              <label for="role-select">Role</label>
+              <span class="val">Parent · 1 child enrolled</span>
+              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Change</a>
+            </div>
+            <div class="settings-row">
+              <label for="location">Location</label>
+              <input type="text" id="location" value="Jacksonville, FL" />
+              <span></span>
+            </div>
+            <div style="margin-top: 18px; display: flex; gap: 10px;">
+              <button class="btn btn--primary btn--sm" type="submit">Save changes</button>
+              <button class="btn btn--ghost btn--sm" type="reset">Cancel</button>
+            </div>
+          </form>
+
+          <div class="settings-card" id="password">
+            <h3>Password &amp; security</h3>
+            <p class="helper">Last changed 58 days ago. We recommend changing every 6 months.</p>
+
+            <div class="settings-row">
+              <label>Password</label>
+              <span class="val">••••••••••</span>
+              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Change password</a>
+            </div>
+            <div class="settings-row">
+              <label>Two-factor auth</label>
+              <span class="val">Not enabled</span>
+              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Set up</a>
+            </div>
+            <div class="settings-row">
+              <label>Active sessions</label>
+              <span class="val">2 devices signed in</span>
+              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Review</a>
+            </div>
+          </div>
+
+          <div class="settings-card" id="notifications">
+            <h3>Notifications</h3>
+            <p class="helper">Choose what you want to hear about, and how often.</p>
+
+            <div class="settings-row">
+              <label>Replies to my inquiries</label>
+              <span class="val">Email you when a school responds.</span>
+              <label class="toggle"><input type="checkbox" checked /><span class="toggle__slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <label>Review helpful votes</label>
+              <span class="val">Weekly summary of your review activity.</span>
+              <label class="toggle"><input type="checkbox" checked /><span class="toggle__slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <label>Saved-school updates</label>
+              <span class="val">Open houses, tuition changes, new reviews on your saved schools.</span>
+              <label class="toggle"><input type="checkbox" checked /><span class="toggle__slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <label>Weekly digest</label>
+              <span class="val">Our weekly roundup of guides, news, and community voices.</span>
+              <label class="toggle"><input type="checkbox" /><span class="toggle__slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <label>Product announcements</label>
+              <span class="val">New features on Islamic School Review. Rare.</span>
+              <label class="toggle"><input type="checkbox" checked /><span class="toggle__slider"></span></label>
+            </div>
+          </div>
+
+          <div class="settings-card" id="privacy">
+            <h3>Privacy</h3>
+            <p class="helper">Control how you appear to schools and other members.</p>
+
+            <div class="settings-row">
+              <label>Show my display name on reviews</label>
+              <span class="val">When off, reviews show as "A parent in Jacksonville."</span>
+              <label class="toggle"><input type="checkbox" checked /><span class="toggle__slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <label>Allow schools to message me</label>
+              <span class="val">Only schools you've inquired with can message you back.</span>
+              <label class="toggle"><input type="checkbox" checked /><span class="toggle__slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <label>Download my data</label>
+              <span class="val">Export a .zip of your profile, reviews, inquiries, and saved schools.</span>
+              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Request export</a>
+            </div>
+          </div>
+
+          <div class="settings-card danger-zone" id="danger">
+            <h3>Close account</h3>
+            <p class="helper" style="color:#991B1B;">Permanently deletes your account, reviews, inquiries, and saved schools. This cannot be undone.</p>
+            <button class="btn--danger" type="button" onclick="if(confirm('This will permanently delete your account. Are you sure?')) alert('Request submitted. Check your email to confirm.');">Close my account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="#">For parents</a></li>
+        <li><a href="#">For educators</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  // Tab switcher
+  (function() {
+    var buttons = document.querySelectorAll('.account-tabs button');
+    var panels = document.querySelectorAll('.panel');
+    function activate(target) {
+      buttons.forEach(function(b) {
+        var on = b.getAttribute('data-target') === target;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panels.forEach(function(p) {
+        p.classList.toggle('is-active', p.id === 'panel-' + target);
+      });
+      // reflect in URL hash for bookmarking
+      if (history.replaceState) history.replaceState(null, '', '#' + target);
+    }
+    buttons.forEach(function(b) {
+      b.addEventListener('click', function() { activate(b.getAttribute('data-target')); });
+    });
+    // open from hash
+    var h = (location.hash || '').replace('#', '');
+    if (['saved','reviews','inquiries','settings'].indexOf(h) !== -1) activate(h);
+
+    // remove card ×
+    document.querySelectorAll('.saved-card__remove').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var card = btn.closest('.saved-card');
+        if (card) {
+          card.style.transition = 'opacity .2s ease, transform .2s ease';
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          setTimeout(function() { card.remove(); }, 220);
+        }
+      });
+    });
+
+    // Settings side-nav in-page scroll highlight (passive)
+    document.querySelectorAll('.settings-side a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.querySelectorAll('.settings-side a').forEach(function(x) { x.classList.remove('is-active'); });
+        a.classList.add('is-active');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

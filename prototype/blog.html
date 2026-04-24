@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guides &amp; stories — Islamic School Review</title>
+  <meta name="description" content="Practical guides, reported stories, and community voices from the world of Islamic education." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/blog.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/blog.html" />
+  <meta property="og:title" content="Guides &amp; stories — Islamic School Review" />
+  <meta property="og:description" content="Practical guides, reported stories, and community voices from the world of Islamic education." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Guides &amp; stories — Islamic School Review" />
+  <meta name="twitter:description" content="Practical guides, reported stories, and community voices from the world of Islamic education." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Islamic School Review — Guides &amp; stories",
+    "url": "https://www.islamicschoolreview.com/blog.html",
+    "description": "Practical guides, reported stories, and community voices from the world of Islamic education.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Islamic School Review",
+      "logo": "https://www.islamicschoolreview.com/favicon.svg"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* ---------- Blog hero ---------- */
+    .blog-hero {
+      padding: 64px 0 28px;
+      background:
+        radial-gradient(900px 420px at 85% -10%, var(--primary-soft) 0%, transparent 55%),
+        radial-gradient(700px 400px at -5% 110%, var(--accent-soft) 0%, transparent 55%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .blog-hero .eyebrow { margin-bottom: 4px; }
+    .blog-hero h1 {
+      font-size: clamp(2.1rem, 4.2vw, 3rem);
+      max-width: 20ch;
+      margin: 6px 0 14px;
+    }
+    .blog-hero p.lede {
+      font-size: 1.08rem;
+      color: var(--ink-soft);
+      max-width: 62ch;
+    }
+    .blog-search {
+      display: flex;
+      gap: 8px;
+      max-width: 480px;
+      margin-top: 22px;
+    }
+    .blog-search input { flex: 1; }
+
+    /* ---------- Category chips ---------- */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px 0 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .chip:hover { background: var(--surface-alt); color: var(--ink); text-decoration: none; }
+    .chip.is-active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .chip__count {
+      font-size: 0.75rem;
+      padding: 1px 8px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--muted);
+    }
+    .chip.is-active .chip__count { background: rgba(255,255,255,0.15); color: #fff; }
+
+    /* ---------- Featured post ---------- */
+    .featured {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      margin: 36px 0 8px;
+    }
+    .featured__media {
+      aspect-ratio: 4 / 3;
+      background:
+        linear-gradient(135deg, #0F5132 0%, #1f7b4f 55%, #B8823A 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .featured__media::after {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(400px 200px at 30% 30%, rgba(255,255,255,0.18), transparent 60%),
+        radial-gradient(300px 200px at 80% 80%, rgba(255,255,255,0.1), transparent 60%);
+    }
+    .featured__pattern {
+      position: absolute; inset: 0;
+      opacity: 0.14;
+      background-image:
+        repeating-linear-gradient(45deg, #fff 0 2px, transparent 2px 18px),
+        repeating-linear-gradient(-45deg, #fff 0 2px, transparent 2px 18px);
+    }
+    .featured__body { padding: 40px 44px; }
+    .featured__tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .featured__body h2 {
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      line-height: 1.2;
+      margin: 0 0 14px;
+    }
+    .featured__body p {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      margin: 0 0 18px;
+    }
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-soft), var(--accent-soft));
+      color: var(--primary);
+      display: grid; place-items: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+      font-family: "Fraunces", Georgia, serif;
+    }
+    .post-meta__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+
+    /* ---------- Two-column main ---------- */
+    .blog-main {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      padding: 56px 0 80px;
+    }
+
+    .post-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .post-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .post-card:hover { box-shadow: var(--shadow-md); border-color: var(--line-strong); }
+    .post-card a { color: inherit; text-decoration: none; }
+    .post-card a:hover { text-decoration: none; }
+    .post-card__media {
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+    .post-card__tag {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: rgba(255,255,255,0.95);
+      color: var(--primary);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+    .post-card__body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+    .post-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      line-height: 1.3;
+      margin: 0 0 10px;
+    }
+    .post-card p {
+      color: var(--ink-soft);
+      font-size: 0.93rem;
+      margin: 0 0 18px;
+      flex: 1;
+    }
+    .post-card .post-meta { margin-top: auto; }
+
+    /* Distinct media variants */
+    .media-a { background: linear-gradient(135deg, #0F5132 0%, #1f7b4f 100%); }
+    .media-b { background: linear-gradient(135deg, #B8823A 0%, #D9A567 100%); }
+    .media-c { background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%); }
+    .media-d { background: linear-gradient(135deg, #6A3F2E 0%, #B8823A 100%); }
+    .media-e { background: linear-gradient(135deg, #3D2C4E 0%, #6A4E82 100%); }
+    .media-f { background: linear-gradient(135deg, #0B3D25 0%, #0F5132 60%, #B8823A 100%); }
+    .media-pattern {
+      position: absolute; inset: 0;
+      opacity: 0.14;
+      background-image:
+        repeating-linear-gradient(45deg, #fff 0 2px, transparent 2px 22px),
+        repeating-linear-gradient(-45deg, #fff 0 2px, transparent 2px 22px);
+    }
+    .media-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(400px 200px at 30% 30%, rgba(255,255,255,0.18), transparent 60%);
+    }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar { display: grid; gap: 24px; align-content: start; position: sticky; top: calc(var(--nav-h) + 16px); }
+    .side-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px;
+    }
+    .side-card h4 {
+      font-family: "Inter", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 14px;
+      font-weight: 600;
+    }
+    .side-newsletter {
+      background: linear-gradient(135deg, var(--primary) 0%, #0c4128 100%);
+      color: #fff;
+      border: 0;
+    }
+    .side-newsletter h4 { color: rgba(255,255,255,0.7); }
+    .side-newsletter h3 {
+      color: #fff;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.35rem;
+      margin: 0 0 8px;
+    }
+    .side-newsletter p { color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0 0 14px; }
+    .side-newsletter input {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .side-newsletter input::placeholder { color: rgba(255,255,255,0.6); }
+
+    .top-posts { display: grid; gap: 16px; }
+    .top-post {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .top-post:last-child { border-bottom: 0; padding-bottom: 0; }
+    .top-post__num {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      line-height: 1;
+      font-weight: 600;
+    }
+    .top-post a {
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      display: block;
+      text-decoration: none;
+    }
+    .top-post a:hover { color: var(--primary); }
+    .top-post__meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 0.82rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: background .15s, color .15s;
+    }
+    .tag:hover { background: var(--primary-soft); color: var(--primary); text-decoration: none; }
+
+    /* ---------- Pagination ---------- */
+    .pager {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 40px;
+    }
+    .pager a, .pager span {
+      min-width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      border-radius: var(--r-md);
+      border: 1px solid var(--line-strong);
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      background: var(--surface);
+    }
+    .pager a:hover { background: var(--surface-alt); }
+    .pager .is-current {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .pager .is-disabled { color: var(--muted); background: transparent; border-color: var(--line); }
+
+    /* ---------- CTA band ---------- */
+    .cta-band {
+      background: var(--surface-alt);
+      padding: 48px 0;
+      border-top: 1px solid var(--line);
+    }
+    .cta-band__inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .cta-band h2 { margin: 0 0 8px; font-size: 1.8rem; }
+    .cta-band p { margin: 0; color: var(--ink-soft); }
+    .cta-band__actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 960px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured__body { padding: 28px; }
+      .blog-main { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 60px; }
+      .sidebar { position: static; }
+      .cta-band__inner { grid-template-columns: 1fr; }
+      .cta-band__actions { justify-content: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .post-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="blog-hero">
+  <div class="container">
+    <span class="eyebrow">Community &amp; guides</span>
+    <h1>Practical guides and honest stories from Islamic education.</h1>
+    <p class="lede">Reported features, parent guides, educator interviews, and community voices — written by our editorial team and vetted by our advisory board of Islamic educators.</p>
+    <form class="blog-search" onsubmit="event.preventDefault();">
+      <input class="input" type="search" placeholder="Search articles, guides, topics…" aria-label="Search articles" />
+      <button type="submit" class="btn btn--primary">Search</button>
+    </form>
+  </div>
+</section>
+
+<!-- ========== CATEGORY CHIPS ========== -->
+<div class="container">
+  <nav class="chip-row" aria-label="Article categories">
+    <a href="#" class="chip is-active">All <span class="chip__count">124</span></a>
+    <a href="#" class="chip">Choosing a school <span class="chip__count">28</span></a>
+    <a href="#" class="chip">Hifz &amp; Quran <span class="chip__count">19</span></a>
+    <a href="#" class="chip">For educators <span class="chip__count">22</span></a>
+    <a href="#" class="chip">For students <span class="chip__count">14</span></a>
+    <a href="#" class="chip">News &amp; policy <span class="chip__count">17</span></a>
+    <a href="#" class="chip">Community voices <span class="chip__count">24</span></a>
+  </nav>
+</div>
+
+<!-- ========== FEATURED POST ========== -->
+<div class="container">
+  <article class="featured">
+    <a href="blog-post.html" class="featured__media" aria-label="Read the featured article">
+      <span class="featured__pattern" aria-hidden="true"></span>
+    </a>
+    <div class="featured__body">
+      <span class="featured__tag">Featured · Parent guide</span>
+      <h2><a href="blog-post.html" style="color:inherit; text-decoration:none;">How to choose an Islamic school: a step-by-step guide for parents</a></h2>
+      <p>From academic rigor to the quality of the Islamic environment — the 12 questions we wish every family asked before enrolling, plus a printable checklist you can bring to school visits.</p>
+      <div class="post-meta">
+        <span class="avatar">AH</span>
+        <div>
+          <div style="color:var(--ink); font-weight:600;">Amina Hassan</div>
+          <div>Apr 18, 2026 · 14 min read</div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main class="container blog-main">
+  <div>
+    <div class="section-title" style="margin-bottom:24px;">
+      <div>
+        <h2 style="font-size:1.5rem;">Latest articles</h2>
+        <p class="muted small" style="margin:4px 0 0;">Fresh guides, features, and community voices — updated weekly.</p>
+      </div>
+      <div class="muted small">Sort: <a href="#" style="font-weight:600; color:var(--ink);">Most recent</a></div>
+    </div>
+
+    <div class="post-grid">
+
+      <article class="post-card">
+        <a href="blog-post.html" class="post-card__media media-a">
+          <span class="post-card__tag">Hifz</span>
+          <span class="media-pattern" aria-hidden="true"></span>
+          <span class="media-glow" aria-hidden="true"></span>
+        </a>
+        <div class="post-card__body">
+          <a href="blog-post.html">
+            <h3>Starting hifz at home: a realistic plan for busy families</h3>
+          </a>
+          <p>Three veteran huffadh share what actually works for weeknight memorization — and where most parents go wrong.</p>
+          <div class="post-meta">
+            <span class="avatar">YK</span>
+            <span>Yusuf Khan</span>
+            <span class="post-meta__dot"></span>
+            <span>Apr 15 · 9 min</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <a href="blog-post.html" class="post-card__media media-b">
+          <span class="post-card__tag">Educators</span>
+          <span class="media-pattern" aria-hidden="true"></span>
+          <span class="media-glow" aria-hidden="true"></span>
+        </a>
+        <div class="post-card__body">
+          <a href="blog-post.html">
+            <h3>What Islamic-school teachers actually earn in 2026</h3>
+          </a>
+          <p>We surveyed 612 teachers across 14 countries. Here's the real compensation picture, by grade level and country.</p>
+          <div class="post-meta">
+            <span class="avatar">LA</span>
+            <span>Layla Ahmed</span>
+            <span class="post-meta__dot"></span>
+            <span>Apr 12 · 11 min</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <a href="blog-post.html" class="post-card__media media-c">
+          <span class="post-card__tag">News</span>
+          <span class="media-pattern" aria-hidden="true"></span>
+          <span class="media-glow" aria-hidden="true"></span>
+        </a>
+        <div class="post-card__body">
+          <a href="blog-post.html">
+            <h3>CISNA accreditation 2026: what's changed and how schools are responding</h3>
+          </a>
+          <p>The revised standards place more weight on student outcomes and Islamic integration. Five principals on what it means in practice.</p>
+          <div class="post-meta">
+            <span class="avatar">IK</span>
+            <span>Ibrahim Karim</span>
+            <span class="post-meta__dot"></span>
+            <span>Apr 9 · 7 min</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <a href="blog-post.html" class="post-card__media media-d">
+          <span class="post-card__tag">Choosing</span>
+          <span class="media-pattern" aria-hidden="true"></span>
+          <span class="media-glow" aria-hidden="true"></span>
+        </a>
+        <div class="post-card__body">
+          <a href="blog-post.html">
+            <h3>Homeschool vs. full-time Islamic school: how four families decided</h3>
+          </a>
+          <p>There's no universal answer. Four Muslim families walk us through the trade-offs that mattered to them.</p>
+          <div class="post-meta">
+            <span class="avatar">AH</span>
+            <span>Amina Hassan</span>
+            <span class="post-meta__dot"></span>
+            <span>Apr 5 · 12 min</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <a href="blog-post.html" class="post-card__media media-e">
+          <span class="post-card__tag">Students</span>
+          <span class="media-pattern" aria-hidden="true"></span>
+          <span class="media-glow" aria-hidden="true"></span>
+        </a>
+        <div class="post-card__body">
+          <a href="blog-post.html">
+            <h3>College applications from Islamic high schools: what admissions officers told us</h3>
+          </a>
+          <p>We spoke with admissions teams at 22 universities. The advice was more consistent than you'd think.</p>
+          <div class="post-meta">
+            <span class="avatar">YK</span>
+            <span>Yusuf Khan</span>
+            <span class="post-meta__dot"></span>
+            <span>Apr 1 · 10 min</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <a href="blog-post.html" class="post-card__media media-f">
+          <span class="post-card__tag">Community</span>
+          <span class="media-pattern" aria-hidden="true"></span>
+          <span class="media-glow" aria-hidden="true"></span>
+        </a>
+        <div class="post-card__body">
+          <a href="blog-post.html">
+            <h3>"We built a school because there wasn't one" — three founder stories</h3>
+          </a>
+          <p>Founding an Islamic school is extraordinarily hard. Three principals tell us what they learned the hard way.</p>
+          <div class="post-meta">
+            <span class="avatar">LA</span>
+            <span>Layla Ahmed</span>
+            <span class="post-meta__dot"></span>
+            <span>Mar 28 · 15 min</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Pagination -->
+    <nav class="pager" aria-label="Pagination">
+      <span class="is-disabled">←</span>
+      <a href="#" class="is-current">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <span>…</span>
+      <a href="#">11</a>
+      <a href="#">→</a>
+    </nav>
+  </div>
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" aria-label="Blog sidebar">
+
+    <div class="side-card side-newsletter">
+      <h4>Weekly digest</h4>
+      <h3>One trusted email each Friday.</h3>
+      <p>New guides, school spotlights, and the week's best stories — curated by our editors.</p>
+      <form onsubmit="event.preventDefault();">
+        <input class="input" type="email" placeholder="you@example.com" aria-label="Your email" />
+        <button class="btn btn--accent btn--block" type="submit">Subscribe</button>
+      </form>
+      <p style="font-size:0.78rem; margin:10px 0 0;">Free. No spam. Unsubscribe any time.</p>
+    </div>
+
+    <div class="side-card">
+      <h4>Most read this month</h4>
+      <div class="top-posts">
+        <div class="top-post">
+          <span class="top-post__num">01</span>
+          <div>
+            <a href="blog-post.html">12 questions to ask on an Islamic school visit</a>
+            <div class="top-post__meta">Parent guide · 9 min</div>
+          </div>
+        </div>
+        <div class="top-post">
+          <span class="top-post__num">02</span>
+          <div>
+            <a href="blog-post.html">Our favorite Arabic curricula, ranked</a>
+            <div class="top-post__meta">Resources · 7 min</div>
+          </div>
+        </div>
+        <div class="top-post">
+          <span class="top-post__num">03</span>
+          <div>
+            <a href="blog-post.html">Full-time hifz programs in North America: the 2026 list</a>
+            <div class="top-post__meta">Directory feature · 11 min</div>
+          </div>
+        </div>
+        <div class="top-post">
+          <span class="top-post__num">04</span>
+          <div>
+            <a href="blog-post.html">How to evaluate a school's Islamic environment</a>
+            <div class="top-post__meta">Parent guide · 8 min</div>
+          </div>
+        </div>
+        <div class="top-post">
+          <span class="top-post__num">05</span>
+          <div>
+            <a href="blog-post.html">Interview: running the only girls' seminary in Texas</a>
+            <div class="top-post__meta">Community · 14 min</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-card">
+      <h4>Popular tags</h4>
+      <div class="tag-cloud">
+        <a href="#" class="tag">#tuition</a>
+        <a href="#" class="tag">#hifz</a>
+        <a href="#" class="tag">#curriculum</a>
+        <a href="#" class="tag">#arabic</a>
+        <a href="#" class="tag">#college</a>
+        <a href="#" class="tag">#middle-school</a>
+        <a href="#" class="tag">#admissions</a>
+        <a href="#" class="tag">#new-schools</a>
+        <a href="#" class="tag">#teachers</a>
+        <a href="#" class="tag">#homeschool</a>
+        <a href="#" class="tag">#uk</a>
+        <a href="#" class="tag">#canada</a>
+      </div>
+    </div>
+
+  </aside>
+</main>
+
+<!-- ========== CTA BAND ========== -->
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div>
+      <h2>Have a story our community should hear?</h2>
+      <p>We publish essays, founder interviews, and reported features from Muslim educators, parents, and students worldwide.</p>
+    </div>
+    <div class="cta-band__actions">
+      <a href="contact.html" class="btn btn--ghost">Contact the editors</a>
+      <a href="contact.html" class="btn btn--primary">Pitch a story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="#">For parents</a></li>
+        <li><a href="#">For educators</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

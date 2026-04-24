@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Write a review — Al-Furqan Academy — Islamic School Review</title>
+  <meta name="description" content="Share your honest experience with Al-Furqan Academy. Your review helps other families make informed decisions about Islamic schools in Jacksonville, FL." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/write-review.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:title" content="Write a review — Islamic School Review" />
+  <meta property="og:description" content="Share your honest experience with an Islamic school and help the next family." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Write a review — Islamic School Review" />
+  <meta name="twitter:description" content="Share your honest experience with an Islamic school and help the next family." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* ===== Write-review styles ===== */
+    .review-hero {
+      padding: 48px 0 28px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .review-hero .breadcrumbs {
+      font-size: 0.85rem; color: var(--muted); margin-bottom: 20px;
+    }
+    .review-hero .breadcrumbs a { color: var(--ink-soft); }
+    .review-hero h1 { font-size: clamp(1.8rem, 3.6vw, 2.4rem); margin: 0 0 6px; }
+    .review-hero p.lede { color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+    .school-context {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 16px 20px;
+      margin-top: 24px;
+    }
+    .school-context__mark {
+      width: 56px; height: 56px; border-radius: 12px;
+      background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);
+      color: #fff; display: grid; place-items: center;
+      font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .school-context__body { flex: 1; min-width: 0; }
+    .school-context__body h3 { margin: 0 0 2px; font-size: 1.1rem; }
+    .school-context__body .small { color: var(--muted); }
+    .school-context__change {
+      font-size: 0.85rem; color: var(--primary); font-weight: 600; text-decoration: none;
+    }
+    .school-context__change:hover { text-decoration: underline; }
+
+    .form-section { padding: 40px 0 80px; }
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 32px;
+    }
+    .form-card h2 {
+      font-size: 1.35rem; margin: 0 0 4px;
+    }
+    .form-card > p.muted { margin: 0 0 24px; }
+
+    .form-field { margin-bottom: 22px; }
+    .form-field > label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .form-field .helper {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* Interactive 5-star rating input */
+    .star-input {
+      display: inline-flex;
+      direction: rtl;
+      gap: 4px;
+    }
+    .star-input input { display: none; }
+    .star-input label {
+      cursor: pointer;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--line-strong);
+      transition: color 0.15s;
+    }
+    .star-input label:hover,
+    .star-input label:hover ~ label,
+    .star-input input:checked ~ label {
+      color: #f59e0b;
+    }
+
+    /* Sub-ratings */
+    .subratings {
+      background: var(--surface-alt);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+    }
+    .subrating-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .subrating-row:last-child { border-bottom: 0; }
+    .subrating-row .sub-label { font-size: 0.92rem; font-weight: 500; }
+    .subrating-row .sub-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .star-input--sm label { font-size: 1.3rem; }
+
+    /* Role picker — radio pills */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .role-pill {
+      display: block;
+      padding: 12px 8px;
+      text-align: center;
+      border: 1.5px solid var(--line-strong);
+      border-radius: var(--r-md);
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      cursor: pointer;
+      background: var(--surface);
+      transition: all 0.15s;
+    }
+    .role-pill input { display: none; }
+    .role-pill:has(input:checked) {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .role-pill:hover { background: var(--surface-alt); }
+
+    .textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 14px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1.6;
+      resize: vertical;
+      background: var(--surface);
+      color: var(--ink);
+    }
+    .textarea:focus, .input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-soft);
+    }
+    .char-counter {
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem; color: var(--muted);
+      margin-top: 6px;
+    }
+    .char-counter .count--over { color: #b45309; font-weight: 600; }
+
+    /* Verification nudge */
+    .verify-nudge {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+      display: flex; gap: 12px;
+      font-size: 0.88rem;
+      color: #854D0E;
+    }
+    .verify-nudge strong { color: #78350F; }
+
+    .checkbox-stack {
+      display: flex; flex-direction: column; gap: 10px;
+      margin: 20px 0 8px;
+    }
+    .checkbox-stack label {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.88rem; color: var(--ink-soft);
+      cursor: pointer;
+    }
+    .checkbox-stack input { margin-top: 4px; flex-shrink: 0; }
+
+    .submit-row {
+      display: flex; gap: 12px; align-items: center;
+      margin-top: 20px;
+    }
+    .submit-row .btn--primary { flex: 0 0 auto; }
+    .submit-row .muted { font-size: 0.82rem; }
+
+    /* Sidebar — guidelines */
+    .sidebar {
+      position: sticky; top: 100px;
+    }
+    .side-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px;
+    }
+    .side-card h3 {
+      font-size: 1rem; margin: 0 0 12px; color: var(--ink);
+    }
+    .side-card ul {
+      list-style: none; padding: 0; margin: 0;
+      font-size: 0.88rem; color: var(--ink-soft);
+    }
+    .side-card ul li {
+      display: flex; gap: 8px; padding: 6px 0;
+      line-height: 1.5;
+    }
+    .side-card ul li::before {
+      content: "✓"; color: var(--primary); font-weight: 700; flex-shrink: 0;
+    }
+    .side-card.side-card--warn ul li::before {
+      content: "✕"; color: #b45309;
+    }
+    .side-card + .side-card { margin-top: 16px; }
+
+    @media (max-width: 960px) {
+      .form-layout { grid-template-columns: 1fr; gap: 32px; }
+      .sidebar { position: static; }
+      .role-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .form-card { padding: 22px; }
+      .star-input label { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="review-hero">
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="index.html">Home</a> · <a href="directory.html">Directory</a> · <a href="school.html">Al-Furqan Academy</a> · <span>Write a review</span>
+    </div>
+    <h1>Share your experience</h1>
+    <p class="lede">Your review helps other families make informed decisions. Please be specific, fair, and focused on your own experience — not on individual staff or students.</p>
+
+    <div class="school-context">
+      <div class="school-context__mark">AF</div>
+      <div class="school-context__body">
+        <h3>Al-Furqan Academy</h3>
+        <div class="small">📍 Jacksonville, FL · Full-time K–12</div>
+      </div>
+      <a href="directory.html" class="school-context__change">Change school</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FORM ========== -->
+<section class="form-section">
+  <div class="container">
+    <div class="form-layout">
+
+      <!-- Main form -->
+      <form class="form-card" onsubmit="event.preventDefault(); window.location.href='confirmation.html?action=review';">
+        <h2>Write your review</h2>
+        <p class="muted">All fields are required unless marked optional.</p>
+
+        <!-- Overall rating -->
+        <div class="form-field">
+          <label>Overall rating</label>
+          <div class="star-input" role="radiogroup" aria-label="Overall rating">
+            <input type="radio" name="rating" id="r5" value="5" required /><label for="r5" title="5 stars — Excellent">★</label>
+            <input type="radio" name="rating" id="r4" value="4" /><label for="r4" title="4 stars — Very good">★</label>
+            <input type="radio" name="rating" id="r3" value="3" /><label for="r3" title="3 stars — Good">★</label>
+            <input type="radio" name="rating" id="r2" value="2" /><label for="r2" title="2 stars — Fair">★</label>
+            <input type="radio" name="rating" id="r1" value="1" /><label for="r1" title="1 star — Poor">★</label>
+          </div>
+          <p class="helper">Tap a star from left to right. 1 = Poor, 5 = Excellent.</p>
+        </div>
+
+        <!-- Sub-ratings -->
+        <div class="form-field">
+          <label>Rate specific areas <span class="small muted" style="font-weight:400;">(optional but recommended)</span></label>
+          <div class="subratings">
+
+            <div class="subrating-row">
+              <div>
+                <div class="sub-label">Academics</div>
+                <div class="sub-desc">Teaching quality, curriculum rigor, college prep</div>
+              </div>
+              <div class="star-input star-input--sm" role="radiogroup" aria-label="Academics">
+                <input type="radio" name="sub-academics" id="sa5" value="5" /><label for="sa5">★</label>
+                <input type="radio" name="sub-academics" id="sa4" value="4" /><label for="sa4">★</label>
+                <input type="radio" name="sub-academics" id="sa3" value="3" /><label for="sa3">★</label>
+                <input type="radio" name="sub-academics" id="sa2" value="2" /><label for="sa2">★</label>
+                <input type="radio" name="sub-academics" id="sa1" value="1" /><label for="sa1">★</label>
+              </div>
+            </div>
+
+            <div class="subrating-row">
+              <div>
+                <div class="sub-label">Islamic environment</div>
+                <div class="sub-desc">Quran, Arabic, character-building, adab</div>
+              </div>
+              <div class="star-input star-input--sm" role="radiogroup" aria-label="Islamic environment">
+                <input type="radio" name="sub-islamic" id="si5" value="5" /><label for="si5">★</label>
+                <input type="radio" name="sub-islamic" id="si4" value="4" /><label for="si4">★</label>
+                <input type="radio" name="sub-islamic" id="si3" value="3" /><label for="si3">★</label>
+                <input type="radio" name="sub-islamic" id="si2" value="2" /><label for="si2">★</label>
+                <input type="radio" name="sub-islamic" id="si1" value="1" /><label for="si1">★</label>
+              </div>
+            </div>
+
+            <div class="subrating-row">
+              <div>
+                <div class="sub-label">Community &amp; culture</div>
+                <div class="sub-desc">Parent community, student friendships, inclusion</div>
+              </div>
+              <div class="star-input star-input--sm" role="radiogroup" aria-label="Community">
+                <input type="radio" name="sub-community" id="sc5" value="5" /><label for="sc5">★</label>
+                <input type="radio" name="sub-community" id="sc4" value="4" /><label for="sc4">★</label>
+                <input type="radio" name="sub-community" id="sc3" value="3" /><label for="sc3">★</label>
+                <input type="radio" name="sub-community" id="sc2" value="2" /><label for="sc2">★</label>
+                <input type="radio" name="sub-community" id="sc1" value="1" /><label for="sc1">★</label>
+              </div>
+            </div>
+
+            <div class="subrating-row">
+              <div>
+                <div class="sub-label">Communication</div>
+                <div class="sub-desc">Responsiveness, transparency with families</div>
+              </div>
+              <div class="star-input star-input--sm" role="radiogroup" aria-label="Communication">
+                <input type="radio" name="sub-comm" id="scm5" value="5" /><label for="scm5">★</label>
+                <input type="radio" name="sub-comm" id="scm4" value="4" /><label for="scm4">★</label>
+                <input type="radio" name="sub-comm" id="scm3" value="3" /><label for="scm3">★</label>
+                <input type="radio" name="sub-comm" id="scm2" value="2" /><label for="scm2">★</label>
+                <input type="radio" name="sub-comm" id="scm1" value="1" /><label for="scm1">★</label>
+              </div>
+            </div>
+
+            <div class="subrating-row">
+              <div>
+                <div class="sub-label">Value for tuition</div>
+                <div class="sub-desc">Quality of experience relative to cost</div>
+              </div>
+              <div class="star-input star-input--sm" role="radiogroup" aria-label="Value">
+                <input type="radio" name="sub-value" id="sv5" value="5" /><label for="sv5">★</label>
+                <input type="radio" name="sub-value" id="sv4" value="4" /><label for="sv4">★</label>
+                <input type="radio" name="sub-value" id="sv3" value="3" /><label for="sv3">★</label>
+                <input type="radio" name="sub-value" id="sv2" value="2" /><label for="sv2">★</label>
+                <input type="radio" name="sub-value" id="sv1" value="1" /><label for="sv1">★</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Your role -->
+        <div class="form-field">
+          <label>Your relationship to this school</label>
+          <div class="role-grid">
+            <label class="role-pill">
+              <input type="radio" name="role" value="parent" checked />
+              <span>👨‍👩‍👧 Parent</span>
+            </label>
+            <label class="role-pill">
+              <input type="radio" name="role" value="student" />
+              <span>🎒 Student</span>
+            </label>
+            <label class="role-pill">
+              <input type="radio" name="role" value="alumnus" />
+              <span>🎓 Alumnus</span>
+            </label>
+            <label class="role-pill">
+              <input type="radio" name="role" value="staff" />
+              <span>💼 Staff</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Years at school -->
+        <div class="form-field">
+          <label for="years">Years at the school <span class="small muted" style="font-weight:400;">(optional)</span></label>
+          <select id="years" class="select">
+            <option value="">Select…</option>
+            <option>Less than 1 year</option>
+            <option>1–2 years</option>
+            <option>3–5 years</option>
+            <option>6+ years</option>
+          </select>
+        </div>
+
+        <!-- Title -->
+        <div class="form-field">
+          <label for="title">Review headline</label>
+          <input id="title" class="input" type="text" maxlength="80" placeholder="e.g., A warm community with strong academics" required />
+          <p class="helper">A short summary — up to 80 characters.</p>
+        </div>
+
+        <!-- Body -->
+        <div class="form-field">
+          <label for="body">Your review</label>
+          <textarea id="body" class="textarea" minlength="100" maxlength="2000"
+            placeholder="What made your experience memorable? What would you tell a family considering this school? Try to cover academics, Islamic program, community, and anything unique." required oninput="
+              const v=this.value.length;
+              const min=100, max=2000;
+              const el=document.getElementById('counter');
+              el.textContent = v + ' / ' + max + ' characters';
+              el.className = (v < min ? 'muted' : (v > max ? 'count--over' : ''));
+              document.getElementById('min-note').style.display = v >= min ? 'none' : 'inline';
+            "></textarea>
+          <div class="char-counter">
+            <span id="min-note">At least 100 characters needed.</span>
+            <span id="counter" class="muted">0 / 2000 characters</span>
+          </div>
+        </div>
+
+        <!-- Would you recommend -->
+        <div class="form-field">
+          <label>Would you recommend this school?</label>
+          <div class="role-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <label class="role-pill">
+              <input type="radio" name="recommend" value="yes" />
+              <span>👍 Yes</span>
+            </label>
+            <label class="role-pill">
+              <input type="radio" name="recommend" value="mixed" />
+              <span>🤔 Mixed</span>
+            </label>
+            <label class="role-pill">
+              <input type="radio" name="recommend" value="no" />
+              <span>👎 No</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Verification nudge -->
+        <div class="verify-nudge">
+          <span style="font-size:1.2rem;line-height:1;">🔒</span>
+          <div>
+            <strong>Want your review marked as Verified?</strong>
+            Upload a photo of a report card, invoice, or school ID on the next step. We never publish documents — only the verification badge.
+          </div>
+        </div>
+
+        <!-- Agreements -->
+        <div class="checkbox-stack">
+          <label>
+            <input type="checkbox" required />
+            <span>I confirm this review reflects my own honest experience and I have not been compensated to write it.</span>
+          </label>
+          <label>
+            <input type="checkbox" required />
+            <span>I agree to the <a href="terms.html" style="color:var(--primary);">community guidelines</a> — no personal attacks, no student or staff names, no defamatory content.</span>
+          </label>
+          <label>
+            <input type="checkbox" />
+            <span>Send me a copy of my review and notify me when the school responds.</span>
+          </label>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn btn--primary btn--lg">Submit review</button>
+          <span class="muted">Reviews are posted publicly after light moderation (usually within 24 hours).</span>
+        </div>
+      </form>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="side-card">
+          <h3>What makes a helpful review</h3>
+          <ul>
+            <li>Specific examples from your own experience</li>
+            <li>Both strengths and areas for growth</li>
+            <li>Balanced tone — warm but honest</li>
+            <li>Context about grade level and years attended</li>
+            <li>Focus on programs, culture, and systems</li>
+          </ul>
+        </div>
+        <div class="side-card side-card--warn">
+          <h3>What we remove</h3>
+          <ul>
+            <li>Names of individual students or staff</li>
+            <li>Personal attacks, harassment, or threats</li>
+            <li>Content that could identify minors</li>
+            <li>Hearsay or second-hand accounts</li>
+            <li>Promotional or paid content</li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="#">For parents</a></li>
+        <li><a href="#">For educators</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

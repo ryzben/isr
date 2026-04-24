@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Membership plans — Islamic School Review</title>
+  <meta name="description" content="Memberships for Islamic schools — Free, Basic, Premium, and Platinum. Get a verified listing, respond to reviews, post jobs, and reach Muslim families worldwide." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/membership.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/membership.html" />
+  <meta property="og:title" content="Membership plans — Islamic School Review" />
+  <meta property="og:description" content="Get a verified listing, respond to reviews, post jobs, and reach Muslim families worldwide." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Membership plans — Islamic School Review" />
+  <meta name="twitter:description" content="Free, Basic, Premium, and Platinum plans for Islamic schools." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Membership plans",
+    "url": "https://www.islamicschoolreview.com/membership.html",
+    "description": "Memberships for Islamic schools — Free, Basic, Premium, and Platinum."
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .m-hero {
+      padding: 72px 0 40px;
+      background:
+        radial-gradient(900px 420px at 85% 0%, var(--primary-soft) 0%, transparent 55%),
+        radial-gradient(700px 380px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+    .m-hero .container { max-width: 800px; }
+    .m-hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.2rem); margin: 4px 0 14px; }
+    .m-hero p.lede { color: var(--ink-soft); font-size: 1.15rem; max-width: 60ch; margin: 0 auto 22px; }
+
+    .billing-toggle {
+      display: inline-flex;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 4px;
+      margin-top: 8px;
+    }
+    .billing-toggle button {
+      border: 0;
+      background: transparent;
+      padding: 8px 18px;
+      font: inherit;
+      font-weight: 500;
+      color: var(--ink-soft);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .billing-toggle button.is-active {
+      background: var(--primary);
+      color: #fff;
+    }
+    .billing-toggle .save-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+      margin-left: 6px;
+      font-weight: 600;
+    }
+
+    /* Tier grid */
+    .tiers {
+      padding: 56px 0 40px;
+    }
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .tier--highlight {
+      border-color: var(--primary);
+      box-shadow: 0 18px 40px rgba(15, 81, 50, 0.14);
+      transform: translateY(-6px);
+    }
+    .tier__badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .tier__name {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 4px;
+    }
+    .tier__desc { color: var(--muted); font-size: 0.9rem; margin: 0 0 20px; min-height: 40px; }
+    .tier__price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .tier__amount {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .tier__period { color: var(--muted); font-size: 0.9rem; }
+    .tier__billed { color: var(--muted); font-size: 0.8rem; margin-bottom: 20px; }
+    .tier .btn { margin-bottom: 22px; }
+    .tier__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 4px;
+      display: grid;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+    }
+    .tier__features li {
+      position: relative;
+      padding-left: 24px;
+    }
+    .tier__features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0; top: 0;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .tier__features li.is-muted {
+      color: var(--muted);
+    }
+    .tier__features li.is-muted::before {
+      content: "·";
+      color: var(--muted);
+    }
+    .tier__section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 20px 0 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+    .tier__section-label:first-of-type { padding-top: 0; border-top: 0; margin-top: 0; }
+
+    /* Comparison table */
+    .compare {
+      padding: 48px 0 24px;
+      border-top: 1px solid var(--line);
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .compare-table th, .compare-table td {
+      padding: 14px 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .compare-table tbody td:first-child,
+    .compare-table thead th:first-child {
+      text-align: left;
+    }
+    .compare-table thead th {
+      background: var(--surface-alt);
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+    .compare-table thead th.is-highlight {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+    .compare-table tbody tr:last-child td { border-bottom: 0; }
+    .compare-table tbody tr.group-row td {
+      background: var(--surface-alt);
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .compare-table .yes { color: var(--primary); font-weight: 600; }
+    .compare-table .no { color: var(--muted); }
+    .compare-table .note { font-size: 0.8rem; color: var(--muted); display: block; }
+
+    /* Testimonial */
+    .testimonial {
+      background: linear-gradient(135deg, var(--primary) 0%, #0c4128 100%);
+      color: #fff;
+      padding: 56px 0;
+      margin-top: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial::before {
+      content: "";
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .testimonial blockquote {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      line-height: 1.4;
+      max-width: 820px;
+      margin: 0 0 24px;
+      color: rgba(255,255,255,0.92);
+    }
+    .testimonial footer {
+      display: flex; align-items: center; gap: 14px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+    }
+    .testimonial .avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      display: grid; place-items: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+    }
+    .testimonial footer strong { color: #fff; }
+
+    /* FAQ */
+    .faq {
+      padding: 64px 0 80px;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 48px;
+      margin-top: 28px;
+    }
+    .faq details {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    .faq summary {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.08rem;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      position: relative;
+      padding-right: 28px;
+      font-weight: 500;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      position: absolute; right: 0; top: -2px;
+      font-size: 1.4rem;
+      color: var(--primary);
+      transition: transform .2s;
+    }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p { margin: 12px 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+    /* Bottom CTA */
+    .m-cta {
+      padding: 56px 0;
+      background: var(--surface-alt);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .m-cta .container { max-width: 720px; }
+    .m-cta h2 { margin: 0 0 10px; font-size: 1.8rem; }
+    .m-cta p { margin: 0 0 22px; color: var(--ink-soft); }
+    .m-cta__actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 1100px) {
+      .tier-grid { grid-template-columns: 1fr 1fr; }
+      .tier--highlight { transform: none; }
+    }
+    @media (max-width: 960px) {
+      .faq-grid { grid-template-columns: 1fr; gap: 0; }
+      .compare-table { font-size: 0.82rem; }
+      .compare-table th, .compare-table td { padding: 10px 8px; }
+    }
+    @media (max-width: 600px) {
+      .tier-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="m-hero">
+  <div class="container">
+    <span class="eyebrow">For schools</span>
+    <h1>Tell your school's story, honestly.</h1>
+    <p class="lede">Every Islamic school is on our directory for free. Paid memberships unlock a richer profile, review-response tools, job postings, and analytics — without ever affecting your rating.</p>
+    <div class="billing-toggle" role="tablist">
+      <button type="button" class="is-active" role="tab">Annual <span class="save-tag">Save 2 months</span></button>
+      <button type="button" role="tab">Monthly</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TIERS ========== -->
+<section class="tiers">
+  <div class="container">
+    <div class="tier-grid">
+
+      <!-- FREE -->
+      <div class="tier">
+        <h3 class="tier__name">Free</h3>
+        <p class="tier__desc">Every school is listed for free. Claim your listing to manage it.</p>
+        <div class="tier__price">
+          <span class="tier__amount">$0</span>
+          <span class="tier__period">/ forever</span>
+        </div>
+        <p class="tier__billed">&nbsp;</p>
+        <a href="signup.html" class="btn btn--ghost btn--block">Claim your listing</a>
+        <ul class="tier__features">
+          <li>Public directory listing</li>
+          <li>Basic school info (address, grades, contact)</li>
+          <li>Receive reviews from verified families</li>
+          <li>Single admin user</li>
+          <li class="is-muted">No response to reviews</li>
+          <li class="is-muted">No photo gallery</li>
+          <li class="is-muted">No job postings</li>
+        </ul>
+      </div>
+
+      <!-- BASIC -->
+      <div class="tier">
+        <h3 class="tier__name">Basic</h3>
+        <p class="tier__desc">Start engaging with families who are checking out your school.</p>
+        <div class="tier__price">
+          <span class="tier__amount">$299</span>
+          <span class="tier__period">/ year</span>
+        </div>
+        <p class="tier__billed">$24.92/mo · billed annually</p>
+        <a href="#" class="btn btn--ghost btn--block">Start with Basic</a>
+        <ul class="tier__features">
+          <li>Everything in Free</li>
+          <li><strong>Respond to reviews</strong> publicly</li>
+          <li>Up to 5 photos in gallery</li>
+          <li>Extended description (500 words)</li>
+          <li>Tuition &amp; admissions details</li>
+          <li>Verified-school badge</li>
+          <li>3 job postings per year</li>
+          <li>Email support</li>
+        </ul>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="tier tier--highlight">
+        <span class="tier__badge">Most popular</span>
+        <h3 class="tier__name">Premium</h3>
+        <p class="tier__desc">Fill your inquiries funnel and reach families actively searching.</p>
+        <div class="tier__price">
+          <span class="tier__amount">$899</span>
+          <span class="tier__period">/ year</span>
+        </div>
+        <p class="tier__billed">$74.92/mo · billed annually</p>
+        <a href="#" class="btn btn--primary btn--block">Start with Premium</a>
+        <ul class="tier__features">
+          <li>Everything in Basic</li>
+          <li><strong>Priority placement</strong> in search results</li>
+          <li>Unlimited photos + 1 video</li>
+          <li>"Request info" lead form on profile</li>
+          <li>Lead notifications via email &amp; SMS</li>
+          <li>Faculty &amp; leadership profiles</li>
+          <li>Unlimited job postings</li>
+          <li>Basic analytics dashboard</li>
+          <li>Premium badge on listing</li>
+          <li>Priority support (24 hr)</li>
+        </ul>
+      </div>
+
+      <!-- PLATINUM -->
+      <div class="tier">
+        <h3 class="tier__name">Platinum</h3>
+        <p class="tier__desc">Best for school networks and established brands wanting full control.</p>
+        <div class="tier__price">
+          <span class="tier__amount">$2,499</span>
+          <span class="tier__period">/ year</span>
+        </div>
+        <p class="tier__billed">$208.25/mo · billed annually</p>
+        <a href="#" class="btn btn--ghost btn--block">Talk to sales</a>
+        <ul class="tier__features">
+          <li>Everything in Premium</li>
+          <li><strong>Featured home-page</strong> placement (regional)</li>
+          <li>Newsletter feature (2× per year)</li>
+          <li>Virtual tour embed</li>
+          <li>Multiple admin users (up to 10)</li>
+          <li>Advanced analytics &amp; export</li>
+          <li>Competitor benchmarking</li>
+          <li>Dedicated account manager</li>
+          <li>Quarterly strategy call</li>
+          <li>Platinum badge + ribbon</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMPARISON TABLE ========== -->
+<section class="compare">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">Side-by-side</span>
+        <h2 style="margin:0;">Compare all features</h2>
+      </div>
+      <p class="muted small" style="margin:0;">All prices in USD. Prices exclude applicable taxes.</p>
+    </div>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Free</th>
+          <th>Basic</th>
+          <th class="is-highlight">Premium</th>
+          <th>Platinum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="group-row"><td colspan="5">Listing</td></tr>
+        <tr><td>Public directory listing</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Photo gallery</td><td class="no">—</td><td>5 photos</td><td class="yes">Unlimited</td><td class="yes">Unlimited + video</td></tr>
+        <tr><td>Extended description</td><td>100 words</td><td>500 words</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
+        <tr><td>Tuition &amp; admissions details</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Faculty profiles</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Virtual tour embed</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+
+        <tr class="group-row"><td colspan="5">Reviews</td></tr>
+        <tr><td>Receive verified reviews</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Respond to reviews publicly</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Invite past families to review</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+        <tr class="group-row"><td colspan="5">Reach &amp; leads</td></tr>
+        <tr><td>Priority placement in search</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">Enhanced</td></tr>
+        <tr><td>"Request info" lead form</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Lead notifications (email + SMS)</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Home-page featured placement</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">Regional</td></tr>
+        <tr><td>Newsletter feature</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">2× / year</td></tr>
+
+        <tr class="group-row"><td colspan="5">Jobs</td></tr>
+        <tr><td>Job postings</td><td class="no">—</td><td>3 / year</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
+        <tr><td>Featured job placement</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+        <tr class="group-row"><td colspan="5">Tools &amp; analytics</td></tr>
+        <tr><td>Basic analytics dashboard</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">Advanced</td></tr>
+        <tr><td>Competitor benchmarking</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Data export (CSV)</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Admin users</td><td>1</td><td>2</td><td>5</td><td class="yes">10</td></tr>
+
+        <tr class="group-row"><td colspan="5">Support</td></tr>
+        <tr><td>Support</td><td>Help center</td><td>Email</td><td class="yes">Priority 24 hr</td><td class="yes">Dedicated mgr</td></tr>
+        <tr><td>Onboarding</td><td>Self-serve</td><td>Self-serve</td><td class="yes">Guided</td><td class="yes">White-glove</td></tr>
+        <tr><td>Strategy call</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">Quarterly</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIAL ========== -->
+<section class="testimonial">
+  <div class="container">
+    <blockquote>"We switched to Premium in the middle of enrollment season and we got 40 inquiries in the first 6 weeks. Three of those families are now enrolled. It pays for itself many times over."</blockquote>
+    <footer>
+      <span class="avatar">FM</span>
+      <div>
+        <strong>Fatima Mahmood</strong> · Director of Admissions<br/>
+        Baitul Zahra Girls Academy · Richardson, TX
+      </div>
+    </footer>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="faq">
+  <div class="container">
+    <div class="section-title" style="justify-content:center; text-align:center;">
+      <div style="width:100%;">
+        <span class="eyebrow">Questions</span>
+        <h2 style="margin:0;">Frequently asked</h2>
+      </div>
+    </div>
+    <div class="faq-grid">
+
+      <div>
+        <details open>
+          <summary>Does a paid plan affect my school's rating?</summary>
+          <p>No. Ever. Memberships affect placement, listing richness, and access to tools — but ratings are generated purely from verified family reviews. See our <a href="about.html">editorial policy</a>.</p>
+        </details>
+
+        <details>
+          <summary>How do you verify reviews?</summary>
+          <p>Every reviewer must confirm their relationship to the school — usually via a tuition receipt, a school-issued email, or an in-person verification through our local ambassadors. About 9% of submitted reviews fail verification and are never published.</p>
+        </details>
+
+        <details>
+          <summary>Can I cancel anytime?</summary>
+          <p>Yes. You can cancel from your admin dashboard any time. Your paid features stay active until the end of your current billing period. No refunds for partial periods, but no hidden fees either.</p>
+        </details>
+
+        <details>
+          <summary>What counts as a "school"?</summary>
+          <p>Full-time K–12 Islamic schools, preschools, seminaries, and full-time hifz programs. For weekend-only schools and tutoring centers, contact us — we have a separate (cheaper) plan.</p>
+        </details>
+      </div>
+
+      <div>
+        <details>
+          <summary>Do I need to pay to respond to reviews?</summary>
+          <p>Yes, from Basic tier ($299/year) upward. Free listings can receive reviews but can't respond publicly. We do this so schools that engage have a real track record with us, which reduces review-response abuse.</p>
+        </details>
+
+        <details>
+          <summary>Is there a contract or setup fee?</summary>
+          <p>No setup fee and no long-term contract. You pay annually (or monthly if you prefer), and you can cancel any time.</p>
+        </details>
+
+        <details>
+          <summary>Can multiple schools in a network share one plan?</summary>
+          <p>Each school needs its own listing and plan. If you operate a network of 5+ schools, email us at <a href="mailto:schools@islamicschoolreview.com">schools@islamicschoolreview.com</a> for multi-school pricing.</p>
+        </details>
+
+        <details>
+          <summary>What's the refund policy?</summary>
+          <p>We offer a 14-day refund for new subscriptions, no questions asked. After 14 days, or at renewal, fees are non-refundable — but you keep your benefits until the period ends.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BOTTOM CTA ========== -->
+<section class="m-cta">
+  <div class="container">
+    <h2>Not sure which plan is right?</h2>
+    <p>Book a 15-minute call with our school-success team. We'll walk through your situation and recommend a plan — or tell you to stick with free.</p>
+    <div class="m-cta__actions">
+      <a href="contact.html" class="btn btn--ghost btn--lg">Contact us</a>
+      <a href="#" class="btn btn--primary btn--lg">Book a 15-min call</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="jobs.html">Jobs board</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

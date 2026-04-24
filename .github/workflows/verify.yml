@@ -1,0 +1,24 @@
+name: Verify prototype
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run verifier
+        run: python3 verify_prototype.py
+
+      - name: Count PASS/FAIL
+        run: |
+          python3 verify_prototype.py 2>&1 | grep -E "PASS|FAIL" | awk '{print $1}' | sort | uniq -c

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank you — Islamic School Review</title>
+  <meta name="description" content="Your submission was received. Here's what happens next and where to go from here." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/confirmation.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:title" content="Thank you — Islamic School Review" />
+  <meta property="og:description" content="Your submission was received. Here's what happens next." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Thank you — Islamic School Review" />
+  <meta name="twitter:description" content="Your submission was received. Here's what happens next." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .confirm-hero {
+      padding: 80px 0 48px;
+      background:
+        radial-gradient(900px 420px at 80% 0%, var(--primary-soft) 0%, transparent 55%),
+        radial-gradient(700px 360px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+    .confirm-hero .container { max-width: 720px; }
+    .confirm-hero__check {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--primary);
+      display: grid; place-items: center;
+      font-size: 2.4rem;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 30px rgba(15,81,50,0.18);
+      animation: pop .35s cubic-bezier(.5,1.6,.4,1) .05s both;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .confirm-hero h1 {
+      font-size: clamp(2rem, 4.6vw, 2.8rem);
+      margin: 0 0 12px;
+      line-height: 1.15;
+    }
+    .confirm-hero p.lede {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      max-width: 52ch;
+      margin: 0 auto 24px;
+    }
+    .confirm-hero__actions {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .next-steps { padding: 56px 0 40px; }
+    .next-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .next-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .next-card__icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid; place-items: center;
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+    }
+    .next-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      margin: 0 0 6px;
+    }
+    .next-card p { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 16px; flex: 1; line-height: 1.55; }
+    .next-card a.link {
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+    .next-card a.link:hover { text-decoration: underline; }
+
+    .summary-card {
+      margin: 0 auto 36px;
+      max-width: 640px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px 26px;
+      text-align: left;
+    }
+    .summary-card__label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .summary-card__row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.93rem;
+    }
+    .summary-card__row:first-of-type { border-top: 0; padding-top: 0; }
+    .summary-card__row strong { color: var(--ink); font-weight: 500; }
+    .summary-card__row span { color: var(--ink-soft); text-align: right; }
+
+    .cta-strip {
+      background: var(--primary);
+      color: #fff;
+      padding: 48px 0;
+      text-align: center;
+    }
+    .cta-strip h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 0 0 8px;
+      color: #fff;
+    }
+    .cta-strip p {
+      color: rgba(255,255,255,0.85);
+      max-width: 52ch;
+      margin: 0 auto 20px;
+      font-size: 1rem;
+    }
+    .cta-strip .btn--white {
+      background: #fff;
+      color: var(--primary);
+      border: 0;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta-strip .btn--white:hover { background: #f5f5f5; }
+    .cta-strip .btn--white--ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+      margin-left: 8px;
+    }
+    .cta-strip .btn--white--ghost:hover { background: rgba(255,255,255,0.1); }
+
+    @media (max-width: 720px) {
+      .next-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO (content swapped by JS based on ?action=) ========== -->
+<section class="confirm-hero">
+  <div class="container">
+    <div class="confirm-hero__check" aria-hidden="true">✓</div>
+    <span class="eyebrow" id="confirm-eyebrow">Thank you</span>
+    <h1 id="confirm-title">Your submission was received.</h1>
+    <p class="lede" id="confirm-lede">We've saved what you sent. Here's a quick summary and where to go from here.</p>
+
+    <div class="summary-card" id="summary-card" hidden>
+      <div class="summary-card__label" id="summary-label">Summary</div>
+      <div id="summary-rows"></div>
+    </div>
+
+    <div class="confirm-hero__actions" id="confirm-actions">
+      <a href="index.html" class="btn btn--primary btn--sm">Back to home</a>
+      <a href="directory.html" class="btn btn--ghost btn--sm">Browse schools</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NEXT STEPS ========== -->
+<section class="next-steps">
+  <div class="container">
+    <h2 style="font-family:'Fraunces',Georgia,serif; text-align:center; margin:0 0 28px;">What happens next</h2>
+    <div class="next-grid" id="next-grid">
+
+      <div class="next-card">
+        <div class="next-card__icon">📬</div>
+        <h3>Check your email</h3>
+        <p>We sent a confirmation to your inbox. If you don't see it in 5 minutes, check your spam folder or search for <em>islamicschoolreview.com</em>.</p>
+        <a href="#" class="link">Didn't get it? Resend →</a>
+      </div>
+
+      <div class="next-card">
+        <div class="next-card__icon">📋</div>
+        <h3>Track it in your account</h3>
+        <p>Your submissions, replies, and saved schools all live in your account dashboard — one place to manage everything.</p>
+        <a href="account.html" class="link">Go to My account →</a>
+      </div>
+
+      <div class="next-card">
+        <div class="next-card__icon">📚</div>
+        <h3>While you wait</h3>
+        <p>Read our guide to choosing an Islamic school — what to look for on a visit, questions to ask, and red flags to avoid.</p>
+        <a href="blog-post.html" class="link">Read the parent guide →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA STRIP ========== -->
+<section class="cta-strip">
+  <div class="container">
+    <h2>Help another family.</h2>
+    <p>Your honest experience — good or critical — is one of the most useful things on this site. It takes 5 minutes.</p>
+    <a href="write-review.html" class="btn--white">Write a review</a>
+    <a href="directory.html" class="btn--white btn--white--ghost">Save more schools</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="#">For parents</a></li>
+        <li><a href="#">For educators</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  // Swap the hero copy, summary, and next steps based on ?action=...
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var action = (params.get('action') || 'generic').toLowerCase();
+    var school = params.get('school') || '';
+
+    var variants = {
+      review: {
+        eyebrow: 'Review submitted',
+        title: 'Thank you — your review is in.',
+        lede: "We've received your review" + (school ? ' for <strong>' + escapeHtml(school) + '</strong>' : '') + ". It's now with our moderation team, typically published within 24 – 48 hours.",
+        summaryLabel: 'Review details',
+        summaryRows: [
+          ['Submitted', 'Just now'],
+          ['School', school || 'Al-Furqan Academy'],
+          ['Status', 'Awaiting moderation'],
+          ['Estimated publish time', 'Within 24 – 48 hours']
+        ],
+        actions: [
+          { label: 'View my reviews', href: 'account.html#reviews', kind: 'primary' },
+          { label: 'Browse more schools', href: 'directory.html', kind: 'ghost' }
+        ]
+      },
+      inquiry: {
+        eyebrow: 'Inquiry sent',
+        title: 'Your message is on its way.',
+        lede: "We forwarded your inquiry" + (school ? ' to <strong>' + escapeHtml(school) + '</strong>' : ' to the schools you selected') + '. Most schools reply within 2 business days.',
+        summaryLabel: 'Inquiry details',
+        summaryRows: [
+          ['Sent', 'Just now'],
+          ['To', school || '3 schools in Jacksonville, FL'],
+          ['Reply method', 'Email + account dashboard'],
+          ['Expected reply', 'Within 2 business days']
+        ],
+        actions: [
+          { label: 'Track in my account', href: 'account.html#inquiries', kind: 'primary' },
+          { label: 'Save more schools', href: 'directory.html', kind: 'ghost' }
+        ]
+      },
+      claim: {
+        eyebrow: 'Claim submitted',
+        title: 'Thanks — we\u2019re verifying your claim.',
+        lede: "We've received your claim" + (school ? ' for <strong>' + escapeHtml(school) + '</strong>' : '') + '. Our partnerships team will verify your role with the school and respond within 2 – 3 business days.',
+        summaryLabel: 'Claim details',
+        summaryRows: [
+          ['Submitted', 'Just now'],
+          ['School', school || 'Al-Furqan Academy'],
+          ['Status', 'Pending verification'],
+          ['Typical verification time', '2 – 3 business days']
+        ],
+        actions: [
+          { label: 'Back to school profile', href: 'school.html', kind: 'primary' },
+          { label: 'Read how verification works', href: 'about.html', kind: 'ghost' }
+        ]
+      },
+      signup: {
+        eyebrow: 'Welcome',
+        title: 'Welcome to the community.',
+        lede: "Your account is ready. We sent a confirmation email to finish setup — meanwhile, feel free to start exploring.",
+        summaryLabel: 'Your account',
+        summaryRows: [
+          ['Created', 'Just now'],
+          ['Plan', 'Free'],
+          ['Role', 'Parent'],
+          ['Next step', 'Confirm your email address']
+        ],
+        actions: [
+          { label: 'Go to my account', href: 'account.html', kind: 'primary' },
+          { label: 'Browse the directory', href: 'directory.html', kind: 'ghost' }
+        ]
+      },
+      contact: {
+        eyebrow: 'Message sent',
+        title: 'Thanks — we\u2019ll be in touch soon.',
+        lede: "We received your message. Depending on the topic, you'll hear from us within 1 business day.",
+        summaryLabel: 'Message details',
+        summaryRows: [
+          ['Sent', 'Just now'],
+          ['Routed to', 'The right team at Islamic School Review'],
+          ['Expected reply', 'Within 1 business day']
+        ],
+        actions: [
+          { label: 'Back to home', href: 'index.html', kind: 'primary' },
+          { label: 'Read our guides', href: 'blog.html', kind: 'ghost' }
+        ]
+      },
+      newsletter: {
+        eyebrow: 'Subscribed',
+        title: "You're on the list.",
+        lede: "We'll send our weekly digest of guides, news, and community voices every Friday morning. No spam — unsubscribe in one click anytime.",
+        summaryLabel: 'Subscription',
+        summaryRows: [
+          ['Subscribed', 'Just now'],
+          ['Frequency', 'Weekly — Friday mornings'],
+          ['Unsubscribe', 'One click, any time from the footer']
+        ],
+        actions: [
+          { label: 'Browse the directory', href: 'directory.html', kind: 'primary' },
+          { label: 'Read recent articles', href: 'blog.html', kind: 'ghost' }
+        ]
+      },
+      generic: {
+        eyebrow: 'Thank you',
+        title: 'Your submission was received.',
+        lede: "We've saved what you sent. Here's a quick summary and where to go from here.",
+        summaryLabel: null,
+        summaryRows: [],
+        actions: [
+          { label: 'Back to home', href: 'index.html', kind: 'primary' },
+          { label: 'Browse schools', href: 'directory.html', kind: 'ghost' }
+        ]
+      }
+    };
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function(c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    var v = variants[action] || variants.generic;
+
+    var eyebrowEl = document.getElementById('confirm-eyebrow');
+    var titleEl = document.getElementById('confirm-title');
+    var ledeEl = document.getElementById('confirm-lede');
+    var summaryCard = document.getElementById('summary-card');
+    var summaryLabel = document.getElementById('summary-label');
+    var summaryRows = document.getElementById('summary-rows');
+    var actionsEl = document.getElementById('confirm-actions');
+
+    if (eyebrowEl) eyebrowEl.textContent = v.eyebrow;
+    if (titleEl) titleEl.textContent = v.title;
+    if (ledeEl) ledeEl.innerHTML = v.lede;
+
+    // Title tag for tab + bookmarking
+    document.title = v.title + ' — Islamic School Review';
+
+    if (v.summaryRows && v.summaryRows.length && summaryCard) {
+      summaryCard.hidden = false;
+      if (summaryLabel) summaryLabel.textContent = v.summaryLabel || 'Summary';
+      summaryRows.innerHTML = v.summaryRows.map(function(r) {
+        return '<div class="summary-card__row"><strong>' + escapeHtml(r[0]) + '</strong><span>' + escapeHtml(r[1]) + '</span></div>';
+      }).join('');
+    }
+
+    if (v.actions && actionsEl) {
+      actionsEl.innerHTML = v.actions.map(function(a) {
+        var cls = a.kind === 'primary' ? 'btn btn--primary btn--sm' : 'btn btn--ghost btn--sm';
+        return '<a href="' + a.href + '" class="' + cls + '">' + escapeHtml(a.label) + '</a>';
+      }).join('');
+    }
+  })();
+</script>
+
+</body>
+</html>

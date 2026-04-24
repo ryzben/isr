@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School Directory — Islamic School Review</title>
+  <meta name="description" content="Browse 2,400+ verified Islamic schools. Filter by location, type, grade level, tuition, and more." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/directory.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/directory.html" />
+  <meta property="og:title" content="School Directory — Islamic School Review" />
+  <meta property="og:description" content="Browse 2,400+ verified Islamic schools. Filter by location, grade level, tuition, and more." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="School Directory — Islamic School Review" />
+  <meta name="twitter:description" content="Browse 2,400+ verified Islamic schools. Filter by location, grade level, tuition, and more." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.islamicschoolreview.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Directory", "item": "https://www.islamicschoolreview.com/directory.html" },
+      { "@type": "ListItem", "position": 3, "name": "Florida", "item": "https://www.islamicschoolreview.com/directory.html?state=FL" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Islamic schools in Florida",
+    "itemListOrder": "https://schema.org/ItemListOrderAscending",
+    "numberOfItems": 14,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Al-Furqan Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 2, "name": "Universal Academy of Florida", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 3, "name": "Ibn Seena Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 4, "name": "Islamic School of Miami", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 5, "name": "MY Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 6, "name": "Al-Zahra Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 7, "name": "American Youth Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 8, "name": "Bayaan Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 9, "name": "Muslim Academy of Greater Orlando", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 10, "name": "Nur Ul-Islam Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 11, "name": "Alazhar School", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 12, "name": "Salah Tawfik Elementary and Middle School", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 13, "name": "T.I.E.S. — The Islamic Education School", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 14, "name": "Clara Mohammed School of Miami", "url": "https://www.islamicschoolreview.com/school.html" }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .page-header {
+      padding: 40px 0 24px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .breadcrumbs {
+      font-size: 0.85rem; color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .breadcrumbs a { color: var(--muted); }
+    .page-header h1 { font-size: 2rem; margin-bottom: 8px; }
+    .page-header p { margin: 0; max-width: 60ch; }
+
+    .dir-search-bar {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr 1fr auto;
+      gap: 10px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-sm);
+      margin-top: 20px;
+    }
+
+    .dir-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      padding: 32px 0 64px;
+    }
+
+    /* Filters sidebar */
+    .filters {
+      position: sticky;
+      top: calc(var(--nav-h) + 20px);
+      align-self: start;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 20px;
+      max-height: calc(100vh - var(--nav-h) - 40px);
+      overflow-y: auto;
+    }
+    .filters h3 {
+      font-family: "Inter", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0 0 14px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .filter-group {
+      border-top: 1px solid var(--line);
+      padding: 16px 0;
+    }
+    .filter-group:first-of-type { border-top: 0; padding-top: 0; }
+    .filter-group h4 {
+      font-family: "Inter", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 10px;
+    }
+    .filter-group .checkbox { margin-bottom: 6px; }
+    .range-row { display: flex; gap: 8px; }
+    .range-row input { padding: 8px 10px; font-size: 0.9rem; }
+
+    /* Results */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .results-count { font-weight: 600; }
+    .results-count span { color: var(--muted); font-weight: 400; margin-left: 6px; }
+    .view-toggle {
+      display: inline-flex;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 3px;
+    }
+    .view-toggle button {
+      border: 0; background: transparent;
+      padding: 7px 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .view-toggle button.is-active {
+      background: var(--primary);
+      color: #fff;
+    }
+    .sort-select {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 0.9rem;
+    }
+
+    /* School result card (horizontal layout) */
+    .result-list { display: grid; gap: 16px; }
+    .result {
+      display: grid;
+      grid-template-columns: 240px 1fr auto;
+      gap: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .result:hover { border-color: var(--line-strong); box-shadow: var(--shadow-sm); }
+    .result__media {
+      aspect-ratio: 1/1;
+      display: grid; place-items: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 2.6rem; color: rgba(255,255,255,0.85);
+      font-weight: 600;
+      position: relative;
+    }
+    .result__badge-top { position: absolute; top: 12px; left: 12px; }
+    .result__fav {
+      position: absolute; top: 12px; right: 12px;
+      width: 32px; height: 32px; border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      display: grid; place-items: center; border: 0; cursor: pointer;
+      color: var(--ink-soft);
+      font-size: 1rem;
+    }
+    .result__fav.is-active { color: var(--danger); }
+    .result__body { padding: 18px 0; }
+    .result__title {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.3rem; font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+    .result__loc { color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; }
+    .result__rating-row {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+    .result__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .result__snippet {
+      color: var(--ink-soft); font-size: 0.92rem;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .result__side {
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 20px 20px 0;
+      min-width: 180px;
+      text-align: right;
+    }
+    .result__tuition strong {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.3rem; color: var(--ink);
+      display: block;
+    }
+    .result__actions { display: grid; gap: 8px; }
+    .result__actions .checkbox { justify-content: flex-end; font-size: 0.85rem; }
+
+    /* Map view */
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      height: 680px;
+    }
+    .map-view {
+      background: linear-gradient(135deg, #E9EEE8 0%, #DFE6DB 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .map-view svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .map-pin {
+      position: absolute;
+      padding: 6px 10px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--ink);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    .map-pin:hover { border-color: var(--primary); }
+    .map-pin.is-active {
+      background: var(--primary);
+      color: #fff; border-color: var(--primary);
+    }
+    .map-pin .rating__star { color: var(--accent); }
+    .map-pin.is-active .rating__star { color: #fff; }
+    .map-side {
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .map-side .result {
+      grid-template-columns: 120px 1fr;
+    }
+    .map-side .result__side { display: none; }
+
+    /* Compare tray */
+    .compare-tray {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 40;
+    }
+    .compare-chip {
+      background: rgba(255,255,255,0.15);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      margin-right: 6px;
+    }
+
+    .pagination {
+      display: flex; justify-content: center;
+      gap: 6px;
+      margin-top: 32px;
+    }
+    .pagination button {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+    .pagination button.is-active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 960px) {
+      .dir-layout { grid-template-columns: 1fr; }
+      .filters { position: static; max-height: none; }
+      .dir-search-bar { grid-template-columns: 1fr 1fr; }
+      .dir-search-bar .btn { grid-column: 1 / -1; }
+      .result { grid-template-columns: 140px 1fr; }
+      .result__side { display: none; }
+      .map-layout { grid-template-columns: 1fr; height: auto; }
+      .map-view { height: 360px; }
+    }
+    @media (max-width: 600px) {
+      .dir-search-bar { grid-template-columns: 1fr; }
+      .result { grid-template-columns: 100px 1fr; }
+      .result__media { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">ISR</span>
+      Islamic School Review
+    </a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle" title="Language">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== PAGE HEADER ========== -->
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">Home</a> · <a href="#">Directory</a> · <span>Florida</span></div>
+    <h1>Islamic schools in Florida</h1>
+    <p>Browse 14 verified Islamic schools across Florida. Filter by city, grade, tuition, and program to find the right fit — from Jacksonville to Miami.</p>
+
+    <form id="dirSearch" class="dir-search-bar">
+      <input class="input" name="state" aria-label="State" placeholder="State" value="Florida" />
+      <select class="select" name="city" aria-label="City">
+        <option>Any city</option>
+        <option>Jacksonville</option>
+        <option>Tampa</option>
+        <option>Orlando</option>
+        <option>Miami</option>
+        <option>Fort Lauderdale</option>
+        <option>Tallahassee</option>
+      </select>
+      <select class="select" name="grade" aria-label="Grade level">
+        <option>Any grade</option>
+        <option>Preschool</option>
+        <option>Elementary</option>
+        <option>Middle</option>
+        <option>High school</option>
+      </select>
+      <select class="select" name="type" aria-label="School type">
+        <option>Any type</option>
+        <option>Full-time</option>
+        <option>Weekend</option>
+        <option>Hifz</option>
+        <option>Online</option>
+      </select>
+      <button type="submit" class="btn btn--primary">Update results</button>
+    </form>
+  </div>
+</section>
+
+<!-- ========== DIRECTORY LAYOUT ========== -->
+<div class="container">
+  <div class="dir-layout">
+    <!-- Filters sidebar -->
+    <aside class="filters" aria-label="Filters">
+      <h3>Filters <a href="#" class="small" style="font-weight:500;">Clear all</a></h3>
+
+      <div class="filter-group">
+        <h4>School type</h4>
+        <label class="checkbox"><input type="checkbox" checked /> Full-time day <span class="muted small">(112)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Weekend / Sunday <span class="muted small">(48)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Online <span class="muted small">(22)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Hifz <span class="muted small">(31)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Montessori <span class="muted small">(14)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Boarding <span class="muted small">(6)</span></label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Grade level</h4>
+        <label class="checkbox"><input type="checkbox" /> Preschool</label>
+        <label class="checkbox"><input type="checkbox" checked /> Elementary</label>
+        <label class="checkbox"><input type="checkbox" checked /> Middle</label>
+        <label class="checkbox"><input type="checkbox" /> High school</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Tuition range</h4>
+        <div class="range-row">
+          <input class="input" placeholder="Min $" value="0" />
+          <input class="input" placeholder="Max $" value="15000" />
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h4>Student body</h4>
+        <label class="checkbox"><input type="radio" name="gender" checked /> Co-ed</label>
+        <label class="checkbox"><input type="radio" name="gender" /> Boys-only</label>
+        <label class="checkbox"><input type="radio" name="gender" /> Girls-only</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Accreditation</h4>
+        <label class="checkbox"><input type="checkbox" /> CISNA</label>
+        <label class="checkbox"><input type="checkbox" /> AdvancED / Cognia</label>
+        <label class="checkbox"><input type="checkbox" /> State-accredited</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Programs</h4>
+        <label class="checkbox"><input type="checkbox" /> Quran competition</label>
+        <label class="checkbox"><input type="checkbox" /> Arabic immersion</label>
+        <label class="checkbox"><input type="checkbox" /> STEM</label>
+        <label class="checkbox"><input type="checkbox" /> Sports</label>
+        <label class="checkbox"><input type="checkbox" /> Arts</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Rating</h4>
+        <label class="checkbox"><input type="radio" name="rating" /> <span class="rating__star" style="color:var(--accent)">★★★★★</span> 5.0</label>
+        <label class="checkbox"><input type="radio" name="rating" checked /> <span class="rating__star" style="color:var(--accent)">★★★★</span>☆ 4.0+</label>
+        <label class="checkbox"><input type="radio" name="rating" /> <span class="rating__star" style="color:var(--accent)">★★★</span>☆☆ 3.0+</label>
+      </div>
+
+      <div class="filter-group">
+        <label class="checkbox"><input type="checkbox" /> <strong>Premium verified only</strong></label>
+      </div>
+    </aside>
+
+    <!-- Results area -->
+    <main>
+      <div class="results-header">
+        <div class="results-count">14 schools <span>in Florida</span></div>
+        <div class="flex gap-12" style="align-items:center;">
+          <div class="view-toggle" role="tablist">
+            <button class="is-active" data-view-toggle="list">List</button>
+            <button data-view-toggle="map">Map</button>
+          </div>
+          <select class="sort-select">
+            <option>Sort: Best match</option>
+            <option>Highest rated</option>
+            <option>Most reviews</option>
+            <option>Lowest tuition</option>
+            <option>Nearest</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- LIST VIEW -->
+      <div data-view="list">
+        <div class="result-list">
+          <!-- Result 1 -->
+          <a href="school.html" class="result" data-city="Jacksonville">
+            <div class="result__media" style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);">
+              <span>AF</span>
+              <span class="badge badge--accent result__badge-top badge--verified">Verified</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Al-Furqan Academy</h3>
+              <div class="result__loc">📍 Jacksonville, FL · Full-time PreK–12 · Est. 1997 · <span style="text-decoration:underline;">alfurqanacademy.org</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">ICNEF</span>
+                <span class="badge badge--muted">FCIS · CISNA · Cognia</span>
+                <span class="badge badge--muted">Step Up For Students</span>
+              </div>
+              <p class="result__snippet">Founded in 1997 by members of the Islamic Center of Northeast Florida (ICNEF). Serves 270+ students across PreK–12 with an integrated Islamic and SAVVAS-aligned academic program.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>$9,300 / yr</strong>
+                <span class="small muted">K–12 tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="af" data-name="Al-Furqan Academy" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 2 -->
+          <a href="school.html" class="result" data-city="Tampa">
+            <div class="result__media" style="background: linear-gradient(135deg, #B8823A 0%, #d29c51 100%);">
+              <span>UAF</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Universal Academy of Florida</h3>
+              <div class="result__loc">📍 6801 Orient Rd, Tampa, FL 33610 · PreK–12 · 830+ students · <span style="text-decoration:underline;">uaftampa.org</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Cognia · FCIS · CISNA · FKC</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Founded 1992</span>
+                <span class="badge badge--muted">STEM</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">One of the largest Islamic schools in Florida, serving Daycare through grade 12. Accredited by Cognia (including Cognia STEM), FCIS, CISNA, and FKC. Call (813) 664-0695.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>Up to $13,820</strong>
+                <span class="small muted">Annual tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="uaf" data-name="Universal Academy of Florida" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 3 -->
+          <a href="school.html" class="result" data-city="Orlando">
+            <div class="result__media" style="background: linear-gradient(135deg, #1f3b54 0%, #3d6793 100%);">
+              <span>IS</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Ibn Seena Academy</h3>
+              <div class="result__loc">📍 12908 S Orange Blossom Trl Ste 102, Orlando, FL 32837 · PreK–12 · <span style="text-decoration:underline;">isacademy.net</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Arabic</span>
+                <span class="badge badge--muted">Quran</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">Central Florida Islamic school offering academics alongside Arabic, Quran, and Islamic studies from PreK through grade 12. Call (407) 888-1000 to inquire.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>~$5,250</strong>
+                <span class="small muted">Annual tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="isa" data-name="Ibn Seena Academy" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 4 -->
+          <a href="school.html" class="result" data-city="Miami">
+            <div class="result__media" style="background: linear-gradient(135deg, #6B4E2E 0%, #8a6a44 100%);">
+              <span>ISM</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Islamic School of Miami</h3>
+              <div class="result__loc">📍 11699 SW 147th Ave, Miami, FL 33196 · K–8 + 9–12 Learning Center · <span style="text-decoration:underline;">myisom.org</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">State of Florida approved</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">8:1 student-teacher</span>
+                <span class="badge badge--muted">Small classes</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">Small K–8 Islamic school in The Hammocks area with a separate 9–12 Learning Center. Low 8:1 student-to-teacher ratio. Call (305) 408-0400.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>~$7,925</strong>
+                <span class="small muted">Annual tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="ism" data-name="Islamic School of Miami" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 5 -->
+          <a href="school.html" class="result" data-city="Jacksonville">
+            <div class="result__media" style="background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%);">
+              <span>MY</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">MY Academy</h3>
+              <div class="result__loc">📍 5940 Beach Blvd Ste A, Jacksonville, FL 32207 · VPK–12 · <span style="text-decoration:underline;">myacademyjax.com</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Private · Muslim</span>
+                <span class="badge badge--muted">7:1 student-teacher</span>
+                <span class="badge badge--muted">Step Up For Students</span>
+              </div>
+              <p class="result__snippet">Small private Muslim school on Beach Blvd serving ~165 students from VPK through grade 12. Low 7:1 student-to-teacher ratio. Call (904) 980-8337 to inquire about openings.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>Contact</strong>
+                <span class="small muted">For tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="my" data-name="MY Academy" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 6 -->
+          <a href="school.html" class="result" data-city="Jacksonville">
+            <div class="result__media" style="background: linear-gradient(135deg, #5c2e2e 0%, #894848 100%);">
+              <span>AZ</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Al-Zahra Academy</h3>
+              <div class="result__loc">📍 Jacksonville, FL · <span style="text-decoration:underline;">alzahrajax.org</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Quran program</span>
+                <span class="badge badge--muted">Islamic studies</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">Jacksonville Islamic school offering Quran and Islamic studies alongside core academics. Listing details are awaiting verification from the school — click to request more info or claim this listing.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>Contact</strong>
+                <span class="small muted">For tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="az" data-name="Al-Zahra Academy" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 7 — American Youth Academy (Tampa) -->
+          <a href="school.html" class="result" data-city="Tampa">
+            <div class="result__media" style="background: linear-gradient(135deg, #2d5f3a 0%, #4a8a5c 100%);">
+              <span>AYA</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">American Youth Academy</h3>
+              <div class="result__loc">📍 5905 E 130th Ave, Tampa, FL 33617 · PreK–12 · <span style="text-decoration:underline;">ayatampa.org</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">FCIS · SACS-CASI · IB World School</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">IB Diploma</span>
+                <span class="badge badge--muted">FCIS</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">The only IB World School among Florida's Islamic schools, offering the IB Diploma Programme to grades 11–12. Accredited by FCIS and SACS-CASI. Call (813) 987-9282.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>From $10,500</strong>
+                <span class="small muted">Annual tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="aya" data-name="American Youth Academy" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 8 — Bayaan Academy (Tampa area) -->
+          <a href="school.html" class="result" data-city="Tampa">
+            <div class="result__media" style="background: linear-gradient(135deg, #3a2d5f 0%, #5c4a8a 100%);">
+              <span>BAY</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Bayaan Academy</h3>
+              <div class="result__loc">📍 Thonotosassa, FL · K–11 · 200 students · <span style="text-decoration:underline;">bayaanacademy.org</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Hifz</span>
+                <span class="badge badge--muted">Tajweed</span>
+                <span class="badge badge--muted">Arabic focus</span>
+              </div>
+              <p class="result__snippet">Islamic "magnet" school north of Tampa with special emphasis on Qur'an tajweed, memorization, and Arabic to understand Qur'an. Serves ~200 students K–11.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>$12,700–$14,700</strong>
+                <span class="small muted">Annual tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="bay" data-name="Bayaan Academy" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 9 — Muslim Academy of Greater Orlando -->
+          <a href="school.html" class="result" data-city="Orlando">
+            <div class="result__media" style="background: linear-gradient(135deg, #1d5f55 0%, #2d8a7c 100%);">
+              <span>MGO</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Muslim Academy of Greater Orlando</h3>
+              <div class="result__loc">📍 11551 Ruby Lake Rd, Orlando, FL 32836 · PreK–8 · 322 students · <span style="text-decoration:underline;">magorlando.net</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">7.6:1 ratio</span>
+                <span class="badge badge--muted">Quran</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">Full-time Pre-K through 8th-grade Islamic school in Orlando with 322 students and a 7.6:1 student-to-teacher ratio. Call (407) 238-0144.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>~$6,500</strong>
+                <span class="small muted">Annual tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="mgo" data-name="Muslim Academy of Greater Orlando" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 10 — Nur Ul-Islam Academy (Cooper City) -->
+          <a href="school.html" class="result" data-city="Fort Lauderdale">
+            <div class="result__media" style="background: linear-gradient(135deg, #B8823A 0%, #e0a659 100%);">
+              <span>NUI</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Nur Ul-Islam Academy</h3>
+              <div class="result__loc">📍 10600 SW 59th St, Cooper City, FL 33328 · PreK–12 · 405 students · <span style="text-decoration:underline;">nuiacademy.org</span></div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">SACS · FCIS accredited</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">SACS</span>
+                <span class="badge badge--muted">FCIS</span>
+                <span class="badge badge--muted">College prep</span>
+              </div>
+              <p class="result__snippet">Broward County's largest Islamic school, serving 405 students PreK–12. Fully accredited by SACS and FCIS. Reported 100% 4-year college attendance. Call (954) 434-3288.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>~$25,000</strong>
+                <span class="small muted">Annual tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="nui" data-name="Nur Ul-Islam Academy" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 11 — Alazhar School (Tamarac) -->
+          <a href="school.html" class="result" data-city="Fort Lauderdale">
+            <div class="result__media" style="background: linear-gradient(135deg, #8a5a2e 0%, #b8823a 100%);">
+              <span>AZS</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Alazhar School</h3>
+              <div class="result__loc">📍 7201 W McNab Rd, Tamarac, FL 33321 · PreK–8 · 223 students</div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Quran</span>
+                <span class="badge badge--muted">Arabic</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">Broward-area PreK–8 Islamic school serving 223 students, with integrated Quran and Arabic programs. Call (954) 722-1555.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>Contact</strong>
+                <span class="small muted">For tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="azs" data-name="Alazhar School" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 12 — Salah Tawfik Elementary and Middle School (Sunrise) -->
+          <a href="school.html" class="result" data-city="Fort Lauderdale">
+            <div class="result__media" style="background: linear-gradient(135deg, #424855 0%, #6b7483 100%);">
+              <span>STS</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Salah Tawfik Elementary and Middle School</h3>
+              <div class="result__loc">📍 5457 NW 108th Ave, Sunrise, FL 33351 · PreK–8 · 179 students</div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Small classes</span>
+                <span class="badge badge--muted">Islamic studies</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">Community-run Islamic elementary and middle school in Sunrise, FL. 179 students across PreK–8. Call (954) 741-8130.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>Contact</strong>
+                <span class="small muted">For tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="sts" data-name="Salah Tawfik Elementary and Middle School" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 13 — T.I.E.S. (Davie) -->
+          <a href="school.html" class="result" data-city="Fort Lauderdale">
+            <div class="result__media" style="background: linear-gradient(135deg, #5a6b35 0%, #8a9f51 100%);">
+              <span>TIE</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">T.I.E.S. — The Islamic Education School</h3>
+              <div class="result__loc">📍 6045 Orange Dr, Davie, FL 33314 · K–9 · 56 students</div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Listing awaiting claim</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Very small school</span>
+                <span class="badge badge--muted">Personal attention</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">Intimate Broward-area Islamic school (K–9) with just 56 students, allowing highly personalized instruction. Call (954) 792-8009.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>Contact</strong>
+                <span class="small muted">For tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="tie" data-name="T.I.E.S. — The Islamic Education School" /> Compare</label>
+              </div>
+            </div>
+          </a>
+
+          <!-- Result 14 — Clara Mohammed School of Miami -->
+          <a href="school.html" class="result" data-city="Miami">
+            <div class="result__media" style="background: linear-gradient(135deg, #7a2a2a 0%, #a84848 100%);">
+              <span>CMS</span>
+              <button class="result__fav" data-fav aria-label="Save">♥</button>
+            </div>
+            <div class="result__body">
+              <h3 class="result__title">Clara Mohammed School of Miami</h3>
+              <div class="result__loc">📍 5245 NW 7th Ave, Miami, FL 33127 · K–8 · 40 students · Founded 1930</div>
+              <div class="result__rating-row">
+                <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+                <span class="small muted">Historic listing</span>
+              </div>
+              <div class="result__tags">
+                <span class="badge badge--muted">Founded 1930</span>
+                <span class="badge badge--muted">Historic</span>
+                <span class="badge badge--muted">Co-ed</span>
+              </div>
+              <p class="result__snippet">One of the oldest private schools in Florida, founded in 1930. Intimate K–8 Islamic school aligned with Miami-Dade district standards, serving ~40 students at Masjid Al-Ansar. Call (305) 757-8741.</p>
+            </div>
+            <div class="result__side">
+              <div class="result__tuition">
+                <strong>Contact</strong>
+                <span class="small muted">For tuition</span>
+              </div>
+              <div class="result__actions">
+                <span class="btn btn--primary btn--sm">Request info</span>
+                <label class="checkbox"><input type="checkbox" data-compare="cms" data-name="Clara Mohammed School of Miami" /> Compare</label>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="pagination">
+          <button>← Prev</button>
+          <button class="is-active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>…</button>
+          <button>31</button>
+          <button>Next →</button>
+        </div>
+      </div>
+
+      <!-- MAP VIEW (hidden by default) -->
+      <div data-view="map" hidden>
+        <div class="map-layout">
+          <div class="map-side">
+            <div class="result-list">
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);">
+                  <span>AF</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Al-Furqan Academy</h3>
+                  <div class="result__loc">📍 Jacksonville · PreK–12</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">Full-time Islamic day school · alfurqanacademy.org</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #B8823A 0%, #d29c51 100%);">
+                  <span>UAF</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Universal Academy of Florida</h3>
+                  <div class="result__loc">📍 Tampa · PreK–12</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">Cognia · FCIS · CISNA · 830+ students</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #1f3b54 0%, #3d6793 100%);">
+                  <span>IS</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Ibn Seena Academy</h3>
+                  <div class="result__loc">📍 Orlando · PreK–12</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">~$5,250/yr · Arabic / Quran focus</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #6B4E2E 0%, #8a6a44 100%);">
+                  <span>ISM</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Islamic School of Miami</h3>
+                  <div class="result__loc">📍 Miami · K–8 + 9–12 Learning Center</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">~$7,925/yr · 8:1 student-teacher ratio</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #2d5f3a 0%, #4a8a5c 100%);">
+                  <span>AYA</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">American Youth Academy</h3>
+                  <div class="result__loc">📍 Tampa · PreK–12</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">IB World School · FCIS · From $10,500</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #3a2d5f 0%, #5c4a8a 100%);">
+                  <span>BAY</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Bayaan Academy</h3>
+                  <div class="result__loc">📍 Thonotosassa · K–11</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">Hifz · Tajweed · Arabic focus</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #1d5f55 0%, #2d8a7c 100%);">
+                  <span>MGO</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Muslim Academy of Greater Orlando</h3>
+                  <div class="result__loc">📍 Orlando · PreK–8</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">~$6,500/yr · 7.6:1 ratio · 322 students</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #B8823A 0%, #e0a659 100%);">
+                  <span>NUI</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Nur Ul-Islam Academy</h3>
+                  <div class="result__loc">📍 Cooper City · PreK–12</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">SACS · FCIS · 405 students</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #8a5a2e 0%, #b8823a 100%);">
+                  <span>AZS</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Alazhar School</h3>
+                  <div class="result__loc">📍 Tamarac · PreK–8</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">Quran · Arabic · 223 students</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #424855 0%, #6b7483 100%);">
+                  <span>STS</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Salah Tawfik School</h3>
+                  <div class="result__loc">📍 Sunrise · PreK–8</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">Small classes · 179 students</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #5a6b35 0%, #8a9f51 100%);">
+                  <span>TIE</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">T.I.E.S.</h3>
+                  <div class="result__loc">📍 Davie · K–9</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">Very small · 56 students · Personal attention</p>
+                </div>
+              </a>
+              <a href="school.html" class="result">
+                <div class="result__media" style="background: linear-gradient(135deg, #7a2a2a 0%, #a84848 100%);">
+                  <span>CMS</span>
+                  <button class="result__fav" data-fav aria-label="Save">♥</button>
+                </div>
+                <div class="result__body">
+                  <h3 class="result__title">Clara Mohammed School</h3>
+                  <div class="result__loc">📍 Miami · K–8</div>
+                  <div class="result__rating-row">
+                    <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
+                  </div>
+                  <p class="result__snippet">Founded 1930 · Historic · 40 students</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="map-view">
+            <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="gridp2" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(15,81,50,0.08)" stroke-width="1"/>
+                </pattern>
+              </defs>
+              <rect width="800" height="600" fill="url(#gridp2)"/>
+              <!-- Florida silhouette (stylized) — panhandle to the keys -->
+              <path d="M120,140 L420,130 L470,160 L520,150 L560,190 L580,260 L570,330 L540,400 L500,470 L470,520 L440,540 L430,500 L440,450 L420,400 L380,370 L340,340 L280,320 L220,280 L170,220 L140,180 Z"
+                    fill="rgba(15,81,50,0.08)" stroke="rgba(15,81,50,0.4)" stroke-width="2"/>
+              <text x="360" y="260" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="28" fill="rgba(15,81,50,0.2)">FLORIDA</text>
+            </svg>
+
+            <div class="map-pin is-active" style="left: 54%; top: 26%;"><span class="rating__star">★</span>Al-Furqan · Jax</div>
+            <div class="map-pin" style="left: 57%; top: 30%;"><span class="rating__star">★</span>MY Academy · Jax</div>
+            <div class="map-pin" style="left: 52%; top: 28%;"><span class="rating__star">★</span>Al-Zahra · Jax</div>
+            <div class="map-pin" style="left: 40%; top: 48%;"><span class="rating__star">★</span>UAF · Tampa</div>
+            <div class="map-pin" style="left: 45%; top: 50%;"><span class="rating__star">★</span>AYA · Tampa</div>
+            <div class="map-pin" style="left: 44%; top: 44%;"><span class="rating__star">★</span>Bayaan · Thonotosassa</div>
+            <div class="map-pin" style="left: 54%; top: 46%;"><span class="rating__star">★</span>Ibn Seena · Orlando</div>
+            <div class="map-pin" style="left: 56%; top: 48%;"><span class="rating__star">★</span>MAGO · Orlando</div>
+            <div class="map-pin" style="left: 60%; top: 76%;"><span class="rating__star">★</span>Nur Ul-Islam · Cooper City</div>
+            <div class="map-pin" style="left: 61%; top: 74%;"><span class="rating__star">★</span>Alazhar · Tamarac</div>
+            <div class="map-pin" style="left: 59%; top: 75%;"><span class="rating__star">★</span>Salah Tawfik · Sunrise</div>
+            <div class="map-pin" style="left: 60%; top: 77%;"><span class="rating__star">★</span>T.I.E.S. · Davie</div>
+            <div class="map-pin" style="left: 62%; top: 78%;"><span class="rating__star">★</span>ISOM · Miami</div>
+            <div class="map-pin" style="left: 63%; top: 80%;"><span class="rating__star">★</span>Clara Mohammed · Miami</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ========== COMPARE TRAY ========== -->
+<div id="compareTray" class="compare-tray" hidden>
+  <span>Compare schools:</span>
+  <span id="compareList"></span>
+  <a href="compare.html" class="btn btn--accent btn--sm">Compare →</a>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Browse by type</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="#">For parents</a></li>
+        <li><a href="#">For educators</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Islamic School Review — Find the best Islamic school for your child's future</title>
+  <meta name="description" content="Search 2,400+ Islamic schools, read honest parent reviews, compare tuition, and find the best fit for your child — all in one trusted place." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/" />
+  <meta property="og:title" content="Islamic School Review — Find the best Islamic school for your child" />
+  <meta property="og:description" content="Search 2,400+ Islamic schools, read honest parent reviews, compare tuition, and find the best fit for your child." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Islamic School Review — Find the best Islamic school for your child" />
+  <meta name="twitter:description" content="Honest parent reviews of Islamic schools across the country. Compare tuition, Quran programs, and community." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Islamic School Review",
+    "url": "https://www.islamicschoolreview.com/",
+    "description": "Directory, reviews, and resources for Islamic schools.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.islamicschoolreview.com/directory.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Islamic School Review",
+    "url": "https://www.islamicschoolreview.com/",
+    "logo": "https://www.islamicschoolreview.com/favicon.svg",
+    "sameAs": []
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* =========================================================
+       HOME — redesigned for search-first hero + stronger trust
+       ========================================================= */
+
+    /* ----- HERO: single-column, centered, search-dominant ----- */
+    .hero {
+      position: relative;
+      padding: 96px 0 80px;
+      text-align: center;
+      background:
+        radial-gradient(1100px 520px at 50% -20%, var(--primary-soft) 0%, transparent 60%),
+        radial-gradient(900px 460px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
+        radial-gradient(700px 380px at 100% 100%, var(--cta-soft) 0%, transparent 55%),
+        var(--bg);
+      overflow: hidden;
+    }
+    .hero__inner {
+      position: relative;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+      font-weight: 500;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .hero__eyebrow strong { color: var(--primary); font-weight: 700; }
+    .hero__eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.15);
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 auto 14px;
+      max-width: 22ch;
+      font-weight: 600;
+    }
+    /* Kept green color on the keyphrase, removed the amber underline pill */
+    .hero h1 em {
+      font-style: normal;
+      color: var(--primary);
+    }
+    .hero p.lede {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 56ch;
+      margin: 0 auto 32px;
+      line-height: 1.55;
+    }
+
+    /* Big, centered search — intentionally the dominant element on the page.
+       Wider, thicker, and deeper shadow than the surrounding typography. */
+    .hero-search {
+      background: var(--surface);
+      border: 2px solid var(--line-strong);
+      border-radius: var(--r-xl);
+      box-shadow:
+        0 30px 70px rgba(28, 25, 23, 0.14),
+        0 8px 20px rgba(28, 25, 23, 0.06);
+      padding: 14px;
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero-search:focus-within {
+      border-color: var(--primary);
+      box-shadow:
+        0 30px 70px rgba(28, 25, 23, 0.14),
+        0 0 0 6px var(--primary-soft);
+    }
+    .hero-search__row {
+      display: grid;
+      grid-template-columns: 2.2fr 1.2fr auto;
+      gap: 0;
+      align-items: stretch;
+    }
+    .hero-search__field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      text-align: left;
+      border-right: 1px solid var(--line);
+    }
+    .hero-search__field:last-of-type { border-right: 0; }
+    .hero-search__icon {
+      flex: 0 0 auto;
+      width: 24px; height: 24px;
+      color: var(--primary);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .hero-search__icon svg { width: 24px; height: 24px; }
+    .hero-search__body { flex: 1; min-width: 0; }
+    .hero-search__label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .hero-search__input,
+    .hero-search__select {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      font: inherit;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--ink);
+      outline: none;
+      appearance: none;
+    }
+    .hero-search__input::placeholder { color: var(--muted); font-weight: 400; }
+    .hero-search__input:focus,
+    .hero-search__select:focus { outline: none; box-shadow: none; }
+    .hero-search__submit {
+      align-self: stretch;
+      padding: 0 34px;
+      margin: 4px;
+      border-radius: var(--r-lg);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      min-width: 200px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .hero-search__submit svg { width: 20px; height: 20px; }
+
+    .hero__popular {
+      margin-top: 24px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .hero__popular a {
+      display: inline-block;
+      padding: 4px 10px;
+      margin: 0 4px 4px 0;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-weight: 500;
+      transition: border-color .15s, color .15s;
+    }
+    .hero__popular a:hover { border-color: var(--primary); color: var(--primary); text-decoration: none; }
+    .hero__popular strong { color: var(--ink); font-weight: 600; margin-right: 8px; }
+
+    /* ----- TRUST STATS BAND ----- */
+    .trust-band {
+      padding: 72px 0 80px;
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .trust-band__eyebrow {
+      text-align: center;
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .trust-stat {
+      padding: 32px 28px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      text-align: center;
+      position: relative;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+    }
+    .trust-stat:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--line-strong);
+    }
+    .trust-stat__icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .trust-stat__icon svg { width: 22px; height: 22px; }
+    .trust-stat__num {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.8rem, 5.5vw, 4rem);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .trust-stat__label {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .trust-stat__sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ----- AUDIENCE SECTION ----- */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .audience-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 28px 26px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: block;
+      color: inherit;
+    }
+    .audience-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+      text-decoration: none;
+    }
+    .audience-card__icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid; place-items: center;
+      margin-bottom: 18px;
+    }
+    .audience-card__icon svg { width: 26px; height: 26px; }
+    .audience-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .audience-card p { font-size: 0.92rem; margin: 0 0 16px; color: var(--muted); line-height: 1.55; }
+    .audience-card__link {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .audience-card:hover .audience-card__link { gap: 10px; }
+
+    /* ----- FEATURED SCHOOL CARDS (upgraded) ----- */
+    .school-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .school-card {
+      display: block;
+      color: inherit;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .school-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--line-strong);
+      text-decoration: none;
+    }
+    .school-card__photo {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+    }
+    .school-card__photo::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+    }
+    .school-card__photo-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .school-card:hover .school-card__photo-img { transform: scale(1.04); }
+    /* Tint overlay to unify the three photos with the brand palette */
+    .school-card__photo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(15, 81, 50, 0.18) 0%, rgba(0, 0, 0, 0) 55%);
+    }
+    .school-card__badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      z-index: 2;
+      background: rgba(255,255,255,0.95);
+      color: var(--ink);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: var(--shadow-sm);
+    }
+    .school-card__badge--verified { color: var(--success); }
+    .school-card__badge--premium { background: var(--cta); color: #fff; }
+    .school-card__fav {
+      position: absolute;
+      top: 14px; right: 14px;
+      z-index: 2;
+      width: 36px; height: 36px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.95);
+      border: 0;
+      display: grid; place-items: center;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      box-shadow: var(--shadow-sm);
+      transition: color .15s, transform .1s;
+    }
+    .school-card__fav:hover { color: var(--danger); transform: scale(1.08); }
+    .school-card__fav.is-active { color: var(--danger); }
+    .school-card__photo-caption {
+      position: absolute;
+      left: 16px; bottom: 14px;
+      z-index: 2;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .school-card__body { padding: 20px 20px 22px; }
+    .school-card__title {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+    .school-card__loc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .school-card__loc svg { width: 14px; height: 14px; flex: 0 0 auto; }
+
+    /* Prominent rating block */
+    .rating-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface-alt);
+      border-radius: var(--r-md);
+      margin-bottom: 14px;
+    }
+    .rating-block__num {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .rating-block__body { flex: 1; }
+    .rating-block__stars {
+      color: var(--accent);
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .rating-block__count {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .rating-block__tuition {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+      text-align: right;
+      line-height: 1.3;
+    }
+    .rating-block__tuition-label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .school-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .school-card__tag {
+      background: var(--primary-soft);
+      color: var(--primary-ink);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* ----- UTILITY BAND (prayer + checklist, below the fold) ----- */
+    .utility-band {
+      padding: 56px 0;
+      background: var(--surface-alt);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .utility-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .prayer-widget {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+    }
+    .prayer-widget__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+    .prayer-widget__header h3 {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .prayer-widget__city { font-size: 0.85rem; color: var(--muted); }
+    .prayer-widget__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .prayer {
+      text-align: center;
+      padding: 10px 6px;
+      background: var(--surface-alt);
+      border-radius: var(--r-md);
+      border: 1px solid transparent;
+    }
+    .prayer.is-next {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+    .prayer__name {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .prayer__time {
+      font-weight: 700;
+      color: var(--ink);
+      margin-top: 4px;
+      font-size: 1rem;
+    }
+
+    .checklist-card {
+      background: linear-gradient(135deg, var(--primary) 0%, #0b3d25 100%);
+      color: #fff;
+      border-radius: var(--r-lg);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .checklist-card__icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.12);
+      display: grid; place-items: center;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+    .checklist-card__icon svg { width: 24px; height: 24px; }
+    .checklist-card__body { flex: 1; }
+    .checklist-card__body strong { color: #fff; display: block; margin-bottom: 4px; font-size: 1rem; }
+    .checklist-card__body p { margin: 0 0 10px; color: rgba(255,255,255,0.82); font-size: 0.9rem; }
+    .checklist-card__body a {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ----- MAP PREVIEW ----- */
+    .map-preview {
+      background: linear-gradient(135deg, #E9EEE8 0%, #DFE6DB 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      height: 380px;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-preview svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .map-pin {
+      position: absolute;
+      width: 32px; height: 32px;
+      background: var(--primary);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      box-shadow: var(--shadow-md);
+      display: grid; place-items: center;
+      color: #fff; font-size: 0.75rem; font-weight: 700;
+      transform: translate(-50%, -50%);
+    }
+    .map-pin.is-featured { background: var(--cta); }
+    .map-overlay {
+      position: absolute;
+      left: 24px; bottom: 24px;
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-md);
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    /* ----- REVIEWS ----- */
+    .review-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .review {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 24px;
+    }
+    .review__stars { color: var(--accent); font-size: 1rem; margin-bottom: 10px; letter-spacing: 1px; }
+    .review__text { font-family: "Fraunces", Georgia, serif; font-size: 1.05rem; color: var(--ink); margin: 0 0 16px; font-weight: 500; line-height: 1.5; }
+    .review__author { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--ink-soft); }
+    .review__avatar {
+      width: 40px; height: 40px; border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid; place-items: center;
+      font-weight: 600;
+      flex: 0 0 auto;
+    }
+
+    /* ----- JOBS ----- */
+    .job-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .job {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color .15s, transform .15s;
+    }
+    .job:hover { border-color: var(--primary); text-decoration: none; transform: translateY(-2px); }
+    .job__logo {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      background: var(--surface-alt);
+      display: grid; place-items: center;
+      font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+      font-family: "Fraunces", Georgia, serif;
+    }
+    .job__body { flex: 1; }
+    .job h4 { margin: 0 0 2px; font-family: "Inter", sans-serif; font-size: 1rem; color: var(--ink); font-weight: 600; }
+    .job__meta { font-size: 0.85rem; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ----- BLOG ----- */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .post-card {
+      display: block;
+      color: inherit;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .post-card:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--line-strong);
+    }
+    .post-card__media {
+      aspect-ratio: 16 / 10;
+      background: var(--surface-alt);
+    }
+    .post-card__body { padding: 20px; }
+    .post-card__cat {
+      font-size: 0.75rem; color: var(--primary); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .post-card h3 { font-family: "Fraunces", Georgia, serif; font-size: 1.15rem; margin: 0 0 8px; color: var(--ink); font-weight: 600; line-height: 1.3; }
+
+    /* ----- NEWSLETTER ----- */
+    .newsletter {
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--r-xl);
+      padding: 56px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter::before {
+      content: ""; position: absolute; right: -60px; top: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .newsletter::after {
+      content: ""; position: absolute; right: 60px; bottom: -120px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(184,130,58,0.15);
+    }
+    .newsletter h2 { color: #fff; margin-bottom: 12px; }
+    .newsletter p { color: rgba(255,255,255,0.88); margin: 0; }
+    .newsletter__form {
+      background: rgba(255,255,255,0.08);
+      padding: 22px;
+      border-radius: var(--r-lg);
+      position: relative; z-index: 1;
+    }
+    .newsletter__form .input {
+      background: rgba(255,255,255,0.95);
+      border-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    /* ----- PARTNERS ----- */
+    .partners {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 64px;
+      flex-wrap: wrap;
+      opacity: 0.72;
+    }
+    .partner-logo {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* Larger rhythm between sections on home */
+    .section { padding: 112px 0; }
+    .section--tight { padding: 72px 0; }
+    .section .section-title { margin-bottom: 40px; }
+
+    /* ----- MOBILE ----- */
+    @media (max-width: 960px) {
+      .hero { padding: 64px 0 56px; }
+      .hero-search__row { grid-template-columns: 1fr; }
+      .hero-search__field { border-right: 0; border-bottom: 1px solid var(--line); padding: 14px 16px; }
+      .hero-search__field:last-of-type { border-bottom: 0; }
+      .hero-search__submit {
+        margin: 6px;
+        padding: 14px;
+        min-width: 0;
+        width: calc(100% - 12px);
+      }
+      .trust-band { padding: 56px 0 64px; }
+      .trust-grid { grid-template-columns: 1fr; gap: 16px; }
+      .trust-stat { padding: 24px 20px; }
+      .audience-grid { grid-template-columns: repeat(2, 1fr); }
+      .school-grid, .blog-grid, .review-strip { grid-template-columns: 1fr 1fr; }
+      .utility-grid { grid-template-columns: 1fr; }
+      .job-list { grid-template-columns: 1fr; }
+      .newsletter { grid-template-columns: 1fr; padding: 40px 28px; }
+      .section { padding: 80px 0; }
+    }
+    @media (max-width: 600px) {
+      .school-grid, .blog-grid, .review-strip { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .prayer-widget__grid { grid-template-columns: repeat(5, 1fr); font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">ISR</span>
+      Islamic School Review
+    </a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle" title="Language">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--cta btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO — SEARCH-FIRST ========== -->
+<section class="hero">
+  <div class="hero__inner">
+    <span class="hero__eyebrow"><span class="dot" aria-hidden="true"></span>Trusted by <strong>18,000+ families</strong> across 14 countries</span>
+
+    <h1>Find the <em>best Islamic school</em> for your child's future.</h1>
+
+    <p class="lede">Search 2,400+ verified Islamic schools, read honest parent reviews, and compare tuition, programs, and culture — all in one trusted place.</p>
+
+    <form class="hero-search" action="directory.html" method="get" aria-label="School search">
+      <div class="hero-search__row">
+        <!-- Location -->
+        <div class="hero-search__field">
+          <span class="hero-search__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <div class="hero-search__body">
+            <label class="hero-search__label" for="loc">Location</label>
+            <input id="loc" name="q" class="hero-search__input" type="text" placeholder="City, zip, or school name" value="Jacksonville, FL" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Grade level -->
+        <div class="hero-search__field">
+          <span class="hero-search__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+          </span>
+          <div class="hero-search__body">
+            <label class="hero-search__label" for="grade">Grade level</label>
+            <select id="grade" name="grade" class="hero-search__select">
+              <option>Any grade</option>
+              <option>Preschool</option>
+              <option>Elementary</option>
+              <option>Middle school</option>
+              <option>High school</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button class="btn btn--cta btn--xl hero-search__submit" type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Search schools
+        </button>
+      </div>
+    </form>
+
+    <div class="hero__popular">
+      <strong>Popular:</strong>
+      <a href="directory.html?city=Jacksonville">Jacksonville</a>
+      <a href="directory.html?city=Tampa">Tampa</a>
+      <a href="directory.html?city=Orlando">Orlando</a>
+      <a href="directory.html?city=Miami">Miami</a>
+      <a href="directory.html?q=Hifz">Hifz programs</a>
+      <a href="directory.html?q=Montessori">Montessori</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRUST STATS BAND ========== -->
+<section class="trust-band" aria-label="Platform stats">
+  <div class="container">
+    <p class="trust-band__eyebrow">The largest Islamic-school community online</p>
+    <div class="trust-grid">
+      <div class="trust-stat">
+        <span class="trust-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/></svg>
+        </span>
+        <div class="trust-stat__num">2,400+</div>
+        <div class="trust-stat__label">Schools listed</div>
+        <div class="trust-stat__sub">Across 48 states &amp; 14 countries</div>
+      </div>
+      <div class="trust-stat">
+        <span class="trust-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.39 6.95H22l-6.19 4.5L18.18 22 12 17.27 5.82 22l2.37-8.55L2 8.95h7.61z"/></svg>
+        </span>
+        <div class="trust-stat__num">18,000</div>
+        <div class="trust-stat__label">Verified parent reviews</div>
+        <div class="trust-stat__sub">Honest, moderated, from real families</div>
+      </div>
+      <div class="trust-stat">
+        <span class="trust-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </span>
+        <div class="trust-stat__num">92%</div>
+        <div class="trust-stat__label">School response rate</div>
+        <div class="trust-stat__sub">Get info and tours within 48 hours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURED SCHOOLS ========== -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">Featured schools</span>
+        <h2>Handpicked institutions this month</h2>
+      </div>
+      <a href="directory.html" class="btn btn--ghost">Browse all schools →</a>
+    </div>
+
+    <div class="school-grid">
+      <!-- Card 1: Al-Furqan Academy -->
+      <a href="school.html" class="school-card">
+        <div class="school-card__photo">
+          <img class="school-card__photo-img"
+               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
+               alt="Al-Furqan Academy school building" loading="lazy" />
+          <span class="school-card__badge">Preview listing</span>
+          <button class="school-card__fav" data-fav aria-label="Save Al-Furqan Academy">♥</button>
+          <span class="school-card__photo-caption">Full-time day school · Est. 1997</span>
+        </div>
+        <div class="school-card__body">
+          <h3 class="school-card__title">Al-Furqan Academy</h3>
+          <div class="school-card__loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Jacksonville, FL · PreK–12 · 270+ students
+          </div>
+          <div class="rating-block">
+            <span class="rating-block__num">—</span>
+            <div class="rating-block__body">
+              <div class="rating-block__stars" style="opacity:0.35;">★★★★★</div>
+              <div class="rating-block__count">Reviews coming soon</div>
+            </div>
+            <div class="rating-block__tuition">
+              <span class="rating-block__tuition-label">Tuition</span>
+              $9,300 / yr
+            </div>
+          </div>
+          <div class="school-card__tags">
+            <span class="school-card__tag">ICNEF</span>
+            <span class="school-card__tag">FCIS · CISNA</span>
+            <span class="school-card__tag">Step Up accepted</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Universal Academy of Florida -->
+      <a href="school.html" class="school-card">
+        <div class="school-card__photo">
+          <img class="school-card__photo-img"
+               src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
+               alt="Universal Academy of Florida classroom" loading="lazy" />
+          <span class="school-card__badge">Preview listing</span>
+          <button class="school-card__fav" data-fav aria-label="Save Universal Academy of Florida">♥</button>
+          <span class="school-card__photo-caption">PreK through 12th</span>
+        </div>
+        <div class="school-card__body">
+          <h3 class="school-card__title">Universal Academy of Florida</h3>
+          <div class="school-card__loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Tampa, FL · PreK–12
+          </div>
+          <div class="rating-block">
+            <span class="rating-block__num">—</span>
+            <div class="rating-block__body">
+              <div class="rating-block__stars">☆☆☆☆☆</div>
+              <div class="rating-block__count">Reviews coming soon</div>
+            </div>
+            <div class="rating-block__tuition">
+              <span class="rating-block__tuition-label">Tuition</span>
+              Up to $13,820
+            </div>
+          </div>
+          <div class="school-card__tags">
+            <span class="school-card__tag">Cognia</span>
+            <span class="school-card__tag">FCIS</span>
+            <span class="school-card__tag">CISNA</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Ibn Seena Academy -->
+      <a href="school.html" class="school-card">
+        <div class="school-card__photo">
+          <img class="school-card__photo-img"
+               src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
+               alt="Ibn Seena Academy library" loading="lazy" />
+          <span class="school-card__badge">Preview listing</span>
+          <button class="school-card__fav" data-fav aria-label="Save Ibn Seena Academy">♥</button>
+          <span class="school-card__photo-caption">Co-ed · PreK–12</span>
+        </div>
+        <div class="school-card__body">
+          <h3 class="school-card__title">Ibn Seena Academy</h3>
+          <div class="school-card__loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Orlando, FL · PreK–12
+          </div>
+          <div class="rating-block">
+            <span class="rating-block__num">—</span>
+            <div class="rating-block__body">
+              <div class="rating-block__stars">☆☆☆☆☆</div>
+              <div class="rating-block__count">Reviews coming soon</div>
+            </div>
+            <div class="rating-block__tuition">
+              <span class="rating-block__tuition-label">Tuition</span>
+              ~$5,250
+            </div>
+          </div>
+          <div class="school-card__tags">
+            <span class="school-card__tag">Arabic</span>
+            <span class="school-card__tag">Quran</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== AUDIENCES — Built for Everyone (refined) ========== -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">Built for everyone</span>
+        <h2>Islamic schools across the country</h2>
+      </div>
+      <p>Pick your path and we'll tailor what you see.</p>
+    </div>
+
+    <div class="audience-grid">
+      <a href="directory.html" class="audience-card">
+        <div class="audience-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Find the best Islamic school for your child</h3>
+        <p>Search, compare, save favorites, and request info from verified schools — in minutes.</p>
+        <span class="audience-card__link">For parents →</span>
+      </a>
+
+      <a href="blog.html" class="audience-card">
+        <div class="audience-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+        </div>
+        <h3>Explore programs and scholarships</h3>
+        <p>Quran &amp; Arabic tools, scholarship listings, study planners, and peer stories.</p>
+        <span class="audience-card__link">For students →</span>
+      </a>
+
+      <a href="jobs.html" class="audience-card">
+        <div class="audience-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Find teaching opportunities</h3>
+        <p>Islamic-school jobs worldwide, plus a community of peers and lesson resources.</p>
+        <span class="audience-card__link">For educators →</span>
+      </a>
+
+      <a href="membership.html" class="audience-card">
+        <div class="audience-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/><path d="M14 9h1"/><path d="M14 13h1"/><path d="M14 17h1"/></svg>
+        </div>
+        <h3>Grow your school and reach families</h3>
+        <p>Claim your listing, recruit great teachers, and reach the right families with membership.</p>
+        <span class="audience-card__link">For schools →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== UTILITY BAND — Prayer + Checklist (moved below the fold) ========== -->
+<section class="utility-band">
+  <div class="container">
+    <div class="utility-grid">
+
+      <!-- Prayer times — compact, helpful, no longer dominant -->
+      <div class="prayer-widget">
+        <div class="prayer-widget__header">
+          <h3>Prayer times today</h3>
+          <span class="prayer-widget__city">Jacksonville, FL · Apr 22</span>
+        </div>
+        <div class="prayer-widget__grid">
+          <div class="prayer"><div class="prayer__name">Fajr</div><div class="prayer__time">5:42</div></div>
+          <div class="prayer"><div class="prayer__name">Dhuhr</div><div class="prayer__time">1:18</div></div>
+          <div class="prayer is-next"><div class="prayer__name">Asr</div><div class="prayer__time">4:51</div></div>
+          <div class="prayer"><div class="prayer__name">Maghrib</div><div class="prayer__time">7:52</div></div>
+          <div class="prayer"><div class="prayer__name">Isha</div><div class="prayer__time">9:12</div></div>
+        </div>
+      </div>
+
+      <!-- Checklist lead magnet — still valuable, no longer above the fold -->
+      <div class="checklist-card">
+        <div class="checklist-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+        </div>
+        <div class="checklist-card__body">
+          <strong>Free: 10-point Islamic school checklist</strong>
+          <p>Know exactly what to ask before you enroll. PDF.</p>
+          <a href="blog-post.html">Get the checklist →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== MAP PREVIEW ========== -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">Explore the map</span>
+        <h2>Islamic schools across the country</h2>
+      </div>
+      <a href="directory.html" class="btn btn--ghost">Open full map →</a>
+    </div>
+
+    <div class="map-preview" aria-label="Map of Islamic schools in the United States">
+      <svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="gridp" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(15,81,50,0.06)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="380" fill="url(#gridp)"/>
+        <path d="M70,180 C100,110 190,80 320,90 C440,100 540,70 640,100 C730,130 740,220 700,280 C640,330 520,320 420,310 C300,298 200,320 130,300 C70,280 50,230 70,180 Z"
+              fill="rgba(15,81,50,0.10)" stroke="rgba(15,81,50,0.35)" stroke-width="1.5"/>
+        <path d="M660,110 L720,100 L730,140 L690,150 Z" fill="rgba(15,81,50,0.10)" stroke="rgba(15,81,50,0.35)" stroke-width="1"/>
+      </svg>
+
+      <div class="map-pin is-featured" style="left: 35%; top: 62%;">12</div>
+      <div class="map-pin" style="left: 52%; top: 38%;">8</div>
+      <div class="map-pin" style="left: 62%; top: 46%;">21</div>
+      <div class="map-pin" style="left: 72%; top: 54%;">6</div>
+      <div class="map-pin is-featured" style="left: 22%; top: 70%;">9</div>
+      <div class="map-pin" style="left: 80%; top: 32%;">4</div>
+
+      <div class="map-overlay">
+        <div>
+          <strong>2,413 schools</strong>
+          <div class="small muted">across 48 states and 14 countries</div>
+        </div>
+        <a href="directory.html" class="btn btn--primary btn--sm">Explore map</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REVIEWS ========== -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">Latest reviews</span>
+        <h2>Honest voices from real families</h2>
+      </div>
+      <a href="directory.html" class="btn btn--ghost">Read more reviews →</a>
+    </div>
+
+    <div class="review-strip">
+      <div class="review">
+        <div class="review__stars">★★★★★</div>
+        <p class="review__text">"The Quran program is the best in our city — my daughter memorized Juz Amma in her first year. Teachers genuinely care."</p>
+        <div class="review__author">
+          <div class="review__avatar">FA</div>
+          <div>
+            <div><strong>Fatima A.</strong> <span class="badge badge--muted small" style="margin-left:6px">Verified parent</span></div>
+            <div class="small muted">Al-Furqan Academy · 3 days ago</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review">
+        <div class="review__stars">★★★★☆</div>
+        <p class="review__text">"Solid academics and a warm community. Would love to see more extracurricular options, but we're happy overall."</p>
+        <div class="review__author">
+          <div class="review__avatar">OM</div>
+          <div>
+            <div><strong>Omar M.</strong> <span class="badge badge--muted small" style="margin-left:6px">Verified parent</span></div>
+            <div class="small muted">Private Islamic school · Florida</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review">
+        <div class="review__stars">★★★★★</div>
+        <p class="review__text">"My son transferred here from a public school and his confidence in his identity has grown so much. Truly grateful."</p>
+        <div class="review__author">
+          <div class="review__avatar">AK</div>
+          <div>
+            <div><strong>Aisha K.</strong> <span class="badge badge--muted small" style="margin-left:6px">Verified parent</span></div>
+            <div class="small muted">Private Islamic school · Florida</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== JOBS ========== -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">Islamic-school careers</span>
+        <h2>Islamic-school careers, now hiring</h2>
+      </div>
+      <a href="jobs.html" class="btn btn--ghost">Browse all jobs →</a>
+    </div>
+
+    <div class="job-list">
+      <a href="jobs.html" class="job">
+        <div class="job__logo">AF</div>
+        <div class="job__body">
+          <h4>Middle School Math Teacher</h4>
+          <div class="job__meta">
+            <span>Al-Furqan Academy</span>
+            <span>· Jacksonville, FL</span>
+            <span>· Full-time</span>
+          </div>
+        </div>
+        <span class="badge badge--accent">Featured</span>
+      </a>
+
+      <a href="jobs.html" class="job">
+        <div class="job__logo">UAF</div>
+        <div class="job__body">
+          <h4>Quran &amp; Arabic Instructor</h4>
+          <div class="job__meta">
+            <span>Universal Academy of Florida</span>
+            <span>· Tampa, FL</span>
+            <span>· Part-time</span>
+          </div>
+        </div>
+        <span class="badge badge--muted">Example</span>
+      </a>
+
+      <a href="jobs.html" class="job">
+        <div class="job__logo">IS</div>
+        <div class="job__body">
+          <h4>Head of School</h4>
+          <div class="job__meta">
+            <span>Ibn Seena Academy</span>
+            <span>· Orlando, FL</span>
+            <span>· Full-time</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="jobs.html" class="job">
+        <div class="job__logo">ISM</div>
+        <div class="job__body">
+          <h4>School Counselor (K–12)</h4>
+          <div class="job__meta">
+            <span>Islamic School of Miami</span>
+            <span>· Miami, FL</span>
+            <span>· Full-time</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BLOG ========== -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">From the blog</span>
+        <h2>Guides, news, and community voices</h2>
+      </div>
+      <a href="blog.html" class="btn btn--ghost">All articles →</a>
+    </div>
+
+    <div class="blog-grid">
+      <a href="blog-post.html" class="post-card">
+        <div class="post-card__media" style="background: linear-gradient(135deg, var(--accent-soft), #E7DBC1);"></div>
+        <div class="post-card__body">
+          <div class="post-card__cat">Guides · For parents</div>
+          <h3>How to choose an Islamic school: a 10-point checklist</h3>
+          <p class="muted small">The questions every parent should ask before enrolling — academics, Quran program, safeguarding, and more.</p>
+          <div class="card__meta mt-8"><span>6 min read</span><span>·</span><span>Apr 18</span></div>
+        </div>
+      </a>
+
+      <a href="blog-post.html" class="post-card">
+        <div class="post-card__media" style="background: linear-gradient(135deg, #DDEBE2, #BDD8C6);"></div>
+        <div class="post-card__body">
+          <div class="post-card__cat">Hifz</div>
+          <h3>Inside a full-time Hifz program: a week in the life</h3>
+          <p class="muted small">Balancing memorization, academics, and childhood — how top Hifz schools structure their day.</p>
+          <div class="card__meta mt-8"><span>8 min read</span><span>·</span><span>Apr 14</span></div>
+        </div>
+      </a>
+
+      <a href="blog-post.html" class="post-card">
+        <div class="post-card__media" style="background: linear-gradient(135deg, #F0E3D0, #D8C6A5);"></div>
+        <div class="post-card__body">
+          <div class="post-card__cat">For educators</div>
+          <h3>Teaching Islamic Studies that sticks: 5 classroom ideas</h3>
+          <p class="muted small">Veteran teachers share what works — projects, discussions, and storytelling that keep students engaged.</p>
+          <div class="card__meta mt-8"><span>5 min read</span><span>·</span><span>Apr 10</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NEWSLETTER ========== -->
+<section class="section">
+  <div class="container">
+    <div class="newsletter">
+      <div>
+        <span class="eyebrow" style="color: var(--accent-soft)">Free · No spam</span>
+        <h2>The weekly digest for Muslim families and educators</h2>
+        <p>One thoughtful email every Friday: new school reviews, teaching jobs, resources, and Islamic education news. Join 12,000+ subscribers.</p>
+      </div>
+      <form class="newsletter__form" onsubmit="event.preventDefault();">
+        <label class="label" style="color: #fff; margin-bottom: 8px;">Get the free 10-point school checklist too</label>
+        <input class="input" type="email" placeholder="your@email.com" />
+        <button class="btn btn--cta btn--block btn--lg" type="submit">Subscribe &amp; get checklist</button>
+        <p class="small" style="color: rgba(255,255,255,0.7); margin: 10px 0 0;">Unsubscribe anytime. We'll never share your email.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PARTNERS ========== -->
+<section class="section section--tight">
+  <div class="container">
+    <p class="text-center small muted" style="margin-bottom: 24px;">Trusted partners &amp; accreditation bodies</p>
+    <div class="partners">
+      <span class="partner-logo">CISNA</span>
+      <span class="partner-logo">AdvancED</span>
+      <span class="partner-logo">ISNA</span>
+      <span class="partner-logo">ICNA</span>
+      <span class="partner-logo">Noorart</span>
+      <span class="partner-logo">IIPH</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff">
+          <span class="brand__mark">ISR</span>
+          Islamic School Review
+        </div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col">
+        <h4>Directory</h4>
+        <ul>
+          <li><a href="directory.html">Browse all schools</a></li>
+          <li><a href="directory.html">Browse by state</a></li>
+          <li><a href="directory.html">Browse by type</a></li>
+          <li><a href="directory.html">Top-rated schools</a></li>
+          <li><a href="membership.html">Claim your school</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="blog.html">Guides &amp; stories</a></li>
+          <li><a href="blog.html">For parents</a></li>
+          <li><a href="blog.html">For students</a></li>
+          <li><a href="jobs.html">For educators</a></li>
+          <li><a href="blog.html">Downloads</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="about.html">Editorial policy</a></li>
+          <li><a href="membership.html">Advertise</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Press</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span>
+        <a href="privacy.html" style="margin-right: 16px;">Privacy</a>
+        <a href="terms.html" style="margin-right: 16px;">Terms</a>
+        <a href="privacy.html">Cookies</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact us — Islamic School Review</title>
+  <meta name="description" content="Get in touch with the Islamic School Review team — editorial, school partnerships, press, support, and general inquiries." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/contact.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/contact.html" />
+  <meta property="og:title" content="Contact us — Islamic School Review" />
+  <meta property="og:description" content="Get in touch with the Islamic School Review team — editorial, partnerships, press, and support." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact us — Islamic School Review" />
+  <meta name="twitter:description" content="Get in touch with the Islamic School Review team." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Islamic School Review",
+    "url": "https://www.islamicschoolreview.com/contact.html"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .contact-hero {
+      padding: 72px 0 40px;
+      background:
+        radial-gradient(900px 400px at 80% 0%, var(--primary-soft) 0%, transparent 55%),
+        radial-gradient(700px 360px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .contact-hero .container { max-width: 820px; text-align: center; }
+    .contact-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3rem); margin-bottom: 14px; }
+    .contact-hero p.lede { font-size: 1.1rem; color: var(--ink-soft); max-width: 56ch; margin: 0 auto; }
+
+    .routes {
+      padding: 48px 0 24px;
+    }
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .route-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+    }
+    .route-card__icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid; place-items: center;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+    .route-card h3 {
+      font-family: "Inter", sans-serif;
+      font-size: 1rem;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+    .route-card p { font-size: 0.9rem; margin: 0 0 14px; color: var(--ink-soft); flex: 1; }
+    .route-card__email {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: auto;
+    }
+    .route-card__email:hover { text-decoration: underline; }
+    .route-card .response {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .form-section {
+      padding: 24px 0 72px;
+    }
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 32px;
+    }
+    .form-card h2 {
+      font-size: 1.5rem;
+      margin: 0 0 6px;
+    }
+    .form-card > p.muted {
+      margin: 0 0 22px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-field { margin-bottom: 16px; }
+    .form-field label { display: block; margin-bottom: 6px; font-size: 0.88rem; font-weight: 600; }
+    .textarea { resize: vertical; min-height: 120px; font-family: inherit; }
+    .radio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .radio-pill {
+      display: block;
+      padding: 10px 12px;
+      text-align: center;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      cursor: pointer;
+      background: var(--surface);
+    }
+    .radio-pill:hover { background: var(--surface-alt); }
+    .radio-pill input { display: none; }
+    .radio-pill input:checked + span { color: var(--primary); font-weight: 600; }
+    .radio-pill:has(input:checked) {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .info-aside { display: grid; gap: 20px; align-content: start; }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px;
+    }
+    .info-card h4 {
+      font-family: "Inter", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 12px;
+      font-weight: 600;
+    }
+    .info-card p { margin: 0 0 8px; font-size: 0.92rem; }
+    .info-card strong { color: var(--ink); }
+    .office {
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .office:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+    .office__city {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .office__addr { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; }
+
+    .sla-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: 0.92rem; }
+    .sla-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px;
+      background: var(--surface-alt);
+      border-radius: var(--r-md);
+    }
+    .sla-list .sla-badge {
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .faq-strip {
+      background: var(--surface-alt);
+      padding: 56px 0;
+      border-top: 1px solid var(--line);
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 40px;
+      margin-top: 28px;
+    }
+    .faq-item h4 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+    .faq-item p { margin: 0; font-size: 0.93rem; color: var(--ink-soft); }
+
+    @media (max-width: 960px) {
+      .route-grid { grid-template-columns: 1fr 1fr; }
+      .form-layout { grid-template-columns: 1fr; gap: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      .radio-grid { grid-template-columns: 1fr 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .route-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="contact-hero">
+  <div class="container">
+    <span class="eyebrow">Contact us</span>
+    <h1>We'd love to hear from you.</h1>
+    <p class="lede">Whether you're a parent with a question, a school that wants to claim its listing, an educator with a pitch, or a reporter looking for a source — here's how to reach the right team.</p>
+  </div>
+</section>
+
+<!-- ========== ROUTES ========== -->
+<section class="routes">
+  <div class="container">
+    <div class="route-grid">
+
+      <div class="route-card">
+        <div class="route-card__icon">👨‍👩‍👧</div>
+        <h3>Parents &amp; families</h3>
+        <p>Questions about the directory, reviews, account issues, or general help finding a school.</p>
+        <a class="route-card__email" href="mailto:hello@islamicschoolreview.com">hello@islamicschoolreview.com</a>
+        <span class="response">Typical reply: within 1 business day</span>
+      </div>
+
+      <div class="route-card">
+        <div class="route-card__icon">🏫</div>
+        <h3>Schools &amp; partnerships</h3>
+        <p>Claim a listing, upgrade to a premium profile, correct school information, or request a demo.</p>
+        <a class="route-card__email" href="mailto:schools@islamicschoolreview.com">schools@islamicschoolreview.com</a>
+        <span class="response">Typical reply: within 1 business day</span>
+      </div>
+
+      <div class="route-card">
+        <div class="route-card__icon">✍</div>
+        <h3>Editorial &amp; story pitches</h3>
+        <p>Pitch a guest essay, submit a news tip, or flag a factual correction on any of our articles.</p>
+        <a class="route-card__email" href="mailto:editorial@islamicschoolreview.com">editorial@islamicschoolreview.com</a>
+        <span class="response">Typical reply: within 3 business days</span>
+      </div>
+
+      <div class="route-card">
+        <div class="route-card__icon">📰</div>
+        <h3>Press &amp; media</h3>
+        <p>Quotes, interviews, data requests, or background on the Islamic-education landscape.</p>
+        <a class="route-card__email" href="mailto:press@islamicschoolreview.com">press@islamicschoolreview.com</a>
+        <span class="response">Typical reply: same day</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FORM + ASIDE ========== -->
+<section class="form-section">
+  <div class="container form-layout">
+
+    <form class="form-card" action="confirmation.html" method="get">
+      <h2>Or, send us a message</h2>
+      <p class="muted">Use this form if you're not sure which team to reach. We'll route it to the right person.</p>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Your name</label>
+          <input id="name" class="input" type="text" placeholder="Full name" required />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input id="email" class="input" type="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="role">I am a…</label>
+          <select id="role" class="select">
+            <option>Parent</option>
+            <option>Student</option>
+            <option>Educator</option>
+            <option>School administrator</option>
+            <option>Journalist</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="subject">Subject</label>
+          <input id="subject" class="input" type="text" placeholder="Brief summary" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>This is about…</label>
+        <div class="radio-grid">
+          <label class="radio-pill"><input type="radio" name="topic" checked /><span>General help</span></label>
+          <label class="radio-pill"><input type="radio" name="topic" /><span>A specific school</span></label>
+          <label class="radio-pill"><input type="radio" name="topic" /><span>A review I posted</span></label>
+          <label class="radio-pill"><input type="radio" name="topic" /><span>Claiming a listing</span></label>
+          <label class="radio-pill"><input type="radio" name="topic" /><span>Editorial pitch</span></label>
+          <label class="radio-pill"><input type="radio" name="topic" /><span>Bug report</span></label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" class="input textarea" placeholder="Tell us a bit more. If it's about a specific school, include the school name and location." required></textarea>
+      </div>
+
+      <label class="checkbox" style="margin-bottom:20px;">
+        <input type="checkbox" />
+        Also send me the weekly newsletter. I can unsubscribe any time.
+      </label>
+
+      <input type="hidden" name="action" value="contact" />
+      <button type="submit" class="btn btn--primary btn--lg">Send message</button>
+      <p class="small muted mt-16" style="margin-bottom:0;">We read every message, insha'Allah. We'll reply within one business day for most topics.</p>
+    </form>
+
+    <aside class="info-aside">
+
+      <div class="info-card">
+        <h4>Response times</h4>
+        <ul class="sla-list">
+          <li>Parents &amp; support <span class="sla-badge">&lt; 24 hrs</span></li>
+          <li>Schools &amp; partnerships <span class="sla-badge">&lt; 24 hrs</span></li>
+          <li>Press &amp; media <span class="sla-badge">Same day</span></li>
+          <li>Editorial pitches <span class="sla-badge">3 days</span></li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Offices</h4>
+        <div class="office">
+          <div class="office__city">Dallas · HQ</div>
+          <div class="office__addr">1200 Harwood Street, Suite 400<br/>Dallas, TX 75201 · USA</div>
+        </div>
+        <div class="office">
+          <div class="office__city">London</div>
+          <div class="office__addr">55 Bishopsgate<br/>London EC2N 3AS · United Kingdom</div>
+        </div>
+        <div class="office">
+          <div class="office__city">Dubai</div>
+          <div class="office__addr">Business Bay, Tower B, Level 14<br/>Dubai · United Arab Emirates</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h4>Before you email</h4>
+        <p>If you're a <strong>school administrator</strong> looking to claim or edit your listing, the fastest path is our <a href="#">self-service claim form</a>.</p>
+        <p>If you're reporting an <strong>incorrect review</strong>, use the "Report" link on the review itself so our moderation team gets full context.</p>
+        <p>If you're asking about <strong>our editorial policy</strong>, see the <a href="about.html">About page</a>.</p>
+      </div>
+
+    </aside>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-strip">
+  <div class="container">
+    <div class="section-title" style="margin-bottom:8px;">
+      <div>
+        <span class="eyebrow">Common questions</span>
+        <h2 style="margin:0;">Before you reach out</h2>
+      </div>
+    </div>
+    <div class="faq-grid">
+
+      <div class="faq-item">
+        <h4>How do I claim my school's listing?</h4>
+        <p>Find your school in the <a href="directory.html">directory</a>, open its profile, and click "Claim this listing." We verify via an official school email and respond within one business day.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Can I remove a negative review?</h4>
+        <p>Not for being negative. We only remove reviews that violate our guidelines (personal attacks, unverifiable claims, fake reviews). Real, verified criticism stays — that's the point.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Do premium listings affect ratings?</h4>
+        <p>No. Premium listings affect placement and profile richness, never ratings. See our <a href="about.html">editorial policy</a>.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Do you accept guest posts?</h4>
+        <p>Yes — from educators, administrators, and parents with something concrete to say. Pitch us at <a href="mailto:editorial@islamicschoolreview.com">editorial@islamicschoolreview.com</a> with a one-paragraph summary.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Can you help me choose a school?</h4>
+        <p>We can't make personal recommendations, but our <a href="blog.html">guides</a> walk through the decision in detail.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>I found a factual error. What do I do?</h4>
+        <p>Email <a href="mailto:editorial@islamicschoolreview.com">editorial@islamicschoolreview.com</a> with the URL and the correction. We publish corrections promptly.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="#">For parents</a></li>
+        <li><a href="#">For educators</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

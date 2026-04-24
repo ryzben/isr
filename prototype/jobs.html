@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Islamic-school jobs — Islamic School Review</title>
+  <meta name="description" content="Teaching, administrative, and leadership jobs at Islamic schools worldwide. Filter by role, grade level, location, and more." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/jobs.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/jobs.html" />
+  <meta property="og:title" content="Islamic-school jobs — Islamic School Review" />
+  <meta property="og:description" content="Teaching, administrative, and leadership jobs at Islamic schools worldwide." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Islamic-school jobs — Islamic School Review" />
+  <meta name="twitter:description" content="Teaching, administrative, and leadership jobs at Islamic schools worldwide." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Islamic-school jobs",
+    "url": "https://www.islamicschoolreview.com/jobs.html",
+    "description": "Teaching, administrative, and leadership jobs at Islamic schools worldwide."
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .jobs-hero {
+      padding: 60px 0 36px;
+      background:
+        radial-gradient(900px 400px at 85% -10%, var(--primary-soft) 0%, transparent 55%),
+        radial-gradient(700px 360px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .jobs-hero h1 { font-size: clamp(2rem, 4.2vw, 2.8rem); margin: 4px 0 10px; }
+    .jobs-hero p.lede { color: var(--ink-soft); font-size: 1.05rem; max-width: 60ch; margin: 0 0 20px; }
+
+    .job-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .job-stat strong {
+      display: block;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .job-stat span { font-size: 0.88rem; color: var(--muted); }
+
+    /* Search bar */
+    .job-search {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr auto;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-lg);
+      padding: 14px;
+      margin-top: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .job-search .input, .job-search .select { border: 0; background: transparent; padding: 8px 10px; }
+    .job-search .input:focus, .job-search .select:focus { box-shadow: none; outline: none; }
+    .job-search > div { border-right: 1px solid var(--line); padding-right: 10px; }
+    .job-search > div:last-of-type { border-right: 0; }
+    .job-search label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      padding: 0 10px;
+    }
+
+    /* Layout */
+    .jobs-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      padding: 40px 0 64px;
+      align-items: start;
+    }
+    .jobs-filters {
+      position: sticky;
+      top: calc(var(--nav-h) + 20px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .filter-group { padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .filter-group:first-of-type { padding-top: 0; }
+    .filter-group:last-of-type { border-bottom: 0; padding-bottom: 0; }
+    .filter-group h4 {
+      font-family: "Inter", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 12px;
+      font-weight: 600;
+    }
+    .filter-list { display: grid; gap: 8px; }
+    .filter-list label {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.9rem; color: var(--ink-soft); cursor: pointer;
+    }
+    .filter-list label:hover { color: var(--ink); }
+    .filter-list label span.muted { font-size: 0.8rem; }
+
+    /* Results */
+    .jobs-results { display: grid; gap: 16px; }
+    .job-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 4px;
+    }
+    .job-count { font-size: 0.92rem; color: var(--muted); }
+    .job-count strong { color: var(--ink); font-weight: 600; }
+
+    .job-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 18px;
+      align-items: start;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .job-card:hover { box-shadow: var(--shadow-md); border-color: var(--line-strong); }
+    .job-card__logo {
+      width: 56px; height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary-soft), var(--accent-soft));
+      color: var(--primary);
+      display: grid; place-items: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .job-card__body { min-width: 0; }
+    .job-card__role {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 4px;
+      line-height: 1.3;
+    }
+    .job-card__role a { color: inherit; text-decoration: none; }
+    .job-card__role a:hover { color: var(--primary); }
+    .job-card__school {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      margin-bottom: 10px;
+    }
+    .job-card__school a { color: var(--primary); font-weight: 500; }
+    .job-card__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .job-tag {
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--ink-soft);
+    }
+    .job-tag--verified { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
+    .job-tag--urgent { background: var(--accent-soft); color: var(--accent-hover); font-weight: 600; }
+    .job-card__desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .job-card__aside { text-align: right; min-width: 140px; }
+    .job-card__salary {
+      font-family: "Fraunces", Georgia, serif;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .job-card__posted { font-size: 0.8rem; color: var(--muted); margin: 4px 0 12px; }
+
+    /* Featured */
+    .featured-jobs {
+      background: linear-gradient(135deg, var(--primary) 0%, #0c4128 100%);
+      color: #fff;
+      border-radius: var(--r-xl);
+      padding: 28px 28px 16px;
+      margin-bottom: 24px;
+    }
+    .featured-jobs h3 {
+      color: #fff;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.3rem;
+      margin: 0 0 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .featured-jobs h3::before { content: "⭐"; font-size: 1.1rem; }
+    .featured-jobs .job-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 12px;
+    }
+    .featured-jobs .job-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+    .featured-jobs .job-card__role a, .featured-jobs .job-card__role { color: #fff; }
+    .featured-jobs .job-card__school { color: rgba(255,255,255,0.7); }
+    .featured-jobs .job-card__school a { color: var(--accent-soft); }
+    .featured-jobs .job-card__desc { color: rgba(255,255,255,0.65); }
+    .featured-jobs .job-card__salary { color: var(--accent-soft); }
+    .featured-jobs .job-card__posted { color: rgba(255,255,255,0.5); }
+    .featured-jobs .job-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
+    .featured-jobs .job-tag--verified { background: var(--accent-soft); color: var(--primary-ink); }
+    .featured-jobs .job-card__logo { background: rgba(255,255,255,0.1); color: var(--accent-soft); }
+
+    /* Post-job CTA */
+    .post-job-cta {
+      background: var(--surface-alt);
+      border-top: 1px solid var(--line);
+      padding: 48px 0;
+    }
+    .post-job-cta__inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .post-job-cta h2 { margin: 0 0 10px; font-size: 1.7rem; }
+    .post-job-cta p { margin: 0; color: var(--ink-soft); }
+    .post-job-cta__actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+
+    /* Pager */
+    .pager {
+      display: flex; justify-content: center; gap: 6px; margin-top: 32px;
+    }
+    .pager a, .pager span {
+      min-width: 38px; height: 38px;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0 12px;
+      border-radius: var(--r-md);
+      border: 1px solid var(--line-strong);
+      color: var(--ink-soft); font-size: 0.9rem; font-weight: 500;
+      text-decoration: none; background: var(--surface);
+    }
+    .pager a:hover { background: var(--surface-alt); }
+    .pager .is-current { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .pager .is-disabled { color: var(--muted); background: transparent; border-color: var(--line); }
+
+    @media (max-width: 960px) {
+      .job-search { grid-template-columns: 1fr 1fr; }
+      .jobs-layout { grid-template-columns: 1fr; }
+      .jobs-filters { position: static; max-height: none; }
+      .post-job-cta__inner { grid-template-columns: 1fr; }
+      .post-job-cta__actions { justify-content: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .job-search { grid-template-columns: 1fr; }
+      .job-card { grid-template-columns: 48px 1fr; }
+      .job-card__aside { grid-column: 1 / -1; text-align: left; display: flex; gap: 14px; align-items: center; margin-top: 10px; border-top: 1px solid var(--line); padding-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="jobs-hero">
+  <div class="container">
+    <span class="eyebrow">Careers</span>
+    <h1>Islamic-school jobs, worldwide.</h1>
+    <p class="lede">Teaching, administrative, and leadership roles at full-time Islamic schools, weekend schools, and seminaries. Updated daily by verified employers.</p>
+
+    <form class="job-search" onsubmit="event.preventDefault();">
+      <div>
+        <label for="q">Keyword</label>
+        <input id="q" class="input" type="search" placeholder="Arabic teacher, principal, hifz…" />
+      </div>
+      <div>
+        <label for="loc">Location</label>
+        <input id="loc" class="input" type="text" placeholder="City, state, or country" />
+      </div>
+      <div>
+        <label for="type">Role</label>
+        <select id="type" class="select">
+          <option>Any role</option>
+          <option>Teacher</option>
+          <option>Administrator</option>
+          <option>Principal / Head of School</option>
+          <option>Quran / Hifz</option>
+          <option>Counselor</option>
+          <option>Operations</option>
+        </select>
+      </div>
+      <button class="btn btn--primary btn--lg" type="submit">Search</button>
+    </form>
+
+    <div class="job-stats">
+      <div class="job-stat"><strong>1,240+</strong><span>Open roles</span></div>
+      <div class="job-stat"><strong>420</strong><span>Hiring schools</span></div>
+      <div class="job-stat"><strong>14</strong><span>Countries</span></div>
+      <div class="job-stat"><strong>94</strong><span>Posted this week</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LAYOUT ========== -->
+<main class="container jobs-layout">
+
+  <!-- Filters -->
+  <aside class="jobs-filters" aria-label="Filters">
+    <div class="filter-group">
+      <h4>Role type</h4>
+      <div class="filter-list">
+        <label class="checkbox"><input type="checkbox" /> Teacher <span class="muted">(612)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Administrator <span class="muted">(184)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Principal <span class="muted">(42)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Quran / Hifz <span class="muted">(168)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Counselor <span class="muted">(38)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Operations / Facilities <span class="muted">(96)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Other <span class="muted">(100)</span></label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Subject (teachers)</h4>
+      <div class="filter-list">
+        <label class="checkbox"><input type="checkbox" /> Arabic</label>
+        <label class="checkbox"><input type="checkbox" /> Quran &amp; tajweed</label>
+        <label class="checkbox"><input type="checkbox" /> Islamic studies</label>
+        <label class="checkbox"><input type="checkbox" /> Math / science</label>
+        <label class="checkbox"><input type="checkbox" /> English / humanities</label>
+        <label class="checkbox"><input type="checkbox" /> Early childhood</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Grade level</h4>
+      <div class="filter-list">
+        <label class="checkbox"><input type="checkbox" /> Preschool / K</label>
+        <label class="checkbox"><input type="checkbox" /> Elementary (1–5)</label>
+        <label class="checkbox"><input type="checkbox" /> Middle (6–8)</label>
+        <label class="checkbox"><input type="checkbox" /> High (9–12)</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Employment</h4>
+      <div class="filter-list">
+        <label class="checkbox"><input type="radio" name="emp" checked /> Any</label>
+        <label class="checkbox"><input type="radio" name="emp" /> Full time</label>
+        <label class="checkbox"><input type="radio" name="emp" /> Part time</label>
+        <label class="checkbox"><input type="radio" name="emp" /> Substitute</label>
+        <label class="checkbox"><input type="radio" name="emp" /> Contract</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Country</h4>
+      <div class="filter-list">
+        <label class="checkbox"><input type="checkbox" checked /> United States <span class="muted">(682)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Canada <span class="muted">(124)</span></label>
+        <label class="checkbox"><input type="checkbox" /> United Kingdom <span class="muted">(156)</span></label>
+        <label class="checkbox"><input type="checkbox" /> UAE <span class="muted">(88)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Saudi Arabia <span class="muted">(72)</span></label>
+        <label class="checkbox"><input type="checkbox" /> Australia <span class="muted">(34)</span></label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Other</h4>
+      <div class="filter-list">
+        <label class="checkbox"><input type="checkbox" /> Visa sponsorship</label>
+        <label class="checkbox"><input type="checkbox" /> Housing provided</label>
+        <label class="checkbox"><input type="checkbox" /> Remote / hybrid</label>
+        <label class="checkbox"><input type="checkbox" /> Verified employer</label>
+      </div>
+    </div>
+
+    <button class="btn btn--ghost btn--block btn--sm" style="margin-top:14px;">Clear filters</button>
+  </aside>
+
+  <!-- Results -->
+  <section class="jobs-results" aria-label="Job listings">
+
+    <div class="job-bar">
+      <span class="job-count"><strong>1,240</strong> jobs · showing 1–10</span>
+      <div class="muted small">Sort: <a href="#" style="font-weight:600; color:var(--ink);">Most recent</a></div>
+    </div>
+
+    <!-- Featured jobs band -->
+    <div class="featured-jobs">
+      <h3>Featured listings (premium schools)</h3>
+
+      <article class="job-card">
+        <div class="job-card__logo">AA</div>
+        <div class="job-card__body">
+          <h4 class="job-card__role"><a href="#">Head of Arabic Department</a></h4>
+          <div class="job-card__school">Al-Azhar Academy · <a href="school.html">Houston, TX</a> · K–12</div>
+          <div class="job-card__tags">
+            <span class="job-tag job-tag--verified">✓ Verified</span>
+            <span class="job-tag">Full time</span>
+            <span class="job-tag">On-site</span>
+            <span class="job-tag">Visa sponsorship</span>
+          </div>
+          <p class="job-card__desc">Lead a team of six Arabic teachers across K–12. Native or near-native Arabic required; experience teaching Arabic as a second language strongly preferred.</p>
+        </div>
+        <div class="job-card__aside">
+          <div class="job-card__salary">$72k – $88k</div>
+          <div class="job-card__posted">Posted 2 days ago</div>
+          <a href="#" class="btn btn--accent btn--sm">Apply</a>
+        </div>
+      </article>
+
+      <article class="job-card">
+        <div class="job-card__logo">NH</div>
+        <div class="job-card__body">
+          <h4 class="job-card__role"><a href="#">Middle School Principal</a></h4>
+          <div class="job-card__school">Noor Al-Huda · <a href="school.html">Dallas, TX</a> · 6–8</div>
+          <div class="job-card__tags">
+            <span class="job-tag job-tag--verified">✓ Verified</span>
+            <span class="job-tag">Full time</span>
+            <span class="job-tag">On-site</span>
+          </div>
+          <p class="job-card__desc">Oversee academics, faculty development, and Islamic programming for grades 6–8. Minimum 5 years teaching experience plus 2 years in a leadership role.</p>
+        </div>
+        <div class="job-card__aside">
+          <div class="job-card__salary">$95k – $115k</div>
+          <div class="job-card__posted">Posted 4 days ago</div>
+          <a href="#" class="btn btn--accent btn--sm">Apply</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Standard listings -->
+    <article class="job-card">
+      <div class="job-card__logo">RI</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">Kindergarten Lead Teacher</a></h4>
+        <div class="job-card__school">Rahma Islamic School · Austin, TX · Preschool/K</div>
+        <div class="job-card__tags">
+          <span class="job-tag job-tag--verified">✓ Verified</span>
+          <span class="job-tag">Full time</span>
+          <span class="job-tag">On-site</span>
+        </div>
+        <p class="job-card__desc">Bachelor's in early childhood education required. Play-based curriculum with daily Quran circle. Warm, supportive team.</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">$48k – $56k</div>
+        <div class="job-card__posted">Posted yesterday</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div class="job-card__logo">QS</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">Full-time Hafidh Teacher (boys)</a></h4>
+        <div class="job-card__school">Qalam Seminary · Dallas, TX · Middle &amp; high</div>
+        <div class="job-card__tags">
+          <span class="job-tag job-tag--urgent">🔥 Urgent</span>
+          <span class="job-tag">Full time</span>
+          <span class="job-tag">Housing provided</span>
+        </div>
+        <p class="job-card__desc">Lead a full-time hifz cohort with 12–15 students. Ijaza required. Housing, meals, and tuition remission for qualifying children included.</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">$55k – $68k</div>
+        <div class="job-card__posted">Posted 3 days ago</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div class="job-card__logo">BZ</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">High School English Teacher</a></h4>
+        <div class="job-card__school">Baitul Zahra Girls Academy · Richardson, TX · High school</div>
+        <div class="job-card__tags">
+          <span class="job-tag">Full time</span>
+          <span class="job-tag">On-site</span>
+          <span class="job-tag">AP experience preferred</span>
+        </div>
+        <p class="job-card__desc">Teach 9th–12th grade English, including AP Language and AP Literature electives. State teaching credential preferred.</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">$52k – $64k</div>
+        <div class="job-card__posted">Posted 5 days ago</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div class="job-card__logo">IC</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">Director of Admissions</a></h4>
+        <div class="job-card__school">Iqra Academy Chicago · Chicago, IL · K–12</div>
+        <div class="job-card__tags">
+          <span class="job-tag job-tag--verified">✓ Verified</span>
+          <span class="job-tag">Full time</span>
+          <span class="job-tag">Hybrid</span>
+        </div>
+        <p class="job-card__desc">Own the admissions funnel from inquiry through enrollment. Strong CRM and community-outreach experience a plus.</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">$68k – $82k</div>
+        <div class="job-card__posted">Posted 1 week ago</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div class="job-card__logo">HM</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">Part-time Weekend Quran Teacher</a></h4>
+        <div class="job-card__school">Hikmah Montessori · Plano, TX · Elementary</div>
+        <div class="job-card__tags">
+          <span class="job-tag">Part time</span>
+          <span class="job-tag">Weekends</span>
+        </div>
+        <p class="job-card__desc">Saturday mornings, 3 hours per session. Teach Quran and basic tajweed to students ages 6–11 in small groups.</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">$30 – $45 / hr</div>
+        <div class="job-card__posted">Posted 2 days ago</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div class="job-card__logo">IS</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">Math Teacher (Grades 6–8)</a></h4>
+        <div class="job-card__school">Ibn Sina Academy · Toronto, ON, Canada · Middle school</div>
+        <div class="job-card__tags">
+          <span class="job-tag">Full time</span>
+          <span class="job-tag">On-site</span>
+          <span class="job-tag">Visa sponsorship</span>
+        </div>
+        <p class="job-card__desc">Teach Ontario Ministry math curriculum. Bachelor's in math or related field plus OCT certification (or willingness to obtain).</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">CA$62k – CA$78k</div>
+        <div class="job-card__posted">Posted 1 week ago</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div class="job-card__logo">DA</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">School Counselor</a></h4>
+        <div class="job-card__school">Darul Arqam Academy · Houston, TX · K–12</div>
+        <div class="job-card__tags">
+          <span class="job-tag job-tag--verified">✓ Verified</span>
+          <span class="job-tag">Full time</span>
+          <span class="job-tag">On-site</span>
+        </div>
+        <p class="job-card__desc">LCSW or LPC preferred. Provide individual counseling, run social-emotional programming, and support families through transitions.</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">$58k – $72k</div>
+        <div class="job-card__posted">Posted 6 days ago</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div class="job-card__logo">GM</div>
+      <div class="job-card__body">
+        <h4 class="job-card__role"><a href="#">Art &amp; Design Teacher</a></h4>
+        <div class="job-card__school">Greenfield Muslim Academy · London, UK · Secondary</div>
+        <div class="job-card__tags">
+          <span class="job-tag">Full time</span>
+          <span class="job-tag">On-site</span>
+        </div>
+        <p class="job-card__desc">GCSE and A-level art. QTS or equivalent teaching qualification required. Portfolio review at interview.</p>
+      </div>
+      <div class="job-card__aside">
+        <div class="job-card__salary">£34k – £46k</div>
+        <div class="job-card__posted">Posted 2 weeks ago</div>
+        <a href="#" class="btn btn--ghost btn--sm">View</a>
+      </div>
+    </article>
+
+    <!-- Pager -->
+    <nav class="pager" aria-label="Pagination">
+      <span class="is-disabled">←</span>
+      <a href="#" class="is-current">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <span>…</span>
+      <a href="#">124</a>
+      <a href="#">→</a>
+    </nav>
+
+  </section>
+</main>
+
+<!-- ========== POST A JOB CTA ========== -->
+<section class="post-job-cta">
+  <div class="container post-job-cta__inner">
+    <div>
+      <span class="eyebrow">Hiring?</span>
+      <h2>Post a job and reach 40,000+ Muslim educators.</h2>
+      <p>Job posts are included with every paid membership — Basic, Premium, and Platinum. Or post a single role and pay per post.</p>
+    </div>
+    <div class="post-job-cta__actions">
+      <a href="membership.html" class="btn btn--ghost">See membership plans</a>
+      <a href="#" class="btn btn--primary">Post a job</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="jobs.html">Jobs board</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in — Islamic School Review</title>
+  <meta name="description" content="Sign in to your Islamic School Review account to save favorites, post reviews, manage your school listing, and more." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/signin.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:title" content="Sign in — Islamic School Review" />
+  <meta property="og:description" content="Sign in to save schools, post reviews, and manage your listing." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sign in — Islamic School Review" />
+  <meta name="twitter:description" content="Sign in to save schools, post reviews, and manage your listing." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* No sticky header on auth pages — simpler top bar */
+    .auth-top {
+      background: transparent;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 10;
+    }
+    .auth-top__inner {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .auth-top .nav-utility { margin-left: auto; display: flex; gap: 10px; align-items: center; font-size: 0.88rem; color: var(--muted); }
+    .auth-top .nav-utility a { color: var(--primary); font-weight: 600; }
+
+    .auth {
+      min-height: calc(100vh - var(--nav-h));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .auth__brand {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, #0B3D25 55%, #0A2E1C 100%);
+      color: #fff;
+      padding: 56px 56px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .auth__brand::before {
+      content: "";
+      position: absolute;
+      right: -80px; top: 10%;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .auth__brand::after {
+      content: "";
+      position: absolute;
+      left: -100px; bottom: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(184, 130, 58, 0.12);
+    }
+    .auth__brand-body {
+      position: relative; z-index: 1; max-width: 440px;
+    }
+    .auth__brand h1 {
+      font-family: "Fraunces", Georgia, serif;
+      color: #fff;
+      font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+      line-height: 1.2;
+      margin: 0 0 20px;
+    }
+    .auth__brand p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      margin: 0 0 28px;
+    }
+    .auth__quote {
+      position: relative; z-index: 1;
+      border-left: 3px solid var(--accent);
+      padding: 14px 0 14px 20px;
+      max-width: 440px;
+    }
+    .auth__quote blockquote {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.92);
+      margin: 0 0 10px;
+      line-height: 1.45;
+    }
+    .auth__quote footer {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+    }
+    .auth__quote footer strong { color: #fff; }
+
+    .auth__panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 40px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+    }
+    .auth-card h2 {
+      font-size: 1.8rem;
+      margin: 0 0 8px;
+    }
+    .auth-card > p.muted {
+      margin: 0 0 28px;
+    }
+
+    /* Social buttons */
+    .social-btns { display: grid; gap: 10px; margin-bottom: 22px; }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      font: inherit;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: var(--surface-alt); }
+    .social-btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+    .divider {
+      display: flex; align-items: center; gap: 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 6px 0 20px;
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 1px; background: var(--line);
+    }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .field label a { font-weight: 500; font-size: 0.82rem; }
+
+    .auth-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+    }
+
+    .auth-submit { margin-bottom: 20px; }
+
+    .auth-alt {
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--muted);
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .auth-alt a { color: var(--primary); font-weight: 600; }
+
+    .legal-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 24px;
+      line-height: 1.5;
+    }
+    .legal-note a { color: var(--primary); }
+
+    @media (max-width: 960px) {
+      .auth { grid-template-columns: 1fr; }
+      .auth__brand { display: none; }
+      .auth__panel { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== TOP BAR ========== -->
+<header class="site-header auth-top">
+  <div class="container auth-top__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <div class="nav-utility">
+      New here? <a href="signup.html">Create an account →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== AUTH ========== -->
+<main class="auth">
+
+  <!-- Left: brand panel -->
+  <aside class="auth__brand" aria-hidden="true">
+    <div class="auth__brand-body">
+      <h1>Welcome back.<br/>Continue your search.</h1>
+      <p>Your favorites, saved schools, reviews, and account settings are waiting for you.</p>
+    </div>
+    <div class="auth__quote">
+      <blockquote>"I had 12 schools saved by the time we made our decision. Being able to compare them side-by-side changed everything."</blockquote>
+      <footer><strong>Sara A.</strong> · Parent of 2, Houston TX</footer>
+    </div>
+  </aside>
+
+  <!-- Right: form -->
+  <section class="auth__panel">
+    <div class="auth-card">
+      <h2>Sign in to your account</h2>
+      <p class="muted">Welcome back. Enter your details below.</p>
+
+      <div class="social-btns">
+        <button type="button" class="social-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.44c-.28 1.48-1.12 2.73-2.38 3.57v2.97h3.86c2.26-2.08 3.57-5.15 3.57-8.78z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.94-2.95l-3.86-2.97c-1.07.72-2.44 1.16-4.08 1.16-3.14 0-5.8-2.12-6.75-4.97H1.27v3.07C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.25 14.27c-.24-.72-.38-1.49-.38-2.27s.14-1.55.38-2.27V6.66H1.27C.46 8.28 0 10.1 0 12s.46 3.72 1.27 5.34l3.98-3.07z"/><path fill="#EA4335" d="M12 4.77c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.27 6.66l3.98 3.07C6.2 6.89 8.86 4.77 12 4.77z"/></svg>
+          Continue with Google
+        </button>
+        <button type="button" class="social-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#000" d="M17.54 12.54c-.03-2.74 2.24-4.07 2.34-4.13-1.27-1.86-3.26-2.11-3.97-2.14-1.69-.17-3.3 1-4.15 1-.87 0-2.18-.97-3.58-.95-1.84.03-3.55 1.07-4.5 2.73-1.93 3.34-.49 8.28 1.38 10.99.92 1.33 2 2.82 3.41 2.77 1.37-.05 1.89-.89 3.54-.89 1.65 0 2.12.89 3.56.86 1.47-.03 2.4-1.36 3.3-2.7 1.05-1.54 1.48-3.04 1.5-3.12-.03-.01-2.88-1.11-2.91-4.42zM14.81 4.39c.76-.92 1.27-2.2 1.13-3.47-1.09.04-2.42.72-3.21 1.64-.71.81-1.33 2.11-1.16 3.36 1.22.09 2.47-.62 3.24-1.53z"/></svg>
+          Continue with Apple
+        </button>
+      </div>
+
+      <div class="divider">or sign in with email</div>
+
+      <form onsubmit="event.preventDefault();">
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" class="input" type="email" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="password">Password <a href="#">Forgot password?</a></label>
+          <input id="password" class="input" type="password" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+
+        <div class="auth-options">
+          <label class="checkbox">
+            <input type="checkbox" checked />
+            Keep me signed in
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--block btn--lg auth-submit">Sign in</button>
+      </form>
+
+      <div class="auth-alt">
+        Don't have an account? <a href="signup.html">Create one free →</a>
+      </div>
+
+      <p class="legal-note">
+        Protected by industry-standard encryption.<br/>
+        By signing in you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

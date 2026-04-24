@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compare schools — Islamic School Review</title>
+  <meta name="description" content="Compare Islamic schools side by side. Location, grades, tuition, accreditation, Islamic program, and more — all in one view." />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/compare.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/compare.html" />
+  <meta property="og:title" content="Compare schools — Islamic School Review" />
+  <meta property="og:description" content="Compare Islamic schools side by side — location, grades, tuition, Islamic program, and more." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Compare schools — Islamic School Review" />
+  <meta name="twitter:description" content="Side-by-side comparison of Islamic schools." />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Compare Islamic schools",
+    "url": "https://www.islamicschoolreview.com/compare.html",
+    "description": "Side-by-side comparison of Islamic schools — location, grades, tuition, Islamic program, and more.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Islamic School Review",
+      "url": "https://www.islamicschoolreview.com/"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@type": "School", "name": "Al-Furqan Academy", "url": "https://www.islamicschoolreview.com/school.html" } },
+        { "@type": "ListItem", "position": 2, "item": { "@type": "School", "name": "MY Academy of Jacksonville" } },
+        { "@type": "ListItem", "position": 3, "item": { "@type": "School", "name": "Al-Zahra Academy" } }
+      ]
+    }
+  }
+  </script>
+  <style>
+    .compare-hero {
+      padding: 48px 0 24px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .compare-hero .breadcrumbs {
+      font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;
+    }
+    .compare-hero .breadcrumbs a { color: var(--ink-soft); }
+    .compare-hero h1 { font-size: clamp(1.8rem, 3.6vw, 2.4rem); margin: 0 0 8px; }
+    .compare-hero p.lede { color: var(--ink-soft); margin: 0; max-width: 65ch; }
+
+    .compare-section { padding: 40px 0 80px; }
+
+    .compare-table {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    /* Header row — sticky school cards */
+    .compare-header {
+      display: grid;
+      grid-template-columns: 220px repeat(3, 1fr);
+      gap: 0;
+      background: var(--surface);
+      border-bottom: 2px solid var(--line-strong);
+      position: sticky;
+      top: 64px;
+      z-index: 5;
+    }
+    .compare-header__spacer {
+      background: var(--surface-alt);
+      border-right: 1px solid var(--line);
+    }
+    .compare-header__card {
+      padding: 20px 18px;
+      border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 8px;
+      position: relative;
+    }
+    .compare-header__card:last-child { border-right: 0; }
+    .compare-header__remove {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--surface-alt);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      cursor: pointer;
+      display: grid; place-items: center;
+      font-size: 1rem; line-height: 1;
+    }
+    .compare-header__remove:hover { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+    .compare-header__mark {
+      width: 48px; height: 48px; border-radius: 10px;
+      color: #fff; display: grid; place-items: center;
+      font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.1rem;
+    }
+    .compare-header__mark--1 { background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%); }
+    .compare-header__mark--2 { background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%); }
+    .compare-header__mark--3 { background: linear-gradient(135deg, #5c2e2e 0%, #894848 100%); }
+    .compare-header__card h3 {
+      margin: 0; font-size: 1rem; line-height: 1.3;
+    }
+    .compare-header__card .small { color: var(--muted); font-size: 0.82rem; }
+    .compare-header__card a.profile-link {
+      margin-top: auto;
+      font-size: 0.82rem; color: var(--primary); font-weight: 600;
+      text-decoration: none;
+    }
+    .compare-header__card a.profile-link:hover { text-decoration: underline; }
+
+    .compare-header__add {
+      padding: 20px; border-right: 1px solid var(--line);
+      display: grid; place-items: center;
+      background: var(--surface-alt);
+    }
+    .compare-header__add:last-child { border-right: 0; }
+    .compare-header__add .add-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 18px;
+      border: 2px dashed var(--line-strong);
+      border-radius: var(--r-md);
+      width: 100%;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-size: 0.88rem;
+      text-decoration: none;
+    }
+    .compare-header__add .add-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--surface);
+    }
+    .compare-header__add .add-btn .plus {
+      font-size: 1.6rem; line-height: 1;
+    }
+
+    /* Category headers */
+    .compare-row--category {
+      background: var(--surface-alt);
+      padding: 14px 20px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    /* Data row */
+    .compare-row {
+      display: grid;
+      grid-template-columns: 220px repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .compare-row:hover .compare-cell { background: var(--surface-alt); }
+    .compare-cell {
+      padding: 14px 18px;
+      border-right: 1px solid var(--line);
+      font-size: 0.92rem;
+      color: var(--ink);
+      min-height: 48px;
+      display: flex; align-items: center;
+    }
+    .compare-cell:last-child { border-right: 0; }
+    .compare-cell--label {
+      background: var(--surface-alt);
+      font-weight: 600;
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+    }
+    .compare-cell--missing { color: var(--muted); font-style: italic; }
+    .compare-cell .best {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--primary); font-weight: 600;
+    }
+    .compare-cell .best::before {
+      content: "✓"; font-size: 0.9rem;
+    }
+    .compare-cell .chip {
+      display: inline-block;
+      padding: 3px 9px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    .compare-cell .rating-inline {
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .compare-cell .rating-inline .star { color: #f59e0b; }
+
+    /* CTA row at bottom */
+    .compare-footer {
+      display: grid;
+      grid-template-columns: 220px repeat(3, 1fr);
+      border-top: 2px solid var(--line-strong);
+      background: var(--surface);
+    }
+    .compare-footer__spacer {
+      background: var(--surface-alt);
+      border-right: 1px solid var(--line);
+    }
+    .compare-footer__cta {
+      padding: 20px; border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .compare-footer__cta:last-child { border-right: 0; }
+
+    .compare-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .compare-toolbar .count {
+      font-size: 0.92rem; color: var(--ink-soft);
+    }
+    .compare-toolbar .count strong { color: var(--ink); }
+
+    .bulk-cta {
+      background: linear-gradient(135deg, var(--primary-soft) 0%, var(--accent-soft) 100%);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      display: flex; gap: 24px; align-items: center;
+      margin-top: 32px;
+    }
+    .bulk-cta__icon {
+      width: 56px; height: 56px; flex-shrink: 0;
+      border-radius: 14px;
+      background: var(--surface);
+      display: grid; place-items: center;
+      font-size: 1.6rem;
+    }
+    .bulk-cta__body { flex: 1; }
+    .bulk-cta__body h3 { margin: 0 0 4px; font-size: 1.15rem; }
+    .bulk-cta__body p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+    /* Mobile — collapse into stacked columns */
+    @media (max-width: 900px) {
+      .compare-header, .compare-row, .compare-footer {
+        grid-template-columns: 1fr;
+      }
+      .compare-header {
+        position: static;
+      }
+      .compare-header__spacer, .compare-cell--label,
+      .compare-footer__spacer {
+        display: none;
+      }
+      .compare-header__card,
+      .compare-cell,
+      .compare-footer__cta {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .compare-cell--label-inline {
+        font-weight: 600;
+        font-size: 0.82rem;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 2px;
+      }
+      .compare-cell {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 18px;
+      }
+      .compare-row--category {
+        background: var(--primary-soft);
+        color: var(--primary);
+        padding-top: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
+      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="compare-hero">
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="index.html">Home</a> · <a href="directory.html">Directory</a> · <span>Compare schools</span>
+    </div>
+    <h1>Compare schools side by side</h1>
+    <p class="lede">See location, grades, tuition, accreditation, and Islamic program details for up to three schools at once. Drop schools in from the directory with the <span style="white-space:nowrap;">✓ Compare</span> checkbox.</p>
+  </div>
+</section>
+
+<!-- ========== COMPARE TABLE ========== -->
+<section class="compare-section">
+  <div class="container">
+
+    <div class="compare-toolbar">
+      <div class="count"><strong>3 of 3</strong> schools — all in Jacksonville, FL</div>
+      <div style="display:flex; gap:8px;">
+        <a href="directory.html" class="btn btn--ghost btn--sm">← Back to directory</a>
+        <button class="btn btn--ghost btn--sm" onclick="window.print()">Print</button>
+        <a href="#" class="btn btn--ghost btn--sm">Share</a>
+      </div>
+    </div>
+
+    <div class="compare-table">
+
+      <!-- Header row -->
+      <div class="compare-header">
+        <div class="compare-header__spacer"></div>
+
+        <div class="compare-header__card">
+          <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
+          <div class="compare-header__mark compare-header__mark--1">AF</div>
+          <h3>Al-Furqan Academy</h3>
+          <div class="small">📍 Jacksonville, FL</div>
+          <a href="school.html" class="profile-link">View full profile →</a>
+        </div>
+
+        <div class="compare-header__card">
+          <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
+          <div class="compare-header__mark compare-header__mark--2">MY</div>
+          <h3>MY Academy</h3>
+          <div class="small">📍 Jacksonville, FL</div>
+          <a href="school.html" class="profile-link">View full profile →</a>
+        </div>
+
+        <div class="compare-header__card">
+          <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
+          <div class="compare-header__mark compare-header__mark--3">AZ</div>
+          <h3>Al-Zahra Academy</h3>
+          <div class="small">📍 Jacksonville, FL</div>
+          <a href="school.html" class="profile-link">View full profile →</a>
+        </div>
+      </div>
+
+      <!-- Category: Overview -->
+      <div class="compare-row--category">Overview</div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Location</div>
+        <div class="compare-cell">Jacksonville, FL</div>
+        <div class="compare-cell">Jacksonville, FL</div>
+        <div class="compare-cell">Jacksonville, FL</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Grades</div>
+        <div class="compare-cell">PreK – 12</div>
+        <div class="compare-cell">VPK – 12</div>
+        <div class="compare-cell">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">School type</div>
+        <div class="compare-cell">Private, non-profit · Full-time day · Co-ed</div>
+        <div class="compare-cell">Private · Muslim · Co-ed</div>
+        <div class="compare-cell compare-cell--missing">Awaiting claim</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Founded</div>
+        <div class="compare-cell">1997</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Enrollment</div>
+        <div class="compare-cell">270+ students</div>
+        <div class="compare-cell">~165 students</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Student-teacher ratio</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell"><span class="best">7 : 1</span></div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Affiliation</div>
+        <div class="compare-cell">Islamic Center of Northeast Florida (ICNEF)</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Address</div>
+        <div class="compare-cell">2333 Saint Johns Bluff Rd S, 32246</div>
+        <div class="compare-cell">5940 Beach Blvd Ste A, 32207</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Phone</div>
+        <div class="compare-cell">(904) 645-0810</div>
+        <div class="compare-cell">(904) 980-8337</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Website</div>
+        <div class="compare-cell"><a href="https://www.alfurqanacademy.org/" target="_blank" rel="noopener" style="color:var(--primary);">alfurqanacademy.org ↗</a></div>
+        <div class="compare-cell"><a href="https://www.myacademyjax.com/" target="_blank" rel="noopener" style="color:var(--primary);">myacademyjax.com ↗</a></div>
+        <div class="compare-cell"><a href="https://alzahrajax.org/school/" target="_blank" rel="noopener" style="color:var(--primary);">alzahrajax.org ↗</a></div>
+      </div>
+
+      <!-- Category: Academics -->
+      <div class="compare-row--category">Academics</div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Student / teacher ratio</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Accreditation</div>
+        <div class="compare-cell">FCIS · CISNA · Cognia</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">AP / honors</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <!-- Category: Islamic program -->
+      <div class="compare-row--category">Islamic program</div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Quran program</div>
+        <div class="compare-cell"><span class="best">Yes — daily</span></div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Hifz track</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Arabic instruction</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Madhab orientation</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <!-- Category: Tuition & aid -->
+      <div class="compare-row--category">Tuition &amp; aid</div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Annual tuition</div>
+        <div class="compare-cell">$9,300 / yr (K–12, 2025–26)</div>
+        <div class="compare-cell compare-cell--missing">Contact school</div>
+        <div class="compare-cell compare-cell--missing">Contact school</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Scholarships accepted</div>
+        <div class="compare-cell"><span class="best">Step Up For Students</span></div>
+        <div class="compare-cell"><span class="best">Step Up For Students</span></div>
+        <div class="compare-cell compare-cell--missing">Pending</div>
+      </div>
+
+      <!-- Category: Community -->
+      <div class="compare-row--category">Community &amp; reviews</div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Overall rating</div>
+        <div class="compare-cell"><span class="rating-inline"><span class="star">★</span> No reviews yet</span></div>
+        <div class="compare-cell"><span class="rating-inline"><span class="star">★</span> No reviews yet</span></div>
+        <div class="compare-cell"><span class="rating-inline"><span class="star">★</span> No reviews yet</span></div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--label">Listing status</div>
+        <div class="compare-cell"><span class="chip" style="background:var(--accent-soft);color:var(--accent);">Preview listing</span></div>
+        <div class="compare-cell"><span class="chip" style="background:var(--accent-soft);color:var(--accent);">Unclaimed</span></div>
+        <div class="compare-cell"><span class="chip" style="background:var(--accent-soft);color:var(--accent);">Unclaimed</span></div>
+      </div>
+
+      <!-- Action row -->
+      <div class="compare-footer">
+        <div class="compare-footer__spacer"></div>
+        <div class="compare-footer__cta">
+          <a href="school.html" class="btn btn--primary btn--block btn--sm">Request info</a>
+          <a href="write-review.html" class="btn btn--ghost btn--block btn--sm">Write a review</a>
+        </div>
+        <div class="compare-footer__cta">
+          <a href="school.html" class="btn btn--primary btn--block btn--sm">Request info</a>
+          <a href="write-review.html" class="btn btn--ghost btn--block btn--sm">Write a review</a>
+        </div>
+        <div class="compare-footer__cta">
+          <a href="school.html" class="btn btn--primary btn--block btn--sm">Request info</a>
+          <a href="write-review.html" class="btn btn--ghost btn--block btn--sm">Write a review</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bulk CTA -->
+    <div class="bulk-cta">
+      <div class="bulk-cta__icon">📨</div>
+      <div class="bulk-cta__body">
+        <h3>Send one inquiry to all three</h3>
+        <p>Save time — we'll forward your question to the admissions team at every school in your comparison.</p>
+      </div>
+      <a href="confirmation.html?action=inquiry" class="btn btn--primary">Contact all 3</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="#">Browse by state</a></li>
+        <li><a href="#">Top-rated schools</a></li>
+        <li><a href="#">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="#">For parents</a></li>
+        <li><a href="#">For educators</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="#">Editorial policy</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

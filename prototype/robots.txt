@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Don't crawl auth, account, or post-submission pages
+Disallow: /signin.html
+Disallow: /signup.html
+Disallow: /account.html
+Disallow: /confirmation.html
+Disallow: /write-review.html
+
+# Search engines may crawl compare.html with URL params,
+# but the canonical is compare.html with no params.
+Disallow: /compare.html?*
+
+Sitemap: https://www.islamicschoolreview.com/sitemap.xml
