@@ -108,7 +108,8 @@ EXPECTATIONS = {
             "The Iman Academy",
             "The Qalam Collegiate Academy",
             "Austin Peace Academy",
-            "San Antonio Academy",
+            "An-Noor Academy of San Antonio",
+            "River City Academy",
         ],
     },
     "school.html": {
