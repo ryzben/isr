@@ -13,7 +13,7 @@ from html.parser import HTMLParser
 import html5lib
 from bs4 import BeautifulSoup
 
-ROOT = "/sessions/practical-vigilant-hawking/mnt/islamicschoolreview/prototype"
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prototype")
 PAGES = [
     "index.html",
     "directory.html",
@@ -77,11 +77,14 @@ EXPECTATIONS = {
     "directory.html": {
         "name": "Directory",
         "required_text": [
-            "Islamic schools in Florida",
+            "Islamic schools across the U.S.",
+            "Islamic Schools in Florida",
+            "Islamic Schools in Texas",
             "Filters",
             "School type",
             "Grade level",
             "Tuition range",
+            # Florida
             "Al-Furqan Academy",
             "MY Academy",
             "Al-Zahra Academy",
@@ -95,6 +98,17 @@ EXPECTATIONS = {
             "Alazhar School",
             "Salah Tawfik",
             "Clara Mohammed School",
+            # Texas
+            "Dallas Islamic School",
+            "Brighter Horizons Academy",
+            "Iqra Academy of Irving",
+            "Good Tree Academy",
+            "ILM Academy",
+            "Darul Arqam School",
+            "The Iman Academy",
+            "The Qalam Collegiate Academy",
+            "Austin Peace Academy",
+            "San Antonio Academy",
         ],
     },
     "school.html": {

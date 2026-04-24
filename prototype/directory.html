@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>School Directory — Islamic School Review</title>
-  <meta name="description" content="Browse 2,400+ verified Islamic schools. Filter by location, type, grade level, tuition, and more." />
+  <meta name="description" content="Browse 24 verified Islamic schools across Florida and Texas. Filter by state, city, grade level, tuition, and program." />
   <link rel="canonical" href="https://www.islamicschoolreview.com/directory.html" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
@@ -12,11 +12,11 @@
   <meta property="og:site_name" content="Islamic School Review" />
   <meta property="og:url" content="https://www.islamicschoolreview.com/directory.html" />
   <meta property="og:title" content="School Directory — Islamic School Review" />
-  <meta property="og:description" content="Browse 2,400+ verified Islamic schools. Filter by location, grade level, tuition, and more." />
+  <meta property="og:description" content="Browse 24 verified Islamic schools across Florida and Texas. Filter by state, city, grade, tuition, and program." />
   <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="School Directory — Islamic School Review" />
-  <meta name="twitter:description" content="Browse 2,400+ verified Islamic schools. Filter by location, grade level, tuition, and more." />
+  <meta name="twitter:description" content="Browse 24 verified Islamic schools across Florida and Texas. Filter by state, city, grade, tuition, and program." />
   <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <script type="application/ld+json">
   {
@@ -25,7 +25,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.islamicschoolreview.com/" },
       { "@type": "ListItem", "position": 2, "name": "Directory", "item": "https://www.islamicschoolreview.com/directory.html" },
-      { "@type": "ListItem", "position": 3, "name": "Florida", "item": "https://www.islamicschoolreview.com/directory.html?state=FL" }
+      { "@type": "ListItem", "position": 3, "name": "All states", "item": "https://www.islamicschoolreview.com/directory.html" }
     ]
   }
   </script>
@@ -33,9 +33,9 @@
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Islamic schools in Florida",
+    "name": "Islamic schools in Florida and Texas",
     "itemListOrder": "https://schema.org/ItemListOrderAscending",
-    "numberOfItems": 14,
+    "numberOfItems": 24,
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Al-Furqan Academy", "url": "https://www.islamicschoolreview.com/school.html" },
       { "@type": "ListItem", "position": 2, "name": "Universal Academy of Florida", "url": "https://www.islamicschoolreview.com/school.html" },
@@ -50,7 +50,17 @@
       { "@type": "ListItem", "position": 11, "name": "Alazhar School", "url": "https://www.islamicschoolreview.com/school.html" },
       { "@type": "ListItem", "position": 12, "name": "Salah Tawfik Elementary and Middle School", "url": "https://www.islamicschoolreview.com/school.html" },
       { "@type": "ListItem", "position": 13, "name": "T.I.E.S. — The Islamic Education School", "url": "https://www.islamicschoolreview.com/school.html" },
-      { "@type": "ListItem", "position": 14, "name": "Clara Mohammed School of Miami", "url": "https://www.islamicschoolreview.com/school.html" }
+      { "@type": "ListItem", "position": 14, "name": "Clara Mohammed School of Miami", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 15, "name": "Dallas Islamic School", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 16, "name": "Brighter Horizons Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 17, "name": "Iqra Academy of Irving", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 18, "name": "Good Tree Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 19, "name": "ILM Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 20, "name": "Darul Arqam School", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 21, "name": "The Iman Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 22, "name": "The Qalam Collegiate Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 23, "name": "Austin Peace Academy", "url": "https://www.islamicschoolreview.com/school.html" },
+      { "@type": "ListItem", "position": 24, "name": "San Antonio Academy", "url": "https://www.islamicschoolreview.com/school.html" }
     ]
   }
   </script>
@@ -167,6 +177,29 @@
       font: inherit;
       font-size: 0.9rem;
     }
+
+    /* State group heading */
+    .state-heading {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 8px 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--line);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .state-heading__count {
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .state-group { margin-bottom: 40px; }
+    .state-group:last-child { margin-bottom: 0; }
 
     /* School result card (horizontal layout) */
     .result-list { display: grid; gap: 16px; }
@@ -370,20 +403,35 @@
 <!-- ========== PAGE HEADER ========== -->
 <section class="page-header">
   <div class="container">
-    <div class="breadcrumbs"><a href="index.html">Home</a> · <a href="#">Directory</a> · <span>Florida</span></div>
-    <h1>Islamic schools in Florida</h1>
-    <p>Browse 14 verified Islamic schools across Florida. Filter by city, grade, tuition, and program to find the right fit — from Jacksonville to Miami.</p>
+    <div class="breadcrumbs"><a href="index.html">Home</a> · <a href="#">Directory</a> · <span>All states</span></div>
+    <h1>Islamic schools across the U.S.</h1>
+    <p>Browse 24 verified Islamic schools across Florida and Texas. Filter by state, city, grade, tuition, and program to find the right fit — from Jacksonville to San Antonio.</p>
 
     <form id="dirSearch" class="dir-search-bar">
-      <input class="input" name="state" aria-label="State" placeholder="State" value="Florida" />
+      <select class="select" name="state" aria-label="State">
+        <option>All states</option>
+        <option>Florida</option>
+        <option>Texas</option>
+      </select>
       <select class="select" name="city" aria-label="City">
         <option>Any city</option>
-        <option>Jacksonville</option>
-        <option>Tampa</option>
-        <option>Orlando</option>
-        <option>Miami</option>
-        <option>Fort Lauderdale</option>
-        <option>Tallahassee</option>
+        <optgroup label="Florida">
+          <option>Jacksonville</option>
+          <option>Tampa</option>
+          <option>Orlando</option>
+          <option>Miami</option>
+          <option>Fort Lauderdale</option>
+          <option>Tallahassee</option>
+        </optgroup>
+        <optgroup label="Texas">
+          <option>Richardson</option>
+          <option>Garland</option>
+          <option>Irving</option>
+          <option>Plano</option>
+          <option>Houston</option>
+          <option>Austin</option>
+          <option>San Antonio</option>
+        </optgroup>
       </select>
       <select class="select" name="grade" aria-label="Grade level">
         <option>Any grade</option>
@@ -475,8 +523,13 @@
     <!-- Results area -->
     <main>
       <div class="results-header">
-        <div class="results-count">14 schools <span>in Florida</span></div>
+        <div class="results-count">24 schools <span>across Florida and Texas</span></div>
         <div class="flex gap-12" style="align-items:center;">
+          <select class="sort-select" name="state-filter" aria-label="Filter by state">
+            <option>All states</option>
+            <option>Florida</option>
+            <option>Texas</option>
+          </select>
           <div class="view-toggle" role="tablist">
             <button class="is-active" data-view-toggle="list">List</button>
             <button data-view-toggle="map">Map</button>
@@ -493,9 +546,15 @@
 
       <!-- LIST VIEW -->
       <div data-view="list">
+        <!-- ====== FLORIDA ====== -->
+        <section class="state-group" data-state-group="FL">
+          <h2 class="state-heading">
+            Islamic Schools in Florida
+            <span class="state-heading__count">14 schools</span>
+          </h2>
         <div class="result-list">
           <!-- Result 1 -->
-          <a href="school.html" class="result" data-city="Jacksonville">
+          <a href="school.html" class="result" data-city="Jacksonville" data-state="FL">
             <div class="result__media" style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);">
               <span>AF</span>
               <span class="badge badge--accent result__badge-top badge--verified">Verified</span>
@@ -943,6 +1002,335 @@
             </div>
           </a>
         </div>
+        </section>
+        <!-- /end Florida -->
+
+        <!-- ====== TEXAS ====== -->
+        <section class="state-group" data-state-group="TX">
+          <h2 class="state-heading">
+            Islamic Schools in Texas
+            <span class="state-heading__count">10 schools</span>
+          </h2>
+          <div class="result-list">
+
+            <!-- TX 1 — Dallas Islamic School -->
+            <a href="school.html" class="result" data-city="Richardson" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);">
+                <span>DIS</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">Dallas Islamic School</h3>
+                <div class="result__loc">📍 Richardson, TX · PreK–12</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.4 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Dallas / North Texas</span>
+                  <span class="badge badge--muted">Full-time</span>
+                  <span class="badge badge--muted">Co-ed</span>
+                </div>
+                <p class="result__snippet">Full-time Islamic day school serving PreK through 12th grade in the Dallas / Richardson metro.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="dis" data-name="Dallas Islamic School" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 2 — Brighter Horizons Academy -->
+            <a href="school.html" class="result" data-city="Garland" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #B8823A 0%, #d29c51 100%);">
+                <span>BHA</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">Brighter Horizons Academy</h3>
+                <div class="result__loc">📍 Garland, TX · PreK–12</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.6 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Dallas / North Texas</span>
+                  <span class="badge badge--muted">Full-time</span>
+                  <span class="badge badge--muted">Established</span>
+                </div>
+                <p class="result__snippet">One of the largest Islamic schools in Texas, serving PreK–12 in the Dallas / Garland area with a strong academic reputation.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="bha" data-name="Brighter Horizons Academy" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 3 — Iqra Academy of Irving -->
+            <a href="school.html" class="result" data-city="Irving" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #1f3b54 0%, #3d6793 100%);">
+                <span>IAI</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">Iqra Academy of Irving</h3>
+                <div class="result__loc">📍 Irving, TX · PreK–12</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.2 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Dallas / North Texas</span>
+                  <span class="badge badge--muted">Full-time</span>
+                  <span class="badge badge--muted">Co-ed</span>
+                </div>
+                <p class="result__snippet">Full-time Islamic school in Irving, TX offering PreK through 12th grade with Quran and Arabic instruction alongside core academics.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="iai" data-name="Iqra Academy of Irving" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 4 — Good Tree Academy -->
+            <a href="school.html" class="result" data-city="Plano" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #0F7A6B 0%, #14a58f 100%);">
+                <span>GTA</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">Good Tree Academy</h3>
+                <div class="result__loc">📍 Plano, TX · PreK–8</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.5 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Dallas / North Texas</span>
+                  <span class="badge badge--muted">Elementary + middle</span>
+                </div>
+                <p class="result__snippet">PreK–8 Islamic school in Plano, TX combining academic rigor with Islamic studies, Quran, and Arabic.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="gta" data-name="Good Tree Academy" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 5 — ILM Academy -->
+            <a href="school.html" class="result" data-city="Houston" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);">
+                <span>ILM</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">ILM Academy</h3>
+                <div class="result__loc">📍 Houston, TX · PreK–12</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.3 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Houston</span>
+                  <span class="badge badge--muted">Full-time</span>
+                </div>
+                <p class="result__snippet">Full-time Islamic school in Houston serving PreK–12 with integrated Islamic studies alongside state-aligned academics.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="ilm" data-name="ILM Academy" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 6 — Darul Arqam School -->
+            <a href="school.html" class="result" data-city="Houston" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #B8823A 0%, #d29c51 100%);">
+                <span>DAS</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">Darul Arqam School</h3>
+                <div class="result__loc">📍 Houston, TX · PreK–12 · Multiple campuses</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.5 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Houston</span>
+                  <span class="badge badge--muted">Multi-campus</span>
+                  <span class="badge badge--muted">Full-time</span>
+                </div>
+                <p class="result__snippet">One of Houston's largest Islamic school networks, operating multiple campuses across Greater Houston and serving PreK–12.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="das" data-name="Darul Arqam School" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 7 — The Iman Academy -->
+            <a href="school.html" class="result" data-city="Houston" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #1f3b54 0%, #3d6793 100%);">
+                <span>TIA</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">The Iman Academy</h3>
+                <div class="result__loc">📍 Houston, TX · PreK–12</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.1 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Houston</span>
+                  <span class="badge badge--muted">Full-time</span>
+                </div>
+                <p class="result__snippet">Full-time Islamic school in Greater Houston serving PreK through 12th grade.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="tim" data-name="The Iman Academy" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 8 — The Qalam Collegiate Academy -->
+            <a href="school.html" class="result" data-city="Houston" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #0F7A6B 0%, #14a58f 100%);">
+                <span>QCA</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">The Qalam Collegiate Academy</h3>
+                <div class="result__loc">📍 Houston, TX · Secondary</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.4 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Houston</span>
+                  <span class="badge badge--muted">College-prep</span>
+                  <span class="badge badge--muted">Traditional Islamic studies</span>
+                </div>
+                <p class="result__snippet">Houston Islamic secondary school emphasizing college preparation alongside traditional Islamic studies.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="qca" data-name="The Qalam Collegiate Academy" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 9 — Austin Peace Academy -->
+            <a href="school.html" class="result" data-city="Austin" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);">
+                <span>APA</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">Austin Peace Academy</h3>
+                <div class="result__loc">📍 Austin, TX · PreK–12</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.3 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">Austin</span>
+                  <span class="badge badge--muted">Full-time</span>
+                </div>
+                <p class="result__snippet">Austin's full-time Islamic school serving PreK through 12th grade with integrated Quran, Arabic, and Islamic studies.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="apa-tx" data-name="Austin Peace Academy" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+            <!-- TX 10 — San Antonio Academy -->
+            <a href="school.html" class="result" data-city="San Antonio" data-state="TX">
+              <div class="result__media" style="background: linear-gradient(135deg, #5a6b35 0%, #8a9f51 100%);">
+                <span>SAA</span>
+                <button class="result__fav" data-fav aria-label="Save">♥</button>
+              </div>
+              <div class="result__body">
+                <h3 class="result__title">San Antonio Academy</h3>
+                <div class="result__loc">📍 San Antonio, TX · PreK–12</div>
+                <div class="result__rating-row">
+                  <span class="rating"><span class="rating__star" style="color:var(--accent)">★</span> 4.2 <span class="rating__count">· Preview rating</span></span>
+                  <span class="small muted">Listing awaiting claim</span>
+                </div>
+                <div class="result__tags">
+                  <span class="badge badge--muted">San Antonio</span>
+                  <span class="badge badge--muted">Full-time</span>
+                </div>
+                <p class="result__snippet">Full-time Islamic school in the San Antonio area serving PreK through 12th grade.</p>
+              </div>
+              <div class="result__side">
+                <div class="result__tuition">
+                  <strong>Contact</strong>
+                  <span class="small muted">For tuition</span>
+                </div>
+                <div class="result__actions">
+                  <span class="btn btn--primary btn--sm">Request info</span>
+                  <label class="checkbox"><input type="checkbox" data-compare="saa" data-name="San Antonio Academy" /> Compare</label>
+                </div>
+              </div>
+            </a>
+
+          </div>
+        </section>
+        <!-- /end Texas -->
 
         <div class="pagination">
           <button>← Prev</button>

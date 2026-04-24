@@ -117,7 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const stateEl = dirForm.querySelector('[name="state"]');
 
     // Match a free-text location ("Tampa, FL", "Orlando") to our city dropdown
-    const CITIES = ["Jacksonville", "Tampa", "Orlando", "Miami", "Fort Lauderdale", "Tallahassee"];
+    const CITIES = [
+      // Florida
+      "Jacksonville", "Tampa", "Orlando", "Miami", "Fort Lauderdale", "Tallahassee",
+      // Texas
+      "Richardson", "Garland", "Irving", "Plano", "Houston", "Austin", "San Antonio"
+    ];
     if (q && cityEl) {
       const match = CITIES.find((c) => q.toLowerCase().includes(c.toLowerCase()));
       if (match) cityEl.value = match;
