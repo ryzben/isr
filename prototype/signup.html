@@ -352,7 +352,7 @@
       <h2>Create your free account</h2>
       <p class="muted">Takes less than a minute. No credit card required.</p>
 
-      <form onsubmit="event.preventDefault();">
+      <form id="signupForm" novalidate>
 
         <!-- Role picker -->
         <span class="role-label">I am a…</span>
@@ -431,8 +431,8 @@
 
         <div class="field">
           <label for="password">Password</label>
-          <input id="password" class="input" type="password" placeholder="At least 8 characters" required autocomplete="new-password" minlength="8" />
-          <span class="hint">Use 8+ characters with a mix of letters, numbers, and symbols.</span>
+          <input id="password" class="input" type="password" placeholder="At least 6 characters" required autocomplete="new-password" minlength="6" />
+          <span class="hint">Use 6+ characters. A mix of letters, numbers, and symbols is recommended.</span>
         </div>
 
         <label class="checkbox-block">

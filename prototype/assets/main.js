@@ -135,4 +135,112 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (q || cityParam || gradeParam) applyFilter();
   }
+
+  // ----------------------------------------------------------------
+  // Demo-only auth handlers (signup + signin)
+  // ISR is in preview — forms validate and respond but do NOT create
+  // accounts, authenticate, or persist anything. No localStorage, no
+  // backend, no password storage. When a real backend is wired up
+  // later (e.g. Supabase), these handlers will be replaced.
+  // ----------------------------------------------------------------
+  const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || "").trim());
+
+  const setAuthStatus = (form, kind, text) => {
+    let el = form.querySelector(".auth-status");
+    if (!el) {
+      el = document.createElement("div");
+      el.className = "auth-status";
+      el.setAttribute("role", "status");
+      el.setAttribute("aria-live", "polite");
+      const submit = form.querySelector("button[type='submit']");
+      if (submit && submit.parentNode) submit.parentNode.insertBefore(el, submit);
+    }
+    el.className = "auth-status" + (kind ? " auth-status--" + kind : "");
+    el.textContent = text || "";
+  };
+
+  const runProcessing = (btn, ms) => {
+    return new Promise((resolve) => {
+      const original = btn.textContent;
+      btn.dataset.originalText = original;
+      btn.textContent = "Please wait…";
+      btn.disabled = true;
+      btn.setAttribute("aria-busy", "true");
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.disabled = false;
+        btn.removeAttribute("aria-busy");
+        resolve();
+      }, ms);
+    });
+  };
+
+  // --- Signup ---
+  const signupForm = document.getElementById("signupForm");
+  if (signupForm) {
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const emailField = signupForm.querySelector("#email");
+      const passwordField = signupForm.querySelector("#password");
+      const submitBtn = signupForm.querySelector("button[type='submit']");
+      const email = emailField ? emailField.value : "";
+      const password = passwordField ? passwordField.value : "";
+
+      if (!isValidEmail(email)) {
+        setAuthStatus(signupForm, "error", "Please enter a valid email address.");
+        if (emailField) emailField.focus();
+        return;
+      }
+      if (!password || password.length < 6) {
+        setAuthStatus(signupForm, "error", "Password must be at least 6 characters.");
+        if (passwordField) passwordField.focus();
+        return;
+      }
+
+      setAuthStatus(signupForm, "", "");
+      runProcessing(submitBtn, 750).then(() => {
+        setAuthStatus(
+          signupForm,
+          "success",
+          "Thanks! ISR is currently in preview. We'll notify you when accounts are live."
+        );
+        // Don't keep the password in the DOM any longer than needed.
+        if (passwordField) passwordField.value = "";
+      });
+    });
+  }
+
+  // --- Signin ---
+  const signinForm = document.getElementById("signinForm");
+  if (signinForm) {
+    signinForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const emailField = signinForm.querySelector("#email");
+      const passwordField = signinForm.querySelector("#password");
+      const submitBtn = signinForm.querySelector("button[type='submit']");
+      const email = emailField ? emailField.value : "";
+      const password = passwordField ? passwordField.value : "";
+
+      if (!isValidEmail(email)) {
+        setAuthStatus(signinForm, "error", "Please enter a valid email address.");
+        if (emailField) emailField.focus();
+        return;
+      }
+      if (!password) {
+        setAuthStatus(signinForm, "error", "Please enter your password.");
+        if (passwordField) passwordField.focus();
+        return;
+      }
+
+      setAuthStatus(signinForm, "", "");
+      runProcessing(submitBtn, 700).then(() => {
+        setAuthStatus(
+          signinForm,
+          "info",
+          "Login will be available soon. ISR is currently in preview."
+        );
+        if (passwordField) passwordField.value = "";
+      });
+    });
+  }
 });
