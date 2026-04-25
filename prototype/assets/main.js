@@ -175,25 +175,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // --- Signup ---
+  // --- Waitlist signup (email-only; no password collected during preview) ---
   const signupForm = document.getElementById("signupForm");
   if (signupForm) {
     signupForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const emailField = signupForm.querySelector("#email");
-      const passwordField = signupForm.querySelector("#password");
       const submitBtn = signupForm.querySelector("button[type='submit']");
       const email = emailField ? emailField.value : "";
-      const password = passwordField ? passwordField.value : "";
 
       if (!isValidEmail(email)) {
         setAuthStatus(signupForm, "error", "Please enter a valid email address.");
         if (emailField) emailField.focus();
-        return;
-      }
-      if (!password || password.length < 6) {
-        setAuthStatus(signupForm, "error", "Password must be at least 6 characters.");
-        if (passwordField) passwordField.focus();
         return;
       }
 
@@ -202,45 +195,14 @@ document.addEventListener("DOMContentLoaded", () => {
         setAuthStatus(
           signupForm,
           "success",
-          "Thanks! ISR is currently in preview. We'll notify you when accounts are live."
+          "You're on the waitlist. We'll email you the moment ISR opens accounts. Thanks for your patience — ISR is in preview."
         );
-        // Don't keep the password in the DOM any longer than needed.
-        if (passwordField) passwordField.value = "";
+        // Clear the email so a refresh doesn't repost.
+        if (emailField) emailField.value = "";
       });
     });
   }
 
-  // --- Signin ---
-  const signinForm = document.getElementById("signinForm");
-  if (signinForm) {
-    signinForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const emailField = signinForm.querySelector("#email");
-      const passwordField = signinForm.querySelector("#password");
-      const submitBtn = signinForm.querySelector("button[type='submit']");
-      const email = emailField ? emailField.value : "";
-      const password = passwordField ? passwordField.value : "";
-
-      if (!isValidEmail(email)) {
-        setAuthStatus(signinForm, "error", "Please enter a valid email address.");
-        if (emailField) emailField.focus();
-        return;
-      }
-      if (!password) {
-        setAuthStatus(signinForm, "error", "Please enter your password.");
-        if (passwordField) passwordField.focus();
-        return;
-      }
-
-      setAuthStatus(signinForm, "", "");
-      runProcessing(submitBtn, 700).then(() => {
-        setAuthStatus(
-          signinForm,
-          "info",
-          "Login will be available soon. ISR is currently in preview."
-        );
-        if (passwordField) passwordField.value = "";
-      });
-    });
-  }
+  // Note: signin.html no longer renders a credential form during preview.
+  // Sign-in will be wired up when accounts launch.
 });

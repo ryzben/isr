@@ -234,29 +234,29 @@ EXPECTATIONS = {
         ],
     },
     "signin.html": {
-        "name": "Sign in",
+        "name": "Sign in (preview — coming soon)",
         "required_text": [
-            "Sign in to your account",
-            "Continue with Google",
-            "Continue with Apple",
-            "or sign in with email",
-            "Forgot password?",
-            "Keep me signed in",
-            "Create one free",
+            "Sign-in is coming soon",
+            "ISR is in preview",
+            "No password to enter today",
+            "Join the waitlist instead",
+            "Back to the school directory",
+            # Sentinel: page must NOT contain phishing-prone patterns.
+            # (Verifier additionally asserts these strings are absent below.)
         ],
     },
     "signup.html": {
-        "name": "Join free",
+        "name": "Join the launch waitlist",
         "required_text": [
-            "Create your free account",
+            "Join the launch waitlist",
+            "ISR is in preview",
             "I am a",
             "Parent",
             "Student",
             "Educator",
             "School admin",
-            "or sign up with email",
-            "Create account",
-            "Already have an account",
+            "Notify me when accounts launch",
+            "No password, no account created today",
         ],
     },
     "write-review.html": {
@@ -352,6 +352,21 @@ def check(page):
     for needle in EXPECTATIONS[page]["required_text"]:
         ok = needle.lower() in html.lower()
         print(f"  [{'PASS' if ok else 'FAIL'}] contains \"{needle}\"")
+
+    # 3b) Phishing/Safe-Browsing guard — auth pages must not look like a
+    #     credential-collection form impersonating Google/Apple. Once a real
+    #     OAuth + auth backend is wired up, these strings can come back.
+    if page in ("signin.html", "signup.html"):
+        forbidden = [
+            "Continue with Google",
+            "Continue with Apple",
+            "or sign in with email",
+            "or sign up with email",
+            'type="password"',
+        ]
+        for needle in forbidden:
+            ok = needle.lower() not in html.lower()
+            print(f"  [{'PASS' if ok else 'FAIL'}] absent \"{needle}\" (Safe-Browsing guard)")
 
     # 4) CSS / JS references resolve
     for link in soup.find_all("link", rel="stylesheet"):
