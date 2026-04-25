@@ -58,83 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Directory search: filter result cards by city
-  const dirForm = document.getElementById("dirSearch");
-  if (dirForm) {
-    const cards = Array.from(document.querySelectorAll(".result-list > .result"));
-    const countEl = document.querySelector(".results-count");
-    const totalLabel = countEl ? countEl.innerHTML : "";
-
-    const applyFilter = () => {
-      const cityEl = dirForm.querySelector('[name="city"]');
-      const stateEl = dirForm.querySelector('[name="state"]');
-      const city = cityEl ? cityEl.value : "Any city";
-      const state = stateEl ? stateEl.value.trim() : "";
-      let visible = 0;
-      cards.forEach((card) => {
-        const cardCity = card.dataset.city || "";
-        const match = city === "Any city" || city === "" || cardCity.toLowerCase() === city.toLowerCase();
-        card.style.display = match ? "" : "none";
-        if (match) visible += 1;
-      });
-      if (countEl) {
-        if (city && city !== "Any city") {
-          countEl.innerHTML = `${visible} school${visible === 1 ? "" : "s"} <span>in ${city}${state ? ", " + state : ""}</span>`;
-        } else {
-          countEl.innerHTML = totalLabel;
-        }
-      }
-    };
-
-    // On submit: filter + brief flash on button
-    dirForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      applyFilter();
-      const btn = dirForm.querySelector('button[type="submit"]');
-      if (btn) {
-        const orig = btn.textContent;
-        btn.textContent = "Updating…";
-        btn.disabled = true;
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.disabled = false;
-        }, 350);
-      }
-      // Scroll results into view on mobile
-      const resultsHeader = document.querySelector(".results-header");
-      if (resultsHeader && window.innerWidth < 960) {
-        resultsHeader.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-
-    // Accept ?q= / ?city= / ?grade= from homepage search
-    const params = new URLSearchParams(location.search);
-    const q = params.get("q");
-    const cityParam = params.get("city");
-    const gradeParam = params.get("grade");
-    const cityEl = dirForm.querySelector('[name="city"]');
-    const gradeEl = dirForm.querySelector('[name="grade"]');
-    const stateEl = dirForm.querySelector('[name="state"]');
-
-    // Match a free-text location ("Tampa, FL", "Orlando") to our city dropdown
-    const CITIES = [
-      // Florida
-      "Jacksonville", "Tampa", "Orlando", "Miami", "Fort Lauderdale", "Tallahassee",
-      // Texas
-      "Richardson", "Garland", "Irving", "Plano", "Houston", "Austin", "San Antonio"
-    ];
-    if (q && cityEl) {
-      const match = CITIES.find((c) => q.toLowerCase().includes(c.toLowerCase()));
-      if (match) cityEl.value = match;
-      if (stateEl && /FL|Florida/i.test(q)) stateEl.value = "Florida";
-    }
-    if (cityParam && cityEl && CITIES.includes(cityParam)) cityEl.value = cityParam;
-    if (gradeParam && gradeEl) {
-      const g = Array.from(gradeEl.options).find((o) => o.value.toLowerCase() === gradeParam.toLowerCase());
-      if (g) gradeEl.value = g.value;
-    }
-    if (q || cityParam || gradeParam) applyFilter();
-  }
+  // Directory search:
+  // The legacy DOM-filter handler that ran here lived on directory.html when
+  // the page rendered hardcoded cards. Phase 2 moved directory rendering and
+  // filtering into an inline <script type="module"> that imports schools-data.js
+  // and owns the form, the URL state, and the result list. We deliberately
+  // do NOTHING here so the two don't double-handle submit/filter events.
 
   // ----------------------------------------------------------------
   // Demo-only auth handlers (signup + signin)

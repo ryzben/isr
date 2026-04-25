@@ -3,60 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Al-Furqan Academy — Islamic School Review</title>
-  <meta name="description" content="Al-Furqan Academy — a PreK–12 Islamic school in Jacksonville, FL, founded in 1997 by the Islamic Center of Northeast Florida (ICNEF). Tuition, admissions, accreditation, and reviews." />
+  <!-- Title / meta / OG / JSON-LD are populated by the inline module below
+       once the school record is loaded. The defaults here are sensible
+       fallbacks for crawlers that don't run JS. -->
+  <title>School profile — Islamic School Review</title>
+  <meta name="description" content="Detailed profile of an Islamic school listed on IslamicSchoolReview.com — grades, tuition, location, accreditation, and program highlights." />
   <link rel="canonical" href="https://islamicschoolreview.com/school.html" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Islamic School Review" />
   <meta property="og:url" content="https://islamicschoolreview.com/school.html" />
-  <meta property="og:title" content="Al-Furqan Academy — Jacksonville, FL" />
-  <meta property="og:description" content="Al-Furqan Academy — a PreK–12 Islamic school in Jacksonville, FL, founded in 1997 by the Islamic Center of Northeast Florida (ICNEF). Tuition, admissions, accreditation, and reviews." />
+  <meta property="og:title" content="School profile — Islamic School Review" />
+  <meta property="og:description" content="Grades, tuition, location, and program highlights for Islamic schools listed on IslamicSchoolReview.com." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Al-Furqan Academy — Jacksonville, FL" />
-  <meta name="twitter:description" content="PreK–12 Islamic school in Jacksonville, FL. Founded 1997 by ICNEF. Tuition, admissions, and reviews." />
+  <meta name="twitter:title" content="School profile — Islamic School Review" />
+  <meta name="twitter:description" content="Grades, tuition, and program highlights for Islamic schools listed on IslamicSchoolReview.com." />
   <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "School",
-    "name": "Al-Furqan Academy",
-    "url": "https://www.alfurqanacademy.org/",
-    "description": "Al-Furqan Academy is a private, non-profit, full-time Islamic school in Jacksonville, FL, founded in 1997 by members of the Islamic Center of Northeast Florida (ICNEF). Serves PreK through grade 12.",
-    "telephone": "+1-904-645-0810",
-    "foundingDate": "1997",
-    "parentOrganization": {
-      "@type": "ReligiousOrganization",
-      "name": "Islamic Center of Northeast Florida",
-      "alternateName": "ICNEF",
-      "url": "https://icnef.org/"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "2333 Saint Johns Bluff Road South",
-      "addressLocality": "Jacksonville",
-      "addressRegion": "FL",
-      "postalCode": "32246",
-      "addressCountry": "US"
-    },
-    "sameAs": ["https://www.alfurqanacademy.org/"]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://islamicschoolreview.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Directory", "item": "https://islamicschoolreview.com/directory.html" },
-      { "@type": "ListItem", "position": 3, "name": "Florida", "item": "https://islamicschoolreview.com/directory.html?state=FL" },
-      { "@type": "ListItem", "position": 4, "name": "Jacksonville", "item": "https://islamicschoolreview.com/directory.html?city=jacksonville" },
-      { "@type": "ListItem", "position": 5, "name": "Al-Furqan Academy", "item": "https://islamicschoolreview.com/school.html" }
-    ]
-  }
-  </script>
+  <!-- JSON-LD School schema, populated by JS. Empty by default. -->
+  <script id="schoolJsonLd" type="application/ld+json">{}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -87,15 +53,19 @@
     .hero-title h1 { margin: 0; font-size: 2.2rem; }
     .hero-location { color: var(--ink-soft); margin-bottom: 16px; font-size: 1rem; }
 
-    .hero-rating {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 20px;
-    }
-    .hero-rating .score {
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--r-lg);
+      margin-bottom: 18px;
+      display: grid; place-items: center;
+      color: rgba(255,255,255,0.85);
       font-family: "Fraunces", Georgia, serif;
-      font-size: 2rem; font-weight: 600; color: var(--ink);
+      font-size: 3rem; font-weight: 600;
     }
-    .hero-rating .stars { color: var(--accent); font-size: 1.15rem; }
 
     .quick-facts {
       display: grid;
@@ -107,7 +77,6 @@
       border: 1px solid var(--line);
       margin-top: 12px;
     }
-    .qf { text-align: left; }
     .qf__label {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -123,42 +92,7 @@
       font-weight: 600;
     }
 
-    /* Gallery */
-    .gallery {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 8px;
-      height: 340px;
-      border-radius: var(--r-lg);
-      overflow: hidden;
-    }
-    .gallery > div {
-      display: grid; place-items: center;
-      color: rgba(255,255,255,0.75);
-      font-family: "Fraunces", Georgia, serif;
-      font-size: 1rem;
-      position: relative;
-    }
-    .gallery > div:nth-child(1) {
-      grid-row: span 2;
-      background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);
-      font-size: 2rem;
-    }
-    .gallery > div:nth-child(2) { background: linear-gradient(135deg, #B8823A 0%, #d29c51 100%); }
-    .gallery > div:nth-child(3) { background: linear-gradient(135deg, #6B4E2E 0%, #8a6a44 100%); }
-    .gallery > div:nth-child(4) { background: linear-gradient(135deg, #1f3b54 0%, #3d6793 100%); }
-    .gallery > div:nth-child(5) { background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%); }
-    .gallery__more {
-      position: absolute; bottom: 10px; right: 12px;
-      background: rgba(0,0,0,0.55);
-      padding: 6px 10px;
-      border-radius: var(--r-md);
-      font-size: 0.8rem;
-      color: #fff;
-    }
-
-    /* Claim banner */
+    /* Claim/preview banner */
     .claim-banner {
       background: var(--accent-soft);
       border: 1px solid var(--accent);
@@ -191,162 +125,77 @@
     }
     .side-card .tuition-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
 
-    /* Section tabs */
-    .tabs {
-      position: sticky;
-      top: var(--nav-h);
-      z-index: 30;
-      background: rgba(250,247,242,0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-    .tabs__inner {
-      display: flex; gap: 4px;
-      padding: 0;
-      overflow-x: auto;
-    }
-    .tabs a {
-      padding: 16px 18px;
-      color: var(--ink-soft);
-      font-size: 0.92rem;
-      font-weight: 500;
-      border-bottom: 2px solid transparent;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .tabs a:hover { color: var(--ink); text-decoration: none; }
-    .tabs a.is-active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-      font-weight: 600;
-    }
-
     .profile-main {
       display: grid;
-      grid-template-columns: 1fr 380px;
+      grid-template-columns: 1fr 320px;
       gap: 40px;
-      padding: 40px 0;
+      padding: 32px 0 64px;
     }
     .profile-content > section {
-      padding: 32px 0;
-      border-bottom: 1px solid var(--line);
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
     }
-    .profile-content > section:last-of-type { border-bottom: 0; }
-    .profile-content h2 { font-size: 1.5rem; margin-bottom: 12px; }
-    .profile-content h3 { font-size: 1.05rem; margin: 20px 0 8px; font-family: "Inter", sans-serif; }
+    .profile-content > section:first-child { border-top: 0; padding-top: 0; }
 
     .facts-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 12px 32px;
-      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
     }
     .fact {
       display: flex; justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px dashed var(--line);
-      font-size: 0.95rem;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      font-size: 0.92rem;
     }
     .fact span:first-child { color: var(--muted); }
     .fact span:last-child { color: var(--ink); font-weight: 500; }
 
-    /* Reviews */
-    .rating-summary {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 32px;
-      margin-bottom: 32px;
-    }
-    .rating-big {
-      text-align: center;
-      padding: 24px;
-      background: var(--surface-alt);
-      border-radius: var(--r-lg);
-    }
-    .rating-big .num {
-      font-family: "Fraunces", Georgia, serif;
-      font-size: 3rem; font-weight: 600;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .rating-big .stars { color: var(--accent); margin: 8px 0; }
-    .rating-big .count { color: var(--muted); font-size: 0.85rem; }
-
-    .rating-axes { display: grid; gap: 10px; }
-    .axis { display: grid; grid-template-columns: 150px 1fr 40px; align-items: center; gap: 12px; font-size: 0.9rem; }
-    .axis-label { color: var(--ink-soft); }
-    .axis-bar { height: 8px; background: var(--surface-alt); border-radius: 4px; overflow: hidden; }
-    .axis-bar span { display: block; height: 100%; background: var(--primary); }
-    .axis-value { font-weight: 600; color: var(--ink); text-align: right; }
-
-    .review-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--r-lg);
-      padding: 22px;
-      margin-bottom: 16px;
-    }
-    .review-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .review-avatar {
-      width: 44px; height: 44px; border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      display: grid; place-items: center; font-weight: 600;
-    }
-    .review-head .stars { color: var(--accent); }
-    .review-body { color: var(--ink); margin: 0 0 12px; font-size: 0.95rem; }
-    .review-response {
-      margin-top: 14px;
-      padding: 14px 16px;
-      background: var(--primary-soft);
-      border-left: 3px solid var(--primary);
-      border-radius: var(--r-md);
-    }
-    .review-response strong { color: var(--primary-ink); }
-    .review-response p { margin: 4px 0 0; font-size: 0.9rem; }
-
-    /* Faculty */
-    .faculty-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .faculty-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--r-lg);
-      padding: 18px;
-      text-align: center;
-    }
-    .faculty-avatar {
-      width: 72px; height: 72px; border-radius: 999px;
-      background: var(--primary-soft); color: var(--primary);
-      display: grid; place-items: center;
-      margin: 0 auto 10px;
-      font-family: "Fraunces", Georgia, serif;
-      font-size: 1.4rem; font-weight: 600;
-    }
-    .faculty-card strong { display: block; font-size: 0.95rem; }
-    .faculty-card span { color: var(--muted); font-size: 0.85rem; }
-
-    /* Similar schools */
     .similar-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
+    /* Loading + not-found states */
+    .school-skel {
+      padding: 40px 0;
+      display: grid; gap: 14px;
+    }
+    .school-skel .bar {
+      height: 14px; border-radius: 4px;
+      background: linear-gradient(110deg, #ECECEC 30%, #F5F5F5 50%, #ECECEC 70%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s linear infinite;
+    }
+    .school-skel .bar--lg { height: 30px; width: 60%; }
+    .school-skel .bar--md { width: 40%; }
+    .school-skel .bar--photo { aspect-ratio: 16/9; height: auto; border-radius: var(--r-lg); }
+    @keyframes shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+
+    .not-found {
+      max-width: 580px;
+      margin: 80px auto;
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--surface);
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--r-lg);
+    }
+    .not-found h1 { font-size: 1.6rem; margin: 0 0 8px; }
+    .not-found p { margin: 0 0 18px; color: var(--muted); }
+
     @media (max-width: 960px) {
       .hero-grid, .profile-main { grid-template-columns: 1fr; }
       .profile-side { position: static; }
-      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; height: auto; }
-      .gallery > div { aspect-ratio: 16/10; }
-      .gallery > div:nth-child(1) { grid-row: auto; grid-column: span 2; }
       .quick-facts { grid-template-columns: repeat(2, 1fr); }
-      .faculty-grid, .similar-grid { grid-template-columns: 1fr 1fr; }
-      .rating-summary { grid-template-columns: 1fr; }
+      .similar-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       .facts-grid { grid-template-columns: 1fr; }
-      .faculty-grid, .similar-grid { grid-template-columns: 1fr; }
+      .similar-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -371,294 +220,144 @@
   </div>
 </header>
 
-<!-- ========== HERO ========== -->
-<section class="profile-hero">
-  <div class="container">
-    <div class="breadcrumbs">
-      <a href="index.html">Home</a> · <a href="directory.html">Directory</a> · <a href="#">Florida</a> · <a href="#">Jacksonville</a> · <span>Al-Furqan Academy</span>
+<!-- ========== Loading skeleton (replaced once data resolves) ========== -->
+<div class="container school-skel" id="schoolSkeleton" aria-busy="true">
+  <div class="bar bar--lg"></div>
+  <div class="bar bar--md"></div>
+  <div class="bar bar--photo"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar bar--md"></div>
+</div>
+
+<!-- ========== Not-found state (shown by JS when ?id matches no school) ========== -->
+<section class="not-found" id="schoolNotFound" hidden>
+  <h1>School not found</h1>
+  <p id="schoolNotFoundMsg">We couldn't find a school matching that link.</p>
+  <a href="directory.html" class="btn btn--primary">Back to the school directory</a>
+</section>
+
+<!-- ========== School profile (filled in by JS) ========== -->
+<article id="schoolMain" hidden>
+
+  <section class="profile-hero">
+    <div class="container">
+      <div class="breadcrumbs" id="schoolBreadcrumbs"></div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="hero-title">
+            <h1 id="schoolName">School name</h1>
+            <span class="badge" id="schoolStatusBadge">Preview listing</span>
+          </div>
+          <div class="hero-location" id="schoolLocation"></div>
+
+          <div class="hero-photo" id="schoolPhoto" aria-label="School photograph">
+            <span id="schoolPhotoFallback"></span>
+          </div>
+
+          <div class="quick-facts" id="schoolQuickFacts"></div>
+
+          <div class="claim-banner" id="schoolPreviewBanner" hidden>
+            <span style="font-size: 1.5rem;">ℹ️</span>
+            <div style="flex:1;">
+              <strong>Preview listing — limited info shown</strong>
+              <p>Tuition, ratings, and other details on this page come from publicly available sources. <span id="schoolClaimNudge"></span> can claim this listing to update information, respond to reviews, and post jobs.</p>
+            </div>
+            <a href="contact.html" class="btn btn--accent btn--sm">Claim listing</a>
+          </div>
+
+          <div class="claim-banner" id="schoolVerifiedBanner" hidden style="background: var(--primary-soft); border-color: var(--primary);">
+            <span style="font-size: 1.5rem;">✓</span>
+            <div style="flex:1;">
+              <strong>Verified by IslamicSchoolReview.com</strong>
+              <p>Address, phone number, grades, and tuition were verified against the school's own materials.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="profile-side">
+          <div class="side-card">
+            <h3>Request more information</h3>
+            <div class="tuition" id="schoolTuition">—</div>
+            <div class="tuition-sub" id="schoolTuitionSub">Annual tuition</div>
+
+            <form onsubmit="event.preventDefault();" class="stack-12">
+              <div>
+                <label class="label" for="f-name">Your name</label>
+                <input id="f-name" class="input" placeholder="Fatima Ahmed" />
+              </div>
+              <div>
+                <label class="label" for="f-email">Email</label>
+                <input id="f-email" class="input" type="email" placeholder="you@email.com" />
+              </div>
+              <div>
+                <label class="label" for="f-grade">Grade of interest</label>
+                <select id="f-grade" class="select">
+                  <option>Preschool</option>
+                  <option>Elementary (K–5)</option>
+                  <option selected>Middle (6–8)</option>
+                  <option>High school (9–12)</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn--primary btn--block">Send inquiry</button>
+              <button type="button" class="btn btn--ghost btn--block">♥ Save to favorites</button>
+            </form>
+            <p class="small muted mt-16" style="margin-bottom:0;">During preview, inquiries are not sent — you'll see a confirmation only.</p>
+          </div>
+        </aside>
+      </div>
     </div>
+  </section>
 
-    <div class="hero-grid">
-      <div>
-        <div class="hero-title">
-          <h1>Al-Furqan Academy</h1>
-          <span class="badge">Preview listing</span>
-        </div>
-        <div class="hero-location">📍 2333 Saint Johns Bluff Rd S, Jacksonville, FL 32246 · (904) 645-0810 · <a href="#">Get directions</a></div>
+  <div class="container">
+    <div class="profile-main">
+      <div class="profile-content">
 
-        <div class="hero-rating">
-          <span class="score">—</span>
-          <div>
-            <div class="stars" style="opacity:0.35;">★★★★★</div>
-            <div class="small muted">No verified reviews yet · be the first</div>
+        <section id="overview">
+          <h2 id="schoolAboutHeading">About this school</h2>
+          <p id="schoolDescription"></p>
+
+          <h3>At a glance</h3>
+          <div class="facts-grid" id="schoolFacts"></div>
+        </section>
+
+        <section id="contact">
+          <h2>Contact</h2>
+          <div class="facts-grid" id="schoolContact"></div>
+          <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a href="contact.html">let us know</a>.</p>
+        </section>
+
+        <section id="similar">
+          <h2>Similar schools</h2>
+          <div class="similar-grid mt-16" id="schoolSimilar">
+            <!-- filled by JS -->
           </div>
-        </div>
-
-        <div class="gallery">
-          <div>Main building <span class="gallery__more">Photos</span></div>
-          <div>Classrooms</div>
-          <div>Masjid</div>
-          <div>Gym</div>
-          <div>Library <span class="gallery__more">+18 more</span></div>
-        </div>
-
-        <div class="quick-facts">
-          <div class="qf"><div class="qf__label">Grades</div><div class="qf__value">PreK–12</div></div>
-          <div class="qf"><div class="qf__label">Students</div><div class="qf__value">270+</div></div>
-          <div class="qf"><div class="qf__label">Founded</div><div class="qf__value">1997</div></div>
-          <div class="qf"><div class="qf__label">Tuition</div><div class="qf__value">$9,300/yr</div></div>
-        </div>
-
-        <div class="claim-banner" style="background: #FFF7ED; border-color: #FED7AA;">
-          <span style="font-size: 1.5rem;">ℹ️</span>
-          <div style="flex:1;">
-            <strong>Preview listing — sample data shown</strong>
-            <p>This profile is a preview. Enrollment, tuition, ratings, and other details are placeholders until <a href="https://www.alfurqanacademy.org/" rel="noopener" target="_blank">Al-Furqan Academy</a> claims this listing and verifies its information.</p>
-          </div>
-          <a href="#" class="btn btn--accent btn--sm">Claim listing</a>
-        </div>
-
-        <div class="claim-banner">
-          <span style="font-size: 1.5rem;">🏫</span>
-          <div style="flex:1;">
-            <strong>Is this your school?</strong>
-            <p>Claim this listing to update information, respond to reviews, and post jobs.</p>
-          </div>
-          <a href="#" class="btn btn--accent btn--sm">Claim listing</a>
-        </div>
+        </section>
       </div>
 
       <aside class="profile-side">
         <div class="side-card">
-          <h3>Request more information</h3>
-          <div class="tuition">$9,300 / year</div>
-          <div class="tuition-sub">K–12 tuition · Step Up For Students scholarship accepted</div>
-
-          <form onsubmit="event.preventDefault();" class="stack-12">
-            <div>
-              <label class="label" for="f-name">Your name</label>
-              <input id="f-name" class="input" placeholder="Fatima Ahmed" />
-            </div>
-            <div>
-              <label class="label" for="f-email">Email</label>
-              <input id="f-email" class="input" type="email" placeholder="you@email.com" />
-            </div>
-            <div>
-              <label class="label" for="f-grade">Grade of interest</label>
-              <select id="f-grade" class="select">
-                <option>Preschool</option>
-                <option>Elementary (K–5)</option>
-                <option selected>Middle (6–8)</option>
-                <option>High school (9–12)</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn--primary btn--block">Send inquiry</button>
-            <button type="button" class="btn btn--ghost btn--block">♥ Save to favorites</button>
-          </form>
-          <p class="small muted mt-16" style="margin-bottom:0;">The school typically replies within 24 hours.</p>
+          <h3>Helpful next steps</h3>
+          <ul style="list-style:none; padding:0; margin:0;">
+            <li style="padding:10px 0; border-bottom:1px solid var(--line);">
+              <a href="directory.html">← Back to all schools</a>
+            </li>
+            <li style="padding:10px 0; border-bottom:1px solid var(--line);">
+              <a href="compare.html">Compare with other schools</a>
+            </li>
+            <li style="padding:10px 0; border-bottom:1px solid var(--line);">
+              <a href="write-review.html">Write a review</a>
+            </li>
+            <li style="padding:10px 0;">
+              <a href="contact.html">Suggest an edit</a>
+            </li>
+          </ul>
         </div>
       </aside>
     </div>
   </div>
-</section>
-
-<!-- ========== TABS ========== -->
-<div class="tabs">
-  <div class="container tabs__inner">
-    <a href="#overview" class="is-active">Overview</a>
-    <a href="#academics">Academics</a>
-    <a href="#admissions">Admissions</a>
-    <a href="#tuition">Tuition &amp; aid</a>
-    <a href="#faculty">Faculty</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#similar">Similar schools</a>
-  </div>
-</div>
-
-<!-- ========== MAIN CONTENT ========== -->
-<div class="container">
-  <div class="profile-main">
-    <div class="profile-content">
-
-      <section id="overview">
-        <h2>About Al-Furqan Academy</h2>
-        <p>Founded in August 1997 by members of the Islamic Center of Northeast Florida (ICNEF), Al-Furqan Academy is a private, non-profit, full-time Islamic school registered with the Florida Department of Education. The school currently serves 270+ students from Pre-K through grade 12 on Jacksonville's Southside.</p>
-        <p>The academic program pairs Quran, Arabic, and Islamic Studies with core subjects (Math, Language Arts, Science, Social Studies) plus Art and Physical Education. Al-Furqan has adopted the SAVVAS curriculum, aligned to Florida's B.E.S.T. State Standards. Families may apply Step Up For Students scholarships toward tuition.</p>
-
-        <h3>At a glance</h3>
-        <div class="facts-grid">
-          <div class="fact"><span>School type</span><span>Private, non-profit · Full-time day · Co-ed</span></div>
-          <div class="fact"><span>Grades served</span><span>Pre-K through 12</span></div>
-          <div class="fact"><span>Total enrollment</span><span>270+ students</span></div>
-          <div class="fact"><span>Founded</span><span>August 1997</span></div>
-          <div class="fact"><span>Accreditation</span><span>FCIS · CISNA · Cognia</span></div>
-          <div class="fact"><span>Affiliation</span><span>Islamic Center of Northeast Florida (ICNEF)</span></div>
-          <div class="fact"><span>Language of instruction</span><span>English + Arabic</span></div>
-          <div class="fact"><span>Scholarships accepted</span><span>Step Up For Students</span></div>
-        </div>
-      </section>
-
-      <section id="academics">
-        <h2>Academics &amp; Islamic program</h2>
-        <p>Al-Furqan Academy's academic program pairs a full Islamic studies track with a college-preparatory core. Islamic subjects are integrated across the day, and the academic curriculum follows Florida's B.E.S.T. State Standards using the SAVVAS program.</p>
-
-        <h3>Quran, Arabic &amp; Islamic Studies</h3>
-        <ul>
-          <li>Daily Quran instruction across grade levels.</li>
-          <li>Arabic as a living language alongside Quranic Arabic.</li>
-          <li>Islamic Studies curriculum developed in coordination with ICNEF scholars.</li>
-          <li>Daily prayer at the adjoining masjid.</li>
-        </ul>
-
-        <h3>Core academics</h3>
-        <ul>
-          <li>Math, Language Arts, Science, and Social Studies at every grade.</li>
-          <li>Enrichment subjects: Art and Physical Education.</li>
-          <li>SAVVAS curriculum, aligned to Florida's B.E.S.T. State Standards.</li>
-          <li>High school pathway through grade 12.</li>
-        </ul>
-        <p class="small muted mt-16">Program details are summarized from the school's public materials. Specific AP offerings, extracurriculars, and competition results are not listed here — contact the school for current specifics.</p>
-      </section>
-
-      <section id="admissions">
-        <h2>Admissions</h2>
-        <p>Al-Furqan Academy reviews applications for Pre-K through grade 12. The exact process — forms, placement assessments, interviews, and deadlines — is managed by the school directly. For current requirements and any mid-year openings, contact the admissions office.</p>
-        <h3>Typical steps (verify with school)</h3>
-        <ol>
-          <li>Submit an application through the school's admissions page.</li>
-          <li>Grade-appropriate placement review.</li>
-          <li>Family meeting with administration.</li>
-          <li>Decision communicated by the school.</li>
-        </ol>
-        <div class="mt-16"><a href="https://www.alfurqanacademy.org/" target="_blank" rel="noopener" class="btn btn--primary">Visit the school's site →</a></div>
-      </section>
-
-      <section id="tuition">
-        <h2>Tuition &amp; financial aid</h2>
-        <p>Al-Furqan Academy publishes a single K–12 tuition rate. Florida families can apply Step Up For Students scholarship funds toward tuition, which can substantially reduce out-of-pocket cost for eligible households.</p>
-        <div class="facts-grid">
-          <div class="fact"><span>K–12 tuition (2025–26)</span><span>$9,300 / year</span></div>
-          <div class="fact"><span>Scholarships accepted</span><span>Step Up For Students</span></div>
-          <div class="fact"><span>Financial assistance</span><span>Inquire with the school</span></div>
-          <div class="fact"><span>Preschool tuition</span><span>Contact school for rates</span></div>
-        </div>
-        <p class="small muted mt-16">Tuition and fee schedules are set by the school and can change year to year. Verify current rates on the school's tuition page before applying.</p>
-      </section>
-
-      <section id="faculty">
-        <h2>Faculty &amp; leadership</h2>
-        <p>Al-Furqan Academy operates under a leadership team working in coordination with the Islamic Center of Northeast Florida (ICNEF). The academic side is organized by grade band (elementary, middle, high school), and the Islamic program is led by qualified Quran and Arabic instructors.</p>
-        <p class="small muted">Names and bios of current administrators and department heads are not published here. For the most up-to-date leadership roster, see the school's own staff page.</p>
-        <div class="mt-16"><a href="https://www.alfurqanacademy.org/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">View school staff page →</a></div>
-      </section>
-
-      <section id="reviews">
-        <div class="flex-between">
-          <h2 style="margin-bottom:0;">Reviews</h2>
-          <a href="write-review.html" class="btn btn--primary btn--sm">Write a review</a>
-        </div>
-
-        <div class="rating-summary mt-24">
-          <div class="rating-big">
-            <div class="num">4.8</div>
-            <div class="stars">★★★★★</div>
-            <div class="count">Sample reviews shown · awaiting verified community reviews</div>
-          </div>
-          <div class="rating-axes">
-            <div class="axis"><div class="axis-label">Academics</div><div class="axis-bar"><span style="width:96%"></span></div><div class="axis-value">4.8</div></div>
-            <div class="axis"><div class="axis-label">Islamic environment</div><div class="axis-bar"><span style="width:98%"></span></div><div class="axis-value">4.9</div></div>
-            <div class="axis"><div class="axis-label">Faculty</div><div class="axis-bar"><span style="width:94%"></span></div><div class="axis-value">4.7</div></div>
-            <div class="axis"><div class="axis-label">Facilities</div><div class="axis-bar"><span style="width:88%"></span></div><div class="axis-value">4.4</div></div>
-            <div class="axis"><div class="axis-label">Value</div><div class="axis-bar"><span style="width:92%"></span></div><div class="axis-value">4.6</div></div>
-          </div>
-        </div>
-
-        <div class="review-card">
-          <div class="review-head">
-            <div class="review-avatar">FA</div>
-            <div style="flex:1;">
-              <div><strong>Fatima A.</strong> <span class="badge badge--muted small" style="margin-left:6px;">Verified parent</span></div>
-              <div class="small muted">Parent of 2 · Reviewed 3 days ago</div>
-            </div>
-            <div class="stars">★★★★★</div>
-          </div>
-          <p class="review-body">The Quran program is the best in our city — my daughter memorized Juz Amma in her first year. Teachers genuinely care, and the community has become like family. The middle school facilities could use an update, but that's the only meaningful critique I have.</p>
-          <div class="review-response">
-            <strong>Al-Furqan Academy replied · 2 days ago</strong>
-            <p>Jazakum Allahu khairan, Sr. Fatima. We're so glad Maryam has thrived here. Regarding facilities — we broke ground on a new middle school wing this month and expect to complete it by August. We'd love to show you the plans at the next parent coffee.</p>
-          </div>
-        </div>
-
-        <div class="review-card">
-          <div class="review-head">
-            <div class="review-avatar">OM</div>
-            <div style="flex:1;">
-              <div><strong>Omar M.</strong> <span class="badge badge--muted small" style="margin-left:6px;">Verified parent</span></div>
-              <div class="small muted">Parent of 3 · Reviewed 2 weeks ago</div>
-            </div>
-            <div class="stars">★★★★☆</div>
-          </div>
-          <p class="review-body">Solid academics, warm community, and my kids feel genuinely seen. High school curriculum is rigorous — my son is thriving in the AP track. My one wish would be more extracurricular variety, especially for boys who aren't into sports.</p>
-        </div>
-
-        <div class="text-center mt-24">
-          <a href="#" class="btn btn--ghost">Load more reviews →</a>
-        </div>
-      </section>
-
-      <section id="similar">
-        <h2>Similar schools nearby</h2>
-        <div class="similar-grid mt-16">
-          <a href="school.html" class="card school-card">
-            <div class="card__media" style="background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%);"><span>MY</span></div>
-            <div class="card__body">
-              <h3 class="card__title">MY Academy</h3>
-              <div class="card__meta">📍 Jacksonville, FL · VPK–12</div>
-              <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
-            </div>
-          </a>
-          <a href="school.html" class="card school-card">
-            <div class="card__media" style="background: linear-gradient(135deg, #5c2e2e 0%, #894848 100%);"><span>AZ</span></div>
-            <div class="card__body">
-              <h3 class="card__title">Al-Zahra Academy</h3>
-              <div class="card__meta">📍 Jacksonville, FL</div>
-              <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
-            </div>
-          </a>
-          <a href="school.html" class="card school-card">
-            <div class="card__media" style="background: linear-gradient(135deg, #B8823A 0%, #d29c51 100%);"><span>UAF</span></div>
-            <div class="card__body">
-              <h3 class="card__title">Universal Academy of Florida</h3>
-              <div class="card__meta">📍 Tampa, FL · PreK–12</div>
-              <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">New listing</span></span>
-            </div>
-          </a>
-        </div>
-      </section>
-    </div>
-
-    <aside class="profile-side">
-      <div class="side-card">
-        <h3>Jobs at Al-Furqan Academy</h3>
-        <a href="#" class="job" style="border:0;padding:12px 0;border-bottom:1px solid var(--line);">
-          <div class="job__logo">AF</div>
-          <div class="job__body">
-            <h4 style="font-size:0.95rem;">Middle School Math Teacher</h4>
-            <div class="job__meta"><span>Full-time</span></div>
-          </div>
-        </a>
-        <a href="#" class="job" style="border:0;padding:12px 0;border-bottom:1px solid var(--line);">
-          <div class="job__logo">AF</div>
-          <div class="job__body">
-            <h4 style="font-size:0.95rem;">Quran Teacher (K–5)</h4>
-            <div class="job__meta"><span>Part-time</span></div>
-          </div>
-        </a>
-        <a href="#" class="btn btn--ghost btn--block btn--sm mt-16">See all 3 open roles →</a>
-      </div>
-    </aside>
-  </div>
-</div>
+</article>
 
 <footer class="site-footer">
   <div class="container">
@@ -699,5 +398,255 @@
 </footer>
 
 <script src="assets/main.js"></script>
+
+<!-- ========== SCHOOL DETAIL RENDER MODULE ========== -->
+<script type="module">
+  import {
+    getSchoolById,
+    getSchools,
+    filterSchools,
+  } from "./assets/schools-data.js";
+
+  const STATE_NAMES = { FL: "Florida", TX: "Texas" };
+  const SITE = "https://islamicschoolreview.com";
+
+  function escapeHtml(s) {
+    return String(s ?? "").replace(/[&<>"']/g, (c) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;",
+    })[c]);
+  }
+  function initials(name) {
+    const w = String(name || "").split(/\s+/).filter(Boolean);
+    if (!w.length) return "?";
+    if (w.length === 1) return w[0].slice(0, 2).toUpperCase();
+    return (w[0][0] + w[1][0]).toUpperCase();
+  }
+  function $(id) { return document.getElementById(id); }
+
+  function getIdFromUrl() {
+    const params = new URLSearchParams(location.search);
+    return (params.get("id") || "").trim();
+  }
+
+  function showNotFound(reason) {
+    $("schoolSkeleton").hidden = true;
+    $("schoolMain").hidden = true;
+    const nf = $("schoolNotFound");
+    nf.hidden = false;
+    if (reason) $("schoolNotFoundMsg").textContent = reason;
+  }
+
+  function fact(label, value) {
+    return `<div class="fact"><span>${escapeHtml(label)}</span><span>${escapeHtml(value)}</span></div>`;
+  }
+
+  function quickFact(label, value) {
+    return `<div class="qf"><div class="qf__label">${escapeHtml(label)}</div><div class="qf__value">${escapeHtml(value)}</div></div>`;
+  }
+
+  function setMeta(name, content, attr = "name") {
+    let el = document.head.querySelector(`meta[${attr}="${name}"]`);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attr, name);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", content);
+  }
+
+  function setCanonical(url) {
+    let el = document.head.querySelector("link[rel='canonical']");
+    if (!el) {
+      el = document.createElement("link");
+      el.setAttribute("rel", "canonical");
+      document.head.appendChild(el);
+    }
+    el.setAttribute("href", url);
+  }
+
+  function setJsonLd(school) {
+    const url = `${SITE}/school.html?id=${encodeURIComponent(school.id)}`;
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "School",
+      "name": school.name,
+      "url": url,
+      "description": school.description || undefined,
+      "telephone": school.phone || undefined,
+      "address": school.address ? {
+        "@type": "PostalAddress",
+        "streetAddress": school.address,
+        "addressLocality": school.city || undefined,
+        "addressRegion": school.state || undefined,
+        "addressCountry": "US",
+      } : undefined,
+      "sameAs": school.website ? [school.website] : undefined,
+    };
+    // Strip undefined values for cleaner output.
+    for (const k of Object.keys(data)) if (data[k] === undefined) delete data[k];
+    if (data.address) for (const k of Object.keys(data.address)) if (data.address[k] === undefined) delete data.address[k];
+    $("schoolJsonLd").textContent = JSON.stringify(data, null, 2);
+  }
+
+  function renderSchool(s) {
+    const url = `${SITE}/school.html?id=${encodeURIComponent(s.id)}`;
+    const where = [s.city, s.state].filter(Boolean).join(", ");
+
+    // ---- HEAD ----
+    document.title = `${s.name} — ${where || "Islamic School Review"}`;
+    setMeta("description", s.description || `${s.name} — an Islamic school listed on IslamicSchoolReview.com.`);
+    setMeta("og:title", `${s.name} — ${where}`, "property");
+    setMeta("og:description", s.description || "", "property");
+    setMeta("og:url", url, "property");
+    if (s.photo_url) setMeta("og:image", s.photo_url, "property");
+    setMeta("twitter:title", `${s.name} — ${where}`);
+    setMeta("twitter:description", s.description || "");
+    if (s.photo_url) setMeta("twitter:image", s.photo_url);
+    setCanonical(url);
+    setJsonLd(s);
+
+    // ---- BREADCRUMBS ----
+    const stateName = STATE_NAMES[s.state] || s.state || "";
+    const stateHref = s.state ? `directory.html?state=${encodeURIComponent(s.state)}` : "directory.html";
+    const cityHref  = s.city  ? `directory.html?city=${encodeURIComponent(s.city)}`   : "directory.html";
+    $("schoolBreadcrumbs").innerHTML = `
+      <a href="index.html">Home</a> ·
+      <a href="directory.html">Directory</a>
+      ${stateName ? ` · <a href="${stateHref}">${escapeHtml(stateName)}</a>` : ""}
+      ${s.city ? ` · <a href="${cityHref}">${escapeHtml(s.city)}</a>` : ""}
+      · <span>${escapeHtml(s.name)}</span>
+    `;
+
+    // ---- HERO ----
+    $("schoolName").textContent = s.name;
+    const badge = $("schoolStatusBadge");
+    if (s.verified) {
+      badge.textContent = "Verified";
+      badge.className = "badge badge--accent";
+    } else {
+      badge.textContent = "Preview listing";
+      badge.className = "badge";
+    }
+
+    const locationParts = [];
+    if (s.address) locationParts.push(`📍 ${s.address}`);
+    else if (where) locationParts.push(`📍 ${where}`);
+    if (s.phone) locationParts.push(escapeHtml(s.phone));
+    const linkHref = s.website || "#";
+    if (s.website) locationParts.push(`<a href="${escapeHtml(s.website)}" target="_blank" rel="noopener">Visit website</a>`);
+    $("schoolLocation").innerHTML = locationParts.join(" · ");
+
+    const photo = $("schoolPhoto");
+    if (s.photo_url) {
+      photo.style.backgroundImage = `url('${s.photo_url}')`;
+      $("schoolPhotoFallback").textContent = "";
+    } else {
+      $("schoolPhotoFallback").textContent = initials(s.name);
+    }
+
+    // ---- QUICK FACTS ----
+    const qf = [];
+    if (s.grades) qf.push(quickFact("Grades", s.grades));
+    if (s.tuition_range) qf.push(quickFact("Tuition", s.tuition_range));
+    qf.push(quickFact("Location", where || "—"));
+    qf.push(quickFact("Status", s.verified ? "Verified" : "Preview"));
+    $("schoolQuickFacts").innerHTML = qf.join("");
+
+    // ---- BANNERS ----
+    if (s.verified) {
+      $("schoolVerifiedBanner").hidden = false;
+    } else {
+      $("schoolPreviewBanner").hidden = false;
+      $("schoolClaimNudge").textContent = s.name;
+    }
+
+    // ---- SIDE CARD TUITION ----
+    if (s.tuition_range) {
+      $("schoolTuition").textContent = s.tuition_range;
+      $("schoolTuitionSub").textContent = "Annual tuition";
+    } else {
+      $("schoolTuition").textContent = "Contact school";
+      $("schoolTuitionSub").textContent = "Tuition not listed";
+    }
+
+    // ---- ABOUT + FACTS ----
+    $("schoolAboutHeading").textContent = `About ${s.name}`;
+    $("schoolDescription").textContent = s.description || "Profile information is being added. Check back soon, or contact the school directly using the details below.";
+
+    const facts = [];
+    if (s.grades)        facts.push(fact("Grades served", s.grades));
+    if (where)           facts.push(fact("Location", where));
+    if (s.tuition_range) facts.push(fact("Tuition", s.tuition_range));
+    facts.push(fact("Listing status", s.verified ? "Verified" : "Preview / awaiting claim"));
+    $("schoolFacts").innerHTML = facts.join("");
+
+    // ---- CONTACT ----
+    const contact = [];
+    if (s.address)       contact.push(fact("Address", s.address));
+    if (s.phone)         contact.push(fact("Phone", s.phone));
+    if (s.website)       contact.push(fact("Website", s.website.replace(/^https?:\/\//, "")));
+    if (!contact.length) contact.push(fact("Contact info", "Not listed yet"));
+    $("schoolContact").innerHTML = contact.join("");
+
+    // ---- REVEAL ----
+    $("schoolSkeleton").hidden = true;
+    $("schoolMain").hidden = false;
+  }
+
+  function similarCard(s) {
+    const where = [s.city, s.state].filter(Boolean).join(", ");
+    const photo = s.photo_url
+      ? `style="background-image:url('${escapeHtml(s.photo_url)}'); background-size:cover; background-position:center;"`
+      : `style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);"`;
+    return `
+      <a href="school.html?id=${encodeURIComponent(s.id)}" class="card school-card">
+        <div class="card__media" ${photo}>${s.photo_url ? "" : `<span>${escapeHtml(initials(s.name))}</span>`}</div>
+        <div class="card__body">
+          <h3 class="card__title">${escapeHtml(s.name)}</h3>
+          <div class="card__meta">📍 ${escapeHtml(where)}${s.grades ? ` · ${escapeHtml(s.grades)}` : ""}</div>
+          <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">${s.verified ? "Verified" : "Preview"}</span></span>
+        </div>
+      </a>
+    `;
+  }
+
+  async function renderSimilar(currentSchool) {
+    try {
+      const all = await getSchools();
+      // Pick up to 3 schools in the same state, excluding the current one;
+      // prefer verified listings to keep the rail looking solid.
+      const sameState = filterSchools(all, { state: currentSchool.state })
+        .filter((s) => s.id !== currentSchool.id);
+      sameState.sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+      const picks = sameState.slice(0, 3);
+      $("schoolSimilar").innerHTML = picks.map(similarCard).join("")
+        || `<p class="muted">No similar schools listed yet.</p>`;
+    } catch (err) {
+      console.warn("Could not render similar schools:", err);
+      $("schoolSimilar").innerHTML = "";
+    }
+  }
+
+  // ---- Boot ----
+  (async () => {
+    const id = getIdFromUrl();
+    if (!id) {
+      showNotFound("This page expects a school ID in the URL (e.g. school.html?id=al-furqan-academy). Try browsing the directory to pick a school.");
+      return;
+    }
+    try {
+      const school = await getSchoolById(id);
+      if (!school) {
+        showNotFound(`We couldn't find a school with ID "${id}". It may have been removed or the link may be out of date.`);
+        return;
+      }
+      renderSchool(school);
+      renderSimilar(school);
+    } catch (err) {
+      console.error("School page failed to load:", err);
+      showNotFound("We couldn't load this school's data. Please try refreshing — or browse the directory to pick another school.");
+    }
+  })();
+</script>
 </body>
 </html>

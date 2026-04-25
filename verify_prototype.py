@@ -78,12 +78,15 @@ EXPECTATIONS = {
         "name": "Directory",
         "required_text": [
             "Islamic schools across the U.S.",
-            "Islamic Schools in Florida",
-            "Islamic Schools in Texas",
             "Filters",
             "School type",
             "Grade level",
             "Tuition range",
+            # Phase 2: cards now render client-side from data/schools.json,
+            # but every school name still appears in the static JSON-LD
+            # ItemList block, so these strings remain present in the HTML
+            # source for crawlers (and for this verifier).
+            #
             # Florida
             "Al-Furqan Academy",
             "MY Academy",
@@ -110,22 +113,29 @@ EXPECTATIONS = {
             "Austin Peace Academy",
             "An-Noor Academy of San Antonio",
             "River City Academy",
+            # Phase 2 markers — confirm the data-driven plumbing is wired in
+            "schools-data.js",
+            "resultsTarget",
+            'type="module"',
         ],
     },
     "school.html": {
-        "name": "School profile",
+        "name": "School profile (data-driven template)",
         "required_text": [
-            "Al-Furqan Academy",
-            "Claim this listing",
-            "About Al-Furqan Academy",
-            "Jacksonville, FL",
+            # Static template strings — these stay in the HTML source
+            # regardless of which school is loaded.
             "Preview listing",
-            "Academics",
-            "Admissions",
-            "Tuition",
-            "Reviews",
-            "Similar schools",
             "Request more information",
+            "Similar schools",
+            "About this school",
+            "Contact",
+            "Helpful next steps",
+            "School not found",
+            # Phase 2 markers — confirm the data-driven plumbing is wired in
+            "schools-data.js",
+            "schoolMain",
+            "schoolSkeleton",
+            'type="module"',
         ],
     },
     "about.html": {
@@ -459,8 +469,77 @@ def check_seo_assets():
         print(f"  [{'PASS' if ok else 'FAIL'}] {rel}  ({size} bytes)")
 
 
+def check_phase2_data():
+    """Phase 2: validate that data/schools.json + assets/schools-data.js
+    are present and well-formed. The directory and school pages now depend
+    on them at runtime, so a malformed JSON or missing module would silently
+    break the live site."""
+    import json
+    print("\n=== Phase 2 data layer ===")
+
+    json_path = os.path.join(ROOT, "data/schools.json")
+    js_path = os.path.join(ROOT, "assets/schools-data.js")
+
+    print(f"  [{'PASS' if os.path.isfile(json_path) else 'FAIL'}] data/schools.json exists")
+    print(f"  [{'PASS' if os.path.isfile(js_path)   else 'FAIL'}] assets/schools-data.js exists")
+
+    if not os.path.isfile(json_path):
+        return
+
+    try:
+        with open(json_path, encoding="utf-8") as f:
+            data = json.load(f)
+        print("  [PASS] schools.json is valid JSON")
+    except json.JSONDecodeError as e:
+        print(f"  [FAIL] schools.json invalid JSON: {e}")
+        return
+
+    is_list = isinstance(data, list)
+    print(f"  [{'PASS' if is_list else 'FAIL'}] schools.json is a top-level array")
+    if not is_list:
+        return
+
+    print(f"  [INFO] {len(data)} school records")
+
+    # Required keys per the Phase 2 schema.
+    required = {"id", "name", "city", "state", "grades", "description", "verified"}
+    bad = []
+    seen_ids = set()
+    dup_ids = []
+    for i, s in enumerate(data):
+        if not isinstance(s, dict):
+            bad.append(f"index {i}: not an object")
+            continue
+        missing = required - s.keys()
+        if missing:
+            bad.append(f"{s.get('id', f'index {i}')}: missing keys {sorted(missing)}")
+        sid = s.get("id")
+        if sid in seen_ids:
+            dup_ids.append(sid)
+        seen_ids.add(sid)
+        # id should be a kebab-case slug
+        if sid and not all(c.islower() or c.isdigit() or c == "-" for c in sid):
+            bad.append(f"{sid}: id is not lowercase kebab-case")
+
+    print(f"  [{'PASS' if not bad else 'FAIL'}] every record has required keys & valid id")
+    for b in bad[:5]:
+        print(f"      · {b}")
+    if len(bad) > 5:
+        print(f"      · …and {len(bad) - 5} more")
+
+    print(f"  [{'PASS' if not dup_ids else 'FAIL'}] all ids are unique")
+    if dup_ids:
+        print(f"      duplicates: {dup_ids}")
+
+    states = sorted({s.get("state") for s in data if s.get("state")})
+    print(f"  [INFO] states represented: {states}")
+    verified_count = sum(1 for s in data if s.get("verified"))
+    print(f"  [INFO] verified listings: {verified_count}/{len(data)}")
+
+
 if __name__ == "__main__":
     for p in PAGES:
         check(p)
     check_seo_assets()
+    check_phase2_data()
     print("\nDone.")
