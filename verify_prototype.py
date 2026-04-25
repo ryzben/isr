@@ -113,6 +113,18 @@ EXPECTATIONS = {
             "Austin Peace Academy",
             "An-Noor Academy of San Antonio",
             "River City Academy",
+            # California
+            "New Horizon School - Pasadena",
+            "Granada Islamic School",
+            "Al-Arqam Islamic School",
+            # New York
+            "Al-Noor School",
+            "Razi School",
+            "Al-Iman School",
+            # New Jersey
+            "Al-Ghazaly School",
+            "Noor-Ul-Iman School",
+            "Rising Star Academy",
             # Phase 2 markers — confirm the data-driven plumbing is wired in
             "schools-data.js",
             "resultsTarget",

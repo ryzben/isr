@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>School Directory — Islamic School Review</title>
-  <meta name="description" content="Browse 25 verified Islamic schools across Florida and Texas. Filter by state, city, grade level, tuition, and program." />
+  <meta name="description" content="Browse Islamic schools across Florida, Texas, California, New York, and New Jersey. Filter by state, city, and grade level." />
   <link rel="canonical" href="https://islamicschoolreview.com/directory.html" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
@@ -12,11 +12,11 @@
   <meta property="og:site_name" content="Islamic School Review" />
   <meta property="og:url" content="https://islamicschoolreview.com/directory.html" />
   <meta property="og:title" content="School Directory — Islamic School Review" />
-  <meta property="og:description" content="Browse 25 verified Islamic schools across Florida and Texas. Filter by state, city, grade, tuition, and program." />
+  <meta property="og:description" content="Browse Islamic schools across Florida, Texas, California, New York, and New Jersey. Filter by state, city, and grade level." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="School Directory — Islamic School Review" />
-  <meta name="twitter:description" content="Browse 25 verified Islamic schools across Florida and Texas. Filter by state, city, grade, tuition, and program." />
+  <meta name="twitter:description" content="Browse Islamic schools across Florida, Texas, California, New York, and New Jersey. Filter by state, city, and grade level." />
   <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
   <script type="application/ld+json">
   {
@@ -33,9 +33,9 @@
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Islamic schools in Florida and Texas",
+    "name": "Islamic schools in the United States",
     "itemListOrder": "https://schema.org/ItemListOrderAscending",
-    "numberOfItems": 25,
+    "numberOfItems": 34,
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Al-Furqan Academy", "url": "https://islamicschoolreview.com/school.html?id=al-furqan-academy" },
       { "@type": "ListItem", "position": 2, "name": "Universal Academy of Florida", "url": "https://islamicschoolreview.com/school.html?id=universal-academy-of-florida" },
@@ -61,7 +61,16 @@
       { "@type": "ListItem", "position": 22, "name": "The Qalam Collegiate Academy", "url": "https://islamicschoolreview.com/school.html?id=the-qalam-collegiate-academy" },
       { "@type": "ListItem", "position": 23, "name": "Austin Peace Academy", "url": "https://islamicschoolreview.com/school.html?id=austin-peace-academy" },
       { "@type": "ListItem", "position": 24, "name": "An-Noor Academy of San Antonio", "url": "https://islamicschoolreview.com/school.html?id=an-noor-academy-of-san-antonio" },
-      { "@type": "ListItem", "position": 25, "name": "River City Academy", "url": "https://islamicschoolreview.com/school.html?id=river-city-academy" }
+      { "@type": "ListItem", "position": 25, "name": "River City Academy", "url": "https://islamicschoolreview.com/school.html?id=river-city-academy" },
+      { "@type": "ListItem", "position": 26, "name": "New Horizon School - Pasadena", "url": "https://islamicschoolreview.com/school.html?id=new-horizon-school-pasadena" },
+      { "@type": "ListItem", "position": 27, "name": "Granada Islamic School", "url": "https://islamicschoolreview.com/school.html?id=granada-islamic-school" },
+      { "@type": "ListItem", "position": 28, "name": "Al-Arqam Islamic School", "url": "https://islamicschoolreview.com/school.html?id=al-arqam-islamic-school" },
+      { "@type": "ListItem", "position": 29, "name": "Al-Noor School", "url": "https://islamicschoolreview.com/school.html?id=al-noor-school" },
+      { "@type": "ListItem", "position": 30, "name": "Razi School", "url": "https://islamicschoolreview.com/school.html?id=razi-school" },
+      { "@type": "ListItem", "position": 31, "name": "Al-Iman School", "url": "https://islamicschoolreview.com/school.html?id=al-iman-school" },
+      { "@type": "ListItem", "position": 32, "name": "Al-Ghazaly School", "url": "https://islamicschoolreview.com/school.html?id=al-ghazaly-school" },
+      { "@type": "ListItem", "position": 33, "name": "Noor-Ul-Iman School", "url": "https://islamicschoolreview.com/school.html?id=noor-ul-iman-school" },
+      { "@type": "ListItem", "position": 34, "name": "Rising Star Academy", "url": "https://islamicschoolreview.com/school.html?id=rising-star-academy" }
     ]
   }
   </script>
@@ -85,7 +94,7 @@
 
     .dir-search-bar {
       display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr 1fr auto;
+      grid-template-columns: 1fr 1fr 1fr auto;
       gap: 10px;
       padding: 16px;
       background: var(--surface);
@@ -94,7 +103,6 @@
       box-shadow: var(--shadow-sm);
       margin-top: 20px;
     }
-    .dir-search-bar input[type="search"] { padding: 10px 12px; font: inherit; font-size: 0.95rem; }
 
     /* Photo-driven school cards (replaces gradient placeholders) */
     .result__media--photo {
@@ -447,11 +455,9 @@
   <div class="container">
     <div class="breadcrumbs"><a href="index.html">Home</a> · <a href="#">Directory</a> · <span>All states</span></div>
     <h1>Islamic schools across the U.S.</h1>
-    <p>Browse 25 verified Islamic schools across Florida and Texas. Filter by state, city, grade, tuition, and program to find the right fit — from Jacksonville to San Antonio.</p>
+    <p>Browse Islamic schools across Florida, Texas, California, New York, and New Jersey. Filter by state, city, and grade level to find the right fit for your family.</p>
 
     <form id="dirSearch" class="dir-search-bar" autocomplete="off">
-      <input class="input" type="search" name="q" aria-label="Search by school name"
-             placeholder="Search by school name…" />
       <select class="select" name="state" aria-label="State">
         <option value="">All states</option>
         <!-- options injected by JS from data -->
@@ -552,7 +558,7 @@
           <select class="sort-select" id="sortSelect" aria-label="Sort">
             <option value="default">Sort: Verified first</option>
             <option value="name">Name (A–Z)</option>
-            <option value="state">State (FL → TX)</option>
+            <option value="state">State (A → Z)</option>
           </select>
         </div>
       </div>
@@ -647,9 +653,15 @@
   const stateSel      = form.querySelector('[name="state"]');
   const citySel       = form.querySelector('[name="city"]');
   const gradeSel      = form.querySelector('[name="grade"]');
-  const qInput        = form.querySelector('[name="q"]');
 
-  const STATE_NAMES = { FL: "Florida", TX: "Texas" };
+  // Free-text query is no longer typed in the directory UI, but the page still
+  // honors `?q=…` URL params from the homepage hero. We keep this value in
+  // module scope and let readUrl() seed it once at boot.
+  let currentQ = "";
+
+  const STATE_NAMES = {
+    FL: "Florida", TX: "Texas", CA: "California", NY: "New York", NJ: "New Jersey",
+  };
 
   // ---- State helpers ----
   function escapeHtml(s) {
@@ -751,7 +763,7 @@
     if (criteria.city)  parts.push(criteria.city);
     if (criteria.grade) parts.push(criteria.grade.charAt(0).toUpperCase() + criteria.grade.slice(1));
     if (criteria.q)     parts.push(`matching "${criteria.q}"`);
-    const where = parts.length ? ` <span>${escapeHtml(parts.join(" · "))}</span>` : ` <span>across Florida and Texas</span>`;
+    const where = parts.length ? ` <span>${escapeHtml(parts.join(" · "))}</span>` : ` <span>across the U.S.</span>`;
     countEl.innerHTML = `${n} school${n === 1 ? "" : "s"}${where}`;
   }
 
@@ -795,7 +807,7 @@
   // ---- Form ↔ URL state ----
   function readForm() {
     return {
-      q:     (qInput.value || "").trim(),
+      q:     currentQ,
       state: stateSel.value || "",
       city:  citySel.value  || "",
       grade: gradeSel.value || "",
@@ -822,12 +834,23 @@
       grade: normalizeGrade(p.get("grade")),
     };
     // Map full state names to codes ("Florida" → "FL").
-    if (c.state === "FLORIDA") c.state = "FL";
-    if (c.state === "TEXAS")   c.state = "TX";
-    // Homepage hero passes a free-text q — try to pull a state code or city out of it.
+    const NAME_TO_CODE = {
+      FLORIDA: "FL", TEXAS: "TX", CALIFORNIA: "CA",
+      "NEW YORK": "NY", "NEW JERSEY": "NJ",
+    };
+    if (NAME_TO_CODE[c.state]) c.state = NAME_TO_CODE[c.state];
+    // Homepage hero passes a free-text q — try to pull a state code or full
+    // state name out of it.
     if (c.q && !c.state) {
-      const m = c.q.match(/\b(FL|Florida|TX|Texas)\b/i);
-      if (m) c.state = /F/i.test(m[1]) ? "FL" : "TX";
+      const m = c.q.match(/\b(FL|Florida|TX|Texas|CA|California|NY|New York|NJ|New Jersey)\b/i);
+      if (m) {
+        const mv = m[1].toLowerCase();
+        if (mv === "fl" || mv === "florida")          c.state = "FL";
+        else if (mv === "tx" || mv === "texas")       c.state = "TX";
+        else if (mv === "ca" || mv === "california")  c.state = "CA";
+        else if (mv === "ny" || mv === "new york")    c.state = "NY";
+        else if (mv === "nj" || mv === "new jersey")  c.state = "NJ";
+      }
     }
     // Free-text q sometimes contains a city we recognize ("Jacksonville, FL").
     // If we haven't been given an explicit city, try to extract one.
@@ -883,7 +906,7 @@
   }
 
   function clearFilters() {
-    qInput.value = "";
+    currentQ = "";
     stateSel.value = "";
     rebuildCityOptions("", "").then(() => {
       gradeSel.value = "";
@@ -893,7 +916,6 @@
 
   // ---- Wire up events ----
   form.addEventListener("submit", (e) => { e.preventDefault(); refresh(); });
-  qInput.addEventListener("input", debounce(refresh, 200));
   stateSel.addEventListener("change", async () => {
     await rebuildCityOptions(stateSel.value, "");
     refresh();
@@ -901,11 +923,6 @@
   citySel.addEventListener("change", refresh);
   gradeSel.addEventListener("change", refresh);
   sortSelect.addEventListener("change", refresh);
-
-  function debounce(fn, ms) {
-    let t;
-    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
-  }
 
   // ---- Boot ----
   (async () => {
@@ -918,7 +935,7 @@
 
       // Seed form from URL params (deep-link from homepage hero).
       const initial = readUrl();
-      qInput.value   = initial.q     || "";
+      currentQ       = initial.q     || "";
       stateSel.value = initial.state || "";
       gradeSel.value = initial.grade || "";
       // City list depends on selected state, so populate it last.
