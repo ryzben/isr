@@ -12,4 +12,4 @@ Disallow: /write-review.html
 # but the canonical is compare.html with no params.
 Disallow: /compare.html?*
 
-Sitemap: https://www.islamicschoolreview.com/sitemap.xml
+Sitemap: https://islamicschoolreview.com/sitemap.xml
