@@ -28,6 +28,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
+    /* ===== Beta notice strip ===== */
+    .beta-strip {
+      background: #FFF6E5;
+      border-bottom: 1px solid #F2D7A1;
+      color: #5C3D00;
+      font-size: 0.92rem;
+    }
+    .beta-strip__inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+    .beta-strip__tag {
+      background: #B8823A;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex: 0 0 auto;
+    }
+    .beta-strip__msg { flex: 1 1 auto; }
+    .beta-strip__cta {
+      flex: 0 0 auto;
+      font-weight: 600;
+      color: #5C3D00;
+      text-decoration: underline;
+    }
+
     /* ===== School profile styles ===== */
     .profile-hero {
       background: var(--surface);
@@ -220,6 +253,21 @@
   </div>
 </header>
 
+<!-- ========== BETA NOTICE ========== -->
+<aside class="beta-strip" role="note">
+  <div class="container beta-strip__inner">
+    <span class="beta-strip__tag">Preview</span>
+    <span class="beta-strip__msg">
+      We're sharing this with school administrators for feedback.
+      Spotted something wrong, or have ideas?
+    </span>
+    <a class="beta-strip__cta"
+       href="mailto:ryzben@gmail.com?subject=ISR%20feedback&amp;body=What%20you%20saw%3A%0A%0AWhat%20would%20make%20it%20better%3A%0A%0AYour%20name%20and%20role%3A%0A">
+      Email feedback →
+    </a>
+  </div>
+</aside>
+
 <!-- ========== Loading skeleton (replaced once data resolves) ========== -->
 <div class="container school-skel" id="schoolSkeleton" aria-busy="true">
   <div class="bar bar--lg"></div>
@@ -264,7 +312,7 @@
               <strong>Preview listing — limited info shown</strong>
               <p>Tuition, ratings, and other details on this page come from publicly available sources. <span id="schoolClaimNudge"></span> can claim this listing to update information, respond to reviews, and post jobs.</p>
             </div>
-            <a href="contact.html" class="btn btn--accent btn--sm">Claim listing</a>
+            <a id="schoolClaimMailto" href="mailto:ryzben@gmail.com" class="btn btn--accent btn--sm">Claim listing</a>
           </div>
 
           <div class="claim-banner" id="schoolVerifiedBanner" hidden style="background: var(--primary-soft); border-color: var(--primary);">
@@ -301,7 +349,6 @@
                 </select>
               </div>
               <button type="submit" class="btn btn--primary btn--block">Send inquiry</button>
-              <button type="button" class="btn btn--ghost btn--block">♥ Save to favorites</button>
             </form>
             <p class="small muted mt-16" style="margin-bottom:0;">During preview, inquiries are not sent — you'll see a confirmation only.</p>
           </div>
@@ -325,7 +372,7 @@
         <section id="contact">
           <h2>Contact</h2>
           <div class="facts-grid" id="schoolContact"></div>
-          <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a href="contact.html">let us know</a>.</p>
+          <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a id="schoolOutOfDateMailto" href="mailto:ryzben@gmail.com">let us know</a>.</p>
         </section>
 
         <section id="similar">
@@ -343,14 +390,8 @@
             <li style="padding:10px 0; border-bottom:1px solid var(--line);">
               <a href="directory.html">← Back to all schools</a>
             </li>
-            <li style="padding:10px 0; border-bottom:1px solid var(--line);">
-              <a href="compare.html">Compare with other schools</a>
-            </li>
-            <li style="padding:10px 0; border-bottom:1px solid var(--line);">
-              <a href="write-review.html">Write a review</a>
-            </li>
             <li style="padding:10px 0;">
-              <a href="contact.html">Suggest an edit</a>
+              <a id="schoolEditMailto" href="mailto:ryzben@gmail.com">Suggest an edit</a>
             </li>
           </ul>
         </div>
@@ -561,6 +602,24 @@
       $("schoolPreviewBanner").hidden = false;
       $("schoolClaimNudge").textContent = s.name;
     }
+
+    // ---- BETA FEEDBACK MAILTO LINKS ----
+    // Pre-fill subject + body so admin emails are easy to triage by school.
+    const enc = encodeURIComponent;
+    const subjClaim   = `Claim listing: ${s.name}`;
+    const subjEdit    = `Listing edit: ${s.name}`;
+    const subjOutdate = `Out of date: ${s.name}`;
+    const body =
+      `School: ${s.name}\n` +
+      `Listing URL: ${url}\n\n` +
+      `What needs to change (please be specific — address, phone, grades, tuition, photo, anything):\n\n` +
+      `Your name and role at the school:\n\n`;
+    const claim = $("schoolClaimMailto");
+    if (claim) claim.href = `mailto:ryzben@gmail.com?subject=${enc(subjClaim)}&body=${enc(body)}`;
+    const edit = $("schoolEditMailto");
+    if (edit) edit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
+    const ood = $("schoolOutOfDateMailto");
+    if (ood) ood.href = `mailto:ryzben@gmail.com?subject=${enc(subjOutdate)}&body=${enc(body)}`;
 
     // ---- SIDE CARD TUITION ----
     if (s.tuition_range) {

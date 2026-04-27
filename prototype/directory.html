@@ -79,6 +79,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
+    /* Beta notice strip */
+    .beta-strip {
+      background: #FFF6E5;
+      border-bottom: 1px solid #F2D7A1;
+      color: #5C3D00;
+      font-size: 0.92rem;
+    }
+    .beta-strip__inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+    .beta-strip__tag {
+      background: #B8823A;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex: 0 0 auto;
+    }
+    .beta-strip__msg { flex: 1 1 auto; }
+    .beta-strip__cta {
+      flex: 0 0 auto;
+      font-weight: 600;
+      color: #5C3D00;
+      text-decoration: underline;
+    }
+
     .page-header {
       padding: 40px 0 24px;
       background: var(--bg);
@@ -185,8 +218,37 @@
       margin: 0 0 10px;
     }
     .filter-group .checkbox { margin-bottom: 6px; }
-    .range-row { display: flex; gap: 8px; }
-    .range-row input { padding: 8px 10px; font-size: 0.9rem; }
+    .filter-pill {
+      display: inline-block;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .filter-roadmap {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+    .filter-roadmap li {
+      padding: 4px 0 4px 16px;
+      position: relative;
+    }
+    .filter-roadmap li::before {
+      content: "·";
+      position: absolute;
+      left: 4px;
+      color: var(--muted);
+    }
 
     /* Results */
     .results-header {
@@ -450,6 +512,21 @@
   </div>
 </header>
 
+<!-- ========== BETA NOTICE ========== -->
+<aside class="beta-strip" role="note">
+  <div class="container beta-strip__inner">
+    <span class="beta-strip__tag">Preview</span>
+    <span class="beta-strip__msg">
+      We're sharing this with school administrators for feedback.
+      Spotted something wrong with a listing, or have ideas?
+    </span>
+    <a class="beta-strip__cta"
+       href="mailto:ryzben@gmail.com?subject=ISR%20directory%20feedback&amp;body=What%20you%20saw%3A%0A%0AWhat%20would%20make%20it%20better%3A%0A%0AYour%20name%20and%20role%3A%0A">
+      Email feedback →
+    </a>
+  </div>
+</aside>
+
 <!-- ========== PAGE HEADER ========== -->
 <section class="page-header">
   <div class="container">
@@ -482,66 +559,28 @@
   <div class="dir-layout">
     <!-- Filters sidebar -->
     <aside class="filters" aria-label="Filters">
-      <h3>Filters <a href="#" class="small" style="font-weight:500;">Clear all</a></h3>
+      <h3>Filters</h3>
+      <p class="small muted" style="margin: 0 0 16px;">
+        Use the search bar above to filter by state, city, and grade level.
+      </p>
 
       <div class="filter-group">
-        <h4>School type</h4>
-        <label class="checkbox"><input type="checkbox" checked /> Full-time day <span class="muted small">(112)</span></label>
-        <label class="checkbox"><input type="checkbox" /> Weekend / Sunday <span class="muted small">(48)</span></label>
-        <label class="checkbox"><input type="checkbox" /> Online <span class="muted small">(22)</span></label>
-        <label class="checkbox"><input type="checkbox" /> Hifz <span class="muted small">(31)</span></label>
-        <label class="checkbox"><input type="checkbox" /> Montessori <span class="muted small">(14)</span></label>
-        <label class="checkbox"><input type="checkbox" /> Boarding <span class="muted small">(6)</span></label>
-      </div>
-
-      <div class="filter-group">
-        <h4>Grade level</h4>
-        <label class="checkbox"><input type="checkbox" /> Preschool</label>
-        <label class="checkbox"><input type="checkbox" checked /> Elementary</label>
-        <label class="checkbox"><input type="checkbox" checked /> Middle</label>
-        <label class="checkbox"><input type="checkbox" /> High school</label>
-      </div>
-
-      <div class="filter-group">
-        <h4>Tuition range</h4>
-        <div class="range-row">
-          <input class="input" placeholder="Min $" value="0" />
-          <input class="input" placeholder="Max $" value="15000" />
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <h4>Student body</h4>
-        <label class="checkbox"><input type="radio" name="gender" checked /> Co-ed</label>
-        <label class="checkbox"><input type="radio" name="gender" /> Boys-only</label>
-        <label class="checkbox"><input type="radio" name="gender" /> Girls-only</label>
-      </div>
-
-      <div class="filter-group">
-        <h4>Accreditation</h4>
-        <label class="checkbox"><input type="checkbox" /> CISNA</label>
-        <label class="checkbox"><input type="checkbox" /> AdvancED / Cognia</label>
-        <label class="checkbox"><input type="checkbox" /> State-accredited</label>
-      </div>
-
-      <div class="filter-group">
-        <h4>Programs</h4>
-        <label class="checkbox"><input type="checkbox" /> Quran competition</label>
-        <label class="checkbox"><input type="checkbox" /> Arabic immersion</label>
-        <label class="checkbox"><input type="checkbox" /> STEM</label>
-        <label class="checkbox"><input type="checkbox" /> Sports</label>
-        <label class="checkbox"><input type="checkbox" /> Arts</label>
-      </div>
-
-      <div class="filter-group">
-        <h4>Rating</h4>
-        <label class="checkbox"><input type="radio" name="rating" /> <span class="rating__star" style="color:var(--accent)">★★★★★</span> 5.0</label>
-        <label class="checkbox"><input type="radio" name="rating" checked /> <span class="rating__star" style="color:var(--accent)">★★★★</span>☆ 4.0+</label>
-        <label class="checkbox"><input type="radio" name="rating" /> <span class="rating__star" style="color:var(--accent)">★★★</span>☆☆ 3.0+</label>
-      </div>
-
-      <div class="filter-group">
-        <label class="checkbox"><input type="checkbox" /> <strong>Premium verified only</strong></label>
+        <h4>More filters <span class="filter-pill">Coming soon</span></h4>
+        <p class="small muted" style="margin: 6px 0 0;">
+          We're building richer filters next:
+        </p>
+        <ul class="filter-roadmap">
+          <li>School type (full-time, weekend, online, hifz)</li>
+          <li>Tuition range</li>
+          <li>Student body (co-ed, boys-only, girls-only)</li>
+          <li>Accreditation</li>
+          <li>Programs (Arabic, STEM, sports, arts)</li>
+          <li>Verified only</li>
+        </ul>
+        <p class="small muted" style="margin-top: 12px;">
+          A filter category you'd like to see?
+          <a href="mailto:ryzben@gmail.com?subject=Directory%20filter%20suggestion">Email us</a>.
+        </p>
       </div>
     </aside>
 
@@ -550,47 +589,24 @@
     <main>
       <div class="results-header">
         <div class="results-count" id="resultsCount" aria-live="polite">Loading schools…</div>
-        <div class="flex gap-12" style="align-items:center;">
-          <div class="view-toggle" role="tablist">
-            <button class="is-active" data-view-toggle="list">List</button>
-            <button data-view-toggle="map" disabled title="Map view returning soon">Map</button>
-          </div>
-          <select class="sort-select" id="sortSelect" aria-label="Sort">
-            <option value="default">Sort: Verified first</option>
-            <option value="name">Name (A–Z)</option>
-            <option value="state">State (A → Z)</option>
-          </select>
-        </div>
+        <select class="sort-select" id="sortSelect" aria-label="Sort">
+          <option value="default">Sort: Verified first</option>
+          <option value="name">Name (A–Z)</option>
+          <option value="state">State (A → Z)</option>
+        </select>
       </div>
 
       <!-- LIST VIEW — populated by inline module below -->
-      <div data-view="list">
-        <div id="resultsTarget" class="result-list" aria-busy="true">
-          <!-- Skeleton shown until data resolves -->
-          <div class="skel-list" id="resultsSkeleton">
-            <div class="skel"><div class="skel__media"></div><div class="skel__body"><div class="skel__line skel__line--lg"></div><div class="skel__line skel__line--md"></div><div class="skel__line skel__line--sm"></div><div class="skel__line skel__line--sm"></div></div></div>
-            <div class="skel"><div class="skel__media"></div><div class="skel__body"><div class="skel__line skel__line--lg"></div><div class="skel__line skel__line--md"></div><div class="skel__line skel__line--sm"></div><div class="skel__line skel__line--sm"></div></div></div>
-            <div class="skel"><div class="skel__media"></div><div class="skel__body"><div class="skel__line skel__line--lg"></div><div class="skel__line skel__line--md"></div><div class="skel__line skel__line--sm"></div><div class="skel__line skel__line--sm"></div></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MAP VIEW — placeholder while we rebuild it on real data -->
-      <div data-view="map" hidden>
-        <div class="empty-state">
-          <h3>Map view is being rebuilt</h3>
-          <p>We're rebuilding the map on top of real school coordinates. In the meantime, the list view supports filtering by state, city, grade, and name.</p>
+      <div id="resultsTarget" class="result-list" aria-busy="true">
+        <!-- Skeleton shown until data resolves -->
+        <div class="skel-list" id="resultsSkeleton">
+          <div class="skel"><div class="skel__media"></div><div class="skel__body"><div class="skel__line skel__line--lg"></div><div class="skel__line skel__line--md"></div><div class="skel__line skel__line--sm"></div><div class="skel__line skel__line--sm"></div></div></div>
+          <div class="skel"><div class="skel__media"></div><div class="skel__body"><div class="skel__line skel__line--lg"></div><div class="skel__line skel__line--md"></div><div class="skel__line skel__line--sm"></div><div class="skel__line skel__line--sm"></div></div></div>
+          <div class="skel"><div class="skel__media"></div><div class="skel__body"><div class="skel__line skel__line--lg"></div><div class="skel__line skel__line--md"></div><div class="skel__line skel__line--sm"></div><div class="skel__line skel__line--sm"></div></div></div>
         </div>
       </div>
     </main>
   </div>
-</div>
-
-<!-- ========== COMPARE TRAY ========== -->
-<div id="compareTray" class="compare-tray" hidden>
-  <span>Compare schools:</span>
-  <span id="compareList"></span>
-  <a href="compare.html" class="btn btn--accent btn--sm">Compare →</a>
 </div>
 
 <!-- ========== FOOTER ========== -->
@@ -721,7 +737,6 @@
         <div class="${photoCls}" ${photo}>
           <span>${initials(s.name)}</span>
           ${verifiedBadge}
-          <button class="result__fav" data-fav aria-label="Save">♥</button>
         </div>
         <div class="result__body">
           <h3 class="result__title">${escapeHtml(s.name)}</h3>
@@ -736,8 +751,6 @@
           <div class="result__tuition">${tuition}</div>
           <div class="result__actions">
             <span class="btn btn--primary btn--sm">View school</span>
-            <label class="checkbox"><input type="checkbox" data-compare="${escapeHtml(s.id)}"
-              data-name="${escapeHtml(s.name)}" /> Compare</label>
           </div>
         </div>
       </a>
@@ -782,14 +795,6 @@
     }
     target.classList.add("result-list");
     target.innerHTML = schools.map(cardHTML).join("");
-    // Re-bind heart icons on freshly rendered cards.
-    target.querySelectorAll("[data-fav]").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        el.classList.toggle("is-active");
-      });
-    });
   }
 
   function renderError(err) {

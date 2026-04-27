@@ -49,17 +49,15 @@ EXPECTATIONS = {
     "index.html": {
         "name": "Home",
         "required_text": [
-            # New search-first hero
+            # Search-first hero
             "best Islamic school",
             "child's future",
             "City, zip, or school name",
             "Search schools",
-            # Trust band
-            "2,400+",
-            "18,000",
-            "92%",
-            "Verified parent reviews",
-            "School response rate",
+            # Preview-state trust band (replaced fake metrics in beta cleanup)
+            "Now in preview",
+            "Schools listed",
+            "Across FL, TX, CA, NY",
             # Audience
             "For parents",
             "Explore programs and scholarships",
@@ -68,7 +66,9 @@ EXPECTATIONS = {
             # Other sections kept
             "Featured schools",
             "Islamic schools across the country",
-            "Honest voices from real families",
+            # Reviews preview block (replaced fake review cards)
+            "Honest reviews, from real families",
+            "early reviewer",
             "Islamic-school careers",
             "Guides, news, and community voices",
             "weekly digest",
