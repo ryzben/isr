@@ -738,11 +738,23 @@
   }
 
   // ---- Boot ----
+  // Watchdog: if the page is still showing the skeleton 8s in, something
+  // hung (failed fetch, blocked module, weird cache). Surface a recovery
+  // path instead of leaving the visitor stuck on placeholder bars.
+  const _watchdog = setTimeout(() => {
+    const skel = $("schoolSkeleton");
+    if (skel && !skel.hidden) {
+      console.warn("School page watchdog fired — rendering took too long.");
+      showNotFound("This page is taking longer than expected to load. Please refresh, or browse the directory to pick another school.");
+    }
+  }, 8000);
+
   (async () => {
     const id = getIdFromUrl();
     if (!id) {
       // No school in the URL — bounce to the directory rather than
       // stranding the visitor on an empty profile page.
+      clearTimeout(_watchdog);
       location.replace("directory.html");
       return;
     }
@@ -757,6 +769,8 @@
     } catch (err) {
       console.error("School page failed to load:", err);
       showNotFound("We couldn't load this school's data. Please try refreshing — or browse the directory to pick another school.");
+    } finally {
+      clearTimeout(_watchdog);
     }
   })();
 </script>
