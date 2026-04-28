@@ -226,7 +226,11 @@
     }
 
     /* Loading + not-found states */
-    .school-skel {
+    /* `[hidden]` from the HTML attribute must always win over .school-skel's
+       display:grid — the JS toggles the attribute to hide the skeleton once
+       data resolves, and without the :not() guard the skeleton stays
+       visible above the rendered content. */
+    .school-skel:not([hidden]) {
       padding: 40px 0;
       display: grid; gap: 14px;
     }
