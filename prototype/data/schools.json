@@ -70,20 +70,6 @@
     "verified": true
   },
   {
-    "id": "al-zahra-academy",
-    "name": "Al-Zahra Academy",
-    "city": "Jacksonville",
-    "state": "FL",
-    "address": null,
-    "phone": null,
-    "website": "https://alzahrajax.org",
-    "grades": null,
-    "tuition_range": null,
-    "description": "Jacksonville Islamic school offering Quran and Islamic studies alongside core academics.",
-    "photo_url": null,
-    "verified": false
-  },
-  {
     "id": "american-youth-academy",
     "name": "American Youth Academy",
     "city": "Tampa",

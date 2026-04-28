@@ -90,7 +90,6 @@ EXPECTATIONS = {
             # Florida
             "Al-Furqan Academy",
             "MY Academy",
-            "Al-Zahra Academy",
             "Universal Academy of Florida",
             "Ibn Seena Academy",
             "Islamic School of Miami",
