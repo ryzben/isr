@@ -93,11 +93,38 @@
       background-size: cover;
       background-position: center;
       border-radius: var(--r-lg);
-      margin-bottom: 18px;
+      margin-bottom: 12px;
       display: grid; place-items: center;
       color: rgba(255,255,255,0.85);
       font-family: "Fraunces", Georgia, serif;
       font-size: 3rem; font-weight: 600;
+    }
+
+    .hero-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+    .hero-gallery a {
+      position: relative;
+      display: block;
+      aspect-ratio: 4/3;
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--r-md);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .hero-gallery a:hover { border-color: var(--primary); }
+    .hero-gallery .cap {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 4px 8px;
+      font-size: 0.72rem;
+      color: #fff;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      letter-spacing: 0.02em;
     }
 
     .quick-facts {
@@ -308,6 +335,8 @@
           <div class="hero-photo" id="schoolPhoto" aria-label="School photograph">
             <span id="schoolPhotoFallback"></span>
           </div>
+
+          <div class="hero-gallery" id="schoolGallery" hidden></div>
 
           <div class="quick-facts" id="schoolQuickFacts"></div>
 
@@ -575,6 +604,19 @@
       $("schoolPhotoFallback").textContent = "";
     } else {
       $("schoolPhotoFallback").textContent = initials(s.name);
+    }
+
+    // ---- GALLERY (optional) ----
+    const gal = $("schoolGallery");
+    if (gal && Array.isArray(s.gallery) && s.gallery.length) {
+      gal.innerHTML = s.gallery
+        .map(g => {
+          const u = escapeHtml(g.url);
+          const c = escapeHtml(g.caption || "");
+          return `<a href="${u}" target="_blank" rel="noopener" style="background-image:url('${u}');" aria-label="${c}">${c ? `<span class="cap">${c}</span>` : ""}</a>`;
+        })
+        .join("");
+      gal.hidden = false;
     }
 
     // ---- QUICK FACTS ----
