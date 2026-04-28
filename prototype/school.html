@@ -136,6 +136,12 @@
     }
     .claim-banner strong { color: var(--accent-hover); }
     .claim-banner p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+    .claim-banner .claim-note {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+    }
 
     /* Sticky sidebar */
     .profile-side {
@@ -247,8 +253,7 @@
     </nav>
     <div class="nav-utility">
       <span class="lang-toggle">🌐 EN</span>
-      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
-      <a href="signup.html" class="btn btn--primary btn--sm">Join free</a>
+      <a href="signin.html" class="btn btn--ghost btn--sm" title="Accounts open later in the preview">Sign in — coming soon</a>
     </div>
   </div>
 </header>
@@ -311,6 +316,7 @@
             <div style="flex:1;">
               <strong>Preview listing — limited info shown</strong>
               <p>Tuition, ratings, and other details on this page come from publicly available sources. <span id="schoolClaimNudge"></span> can claim this listing to update information, respond to reviews, and post jobs.</p>
+              <p class="claim-note">Currently handled manually — we'll respond within 24 hours.</p>
             </div>
             <a id="schoolClaimMailto" href="mailto:ryzben@gmail.com" class="btn btn--accent btn--sm">Claim listing</a>
           </div>
@@ -326,31 +332,17 @@
 
         <aside class="profile-side">
           <div class="side-card">
-            <h3>Request more information</h3>
+            <h3>Tuition &amp; contact</h3>
             <div class="tuition" id="schoolTuition">—</div>
             <div class="tuition-sub" id="schoolTuitionSub">Annual tuition</div>
 
-            <form onsubmit="event.preventDefault();" class="stack-12">
-              <div>
-                <label class="label" for="f-name">Your name</label>
-                <input id="f-name" class="input" placeholder="Fatima Ahmed" />
-              </div>
-              <div>
-                <label class="label" for="f-email">Email</label>
-                <input id="f-email" class="input" type="email" placeholder="you@email.com" />
-              </div>
-              <div>
-                <label class="label" for="f-grade">Grade of interest</label>
-                <select id="f-grade" class="select">
-                  <option>Preschool</option>
-                  <option>Elementary (K–5)</option>
-                  <option selected>Middle (6–8)</option>
-                  <option>High school (9–12)</option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn--primary btn--block">Send inquiry</button>
-            </form>
-            <p class="small muted mt-16" style="margin-bottom:0;">During preview, inquiries are not sent — you'll see a confirmation only.</p>
+            <p class="small" style="color: var(--ink-soft); margin: 12px 0 16px; line-height:1.5;">
+              We don't relay inquiries during preview. The best way to reach a school is directly — phone numbers and websites are listed below.
+            </p>
+
+            <a id="schoolWebsiteLink" href="#" class="btn btn--primary btn--block" target="_blank" rel="noopener" hidden>Visit school website</a>
+            <a id="schoolPhoneLink" href="#" class="btn btn--ghost btn--block" hidden style="margin-top:8px;">Call school</a>
+            <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:ryzben@gmail.com">Email us</a> — we respond within 24 hours.</p>
           </div>
         </aside>
       </div>
@@ -414,26 +406,24 @@
       </div>
       <div class="footer-col"><h4>Directory</h4><ul>
         <li><a href="directory.html">Browse all schools</a></li>
-        <li><a href="#">Browse by state</a></li>
-        <li><a href="#">Top-rated schools</a></li>
-        <li><a href="#">Claim your school</a></li>
+        <li><a href="directory.html">Browse by state</a></li>
+        <li><a href="membership.html">Claim your school</a></li>
       </ul></div>
       <div class="footer-col"><h4>Resources</h4><ul>
         <li><a href="blog.html">Guides &amp; stories</a></li>
-        <li><a href="#">For parents</a></li>
-        <li><a href="#">For educators</a></li>
-        <li><a href="#">Downloads</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="about.html">About</a></li>
       </ul></div>
       <div class="footer-col"><h4>Company</h4><ul>
         <li><a href="about.html">About us</a></li>
-        <li><a href="#">Editorial policy</a></li>
-        <li><a href="#">Advertise</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
       </ul></div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
-      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="#">Cookies</a></span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="privacy.html">Cookies</a></span>
     </div>
   </div>
 </footer>
@@ -630,6 +620,23 @@
       $("schoolTuitionSub").textContent = "Tuition not listed";
     }
 
+    // ---- SIDE CARD CONTACT CTAs ----
+    const sideWeb = $("schoolWebsiteLink");
+    if (s.website && sideWeb) {
+      sideWeb.href = s.website;
+      sideWeb.hidden = false;
+    }
+    const sidePhone = $("schoolPhoneLink");
+    if (s.phone && sidePhone) {
+      // Strip everything but digits + leading + for tel: scheme.
+      const digits = s.phone.replace(/[^\d+]/g, "");
+      sidePhone.href = `tel:${digits}`;
+      sidePhone.textContent = `Call ${s.phone}`;
+      sidePhone.hidden = false;
+    }
+    const sideEdit = $("schoolSidebarEditMailto");
+    if (sideEdit) sideEdit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
+
     // ---- ABOUT + FACTS ----
     $("schoolAboutHeading").textContent = `About ${s.name}`;
     $("schoolDescription").textContent = s.description || "Profile information is being added. Check back soon, or contact the school directly using the details below.";
@@ -692,7 +699,9 @@
   (async () => {
     const id = getIdFromUrl();
     if (!id) {
-      showNotFound("This page expects a school ID in the URL (e.g. school.html?id=al-furqan-academy). Try browsing the directory to pick a school.");
+      // No school in the URL — bounce to the directory rather than
+      // stranding the visitor on an empty profile page.
+      location.replace("directory.html");
       return;
     }
     try {

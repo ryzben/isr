@@ -136,7 +136,10 @@ EXPECTATIONS = {
             # Static template strings — these stay in the HTML source
             # regardless of which school is loaded.
             "Preview listing",
-            "Request more information",
+            # Beta-cleanup replaced the stub inquiry form with mailto + direct contact.
+            "Tuition &amp; contact",
+            "We don't relay inquiries during preview",
+            "Currently handled manually",
             "Similar schools",
             "About this school",
             "Contact",
@@ -247,11 +250,12 @@ EXPECTATIONS = {
             "Premium",
             "Platinum",
             "MOST POPULAR",
-            "Start with Basic",
-            "Start with Premium",
+            # Beta cleanup: dead CTAs swapped for mailto handles.
+            "Email us about Basic",
+            "Email us about Premium",
             "Talk to sales",
             "Compare",
-            "Book a 15-min call",
+            "Email us to book a call",
         ],
     },
     "signin.html": {
@@ -267,17 +271,14 @@ EXPECTATIONS = {
         ],
     },
     "signup.html": {
-        "name": "Join the launch waitlist",
+        "name": "Sign up — coming soon",
         "required_text": [
-            "Join the launch waitlist",
+            # Beta cleanup replaced the waitlist form with a coming-soon panel
+            # whose only working CTA is a mailto. No fields, no role picker.
+            "Accounts are coming soon",
             "ISR is in preview",
-            "I am a",
-            "Parent",
-            "Student",
-            "Educator",
-            "School admin",
-            "Notify me when accounts launch",
-            "No password, no account created today",
+            "Email us to be notified",
+            "Currently handled manually",
         ],
     },
     "write-review.html": {

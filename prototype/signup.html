@@ -352,91 +352,33 @@
 
       <div class="auth-banner" role="note">
         <strong>ISR is in preview.</strong>
-        We're not collecting account passwords yet. Drop your email below and we'll send you an invite when sign-in launches.
+        Accounts aren't open yet, and we're not collecting names or passwords. Browsing the directory doesn't require one.
       </div>
 
-      <h2>Join the launch waitlist</h2>
-      <p class="muted">No password, no account created today — just an early heads-up when ISR opens.</p>
+      <h2>Accounts are coming soon</h2>
+      <p class="muted">During preview, you can browse and compare schools without an account. We'll launch sign-up once reviews and saved-favorites go live.</p>
 
-      <form id="signupForm" novalidate>
-
-        <!-- Role picker -->
-        <span class="role-label">I am a…</span>
-        <div class="role-grid" role="radiogroup" aria-label="Choose your role">
-          <label class="role-card">
-            <input type="radio" name="role" value="parent" checked />
-            <div class="role-card__inner">
-              <span class="role-card__icon" aria-hidden="true">Pa</span>
-              <div class="role-card__body">
-                <strong>Parent</strong>
-                <span>Searching for a school</span>
-              </div>
-            </div>
-          </label>
-          <label class="role-card">
-            <input type="radio" name="role" value="student" />
-            <div class="role-card__inner">
-              <span class="role-card__icon" aria-hidden="true">St</span>
-              <div class="role-card__body">
-                <strong>Student</strong>
-                <span>Currently enrolled or alumni</span>
-              </div>
-            </div>
-          </label>
-          <label class="role-card">
-            <input type="radio" name="role" value="educator" />
-            <div class="role-card__inner">
-              <span class="role-card__icon" aria-hidden="true">Ed</span>
-              <div class="role-card__body">
-                <strong>Educator</strong>
-                <span>Teacher, tutor, or scholar</span>
-              </div>
-            </div>
-          </label>
-          <label class="role-card">
-            <input type="radio" name="role" value="admin" />
-            <div class="role-card__inner">
-              <span class="role-card__icon" aria-hidden="true">Ad</span>
-              <div class="role-card__body">
-                <strong>School admin</strong>
-                <span>Representing a school</span>
-              </div>
-            </div>
-          </label>
+      <div class="coming-soon-card">
+        <div class="coming-soon-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-
-        <div class="form-row-2">
-          <div class="field">
-            <label for="firstName">First name</label>
-            <input id="firstName" class="input" type="text" placeholder="Aisha" required autocomplete="given-name" />
-          </div>
-          <div class="field">
-            <label for="lastName">Last name</label>
-            <input id="lastName" class="input" type="text" placeholder="Rahman" required autocomplete="family-name" />
-          </div>
+        <div class="coming-soon-card__body">
+          <strong>Want a heads-up when accounts open?</strong>
+          <span>Email us and we'll add you to the launch list — no form fields, no passwords, just a quick note.</span>
         </div>
+      </div>
 
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" class="input" type="email" placeholder="you@example.com" required autocomplete="email" />
-          <span class="hint">We'll only use this to send you the launch invite. No password needed today.</span>
-        </div>
-
-        <label class="checkbox-block">
-          <input type="checkbox" checked />
-          <span>Also send me the weekly digest — new schools, guides, and jobs. Unsubscribe anytime.</span>
-        </label>
-
-        <button type="submit" class="btn btn--primary btn--block btn--lg auth-submit">Notify me when accounts launch</button>
-
-        <p class="legal-note legal-note--inline">
-          By submitting, you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>. ISR does not store passwords during preview.
-        </p>
-      </form>
+      <a href="mailto:ryzben@gmail.com?subject=Notify%20me%20when%20ISR%20accounts%20launch&amp;body=Please%20let%20me%20know%20when%20accounts%20open%20on%20IslamicSchoolReview.com.%0A%0AYour%20name%20(optional)%3A%0A%0AHow%20you%27d%20use%20ISR%20(parent%2C%20student%2C%20educator%2C%20school%20admin)%3A%0A"
+         class="btn btn--primary btn--block btn--lg auth-submit">Email us to be notified</a>
 
       <div class="auth-alt">
-        Already on the list? You can close this tab — we'll email you when sign-in goes live.
+        Want to keep browsing? <a href="directory.html">Back to the school directory →</a>
       </div>
+
+      <p class="legal-note">
+        Currently handled manually — we'll respond within 24 hours. See our
+        <a href="privacy.html">Privacy Policy</a> for details on what we store (almost nothing during preview).
+      </p>
     </div>
   </section>
 

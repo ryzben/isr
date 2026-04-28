@@ -826,8 +826,7 @@
     </nav>
     <div class="nav-utility">
       <span class="lang-toggle" title="Language">🌐 EN</span>
-      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in</a>
-      <a href="signup.html" class="btn btn--cta btn--sm">Join free</a>
+      <a href="signin.html" class="btn btn--ghost btn--sm" title="Accounts open later in the preview">Sign in — coming soon</a>
     </div>
   </div>
 </header>
@@ -937,13 +936,12 @@
 
     <div class="school-grid">
       <!-- Card 1: Al-Furqan Academy -->
-      <a href="school.html" class="school-card">
+      <a href="school.html?id=al-furqan-academy" class="school-card">
         <div class="school-card__photo">
           <img class="school-card__photo-img"
                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
                alt="Al-Furqan Academy school building" loading="lazy" />
           <span class="school-card__badge">Preview listing</span>
-          <button class="school-card__fav" data-fav aria-label="Save Al-Furqan Academy">♥</button>
           <span class="school-card__photo-caption">Full-time day school · Est. 1997</span>
         </div>
         <div class="school-card__body">
@@ -972,13 +970,12 @@
       </a>
 
       <!-- Card 2: Universal Academy of Florida -->
-      <a href="school.html" class="school-card">
+      <a href="school.html?id=universal-academy-of-florida" class="school-card">
         <div class="school-card__photo">
           <img class="school-card__photo-img"
                src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
                alt="Universal Academy of Florida classroom" loading="lazy" />
           <span class="school-card__badge">Preview listing</span>
-          <button class="school-card__fav" data-fav aria-label="Save Universal Academy of Florida">♥</button>
           <span class="school-card__photo-caption">PreK through 12th</span>
         </div>
         <div class="school-card__body">
@@ -1007,13 +1004,12 @@
       </a>
 
       <!-- Card 3: Ibn Seena Academy -->
-      <a href="school.html" class="school-card">
+      <a href="school.html?id=ibn-seena-academy" class="school-card">
         <div class="school-card__photo">
           <img class="school-card__photo-img"
                src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
                alt="Ibn Seena Academy library" loading="lazy" />
           <span class="school-card__badge">Preview listing</span>
-          <button class="school-card__fav" data-fav aria-label="Save Ibn Seena Academy">♥</button>
           <span class="school-card__photo-caption">Co-ed · PreK–12</span>
         </div>
         <div class="school-card__body">
@@ -1163,10 +1159,10 @@
 
       <div class="map-overlay">
         <div>
-          <strong>2,413 schools</strong>
-          <div class="small muted">across 48 states and 14 countries</div>
+          <strong>33 schools listed</strong>
+          <div class="small muted">across 5 states — growing weekly</div>
         </div>
-        <a href="directory.html" class="btn btn--primary btn--sm">Explore map</a>
+        <a href="directory.html" class="btn btn--primary btn--sm">Browse directory</a>
       </div>
     </div>
   </div>
@@ -1313,11 +1309,12 @@
         <h2>The weekly digest for Muslim families and educators</h2>
         <p>Get an early-access email when reviews open and we add new schools to the directory. We'll only email when there's something genuinely new.</p>
       </div>
-      <form class="newsletter__form" onsubmit="event.preventDefault();">
-        <label class="label" style="color: #fff; margin-bottom: 8px;">Get the free 10-point school checklist too</label>
-        <input class="input" type="email" placeholder="your@email.com" />
+      <form class="newsletter__form" action="confirmation.html" method="get">
+        <input type="hidden" name="action" value="newsletter" />
+        <label class="label" for="newsletter-email" style="color: #fff; margin-bottom: 8px;">Get the free 10-point school checklist too</label>
+        <input id="newsletter-email" class="input" type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
         <button class="btn btn--cta btn--block btn--lg" type="submit">Subscribe &amp; get checklist</button>
-        <p class="small" style="color: rgba(255,255,255,0.7); margin: 10px 0 0;">Unsubscribe anytime. We'll never share your email.</p>
+        <p class="small" style="color: rgba(255,255,255,0.7); margin: 10px 0 0;">Preview only — sign-ups aren't stored yet. We'll be in touch when newsletters launch.</p>
       </form>
     </div>
   </div>
