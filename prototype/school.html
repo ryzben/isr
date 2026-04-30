@@ -93,38 +93,11 @@
       background-size: cover;
       background-position: center;
       border-radius: var(--r-lg);
-      margin-bottom: 12px;
+      margin-bottom: 18px;
       display: grid; place-items: center;
       color: rgba(255,255,255,0.85);
       font-family: "Fraunces", Georgia, serif;
       font-size: 3rem; font-weight: 600;
-    }
-
-    .hero-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      margin: 0 0 18px;
-    }
-    .hero-gallery a {
-      position: relative;
-      display: block;
-      aspect-ratio: 4/3;
-      background-size: cover;
-      background-position: center;
-      border-radius: var(--r-md);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      text-decoration: none;
-    }
-    .hero-gallery a:hover { border-color: var(--primary); }
-    .hero-gallery .cap {
-      position: absolute; left: 0; right: 0; bottom: 0;
-      padding: 4px 8px;
-      font-size: 0.72rem;
-      color: #fff;
-      background: linear-gradient(transparent, rgba(0,0,0,0.55));
-      letter-spacing: 0.02em;
     }
 
     .quick-facts {
@@ -226,11 +199,7 @@
     }
 
     /* Loading + not-found states */
-    /* `[hidden]` from the HTML attribute must always win over .school-skel's
-       display:grid — the JS toggles the attribute to hide the skeleton once
-       data resolves, and without the :not() guard the skeleton stays
-       visible above the rendered content. */
-    .school-skel:not([hidden]) {
+    .school-skel {
       padding: 40px 0;
       display: grid; gap: 14px;
     }
@@ -284,6 +253,7 @@
     </nav>
     <div class="nav-utility">
       <span class="lang-toggle">🌐 EN</span>
+      <a href="add-school.html" class="btn btn--primary btn--sm">Add your school</a>
       <a href="signin.html" class="btn btn--ghost btn--sm" title="Accounts open later in the preview">Sign in — coming soon</a>
     </div>
   </div>
@@ -340,18 +310,15 @@
             <span id="schoolPhotoFallback"></span>
           </div>
 
-          <div class="hero-gallery" id="schoolGallery" hidden></div>
-
           <div class="quick-facts" id="schoolQuickFacts"></div>
 
           <div class="claim-banner" id="schoolPreviewBanner" hidden>
-            <span style="font-size: 1.5rem;">ℹ️</span>
+            <span style="font-size: 1.5rem;">🏫</span>
             <div style="flex:1;">
-              <strong>Preview listing — limited info shown</strong>
-              <p>Tuition, ratings, and other details on this page come from publicly available sources. <span id="schoolClaimNudge"></span> can claim this listing to update information, respond to reviews, and post jobs.</p>
-              <p class="claim-note">Currently handled manually — we'll respond within 24 hours.</p>
+              <strong>Is this your school?</strong>
+              <p>Tuition, contact info, and other details on this page come from publicly available sources. <span id="schoolClaimNudge"></span> can claim this listing to update information, respond to reviews, and post jobs — free in under 5 minutes.</p>
             </div>
-            <a id="schoolClaimMailto" href="mailto:ryzben@gmail.com" class="btn btn--accent btn--sm">Claim listing</a>
+            <a id="schoolClaimLink" href="add-school.html?mode=claim" class="btn btn--accent btn--sm">Claim this listing →</a>
           </div>
 
           <div class="claim-banner" id="schoolVerifiedBanner" hidden style="background: var(--primary-soft); border-color: var(--primary);">
@@ -440,7 +407,7 @@
       <div class="footer-col"><h4>Directory</h4><ul>
         <li><a href="directory.html">Browse all schools</a></li>
         <li><a href="directory.html">Browse by state</a></li>
-        <li><a href="membership.html">Claim your school</a></li>
+        <li><a href="add-school.html">Claim your school</a></li>
       </ul></div>
       <div class="footer-col"><h4>Resources</h4><ul>
         <li><a href="blog.html">Guides &amp; stories</a></li>
@@ -610,19 +577,6 @@
       $("schoolPhotoFallback").textContent = initials(s.name);
     }
 
-    // ---- GALLERY (optional) ----
-    const gal = $("schoolGallery");
-    if (gal && Array.isArray(s.gallery) && s.gallery.length) {
-      gal.innerHTML = s.gallery
-        .map(g => {
-          const u = escapeHtml(g.url);
-          const c = escapeHtml(g.caption || "");
-          return `<a href="${u}" target="_blank" rel="noopener" style="background-image:url('${u}');" aria-label="${c}">${c ? `<span class="cap">${c}</span>` : ""}</a>`;
-        })
-        .join("");
-      gal.hidden = false;
-    }
-
     // ---- QUICK FACTS ----
     const qf = [];
     if (s.grades) qf.push(quickFact("Grades", s.grades));
@@ -650,8 +604,8 @@
       `Listing URL: ${url}\n\n` +
       `What needs to change (please be specific — address, phone, grades, tuition, photo, anything):\n\n` +
       `Your name and role at the school:\n\n`;
-    const claim = $("schoolClaimMailto");
-    if (claim) claim.href = `mailto:ryzben@gmail.com?subject=${enc(subjClaim)}&body=${enc(body)}`;
+    const claim = $("schoolClaimLink");
+    if (claim) claim.href = `add-school.html?mode=claim&school=${enc(s.name)}`;
     const edit = $("schoolEditMailto");
     if (edit) edit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
     const ood = $("schoolOutOfDateMailto");
@@ -742,23 +696,11 @@
   }
 
   // ---- Boot ----
-  // Watchdog: if the page is still showing the skeleton 8s in, something
-  // hung (failed fetch, blocked module, weird cache). Surface a recovery
-  // path instead of leaving the visitor stuck on placeholder bars.
-  const _watchdog = setTimeout(() => {
-    const skel = $("schoolSkeleton");
-    if (skel && !skel.hidden) {
-      console.warn("School page watchdog fired — rendering took too long.");
-      showNotFound("This page is taking longer than expected to load. Please refresh, or browse the directory to pick another school.");
-    }
-  }, 8000);
-
   (async () => {
     const id = getIdFromUrl();
     if (!id) {
       // No school in the URL — bounce to the directory rather than
       // stranding the visitor on an empty profile page.
-      clearTimeout(_watchdog);
       location.replace("directory.html");
       return;
     }
@@ -773,10 +715,9 @@
     } catch (err) {
       console.error("School page failed to load:", err);
       showNotFound("We couldn't load this school's data. Please try refreshing — or browse the directory to pick another school.");
-    } finally {
-      clearTimeout(_watchdog);
     }
   })();
 </script>
 </body>
 </html>
+                                                                                                    

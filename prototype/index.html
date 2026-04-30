@@ -826,6 +826,7 @@
     </nav>
     <div class="nav-utility">
       <span class="lang-toggle" title="Language">🌐 EN</span>
+      <a href="add-school.html" class="btn btn--primary btn--sm">Add your school</a>
       <a href="signin.html" class="btn btn--ghost btn--sm" title="Accounts open later in the preview">Sign in — coming soon</a>
     </div>
   </div>
@@ -939,7 +940,7 @@
       <a href="school.html?id=al-furqan-academy" class="school-card">
         <div class="school-card__photo">
           <img class="school-card__photo-img"
-               src="assets/photos/afa-building.jpg"
+               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
                alt="Al-Furqan Academy school building" loading="lazy" />
           <span class="school-card__badge">Preview listing</span>
           <span class="school-card__photo-caption">Full-time day school · Est. 1997</span>
@@ -1300,6 +1301,168 @@
   </div>
 </section>
 
+<!-- ========== FOR SCHOOLS CTA ========== -->
+<section class="school-cta-section">
+  <div class="container">
+    <div class="school-cta-inner">
+      <div class="school-cta-text">
+        <span class="eyebrow" style="color: var(--primary-soft); opacity: 0.85;">For Islamic schools</span>
+        <h2>Is your school listed?</h2>
+        <p>Over 33 schools are already on Islamic School Review — and families are actively searching. Get listed free in under 5 minutes, or claim your existing profile to keep it accurate.</p>
+        <ul class="school-cta-bullets">
+          <li><span class="bullet-check">✓</span> Free basic listing — no credit card needed</li>
+          <li><span class="bullet-check">✓</span> Reach families actively searching for Islamic schools</li>
+          <li><span class="bullet-check">✓</span> Update your info, photos, and grades any time</li>
+          <li><span class="bullet-check">✓</span> Post jobs and respond to parent reviews</li>
+        </ul>
+        <div class="school-cta-actions">
+          <a href="add-school.html?mode=add" class="btn btn--cta btn--lg">Add your school — it's free</a>
+          <a href="add-school.html?mode=claim" class="btn btn--ghost-light btn--lg">Claim existing listing →</a>
+        </div>
+      </div>
+      <div class="school-cta-card">
+        <div class="cta-card-eyebrow">Already listed</div>
+        <div class="cta-card-count">33</div>
+        <div class="cta-card-label">Islamic schools across<br>FL · TX · CA · NY · NJ</div>
+        <div class="cta-card-divider"></div>
+        <div class="cta-card-stat"><span>5 states</span><span class="cta-stat-label">covered</span></div>
+        <div class="cta-card-stat"><span>Free</span><span class="cta-stat-label">to list</span></div>
+        <div class="cta-card-stat"><span>&lt; 5 min</span><span class="cta-stat-label">to submit</span></div>
+        <a href="add-school.html" class="btn btn--surface btn--block" style="margin-top: 20px;">Get started →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .school-cta-section {
+    background: linear-gradient(135deg, #0B3D25 0%, #0F5132 60%, #1a6b43 100%);
+    padding: 80px 0;
+  }
+  .school-cta-inner {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 56px;
+    align-items: center;
+  }
+  .school-cta-text h2 {
+    color: #fff;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    margin-bottom: 14px;
+  }
+  .school-cta-text p {
+    color: rgba(255,255,255,0.78);
+    font-size: 1.05rem;
+    max-width: 52ch;
+    margin-bottom: 22px;
+  }
+  .school-cta-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    display: grid;
+    gap: 10px;
+  }
+  .school-cta-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.88);
+    font-size: 0.97rem;
+  }
+  .bullet-check {
+    color: #6EE7A0;
+    font-weight: 700;
+    font-size: 1rem;
+    flex: 0 0 auto;
+  }
+  .school-cta-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn--ghost-light {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    color: #fff;
+    padding: 0 24px;
+    height: 48px;
+    border-radius: var(--r-md);
+    font-weight: 600;
+    font-size: 0.97rem;
+    display: inline-flex;
+    align-items: center;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn--ghost-light:hover {
+    border-color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.08);
+    text-decoration: none;
+  }
+  .school-cta-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--r-xl);
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .cta-card-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .cta-card-count {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .cta-card-label {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .cta-card-divider {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    margin-bottom: 16px;
+  }
+  .cta-card-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.92rem;
+    color: #fff;
+  }
+  .cta-card-stat:last-of-type { border-bottom: 0; }
+  .cta-stat-label { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+  .btn--surface {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-weight: 600;
+    border-radius: var(--r-md);
+    padding: 11px 0;
+    text-align: center;
+    font-size: 0.95rem;
+    display: block;
+    transition: background 0.15s;
+  }
+  .btn--surface:hover { background: rgba(255,255,255,0.2); text-decoration: none; }
+  @media (max-width: 860px) {
+    .school-cta-inner { grid-template-columns: 1fr; }
+    .school-cta-card  { display: none; }
+  }
+</style>
+
 <!-- ========== NEWSLETTER ========== -->
 <section class="section">
   <div class="container">
@@ -1358,7 +1521,7 @@
           <li><a href="directory.html">Browse by state</a></li>
           <li><a href="directory.html">Browse by type</a></li>
           <li><a href="directory.html">Top-rated schools</a></li>
-          <li><a href="membership.html">Claim your school</a></li>
+          <li><a href="add-school.html">Claim your school</a></li>
         </ul>
       </div>
       <div class="footer-col">

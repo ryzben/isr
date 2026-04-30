@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add or claim a school — Islamic School Review</title>
+  <meta name="description" content="List your Islamic school on IslamicSchoolReview.com or claim an existing listing to manage your profile, respond to reviews, and connect with families." />
+  <link rel="canonical" href="https://islamicschoolreview.com/add-school.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://islamicschoolreview.com/add-school.html" />
+  <meta property="og:title" content="Add or claim a school — Islamic School Review" />
+  <meta property="og:description" content="Get your Islamic school listed on IslamicSchoolReview.com." />
+  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+
+    /* ── Page hero ── */
+    .page-hero {
+      padding: 72px 0 48px;
+      background:
+        radial-gradient(900px 400px at 80% 0%, var(--primary-soft) 0%, transparent 55%),
+        radial-gradient(700px 360px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+    .page-hero .container { max-width: 700px; }
+    .page-hero h1 { font-size: clamp(2rem, 4.4vw, 2.8rem); margin-bottom: 14px; }
+    .page-hero p.lede { font-size: 1.08rem; color: var(--ink-soft); max-width: 54ch; margin: 0 auto; }
+
+    /* ── Mode toggle ── */
+    .mode-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      width: fit-content;
+      margin: 0 auto 32px;
+    }
+    .mode-btn {
+      flex: 1;
+      padding: 12px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: inherit;
+      background: var(--surface);
+      color: var(--ink-soft);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mode-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+    .mode-btn:not(.active):hover {
+      background: var(--surface-alt);
+    }
+
+    /* ── Layout ── */
+    .form-section { padding: 56px 0 80px; }
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── Form card ── */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 36px;
+    }
+    .form-card h2 {
+      font-size: 1.45rem;
+      margin: 0 0 6px;
+    }
+    .form-card > .form-sub {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin: 0 0 28px;
+    }
+    .form-section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin: 28px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 0;
+    }
+    .form-field { margin-bottom: 16px; }
+    .form-field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .form-field label .opt {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .form-field .hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .check-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      cursor: pointer;
+      background: var(--surface);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .check-pill:has(input:checked) {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .check-pill input { accent-color: var(--primary); }
+
+    .submit-row {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .submit-row .privacy-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── Mode panels ── */
+    .mode-panel { display: none; }
+    .mode-panel.active { display: block; }
+
+    /* ── Aside ── */
+    .info-aside { display: grid; gap: 20px; align-content: start; }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px;
+    }
+    .info-card__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+    .info-card h4 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+      color: var(--ink);
+    }
+    .info-card p {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      margin: 0 0 8px;
+    }
+    .info-card p:last-child { margin-bottom: 0; }
+    .tier-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .tier-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 12px;
+      background: var(--surface-alt);
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+    }
+    .tier-badge {
+      font-size: 0.75rem;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .tier-badge--free { background: var(--surface-alt); color: var(--muted); border: 1px solid var(--line-strong); }
+    .tier-badge--green { background: var(--primary-soft); color: var(--primary); }
+    .tier-badge--gold  { background: var(--accent-soft);  color: var(--accent);  }
+
+    .steps-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+    .steps-list li { display: flex; gap: 12px; font-size: 0.92rem; }
+    .step-num {
+      flex: 0 0 auto;
+      width: 24px; height: 24px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .step-body { color: var(--ink-soft); line-height: 1.5; }
+    .step-body strong { color: var(--ink); }
+
+    /* ── Success banner ── */
+    .success-banner {
+      display: none;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      text-align: center;
+      margin-top: 24px;
+    }
+    .success-banner h3 { color: var(--primary); margin-bottom: 8px; }
+    .success-banner p { color: var(--primary-ink); margin: 0; }
+
+    @media (max-width: 900px) {
+      .form-layout { grid-template-columns: 1fr; }
+      .form-row    { grid-template-columns: 1fr; }
+      .checkbox-grid { grid-template-columns: 1fr 1fr; }
+      .info-aside  { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .form-card   { padding: 22px; }
+      .checkbox-grid { grid-template-columns: 1fr; }
+      .info-aside  { grid-template-columns: 1fr; }
+      .mode-btn    { padding: 11px 16px; font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="add-school.html" class="btn btn--primary btn--sm">Add your school</a>
+      <a href="signin.html" class="btn btn--ghost btn--sm">Sign in — coming soon</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">For schools</span>
+    <h1>Get your school on Islamic School Review</h1>
+    <p class="lede">Already listed? Claim your profile. Not listed yet? Add your school. It's free and takes less than 5 minutes.</p>
+  </div>
+</section>
+
+<!-- ========== FORM ========== -->
+<section class="form-section">
+  <div class="container form-layout">
+
+    <!-- FORM CARD -->
+    <div>
+
+      <!-- Mode toggle -->
+      <div class="mode-toggle">
+        <button class="mode-btn active" onclick="setMode('claim')" id="btn-claim">Claim existing listing</button>
+        <button class="mode-btn" onclick="setMode('add')" id="btn-add">Add a new school</button>
+      </div>
+
+      <!-- ── CLAIM MODE ── -->
+      <!--
+        TO ACTIVATE FORM SUBMISSIONS:
+        1. Go to https://formspree.io and create a free account
+        2. Create a new form — choose "New Form" and set the email to schools@islamicschoolreview.com
+        3. Copy your form ID (looks like "xpwzabcd")
+        4. Replace YOUR_CLAIM_FORM_ID below with that ID
+        Example: action="https://formspree.io/f/xpwzabcd"
+      -->
+      <form
+        class="form-card mode-panel active"
+        id="panel-claim"
+        action="https://formspree.io/f/xvzlozgn"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="School listing claim — IslamicSchoolReview.com" />
+        <input type="hidden" name="form_type" value="claim" />
+
+        <h2>Claim your school's listing</h2>
+        <p class="form-sub">Your school is already in our directory. Claiming it lets you update details, respond to reviews, and post jobs.</p>
+
+        <div class="form-section-label">Your school</div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="c-school-name">School name</label>
+            <input id="c-school-name" name="school_name" class="input" type="text" placeholder="e.g. Al-Furqan Academy" required />
+          </div>
+          <div class="form-field">
+            <label for="c-city">City &amp; state</label>
+            <input id="c-city" name="city_state" class="input" type="text" placeholder="e.g. Jacksonville, FL" required />
+          </div>
+        </div>
+
+        <div class="form-section-label">Your contact info</div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="c-name">Your full name</label>
+            <input id="c-name" name="contact_name" class="input" type="text" placeholder="First Last" required />
+          </div>
+          <div class="form-field">
+            <label for="c-title">Your title / role</label>
+            <input id="c-title" name="contact_title" class="input" type="text" placeholder="e.g. Principal, Director" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="c-email">School email</label>
+            <input id="c-email" name="contact_email" class="input" type="email" placeholder="you@yourschool.org" required />
+          </div>
+          <div class="form-field">
+            <label for="c-phone">School phone <span class="opt">(optional)</span></label>
+            <input id="c-phone" name="contact_phone" class="input" type="tel" placeholder="(000) 000-0000" />
+          </div>
+        </div>
+
+        <div class="form-section-label">What needs updating?</div>
+
+        <div class="form-field">
+          <label>Select all that apply</label>
+          <div class="checkbox-grid">
+            <label class="check-pill"><input type="checkbox" name="update[]" value="address_phone" /> Address &amp; phone</label>
+            <label class="check-pill"><input type="checkbox" name="update[]" value="tuition" /> Tuition info</label>
+            <label class="check-pill"><input type="checkbox" name="update[]" value="grades" /> Grades offered</label>
+            <label class="check-pill"><input type="checkbox" name="update[]" value="photos" /> Photos</label>
+            <label class="check-pill"><input type="checkbox" name="update[]" value="description" /> School description</label>
+            <label class="check-pill"><input type="checkbox" name="update[]" value="accreditation" /> Accreditation</label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="c-notes">Anything else you'd like to share or correct? <span class="opt">(optional)</span></label>
+          <textarea id="c-notes" name="notes" class="input textarea" placeholder="Corrections, additional context, questions for our team…"></textarea>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn btn--primary">Submit claim request</button>
+          <span class="privacy-note">We'll reply to your school email within 1 business day.</span>
+        </div>
+
+        <div class="success-banner" id="claim-success">
+          <h3>Request received — JazakAllah Khair!</h3>
+          <p>We'll review your claim and follow up at your school email within 1 business day.</p>
+        </div>
+      </form>
+
+      <!-- ── ADD MODE ── -->
+      <!--
+        TO ACTIVATE FORM SUBMISSIONS:
+        1. Go to https://formspree.io and create a free account
+        2. Create a second form for new school submissions
+        3. Replace YOUR_ADD_FORM_ID below with that form's ID
+        Example: action="https://formspree.io/f/xabcd123"
+      -->
+      <form
+        class="form-card mode-panel"
+        id="panel-add"
+        action="https://formspree.io/f/mjglvggk"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="New school submission — IslamicSchoolReview.com" />
+        <input type="hidden" name="form_type" value="new_school" />
+
+        <h2>Add your school</h2>
+        <p class="form-sub">Fill in what you know — you don't need everything. We'll research and verify details before publishing.</p>
+
+        <div class="form-section-label">School information</div>
+
+        <div class="form-field">
+          <label for="a-school-name">School name <span class="opt">*</span></label>
+          <input id="a-school-name" name="school_name" class="input" type="text" placeholder="Full official school name" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="a-address">Street address <span class="opt">(optional)</span></label>
+            <input id="a-address" name="address" class="input" type="text" placeholder="123 Main St" />
+          </div>
+          <div class="form-field">
+            <label for="a-city">City</label>
+            <input id="a-city" name="city" class="input" type="text" placeholder="City" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="a-state">State</label>
+            <select id="a-state" name="state" class="select" required>
+              <option value="">Select state…</option>
+              <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+              <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+              <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+              <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+              <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+              <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+              <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+              <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+              <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+              <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+              <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+              <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+              <option>WI</option><option>WY</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="a-zip">ZIP code <span class="opt">(optional)</span></label>
+            <input id="a-zip" name="zip" class="input" type="text" placeholder="00000" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="a-phone">Phone <span class="opt">(optional)</span></label>
+            <input id="a-phone" name="phone" class="input" type="tel" placeholder="(000) 000-0000" />
+          </div>
+          <div class="form-field">
+            <label for="a-website">Website <span class="opt">(optional)</span></label>
+            <input id="a-website" name="website" class="input" type="url" placeholder="https://yourschool.org" />
+          </div>
+        </div>
+
+        <div class="form-section-label">Programs &amp; grades</div>
+
+        <div class="form-field">
+          <label>Grades offered</label>
+          <div class="checkbox-grid">
+            <label class="check-pill"><input type="checkbox" name="grades[]" value="PreK/VPK" /> PreK / VPK</label>
+            <label class="check-pill"><input type="checkbox" name="grades[]" value="K" /> Kindergarten</label>
+            <label class="check-pill"><input type="checkbox" name="grades[]" value="1-5" /> Grades 1–5</label>
+            <label class="check-pill"><input type="checkbox" name="grades[]" value="6-8" /> Grades 6–8</label>
+            <label class="check-pill"><input type="checkbox" name="grades[]" value="9-12" /> Grades 9–12</label>
+            <label class="check-pill"><input type="checkbox" name="grades[]" value="hifz" /> Hifz program</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="a-tuition">Tuition range <span class="opt">(optional)</span></label>
+            <input id="a-tuition" name="tuition" class="input" type="text" placeholder="e.g. $8,000–$12,000/yr" />
+          </div>
+          <div class="form-field">
+            <label for="a-enrollment">Approx. enrollment <span class="opt">(optional)</span></label>
+            <input id="a-enrollment" name="enrollment" class="input" type="text" placeholder="e.g. 200 students" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="a-desc">Brief school description <span class="opt">(optional)</span></label>
+          <textarea id="a-desc" name="description" class="input textarea" placeholder="Tell families what makes your school special — curriculum approach, founding year, community, programs…"></textarea>
+          <p class="hint">2–4 sentences is plenty. We'll refine it before publishing.</p>
+        </div>
+
+        <div class="form-section-label">Your contact info</div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="a-name">Your full name</label>
+            <input id="a-name" name="contact_name" class="input" type="text" placeholder="First Last" required />
+          </div>
+          <div class="form-field">
+            <label for="a-title">Your role at the school</label>
+            <input id="a-title" name="contact_title" class="input" type="text" placeholder="e.g. Principal, Administrator" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="a-email">Your email</label>
+            <input id="a-email" name="contact_email" class="input" type="email" placeholder="you@yourschool.org" required />
+          </div>
+          <div class="form-field">
+            <label for="a-ref">How did you hear about us? <span class="opt">(optional)</span></label>
+            <select id="a-ref" name="referral" class="select">
+              <option value="">Select…</option>
+              <option>Another school recommended us</option>
+              <option>Google search</option>
+              <option>Social media</option>
+              <option>Email / newsletter</option>
+              <option>Word of mouth</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn btn--primary">Submit school</button>
+          <span class="privacy-note">Free listing. We'll publish within 2 business days.</span>
+        </div>
+
+        <div class="success-banner" id="add-success">
+          <h3>School submitted — JazakAllah Khair!</h3>
+          <p>We'll review the information and reach out to you at your email. Expect your listing to go live within 2 business days.</p>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- ASIDE -->
+    <aside class="info-aside">
+
+      <div class="info-card">
+        <p class="info-card__eyebrow">Membership tiers</p>
+        <h4>Start free, upgrade anytime</h4>
+        <ul class="tier-list">
+          <li>Free listing <span class="tier-badge tier-badge--free">Free</span></li>
+          <li>Basic profile <span class="tier-badge tier-badge--green">$29/mo</span></li>
+          <li>Premium profile <span class="tier-badge tier-badge--gold">$79/mo</span></li>
+        </ul>
+        <p style="margin-top:14px; font-size:0.88rem;">Premium schools get priority placement, photo galleries, job postings, and review responses. <a href="membership.html">See all plans →</a></p>
+      </div>
+
+      <div class="info-card">
+        <p class="info-card__eyebrow">What happens next</p>
+        <ul class="steps-list">
+          <li>
+            <span class="step-num">1</span>
+            <span class="step-body"><strong>We review your submission</strong> — usually within 1 business day.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span class="step-body"><strong>We verify key details</strong> against your school website and public records.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span class="step-body"><strong>Your listing goes live</strong> — we'll email you the link.</span>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <span class="step-body"><strong>You can update any time</strong> by emailing <a href="mailto:schools@islamicschoolreview.com">schools@islamicschoolreview.com</a>.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <p class="info-card__eyebrow">Questions?</p>
+        <p>Email us at <a href="mailto:schools@islamicschoolreview.com">schools@islamicschoolreview.com</a> — we typically reply within 1 business day.</p>
+        <p>Or <a href="contact.html">visit our contact page</a> for more ways to reach the team.</p>
+      </div>
+
+    </aside>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="directory.html">Browse by state</a></li>
+        <li><a href="directory.html">Top-rated schools</a></li>
+        <li><a href="add-school.html">Add your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="blog.html">For parents</a></li>
+        <li><a href="blog.html">For educators</a></li>
+        <li><a href="blog.html">Downloads</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="about.html">Editorial policy</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="privacy.html">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  // Mode toggle
+  function setMode(mode) {
+    document.getElementById('btn-claim').classList.toggle('active', mode === 'claim');
+    document.getElementById('btn-add').classList.toggle('active', mode === 'add');
+    document.getElementById('panel-claim').classList.toggle('active', mode === 'claim');
+    document.getElementById('panel-add').classList.toggle('active', mode === 'add');
+  }
+
+  // Pre-select mode from URL param: add-school.html?mode=add  or  ?mode=claim
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+    if (mode === 'add') setMode('add');
+
+    // Pre-fill school name from URL param: ?school=Al-Furqan+Academy
+    const schoolName = params.get('school');
+    if (schoolName) {
+      const el = document.getElementById('c-school-name');
+      if (el) el.value = schoolName;
+    }
+  })();
+
+  // Formspree AJAX success handling
+  document.querySelectorAll('form.form-card').forEach(function(form) {
+    form.addEventListener('submit', async function(e) {
+      // Only intercept if Formspree ID has been set
+      const action = form.getAttribute('action') || '';
+      if (action.includes('YOUR_')) return; // fall through to regular POST
+      e.preventDefault();
+      const data = new FormData(form);
+      const res = await fetch(action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        const successId = form.id === 'panel-claim' ? 'claim-success' : 'add-success';
+        document.getElementById(successId).style.display = 'block';
+        form.querySelectorAll('button[type="submit"]').forEach(b => b.disabled = true);
+        form.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
