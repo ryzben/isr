@@ -357,7 +357,6 @@
         id="addSchoolForm"
         action="https://formspree.io/f/mjglvggk"
         method="POST"
-        enctype="multipart/form-data"
       >
         <input type="hidden" name="_subject" value="New school submission — IslamicSchoolReview.com" />
 
@@ -454,14 +453,10 @@
         <p class="field-section">School photos <span style="font-weight:400; text-transform:none; letter-spacing:0; font-size:0.85rem;">(optional)</span></p>
 
         <div class="field">
-          <div class="upload-zone" id="uploadZone">
-            <input type="file" id="photos" name="photos" accept="image/*" multiple />
-            <span class="upload-zone__icon">📸</span>
-            <span class="upload-zone__label">Drag photos here or <span>browse</span></span>
-            <span class="upload-zone__sub">JPG, PNG or WEBP · Max 5 MB per photo</span>
-          </div>
-          <p class="hint">Please upload clear photos of your school (building, classrooms, activities). These appear on your listing and help families get a feel for your school.</p>
-          <div class="upload-preview" id="uploadPreview"></div>
+          <label for="photo_link">Photo link <span class="opt">(optional)</span></label>
+          <input id="photo_link" name="photo_link" class="input" type="url"
+            placeholder="e.g. https://drive.google.com/drive/folders/…" />
+          <p class="hint">📸 Please upload clear photos of your school (building, classrooms, activities) to a shared <strong>Google Drive</strong> or <strong>Dropbox</strong> folder, then paste the link above. Our team will use them when publishing your listing.</p>
         </div>
 
         <!-- ── Submit ── -->
@@ -530,38 +525,6 @@
 
 <script src="assets/main.js"></script>
 <script>
-  /* ── Photo upload preview ── */
-  const input    = document.getElementById('photos');
-  const preview  = document.getElementById('uploadPreview');
-  const zone     = document.getElementById('uploadZone');
-
-  input.addEventListener('change', () => renderPreviews(input.files));
-
-  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over'); });
-  zone.addEventListener('dragleave', ()  => zone.classList.remove('drag-over'));
-  zone.addEventListener('drop', e => {
-    e.preventDefault();
-    zone.classList.remove('drag-over');
-    input.files = e.dataTransfer.files;
-    renderPreviews(e.dataTransfer.files);
-  });
-
-  function renderPreviews(files) {
-    preview.innerHTML = '';
-    Array.from(files).forEach(file => {
-      if (!file.type.startsWith('image/')) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        const item = document.createElement('div');
-        item.className = 'upload-preview__item';
-        item.innerHTML = `<img src="${e.target.result}" alt="${file.name}" /><button type="button" title="Remove">✕</button>`;
-        item.querySelector('button').addEventListener('click', () => item.remove());
-        preview.appendChild(item);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
   /* ── Formspree AJAX submit ── */
   document.getElementById('addSchoolForm').addEventListener('submit', async function(e) {
     e.preventDefault();
