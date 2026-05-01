@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join the waitlist — Islamic School Review</title>
+  <meta name="description" content="ISR is in preview. Drop your email to be notified when free accounts open — for parents, students, educators, and school admins." />
+  <link rel="canonical" href="https://islamicschoolreview.com/signup.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:title" content="Join the waitlist — Islamic School Review" />
+  <meta property="og:description" content="ISR is in preview. Drop your email and we'll let you know when accounts open." />
+  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Join the waitlist — Islamic School Review" />
+  <meta name="twitter:description" content="ISR is in preview. Drop your email and we'll let you know when accounts open." />
+  <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* No sticky header on auth pages — simpler top bar */
+    .auth-top {
+      background: transparent;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 10;
+    }
+    .auth-top__inner {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .auth-top .nav-utility { margin-left: auto; display: flex; gap: 10px; align-items: center; font-size: 0.88rem; color: var(--muted); }
+    .auth-top .nav-utility a { color: var(--primary); font-weight: 600; }
+
+    .auth {
+      min-height: calc(100vh - var(--nav-h));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .auth__brand {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, #0B3D25 55%, #0A2E1C 100%);
+      color: #fff;
+      padding: 56px 56px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .auth__brand::before {
+      content: "";
+      position: absolute;
+      right: -80px; top: 10%;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .auth__brand::after {
+      content: "";
+      position: absolute;
+      left: -100px; bottom: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(184, 130, 58, 0.12);
+    }
+    .auth__brand-body {
+      position: relative; z-index: 1; max-width: 460px;
+    }
+    .auth__brand h1 {
+      font-family: "Fraunces", Georgia, serif;
+      color: #fff;
+      font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+      line-height: 1.2;
+      margin: 0 0 20px;
+    }
+    .auth__brand p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      margin: 0 0 28px;
+    }
+    .perks {
+      position: relative; z-index: 1;
+      display: grid;
+      gap: 16px;
+      max-width: 460px;
+      margin-bottom: 36px;
+    }
+    .perk {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .perk__icon {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: "Fraunces", Georgia, serif;
+    }
+    .perk__body strong { display: block; color: #fff; font-size: 0.98rem; margin-bottom: 2px; }
+    .perk__body span { color: rgba(255,255,255,0.72); font-size: 0.9rem; line-height: 1.5; }
+
+    .auth__quote {
+      position: relative; z-index: 1;
+      border-left: 3px solid var(--accent);
+      padding: 14px 0 14px 20px;
+      max-width: 460px;
+    }
+    .auth__quote blockquote {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.92);
+      margin: 0 0 10px;
+      line-height: 1.45;
+    }
+    .auth__quote footer {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.65);
+    }
+    .auth__quote footer strong { color: #fff; }
+
+    .auth__panel {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 40px 64px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 480px;
+    }
+    .auth-card h2 {
+      font-size: 1.7rem;
+      margin: 0 0 8px;
+    }
+    .auth-card > p.muted {
+      margin: 0 0 28px;
+    }
+
+    /* Role picker */
+    .role-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .role-card {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+    .role-card input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .role-card__inner {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 14px;
+      border: 1.5px solid var(--line-strong);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+    .role-card:hover .role-card__inner { border-color: var(--primary); }
+    .role-card:has(input:checked) .role-card__inner {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: 0 0 0 3px rgba(13, 80, 48, 0.08);
+    }
+    .role-card__icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--surface-alt);
+      color: var(--primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .role-card:has(input:checked) .role-card__icon {
+      background: var(--primary);
+      color: #fff;
+    }
+    .role-card__body strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .role-card__body span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* Social buttons */
+    .social-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      font: inherit;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: var(--surface-alt); }
+    .social-btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+    .divider {
+      display: flex; align-items: center; gap: 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 6px 0 20px;
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 1px; background: var(--line);
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .field .hint {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .checkbox-block {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .checkbox-block input { margin-top: 3px; }
+    .checkbox-block a { color: var(--primary); font-weight: 600; }
+
+    .auth-submit { margin: 10px 0 20px; }
+
+    .auth-alt {
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--muted);
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .auth-alt a { color: var(--primary); font-weight: 600; }
+
+    @media (max-width: 960px) {
+      .auth { grid-template-columns: 1fr; }
+      .auth__brand { display: none; }
+      .auth__panel { padding: 40px 24px 56px; }
+      .role-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .social-btns { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== TOP BAR ========== -->
+<header class="site-header auth-top">
+  <div class="container auth-top__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <div class="nav-utility">
+      <span class="preview-pill" aria-label="Preview"><span class="preview-pill__dot" aria-hidden="true"></span>ISR is in preview</span>
+    </div>
+  </div>
+</header>
+
+<!-- ========== AUTH ========== -->
+<main class="auth">
+
+  <!-- Left: brand panel -->
+  <aside class="auth__brand" aria-hidden="true">
+    <div class="auth__brand-body">
+      <h1>Be first in line<br/>when accounts launch.</h1>
+      <p>ISR is in early preview. Sign up and we'll send you a private invite the moment free accounts go live — no payments, no passwords on file.</p>
+
+      <div class="perks">
+        <div class="perk">
+          <span class="perk__icon">✓</span>
+          <div class="perk__body"><strong>Save &amp; compare schools</strong><span>Bookmark listings and line them up side-by-side — tuition, grades, programs.</span></div>
+        </div>
+        <div class="perk">
+          <span class="perk__icon">✓</span>
+          <div class="perk__body"><strong>Post honest reviews</strong><span>Share your family's experience. Verified reviews help the next parent.</span></div>
+        </div>
+        <div class="perk">
+          <span class="perk__icon">✓</span>
+          <div class="perk__body"><strong>Weekly digest</strong><span>New guides, school updates, and jobs — hand-picked every Friday.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth__quote">
+      <blockquote>"I created an account the day I started our school search. A year later, I'm still here — reading guides, following news, and cheering on our community."</blockquote>
+      <footer><strong>Yusuf R.</strong> · Parent &amp; volunteer, Chicago IL</footer>
+    </div>
+  </aside>
+
+  <!-- Right: form -->
+  <section class="auth__panel">
+    <div class="auth-card">
+
+      <div class="auth-banner" role="note">
+        <strong>ISR is in preview.</strong>
+        We're not collecting account passwords yet. Drop your email below and we'll send you an invite when sign-in launches.
+      </div>
+
+      <h2>Join the launch waitlist</h2>
+      <p class="muted">No password, no account created today — just an early heads-up when ISR opens.</p>
+
+      <form id="signupForm" novalidate>
+
+        <!-- Role picker -->
+        <span class="role-label">I am a…</span>
+        <div class="role-grid" role="radiogroup" aria-label="Choose your role">
+          <label class="role-card">
+            <input type="radio" name="role" value="parent" checked />
+            <div class="role-card__inner">
+              <span class="role-card__icon" aria-hidden="true">Pa</span>
+              <div class="role-card__body">
+                <strong>Parent</strong>
+                <span>Searching for a school</span>
+              </div>
+            </div>
+          </label>
+          <label class="role-card">
+            <input type="radio" name="role" value="student" />
+            <div class="role-card__inner">
+              <span class="role-card__icon" aria-hidden="true">St</span>
+              <div class="role-card__body">
+                <strong>Student</strong>
+                <span>Currently enrolled or alumni</span>
+              </div>
+            </div>
+          </label>
+          <label class="role-card">
+            <input type="radio" name="role" value="educator" />
+            <div class="role-card__inner">
+              <span class="role-card__icon" aria-hidden="true">Ed</span>
+              <div class="role-card__body">
+                <strong>Educator</strong>
+                <span>Teacher, tutor, or scholar</span>
+              </div>
+            </div>
+          </label>
+          <label class="role-card">
+            <input type="radio" name="role" value="admin" />
+            <div class="role-card__inner">
+              <span class="role-card__icon" aria-hidden="true">Ad</span>
+              <div class="role-card__body">
+                <strong>School admin</strong>
+                <span>Representing a school</span>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="form-row-2">
+          <div class="field">
+            <label for="firstName">First name</label>
+            <input id="firstName" class="input" type="text" placeholder="Aisha" required autocomplete="given-name" />
+          </div>
+          <div class="field">
+            <label for="lastName">Last name</label>
+            <input id="lastName" class="input" type="text" placeholder="Rahman" required autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" class="input" type="email" placeholder="you@example.com" required autocomplete="email" />
+          <span class="hint">We'll only use this to send you the launch invite. No password needed today.</span>
+        </div>
+
+        <label class="checkbox-block">
+          <input type="checkbox" checked />
+          <span>Also send me the weekly digest — new schools, guides, and jobs. Unsubscribe anytime.</span>
+        </label>
+
+        <button type="submit" class="btn btn--primary btn--block btn--lg auth-submit">Notify me when accounts launch</button>
+
+        <p class="legal-note legal-note--inline">
+          By submitting, you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>. ISR does not store passwords during preview.
+        </p>
+      </form>
+
+      <div class="auth-alt">
+        Already on the list? You can close this tab — we'll email you when sign-in goes live.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Friendly URLs for key pages (drop the .html)
+/directory            /directory.html          200
+/school               /school.html             200
+/about                /about.html              200
+/contact              /contact.html            200
+/blog                 /blog.html               200
+/jobs                 /jobs.html               200
+/membership           /membership.html         200
+/privacy              /privacy.html            200
+/terms                /terms.html              200
+/signin               /signin.html             200
+/signup               /signup.html             200
+/account              /account.html            200
+/compare              /compare.html            200
+/write-review         /write-review.html       200
+
+# Legacy / common typos
+/sign-in              /signin.html             301
+/sign-up              /signup.html             301
+/join                 /signup.html             301
+/login                /signin.html             301

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Title / meta / OG / JSON-LD are populated by the inline module below
+       once the school record is loaded. The defaults here are sensible
+       fallbacks for crawlers that don't run JS. -->
+  <title>School profile — Islamic School Review</title>
+  <meta name="description" content="Detailed profile of an Islamic school listed on IslamicSchoolReview.com — grades, tuition, location, accreditation, and program highlights." />
+  <link rel="canonical" href="https://islamicschoolreview.com/school.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Islamic School Review" />
+  <meta property="og:url" content="https://islamicschoolreview.com/school.html" />
+  <meta property="og:title" content="School profile — Islamic School Review" />
+  <meta property="og:description" content="Grades, tuition, location, and program highlights for Islamic schools listed on IslamicSchoolReview.com." />
+  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="School profile — Islamic School Review" />
+  <meta name="twitter:description" content="Grades, tuition, and program highlights for Islamic schools listed on IslamicSchoolReview.com." />
+  <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <!-- JSON-LD School schema, populated by JS. Empty by default. -->
+  <script id="schoolJsonLd" type="application/ld+json">{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* ===== Beta notice strip ===== */
+    .beta-strip {
+      background: #FFF6E5;
+      border-bottom: 1px solid #F2D7A1;
+      color: #5C3D00;
+      font-size: 0.92rem;
+    }
+    .beta-strip__inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+    .beta-strip__tag {
+      background: #B8823A;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex: 0 0 auto;
+    }
+    .beta-strip__msg { flex: 1 1 auto; }
+    .beta-strip__cta {
+      flex: 0 0 auto;
+      font-weight: 600;
+      color: #5C3D00;
+      text-decoration: underline;
+    }
+
+    /* ===== School profile styles ===== */
+    .profile-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    .breadcrumbs {
+      font-size: 0.85rem; color: var(--muted);
+      padding: 20px 0 0;
+    }
+    .breadcrumbs a { color: var(--muted); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      padding: 24px 0 40px;
+    }
+
+    .hero-title {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .hero-title h1 { margin: 0; font-size: 2.2rem; }
+    .hero-location { color: var(--ink-soft); margin-bottom: 16px; font-size: 1rem; }
+
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--r-lg);
+      margin-bottom: 18px;
+      display: grid; place-items: center;
+      color: rgba(255,255,255,0.85);
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 3rem; font-weight: 600;
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 16px;
+      background: var(--bg);
+      border-radius: var(--r-lg);
+      border: 1px solid var(--line);
+      margin-top: 12px;
+    }
+    .qf__label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .qf__value {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Claim/preview banner */
+    .claim-banner {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: var(--r-lg);
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 16px;
+      margin-top: 20px;
+    }
+    .claim-banner strong { color: var(--accent-hover); }
+    .claim-banner p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+    .claim-banner .claim-note {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Sticky sidebar */
+    .profile-side {
+      position: sticky;
+      top: calc(var(--nav-h) + 20px);
+      align-self: start;
+    }
+    .side-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .side-card h3 { font-family: "Inter", sans-serif; font-size: 1.1rem; margin: 0 0 12px; }
+    .side-card .tuition {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.8rem; font-weight: 600; color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .side-card .tuition-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+
+    .profile-main {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      padding: 32px 0 64px;
+    }
+    .profile-content > section {
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+    }
+    .profile-content > section:first-child { border-top: 0; padding-top: 0; }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .fact {
+      display: flex; justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      font-size: 0.92rem;
+    }
+    .fact span:first-child { color: var(--muted); }
+    .fact span:last-child { color: var(--ink); font-weight: 500; }
+
+    .similar-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* Loading + not-found states */
+    .school-skel {
+      padding: 40px 0;
+      display: grid; gap: 14px;
+    }
+    .school-skel .bar {
+      height: 14px; border-radius: 4px;
+      background: linear-gradient(110deg, #ECECEC 30%, #F5F5F5 50%, #ECECEC 70%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s linear infinite;
+    }
+    .school-skel .bar--lg { height: 30px; width: 60%; }
+    .school-skel .bar--md { width: 40%; }
+    .school-skel .bar--photo { aspect-ratio: 16/9; height: auto; border-radius: var(--r-lg); }
+    @keyframes shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+
+    .not-found {
+      max-width: 580px;
+      margin: 80px auto;
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--surface);
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--r-lg);
+    }
+    .not-found h1 { font-size: 1.6rem; margin: 0 0 8px; }
+    .not-found p { margin: 0 0 18px; color: var(--muted); }
+
+    @media (max-width: 960px) {
+      .hero-grid, .profile-main { grid-template-columns: 1fr; }
+      .profile-side { position: static; }
+      .quick-facts { grid-template-columns: repeat(2, 1fr); }
+      .similar-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .facts-grid { grid-template-columns: 1fr; }
+      .similar-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory.html">Directory</a>
+      <a href="blog.html">Resources</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="membership.html">Membership</a>
+      <a href="blog.html">Community</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-utility">
+      <span class="lang-toggle">🌐 EN</span>
+      <a href="add-school.html" class="btn btn--cta btn--sm">Add School</a>
+      
+    </div>
+  </div>
+</header>
+
+<!-- ========== BETA NOTICE ========== -->
+<aside class="beta-strip" role="note">
+  <div class="container beta-strip__inner">
+    <span class="beta-strip__tag">Preview</span>
+    <span class="beta-strip__msg">
+      We're sharing this with school administrators for feedback.
+      Spotted something wrong, or have ideas?
+    </span>
+    <a class="beta-strip__cta"
+       href="mailto:ryzben@gmail.com?subject=ISR%20feedback&amp;body=What%20you%20saw%3A%0A%0AWhat%20would%20make%20it%20better%3A%0A%0AYour%20name%20and%20role%3A%0A">
+      Email feedback →
+    </a>
+  </div>
+</aside>
+
+<!-- ========== Loading skeleton (replaced once data resolves) ========== -->
+<div class="container school-skel" id="schoolSkeleton" aria-busy="true">
+  <div class="bar bar--lg"></div>
+  <div class="bar bar--md"></div>
+  <div class="bar bar--photo"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar bar--md"></div>
+</div>
+
+<!-- ========== Not-found state (shown by JS when ?id matches no school) ========== -->
+<section class="not-found" id="schoolNotFound" hidden>
+  <h1>School not found</h1>
+  <p id="schoolNotFoundMsg">We couldn't find a school matching that link.</p>
+  <a href="directory.html" class="btn btn--primary">Back to the school directory</a>
+</section>
+
+<!-- ========== School profile (filled in by JS) ========== -->
+<article id="schoolMain" hidden>
+
+  <section class="profile-hero">
+    <div class="container">
+      <div class="breadcrumbs" id="schoolBreadcrumbs"></div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="hero-title">
+            <h1 id="schoolName">School name</h1>
+            <span class="badge" id="schoolStatusBadge">Preview listing</span>
+          </div>
+          <div class="hero-location" id="schoolLocation"></div>
+
+          <div class="hero-photo" id="schoolPhoto" aria-label="School photograph">
+            <span id="schoolPhotoFallback"></span>
+          </div>
+
+          <div class="quick-facts" id="schoolQuickFacts"></div>
+
+          <div class="claim-banner" id="schoolPreviewBanner" hidden>
+            <span style="font-size: 1.5rem;">🏫</span>
+            <div style="flex:1;">
+              <strong>Is this your school?</strong>
+              <p>Tuition, contact info, and other details on this page come from publicly available sources. <span id="schoolClaimNudge"></span> can claim this listing to update information, respond to reviews, and post jobs — free in under 5 minutes.</p>
+            </div>
+            <a id="schoolClaimLink" href="add-school.html?mode=claim" class="btn btn--accent btn--sm">Claim this listing →</a>
+          </div>
+
+          <div class="claim-banner" id="schoolVerifiedBanner" hidden style="background: var(--primary-soft); border-color: var(--primary);">
+            <span style="font-size: 1.5rem;">✓</span>
+            <div style="flex:1;">
+              <strong>Verified by IslamicSchoolReview.com</strong>
+              <p>Address, phone number, grades, and tuition were verified against the school's own materials.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="profile-side">
+          <div class="side-card">
+            <h3>Tuition &amp; contact</h3>
+            <div class="tuition" id="schoolTuition">—</div>
+            <div class="tuition-sub" id="schoolTuitionSub">Annual tuition</div>
+
+            <p class="small" style="color: var(--ink-soft); margin: 12px 0 16px; line-height:1.5;">
+              We don't relay inquiries during preview. The best way to reach a school is directly — phone numbers and websites are listed below.
+            </p>
+
+            <a id="schoolWebsiteLink" href="#" class="btn btn--primary btn--block" target="_blank" rel="noopener" hidden>Visit school website</a>
+            <a id="schoolPhoneLink" href="#" class="btn btn--ghost btn--block" hidden style="margin-top:8px;">Call school</a>
+            <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:ryzben@gmail.com">Email us</a> — we respond within 24 hours.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="profile-main">
+      <div class="profile-content">
+
+        <section id="overview">
+          <h2 id="schoolAboutHeading">About this school</h2>
+          <p id="schoolDescription"></p>
+
+          <h3>At a glance</h3>
+          <div class="facts-grid" id="schoolFacts"></div>
+        </section>
+
+        <section id="contact">
+          <h2>Contact</h2>
+          <div class="facts-grid" id="schoolContact"></div>
+          <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a id="schoolOutOfDateMailto" href="mailto:ryzben@gmail.com">let us know</a>.</p>
+        </section>
+
+        <section id="similar">
+          <h2>Similar schools</h2>
+          <div class="similar-grid mt-16" id="schoolSimilar">
+            <!-- filled by JS -->
+          </div>
+        </section>
+      </div>
+
+      <aside class="profile-side">
+        <div class="side-card">
+          <h3>Helpful next steps</h3>
+          <ul style="list-style:none; padding:0; margin:0;">
+            <li style="padding:10px 0; border-bottom:1px solid var(--line);">
+              <a href="directory.html">← Back to all schools</a>
+            </li>
+            <li style="padding:10px 0;">
+              <a id="schoolEditMailto" href="mailto:ryzben@gmail.com">Suggest an edit</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+        <form class="newsletter-inline" action="confirmation.html" method="get">
+          <input type="hidden" name="action" value="newsletter" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory.html">Browse all schools</a></li>
+        <li><a href="directory.html">Browse by state</a></li>
+        <li><a href="add-school.html">Claim your school</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="blog.html">Guides &amp; stories</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="privacy.html">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+
+<!-- ========== SCHOOL DETAIL RENDER MODULE ========== -->
+<script type="module">
+  import {
+    getSchoolById,
+    getSchools,
+    filterSchools,
+  } from "./assets/schools-data.js";
+
+  const STATE_NAMES = {
+    FL: "Florida", TX: "Texas", CA: "California", NY: "New York", NJ: "New Jersey",
+  };
+  const SITE = "https://islamicschoolreview.com";
+
+  function escapeHtml(s) {
+    return String(s ?? "").replace(/[&<>"']/g, (c) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;",
+    })[c]);
+  }
+  function initials(name) {
+    const w = String(name || "").split(/\s+/).filter(Boolean);
+    if (!w.length) return "?";
+    if (w.length === 1) return w[0].slice(0, 2).toUpperCase();
+    return (w[0][0] + w[1][0]).toUpperCase();
+  }
+  function $(id) { return document.getElementById(id); }
+
+  function getIdFromUrl() {
+    const params = new URLSearchParams(location.search);
+    return (params.get("id") || "").trim();
+  }
+
+  function showNotFound(reason) {
+    $("schoolSkeleton").hidden = true;
+    $("schoolMain").hidden = true;
+    const nf = $("schoolNotFound");
+    nf.hidden = false;
+    if (reason) $("schoolNotFoundMsg").textContent = reason;
+  }
+
+  function fact(label, value) {
+    return `<div class="fact"><span>${escapeHtml(label)}</span><span>${escapeHtml(value)}</span></div>`;
+  }
+
+  function quickFact(label, value) {
+    return `<div class="qf"><div class="qf__label">${escapeHtml(label)}</div><div class="qf__value">${escapeHtml(value)}</div></div>`;
+  }
+
+  function setMeta(name, content, attr = "name") {
+    let el = document.head.querySelector(`meta[${attr}="${name}"]`);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attr, name);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", content);
+  }
+
+  function setCanonical(url) {
+    let el = document.head.querySelector("link[rel='canonical']");
+    if (!el) {
+      el = document.createElement("link");
+      el.setAttribute("rel", "canonical");
+      document.head.appendChild(el);
+    }
+    el.setAttribute("href", url);
+  }
+
+  function setJsonLd(school) {
+    const url = `${SITE}/school.html?id=${encodeURIComponent(school.id)}`;
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "School",
+      "name": school.name,
+      "url": url,
+      "description": school.description || undefined,
+      "telephone": school.phone || undefined,
+      "address": school.address ? {
+        "@type": "PostalAddress",
+        "streetAddress": school.address,
+        "addressLocality": school.city || undefined,
+        "addressRegion": school.state || undefined,
+        "addressCountry": "US",
+      } : undefined,
+      "sameAs": school.website ? [school.website] : undefined,
+    };
+    // Strip undefined values for cleaner output.
+    for (const k of Object.keys(data)) if (data[k] === undefined) delete data[k];
+    if (data.address) for (const k of Object.keys(data.address)) if (data.address[k] === undefined) delete data.address[k];
+    $("schoolJsonLd").textContent = JSON.stringify(data, null, 2);
+  }
+
+  function renderSchool(s) {
+    const url = `${SITE}/school.html?id=${encodeURIComponent(s.id)}`;
+    const where = [s.city, s.state].filter(Boolean).join(", ");
+
+    // ---- HEAD ----
+    document.title = `${s.name} — ${where || "Islamic School Review"}`;
+    setMeta("description", s.description || `${s.name} — an Islamic school listed on IslamicSchoolReview.com.`);
+    setMeta("og:title", `${s.name} — ${where}`, "property");
+    setMeta("og:description", s.description || "", "property");
+    setMeta("og:url", url, "property");
+    if (s.photo_url) setMeta("og:image", s.photo_url, "property");
+    setMeta("twitter:title", `${s.name} — ${where}`);
+    setMeta("twitter:description", s.description || "");
+    if (s.photo_url) setMeta("twitter:image", s.photo_url);
+    setCanonical(url);
+    setJsonLd(s);
+
+    // ---- BREADCRUMBS ----
+    const stateName = STATE_NAMES[s.state] || s.state || "";
+    const stateHref = s.state ? `directory.html?state=${encodeURIComponent(s.state)}` : "directory.html";
+    const cityHref  = s.city  ? `directory.html?city=${encodeURIComponent(s.city)}`   : "directory.html";
+    $("schoolBreadcrumbs").innerHTML = `
+      <a href="index.html">Home</a> ·
+      <a href="directory.html">Directory</a>
+      ${stateName ? ` · <a href="${stateHref}">${escapeHtml(stateName)}</a>` : ""}
+      ${s.city ? ` · <a href="${cityHref}">${escapeHtml(s.city)}</a>` : ""}
+      · <span>${escapeHtml(s.name)}</span>
+    `;
+
+    // ---- HERO ----
+    $("schoolName").textContent = s.name;
+    const badge = $("schoolStatusBadge");
+    if (s.verified) {
+      badge.textContent = "Verified";
+      badge.className = "badge badge--accent";
+    } else {
+      badge.textContent = "Preview listing";
+      badge.className = "badge";
+    }
+
+    const locationParts = [];
+    if (s.address) locationParts.push(`📍 ${s.address}`);
+    else if (where) locationParts.push(`📍 ${where}`);
+    if (s.phone) locationParts.push(escapeHtml(s.phone));
+    const linkHref = s.website || "#";
+    if (s.website) locationParts.push(`<a href="${escapeHtml(s.website)}" target="_blank" rel="noopener">Visit website</a>`);
+    $("schoolLocation").innerHTML = locationParts.join(" · ");
+
+    const photo = $("schoolPhoto");
+    if (s.photo_url) {
+      photo.style.backgroundImage = `url('${s.photo_url}')`;
+      $("schoolPhotoFallback").textContent = "";
+    } else {
+      $("schoolPhotoFallback").textContent = initials(s.name);
+    }
+
+    // ---- QUICK FACTS ----
+    const qf = [];
+    if (s.grades) qf.push(quickFact("Grades", s.grades));
+    if (s.tuition_range) qf.push(quickFact("Tuition", s.tuition_range));
+    qf.push(quickFact("Location", where || "—"));
+    qf.push(quickFact("Status", s.verified ? "Verified" : "Preview"));
+    $("schoolQuickFacts").innerHTML = qf.join("");
+
+    // ---- BANNERS ----
+    if (s.verified) {
+      $("schoolVerifiedBanner").hidden = false;
+    } else {
+      $("schoolPreviewBanner").hidden = false;
+      $("schoolClaimNudge").textContent = s.name;
+    }
+
+    // ---- BETA FEEDBACK MAILTO LINKS ----
+    // Pre-fill subject + body so admin emails are easy to triage by school.
+    const enc = encodeURIComponent;
+    const subjClaim   = `Claim listing: ${s.name}`;
+    const subjEdit    = `Listing edit: ${s.name}`;
+    const subjOutdate = `Out of date: ${s.name}`;
+    const body =
+      `School: ${s.name}\n` +
+      `Listing URL: ${url}\n\n` +
+      `What needs to change (please be specific — address, phone, grades, tuition, photo, anything):\n\n` +
+      `Your name and role at the school:\n\n`;
+    const claim = $("schoolClaimLink");
+    if (claim) claim.href = `add-school.html?mode=claim&school=${enc(s.name)}`;
+    const edit = $("schoolEditMailto");
+    if (edit) edit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
+    const ood = $("schoolOutOfDateMailto");
+    if (ood) ood.href = `mailto:ryzben@gmail.com?subject=${enc(subjOutdate)}&body=${enc(body)}`;
+
+    // ---- SIDE CARD TUITION ----
+    if (s.tuition_range) {
+      $("schoolTuition").textContent = s.tuition_range;
+      $("schoolTuitionSub").textContent = "Annual tuition";
+    } else {
+      $("schoolTuition").textContent = "Contact school";
+      $("schoolTuitionSub").textContent = "Tuition not listed";
+    }
+
+    // ---- SIDE CARD CONTACT CTAs ----
+    const sideWeb = $("schoolWebsiteLink");
+    if (s.website && sideWeb) {
+      sideWeb.href = s.website;
+      sideWeb.hidden = false;
+    }
+    const sidePhone = $("schoolPhoneLink");
+    if (s.phone && sidePhone) {
+      // Strip everything but digits + leading + for tel: scheme.
+      const digits = s.phone.replace(/[^\d+]/g, "");
+      sidePhone.href = `tel:${digits}`;
+      sidePhone.textContent = `Call ${s.phone}`;
+      sidePhone.hidden = false;
+    }
+    const sideEdit = $("schoolSidebarEditMailto");
+    if (sideEdit) sideEdit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
+
+    // ---- ABOUT + FACTS ----
+    $("schoolAboutHeading").textContent = `About ${s.name}`;
+    $("schoolDescription").textContent = s.description || "Profile information is being added. Check back soon, or contact the school directly using the details below.";
+
+    const facts = [];
+    if (s.grades)        facts.push(fact("Grades served", s.grades));
+    if (where)           facts.push(fact("Location", where));
+    if (s.tuition_range) facts.push(fact("Tuition", s.tuition_range));
+    facts.push(fact("Listing status", s.verified ? "Verified" : "Preview / awaiting claim"));
+    $("schoolFacts").innerHTML = facts.join("");
+
+    // ---- CONTACT ----
+    const contact = [];
+    if (s.address)       contact.push(fact("Address", s.address));
+    if (s.phone)         contact.push(fact("Phone", s.phone));
+    if (s.website)       contact.push(fact("Website", s.website.replace(/^https?:\/\//, "")));
+    if (!contact.length) contact.push(fact("Contact info", "Not listed yet"));
+    $("schoolContact").innerHTML = contact.join("");
+
+    // ---- REVEAL ----
+    $("schoolSkeleton").hidden = true;
+    $("schoolMain").hidden = false;
+  }
+
+  function similarCard(s) {
+    const where = [s.city, s.state].filter(Boolean).join(", ");
+    const photo = s.photo_url
+      ? `style="background-image:url('${escapeHtml(s.photo_url)}'); background-size:cover; background-position:center;"`
+      : `style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);"`;
+    return `
+      <a href="school.html?id=${encodeURIComponent(s.id)}" class="card school-card">
+        <div class="card__media" ${photo}>${s.photo_url ? "" : `<span>${escapeHtml(initials(s.name))}</span>`}</div>
+        <div class="card__body">
+          <h3 class="card__title">${escapeHtml(s.name)}</h3>
+          <div class="card__meta">📍 ${escapeHtml(where)}${s.grades ? ` · ${escapeHtml(s.grades)}` : ""}</div>
+          <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">${s.verified ? "Verified" : "Preview"}</span></span>
+        </div>
+      </a>
+    `;
+  }
+
+  async function renderSimilar(currentSchool) {
+    try {
+      const all = await getSchools();
+      // Pick up to 3 schools in the same state, excluding the current one;
+      // prefer verified listings to keep the rail looking solid.
+      const sameState = filterSchools(all, { state: currentSchool.state })
+        .filter((s) => s.id !== currentSchool.id);
+      sameState.sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+      const picks = sameState.slice(0, 3);
+      $("schoolSimilar").innerHTML = picks.map(similarCard).join("")
+        || `<p class="muted">No similar schools listed yet.</p>`;
+    } catch (err) {
+      console.warn("Could not render similar schools:", err);
+      $("schoolSimilar").innerHTML = "";
+    }
+  }
+
+  // ---- Boot ----
+  (async () => {
+    const id = getIdFromUrl();
+    if (!id) {
+      // No school in the URL — bounce to the directory rather than
+      // stranding the visitor on an empty profile page.
+      location.replace("directory.html");
+      return;
+    }
+    try {
+      const school = await getSchoolById(id);
+      if (!school) {
+        showNotFound(`We couldn't find a school with ID "${id}". It may have been removed or the link may be out of date.`);
+        return;
+      }
+      renderSchool(school);
+      renderSimilar(school);
+    } catch (err) {
+      console.error("School page failed to load:", err);
+      showNotFound("We couldn't load this school's data. Please try refreshing — or browse the directory to pick another school.");
+    }
+  })();
+</script>
+</body>
+</html>
+                                                                                                    

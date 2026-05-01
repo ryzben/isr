@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Account — Islamic School Review</title>
+  <meta name="description" content="Create your free Islamic School Review account. Save favorite schools, leave reviews, and get personalized recommendations." />
+  <meta property="og:title" content="Create Account — Islamic School Review" />
+  <meta property="og:description" content="Create your free Islamic School Review account. Save favorite schools, leave reviews, and get personalized recommendations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* No sticky header on auth pages — simpler top bar */
+    .auth-top {
+      background: transparent;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 10;
+    }
+    .auth-top__inner {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .auth-top .nav-utility { margin-left: auto; display: flex; gap: 10px; align-items: center; font-size: 0.88rem; color: var(--muted); }
+    .auth-top .nav-utility a { color: var(--primary); font-weight: 600; }
+
+    .auth {
+      min-height: calc(100vh - var(--nav-h));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .auth__brand {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, #0B3D25 55%, #0A2E1C 100%);
+      color: #fff;
+      padding: 56px 56px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .auth__brand::before {
+      content: "";
+      position: absolute;
+      right: -80px; top: 10%;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .auth__brand::after {
+      content: "";
+      position: absolute;
+      left: -100px; bottom: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(184, 130, 58, 0.12);
+    }
+    .auth__brand-body {
+      position: relative; z-index: 1; max-width: 460px;
+    }
+    .auth__brand h1 {
+      font-family: "Fraunces", Georgia, serif;
+      color: #fff;
+      font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+      line-height: 1.2;
+      margin: 0 0 20px;
+    }
+    .auth__brand p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      margin: 0 0 28px;
+    }
+    .perks {
+      position: relative; z-index: 1;
+      display: grid;
+      gap: 16px;
+      max-width: 460px;
+      margin-bottom: 36px;
+    }
+    .perk {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .perk__icon {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: "Fraunces", Georgia, serif;
+    }
+    .perk__body strong { display: block; color: #fff; font-size: 0.98rem; margin-bottom: 2px; }
+    .perk__body span { color: rgba(255,255,255,0.72); font-size: 0.9rem; line-height: 1.5; }
+
+    .auth__quote {
+      position: relative; z-index: 1;
+      border-left: 3px solid var(--accent);
+      padding: 14px 0 14px 20px;
+      max-width: 460px;
+    }
+    .auth__quote blockquote {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.92);
+      margin: 0 0 10px;
+      line-height: 1.45;
+    }
+    .auth__quote footer {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.65);
+    }
+    .auth__quote footer strong { color: #fff; }
+
+    .auth__panel {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 40px 64px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 480px;
+    }
+    .auth-card h2 {
+      font-size: 1.7rem;
+      margin: 0 0 8px;
+    }
+    .auth-card > p.muted {
+      margin: 0 0 28px;
+    }
+
+    /* Role picker */
+    .role-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .role-card {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+    .role-card input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .role-card__inner {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 14px;
+      border: 1.5px solid var(--line-strong);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+    .role-card:hover .role-card__inner { border-color: var(--primary); }
+    .role-card:has(input:checked) .role-card__inner {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: 0 0 0 3px rgba(13, 80, 48, 0.08);
+    }
+    .role-card__icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--surface-alt);
+      color: var(--primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .role-card:has(input:checked) .role-card__icon {
+      background: var(--primary);
+      color: #fff;
+    }
+    .role-card__body strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .role-card__body span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* Social buttons */
+    .social-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      font: inherit;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: var(--surface-alt); }
+    .social-btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+    .divider {
+      display: flex; align-items: center; gap: 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 6px 0 20px;
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 1px; background: var(--line);
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .field .hint {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .checkbox-block {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .checkbox-block input { margin-top: 3px; }
+    .checkbox-block a { color: var(--primary); font-weight: 600; }
+
+    .auth-submit { margin: 10px 0 20px; }
+
+    .auth-alt {
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--muted);
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .auth-alt a { color: var(--primary); font-weight: 600; }
+
+    @media (max-width: 960px) {
+      .auth { grid-template-columns: 1fr; }
+      .auth__brand { display: none; }
+      .auth__panel { padding: 40px 24px 56px; }
+      .role-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .social-btns { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== TOP BAR ========== -->
+<header class="site-header auth-top">
+  <div class="container auth-top__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <div class="nav-utility">
+      <span class="preview-pill" aria-label="Preview"><span class="preview-pill__dot" aria-hidden="true"></span>ISR is in preview</span>
+    </div>
+  </div>
+</header>
+
+<!-- ========== AUTH ========== -->
+<main class="auth">
+
+  <!-- Left: brand panel -->
+  <aside class="auth__brand" aria-hidden="true">
+    <div class="auth__brand-body">
+      <h1>Create your free account</h1>
+      <p>Join thousands of Muslim families finding the perfect Islamic school for their children.</p>
+
+      <div class="perks">
+        <div class="perk">
+          <span class="perk__icon">💚</span>
+          <div class="perk__body"><strong>Save favorite schools</strong><span>Bookmark schools you're interested in and compare them side-by-side.</span></div>
+        </div>
+        <div class="perk">
+          <span class="perk__icon">⭐</span>
+          <div class="perk__body"><strong>Leave honest reviews</strong><span>Share your family's experience to help other parents make informed decisions.</span></div>
+        </div>
+        <div class="perk">
+          <span class="perk__icon">📧</span>
+          <div class="perk__body"><strong>Weekly digest</strong><span>Get notified about new schools, updates, and Islamic education news.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth__quote">
+      <blockquote>"Finding the right Islamic school changed everything for our family. Now I can help others find theirs too."</blockquote>
+      <footer><strong>Fatima K.</strong> · Parent, Dallas TX</footer>
+    </div>
+  </aside>
+
+  <!-- Right: form -->
+  <section class="auth__panel">
+    <div class="auth-card">
+      <h2>Create your account</h2>
+      <p class="muted">Join our community of Muslim families and educators.</p>
+
+      <!-- Status messages -->
+      <div id="auth-status" class="auth-status" role="status" aria-live="polite"></div>
+
+      <form id="signupForm">
+        <!-- User Type Selection -->
+        <div class="field">
+          <label class="role-label">I am a...</label>
+          <div class="role-grid">
+            <label class="role-card">
+              <input type="radio" name="userType" value="parent" required>
+              <div class="role-card__inner">
+                <span class="role-card__icon">👨‍👩‍👧‍👦</span>
+                <div class="role-card__body">
+                  <strong>Parent</strong>
+                  <span>Looking for schools for my children</span>
+                </div>
+              </div>
+            </label>
+            <label class="role-card">
+              <input type="radio" name="userType" value="student" required>
+              <div class="role-card__inner">
+                <span class="role-card__icon">🎓</span>
+                <div class="role-card__body">
+                  <strong>Student</strong>
+                  <span>Current or prospective student</span>
+                </div>
+              </div>
+            </label>
+            <label class="role-card">
+              <input type="radio" name="userType" value="educator" required>
+              <div class="role-card__inner">
+                <span class="role-card__icon">👩‍🏫</span>
+                <div class="role-card__body">
+                  <strong>Educator</strong>
+                  <span>Teacher, administrator, or staff</span>
+                </div>
+              </div>
+            </label>
+            <label class="role-card">
+              <input type="radio" name="userType" value="admin" required>
+              <div class="role-card__inner">
+                <span class="role-card__icon">🏫</span>
+                <div class="role-card__body">
+                  <strong>School Admin</strong>
+                  <span>Managing or representing a school</span>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Name -->
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required placeholder="Your full name">
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+          <span class="hint">We'll never share your email with anyone.</span>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Create a secure password" minlength="8">
+          <span class="hint">At least 8 characters long.</span>
+        </div>
+
+        <!-- Terms -->
+        <label class="checkbox-block">
+          <input type="checkbox" required>
+          <span>I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></span>
+        </label>
+
+        <button type="submit" class="btn btn--primary btn--block btn--lg auth-submit">
+          Create Account
+        </button>
+      </form>
+
+      <div class="auth-alt">
+        Already have an account? <a href="signin.html">Sign in →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+// Supabase Configuration
+const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_NDDC-hnp-ic3n0ijcGsLSg_awOo709H';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Auth form handling
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const statusEl = document.getElementById('auth-status');
+
+  // Clear previous status
+  statusEl.className = 'auth-status';
+  statusEl.textContent = '';
+
+  // Get form data
+  const formData = new FormData(form);
+  const email = formData.get('email').trim();
+  const password = formData.get('password');
+  const fullName = formData.get('fullName').trim();
+  const userType = formData.get('userType');
+
+  // Basic validation
+  if (!email || !password || !fullName || !userType) {
+    statusEl.className = 'auth-status auth-status--error';
+    statusEl.textContent = 'Please fill in all required fields.';
+    return;
+  }
+
+  if (password.length < 8) {
+    statusEl.className = 'auth-status auth-status--error';
+    statusEl.textContent = 'Password must be at least 8 characters long.';
+    return;
+  }
+
+  // Show loading state
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Creating account...';
+
+  try {
+    // Sign up with Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+          user_type: userType
+        }
+      }
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    if (data.user && !data.user.email_confirmed_at) {
+      // Email confirmation required
+      statusEl.className = 'auth-status auth-status--success';
+      statusEl.textContent = 'Account created! Please check your email to confirm your account before signing in.';
+      form.reset();
+    } else {
+      // Auto-confirmed or already confirmed
+      statusEl.className = 'auth-status auth-status--success';
+      statusEl.textContent = 'Account created successfully! You can now sign in.';
+      setTimeout(() => {
+        window.location.href = 'signin.html';
+      }, 2000);
+    }
+
+  } catch (error) {
+    console.error('Signup error:', error);
+    statusEl.className = 'auth-status auth-status--error';
+
+    if (error.message.includes('already registered')) {
+      statusEl.textContent = 'An account with this email already exists. Try signing in instead.';
+    } else {
+      statusEl.textContent = error.message || 'Failed to create account. Please try again.';
+    }
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Create Account';
+  }
+});
+</script>
+</body>
+</html>
