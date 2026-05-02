@@ -75,14 +75,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (moreBtn && moreMenu) {
     moreBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const open = moreBtn.getAttribute('aria-expanded') === 'true';
-      moreBtn.setAttribute('aria-expanded', !open);
-      moreMenu.hidden = open;
+      const isOpen = !moreMenu.hidden;
+      moreMenu.hidden = isOpen;
+      moreBtn.setAttribute('aria-expanded', String(!isOpen));
     });
     document.addEventListener('click', () => {
-      moreBtn.setAttribute('aria-expanded', 'false');
       moreMenu.hidden = true;
+      moreBtn.setAttribute('aria-expanded', 'false');
     });
+    moreMenu.addEventListener('click', (e) => e.stopPropagation());
   }
 
   // Read session from localStorage (set by signin.html)
