@@ -69,6 +69,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Supabase Authentication & User Features
   // ----------------------------------------------------------------
 
+  // More dropdown toggle
+  const moreBtn = document.querySelector('.nav-more__btn');
+  const moreMenu = document.querySelector('.nav-more__menu');
+  if (moreBtn && moreMenu) {
+    moreBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = moreBtn.getAttribute('aria-expanded') === 'true';
+      moreBtn.setAttribute('aria-expanded', !open);
+      moreMenu.hidden = open;
+    });
+    document.addEventListener('click', () => {
+      moreBtn.setAttribute('aria-expanded', 'false');
+      moreMenu.hidden = true;
+    });
+  }
+
   // Read session from localStorage (set by signin.html)
   function getSession() {
     try {
