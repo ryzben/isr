@@ -103,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       navUtility.innerHTML = `
         <a href="signin.html" class="btn btn--cta btn--sm">Sign In</a>
+        <a href="add-school.html" class="btn btn--cta btn--sm">List Your School</a>
       `;
     }
   };
