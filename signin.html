@@ -262,77 +262,57 @@
 
 </main>
 
-<!-- Supabase SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-
 <script>
-// Supabase Configuration
-const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
+const SUPABASE_URL  = 'https://vprltwjduekabkizlbkv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Auth form handling
 document.getElementById('signinForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  const form = e.target;
+  const form      = e.target;
   const submitBtn = form.querySelector('button[type="submit"]');
-  const statusEl = document.getElementById('auth-status');
+  const statusEl  = document.getElementById('auth-status');
 
-  // Clear previous status
-  statusEl.className = 'auth-status';
+  statusEl.className   = 'auth-status';
   statusEl.textContent = '';
 
-  // Get form data
-  const formData = new FormData(form);
-  const email = formData.get('email').trim();
-  const password = formData.get('password');
+  const email    = form.querySelector('[name="email"]').value.trim();
+  const password = form.querySelector('[name="password"]').value;
 
-  // Basic validation
   if (!email || !password) {
-    statusEl.className = 'auth-status auth-status--error';
+    statusEl.className   = 'auth-status auth-status--error';
     statusEl.textContent = 'Please enter both email and password.';
     return;
   }
 
-  // Show loading state
-  submitBtn.disabled = true;
+  submitBtn.disabled    = true;
   submitBtn.textContent = 'Signing in...';
 
   try {
-    // Sign in with Supabase
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password
+    const res  = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
+      body   : JSON.stringify({ email, password }),
     });
+    const data = await res.json();
 
-    if (error) {
-      throw error;
-    }
+    if (!res.ok) throw new Error(data.error_description || data.msg || 'Sign in failed.');
 
-    if (data.user) {
-      statusEl.className = 'auth-status auth-status--success';
-      statusEl.textContent = 'Sign in successful! Redirecting...';
+    localStorage.setItem('isr_session', JSON.stringify({
+      access_token : data.access_token,
+      refresh_token: data.refresh_token,
+      user         : data.user,
+      expires_at   : Date.now() + data.expires_in * 1000,
+    }));
 
-      // Redirect to account page or home
-      setTimeout(() => {
-        window.location.href = 'account.html';
-      }, 1000);
-    }
+    statusEl.className   = 'auth-status auth-status--success';
+    statusEl.textContent = 'Signed in! Redirecting…';
+    setTimeout(() => { window.location.href = 'account.html'; }, 1000);
 
-  } catch (error) {
-    console.error('Signin error:', error);
-    statusEl.className = 'auth-status auth-status--error';
-
-    if (error.message.includes('Invalid login credentials')) {
-      statusEl.textContent = 'Invalid email or password. Please try again.';
-    } else if (error.message.includes('Email not confirmed')) {
-      statusEl.textContent = 'Please check your email and confirm your account before signing in.';
-    } else {
-      statusEl.textContent = error.message || 'Failed to sign in. Please try again.';
-    }
+  } catch (err) {
+    statusEl.className   = 'auth-status auth-status--error';
+    statusEl.textContent = err.message.includes('Invalid') ? 'Invalid email or password.' : err.message;
   } finally {
-    submitBtn.disabled = false;
+    submitBtn.disabled    = false;
     submitBtn.textContent = 'Sign In';
   }
 });

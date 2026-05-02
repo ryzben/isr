@@ -431,93 +431,59 @@
 
 </main>
 
-<!-- Supabase SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-
 <script>
-// Supabase Configuration
-const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
+const SUPABASE_URL      = 'https://vprltwjduekabkizlbkv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Auth form handling
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  const form = e.target;
+  const form      = e.target;
   const submitBtn = form.querySelector('button[type="submit"]');
-  const statusEl = document.getElementById('auth-status');
+  const statusEl  = document.getElementById('auth-status');
 
-  // Clear previous status
-  statusEl.className = 'auth-status';
+  statusEl.className   = 'auth-status';
   statusEl.textContent = '';
 
-  // Get form data
   const formData = new FormData(form);
-  const email = formData.get('email').trim();
-  const password = formData.get('password');
-  const fullName = formData.get('fullName').trim();
+  const email    = (formData.get('email')    || '').trim();
+  const password = (formData.get('password') || '');
+  const fullName = (formData.get('fullName') || '').trim();
   const userType = formData.get('userType');
 
-  // Basic validation
   if (!email || !password || !fullName || !userType) {
-    statusEl.className = 'auth-status auth-status--error';
-    statusEl.textContent = 'Please fill in all required fields.';
+    statusEl.className   = 'auth-status auth-status--error';
+    statusEl.textContent = 'Please fill in all fields and select a role.';
     return;
   }
-
   if (password.length < 8) {
-    statusEl.className = 'auth-status auth-status--error';
-    statusEl.textContent = 'Password must be at least 8 characters long.';
+    statusEl.className   = 'auth-status auth-status--error';
+    statusEl.textContent = 'Password must be at least 8 characters.';
     return;
   }
 
-  // Show loading state
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Creating account...';
+  submitBtn.disabled    = true;
+  submitBtn.textContent = 'Creating account…';
 
   try {
-    // Sign up with Supabase
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-          user_type: userType
-        }
-      }
+    const res  = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
+      body   : JSON.stringify({ email, password, data: { full_name: fullName, user_type: userType } }),
     });
+    const data = await res.json();
 
-    if (error) {
-      throw error;
-    }
+    if (!res.ok) throw new Error(data.msg || data.message || 'Sign up failed.');
 
-    if (data.user && !data.user.email_confirmed_at) {
-      // Email confirmation required
-      statusEl.className = 'auth-status auth-status--success';
-      statusEl.textContent = 'Account created! Please check your email to confirm your account before signing in.';
-      form.reset();
-    } else {
-      // Auto-confirmed or already confirmed
-      statusEl.className = 'auth-status auth-status--success';
-      statusEl.textContent = 'Account created successfully! You can now sign in.';
-      setTimeout(() => {
-        window.location.href = 'signin.html';
-      }, 2000);
-    }
+    statusEl.className   = 'auth-status auth-status--success';
+    statusEl.textContent = 'Account created! Check your email to confirm before signing in.';
+    form.reset();
 
-  } catch (error) {
-    console.error('Signup error:', error);
-    statusEl.className = 'auth-status auth-status--error';
-
-    if (error.message.includes('already registered')) {
-      statusEl.textContent = 'An account with this email already exists. Try signing in instead.';
-    } else {
-      statusEl.textContent = error.message || 'Failed to create account. Please try again.';
-    }
+  } catch (err) {
+    statusEl.className   = 'auth-status auth-status--error';
+    statusEl.textContent = err.message.includes('already registered')
+      ? 'An account with this email already exists. Try signing in.'
+      : (err.message || 'Failed to create account. Please try again.');
   } finally {
-    submitBtn.disabled = false;
+    submitBtn.disabled    = false;
     submitBtn.textContent = 'Create Account';
   }
 });

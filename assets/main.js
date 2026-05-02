@@ -69,14 +69,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Supabase Authentication & User Features
   // ----------------------------------------------------------------
 
-  // Initialize Supabase
-  const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // Read session from localStorage (set by signin.html)
+  function getSession() {
+    try {
+      const raw = localStorage.getItem('isr_session');
+      if (!raw) return null;
+      const s = JSON.parse(raw);
+      if (Date.now() > s.expires_at) { localStorage.removeItem('isr_session'); return null; }
+      return s;
+    } catch { return null; }
+  }
 
-  // Global user state
-  let currentUser = null;
-  let userProfile = null;
+  const session     = getSession();
+  const currentUser = session?.user || null;
 
   // Update navigation based on auth state
   const updateNavigation = () => {
@@ -84,165 +89,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!navUtility) return;
 
     if (currentUser) {
-      // User is signed in
+      const name = currentUser.user_metadata?.full_name?.split(' ')[0] || 'Account';
       navUtility.innerHTML = `
         <a href="add-school.html" class="btn btn--cta btn--sm">List Your School</a>
-        <a href="account.html">My Account</a>
+        <a href="account.html">Hi, ${name}</a>
         <a href="#" id="signout-link">Sign Out</a>
       `;
-
-      // Add sign out handler
-      document.getElementById('signout-link')?.addEventListener('click', async (e) => {
+      document.getElementById('signout-link')?.addEventListener('click', (e) => {
         e.preventDefault();
-        await supabase.auth.signOut();
+        localStorage.removeItem('isr_session');
         window.location.reload();
       });
     } else {
-      // User is not signed in
       navUtility.innerHTML = `
         <a href="signin.html" class="btn btn--ghost btn--sm">Sign In</a>
       `;
     }
   };
 
-  // Load user favorites
-  const loadUserFavorites = async () => {
-    if (!currentUser) return new Set();
-
-    try {
-      const { data: favorites, error } = await supabase
-        .from('user_favorites')
-        .select('school_id')
-        .eq('user_id', currentUser.id);
-
-      if (error) throw error;
-
-      return new Set(favorites.map(f => f.school_id));
-    } catch (error) {
-      console.error('Error loading favorites:', error);
-      return new Set();
-    }
-  };
-
-  // Toggle favorite for a school
-  window.toggleFavorite = async (schoolId, element) => {
-    if (!currentUser) {
-      // Redirect to sign in
-      window.location.href = 'signin.html';
-      return;
-    }
-
-    try {
-      const { data: existing } = await supabase
-        .from('user_favorites')
-        .select('id')
-        .eq('user_id', currentUser.id)
-        .eq('school_id', schoolId)
-        .single();
-
-      if (existing) {
-        // Remove favorite
-        await supabase
-          .from('user_favorites')
-          .delete()
-          .eq('user_id', currentUser.id)
-          .eq('school_id', schoolId);
-
-        element.classList.remove('is-active');
-      } else {
-        // Add favorite
-        await supabase
-          .from('user_favorites')
-          .insert({
-            user_id: currentUser.id,
-            school_id: schoolId
-          });
-
-        element.classList.add('is-active');
-      }
-    } catch (error) {
-      console.error('Error toggling favorite:', error);
-    }
-  };
-
-  // Submit a review
-  window.submitReview = async (schoolId, rating, reviewText, isAnonymous = false) => {
-    if (!currentUser) {
-      window.location.href = 'signin.html';
-      return;
-    }
-
-    try {
-      const { error } = await supabase
-        .from('reviews')
-        .insert({
-          user_id: currentUser.id,
-          school_id: schoolId,
-          rating: parseInt(rating),
-          review_text: reviewText,
-          is_anonymous: isAnonymous
-        });
-
-      if (error) throw error;
-
-      // Reload page to show new review
-      window.location.reload();
-    } catch (error) {
-      console.error('Error submitting review:', error);
-      alert('Failed to submit review. Please try again.');
-    }
-  };
-
-  // Initialize favorite buttons
-  const initializeFavorites = async () => {
-    const userFavorites = await loadUserFavorites();
-
-    document.querySelectorAll("[data-fav]").forEach((el) => {
-      const schoolId = el.dataset.schoolId;
-      if (schoolId && userFavorites.has(schoolId)) {
-        el.classList.add('is-active');
-      }
-
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.toggleFavorite(schoolId, el);
-      });
-    });
-  };
-
-  // Auth state change handler
-  supabase.auth.onAuthStateChange(async (event, session) => {
-    currentUser = session?.user || null;
-
-    if (currentUser) {
-      // Load user profile
-      try {
-        const { data: profile, error } = await supabase
-          .from('user_profiles')
-          .select('*')
-          .eq('id', currentUser.id)
-          .single();
-
-        if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
-          console.error('Error loading profile:', error);
-        } else {
-          userProfile = profile;
-        }
-      } catch (error) {
-        console.error('Error loading profile:', error);
-      }
-    } else {
-      userProfile = null;
-    }
-
-    updateNavigation();
-    initializeFavorites();
-  });
-
-  // Initialize on page load
-  supabase.auth.getSession().then(({ data: { session } }) => {
-    currentUser = session?.user || null;
-    updateNavigation();
-    initializeFavorites();
-  });
+  updateNavigation();
 });
