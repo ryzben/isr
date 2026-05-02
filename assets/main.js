@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentUser) {
       // User is signed in
       navUtility.innerHTML = `
-        <span>Welcome, ${userProfile?.full_name?.split(' ')[0] || 'User'}</span>
+        <a href="add-school.html" class="btn btn--cta btn--sm">List Your School</a>
         <a href="account.html">My Account</a>
         <a href="#" id="signout-link">Sign Out</a>
       `;
@@ -100,8 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       // User is not signed in
       navUtility.innerHTML = `
-        <a href="signin.html">Sign In</a>
-        <a href="signup.html">Sign Up</a>
+        <a href="signin.html" class="btn btn--ghost btn--sm">Sign In</a>
       `;
     }
   };
