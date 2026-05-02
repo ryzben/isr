@@ -631,6 +631,8 @@
     btn.textContent = 'Submitting…';
 
     const data = new FormData(this);
+    // Remove file inputs — Formspree free plan doesn't support uploads
+    ['photo_1', 'photo_2', 'photo_3'].forEach(k => data.delete(k));
     const res  = await fetch(this.action, {
       method: 'POST',
       body: data,
