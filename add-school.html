@@ -67,6 +67,50 @@
     }
     .notice-banner__text strong { color: var(--primary); }
 
+    /* ── Photo upload ── */
+    .photo-upload-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .photo-slot { cursor: pointer; }
+    .photo-slot__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1.5px dashed var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 28px 16px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      transition: border-color 0.15s, background 0.15s;
+      background: var(--surface);
+    }
+    .photo-slot:hover .photo-slot__inner {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+    .photo-slot__inner.has-file {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+    .photo-slot__inner img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .optional {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
     /* ── Form card ── */
     .form-card {
       background: var(--surface);
@@ -457,6 +501,42 @@
           <p class="hint">📸 Please upload clear photos of your school (building, classrooms, activities) to a shared <strong>Google Drive</strong> or <strong>Dropbox</strong> folder, then paste the link above. Our team will use them when publishing your listing.</p>
         </div>
 
+        <!-- ── Photos ── -->
+        <div class="form-section">
+          <h3 class="form-section__title">Photos <span class="optional">optional</span></h3>
+          <p class="form-section__desc">Add up to 3 photos. The first will be the main image.</p>
+          <div class="photo-upload-grid">
+            <label class="photo-slot">
+              <input type="file" name="photo_1" accept="image/*" style="display:none">
+              <div class="photo-slot__inner" id="slot1">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Photo 1</span>
+              </div>
+            </label>
+            <label class="photo-slot">
+              <input type="file" name="photo_2" accept="image/*" style="display:none">
+              <div class="photo-slot__inner" id="slot2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Photo 2</span>
+              </div>
+            </label>
+            <label class="photo-slot">
+              <input type="file" name="photo_3" accept="image/*" style="display:none">
+              <div class="photo-slot__inner" id="slot3">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Photo 3</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- ── Video ── -->
+        <div class="form-section">
+          <h3 class="form-section__title">Video <span class="optional">optional</span></h3>
+          <p class="form-section__desc">Add a YouTube link for a virtual tour.</p>
+          <input type="url" name="video_url" placeholder="https://www.youtube.com/watch?v=..." class="input">
+        </div>
+
         <!-- ── Submit ── -->
         <div class="submit-area">
           <button type="submit" class="btn btn--primary btn--submit">
@@ -523,6 +603,21 @@
 
 <script src="assets/main.js"></script>
 <script>
+  // Photo preview
+  document.querySelectorAll('.photo-slot input[type="file"]').forEach((input, i) => {
+    input.addEventListener('change', () => {
+      const slot = document.getElementById('slot' + (i + 1));
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        slot.innerHTML = `<img src="${e.target.result}" alt="Preview"><span>${file.name}</span>`;
+        slot.classList.add('has-file');
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
   /* ── Formspree AJAX submit ── */
   document.getElementById('addSchoolForm').addEventListener('submit', async function(e) {
     e.preventDefault();
