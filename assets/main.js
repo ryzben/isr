@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     } else {
       navUtility.innerHTML = `
-        <a href="signin.html" class="btn btn--ghost btn--sm">Sign In</a>
+        <a href="signin.html" class="btn btn--cta btn--sm">Sign In</a>
       `;
     }
   };
