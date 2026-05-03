@@ -3,6 +3,12 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "islamicschoolreview.com" }],
+      "destination": "https://www.islamicschoolreview.com/$1",
+      "permanent": true
+    },
     { "source": "/sign-in", "destination": "/signin", "permanent": true },
     { "source": "/sign-up", "destination": "/signup", "permanent": true },
     { "source": "/join", "destination": "/signup", "permanent": true },
