@@ -346,6 +346,7 @@
 
             <a id="schoolWebsiteLink" href="#" class="btn btn--primary btn--block" target="_blank" rel="noopener" hidden>Visit school website</a>
             <a id="schoolPhoneLink" href="#" class="btn btn--ghost btn--block" hidden style="margin-top:8px;">Call school</a>
+            <a id="schoolReviewLink" href="#" class="btn btn--ghost btn--block" style="margin-top:8px;">✏️ Write a review</a>
             <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:ryzben@gmail.com">Email us</a> — we respond within 24 hours.</p>
           </div>
         </aside>
@@ -640,6 +641,10 @@
     }
     const sideEdit = $("schoolSidebarEditMailto");
     if (sideEdit) sideEdit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
+
+    // ---- WRITE A REVIEW LINK ----
+    const reviewLink = $("schoolReviewLink");
+    if (reviewLink) reviewLink.href = `write-review.html?school_id=${encodeURIComponent(s.id)}&school_name=${encodeURIComponent(s.name)}`;
 
     // ---- ABOUT + FACTS ----
     $("schoolAboutHeading").textContent = `About ${s.name}`;

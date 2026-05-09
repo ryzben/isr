@@ -304,7 +304,7 @@
     <div class="form-layout">
 
       <!-- Main form -->
-      <form class="form-card" onsubmit="event.preventDefault(); window.location.href='confirmation.html?action=review';">
+      <form class="form-card" id="reviewForm">
         <h2>Write your review</h2>
         <p class="muted">All fields are required unless marked optional.</p>
 
@@ -576,5 +576,84 @@
 </footer>
 
 <script src="assets/main.js"></script>
+<script>
+(async () => {
+  const SUPABASE_URL     = 'https://vprltwjduekabkizlbkv.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
+
+  // Parse URL params
+  const params     = new URLSearchParams(location.search);
+  const schoolId   = params.get('school_id');
+  const schoolName = params.get('school_name') || 'this school';
+
+  // Require sign-in
+  let session = null;
+  try { session = JSON.parse(localStorage.getItem('isr_session') || 'null'); } catch {}
+  if (!session || Date.now() > session.expires_at) {
+    localStorage.removeItem('isr_session');
+    location.href = `signin.html?next=${encodeURIComponent(location.href)}`;
+    return;
+  }
+
+  // Redirect if no school_id
+  if (!schoolId) { location.replace('directory.html'); return; }
+
+  // Update heading and breadcrumb with school name
+  const decoded = decodeURIComponent(schoolName);
+  document.title = `Write a review — ${decoded} — Islamic School Review`;
+  const h1 = document.querySelector('.review-hero h1');
+  if (h1) h1.textContent = `Review ${decoded}`;
+  document.querySelectorAll('.breadcrumbs a[href="school.html"]').forEach(a => {
+    a.textContent = decoded;
+    a.href = `school.html?id=${encodeURIComponent(schoolId)}`;
+  });
+
+  // Submit handler
+  document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const rating = parseInt(this.querySelector('[name="rating"]:checked')?.value || '0', 10);
+    const title  = this.querySelector('#title')?.value.trim();
+    const body   = this.querySelector('#body')?.value.trim();
+
+    if (!rating) { alert('Please select an overall rating.'); btn.disabled = false; btn.textContent = 'Submit review'; return; }
+    if (!title)  { alert('Please add a review headline.');    btn.disabled = false; btn.textContent = 'Submit review'; return; }
+    if (!body || body.length < 100) { alert('Please write at least 100 characters in your review.'); btn.disabled = false; btn.textContent = 'Submit review'; return; }
+
+    const user = session.user;
+    const res  = await fetch(`${SUPABASE_URL}/rest/v1/reviews`, {
+      method : 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'apikey'       : SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${session.access_token}`,
+        'Prefer'       : 'return=minimal',
+      },
+      body: JSON.stringify({
+        school_id      : schoolId,
+        user_id        : user.id,
+        user_name      : user.user_metadata?.full_name || user.email,
+        user_email     : user.email,
+        rating,
+        title,
+        content        : body,
+        verified_parent: false,
+      }),
+    });
+
+    if (res.ok) {
+      location.href = `confirmation.html?action=review&school=${encodeURIComponent(schoolId)}`;
+    } else {
+      const err = await res.json().catch(() => ({}));
+      alert('Failed to submit: ' + (err.message || err.details || 'Please try again.'));
+      btn.disabled = false;
+      btn.textContent = 'Submit review';
+    }
+  });
+})();
+</script>
 </body>
 </html>

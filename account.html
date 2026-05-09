@@ -1035,22 +1035,23 @@
     });
   })();
 
-  // Initialize when page loads
-  document.addEventListener('DOMContentLoaded', function() {
+  // Initialize when page loads — validate session, bridge tokens into SDK, then load data
+  document.addEventListener('DOMContentLoaded', async function() {
+    let session = null;
+    try { session = JSON.parse(localStorage.getItem('isr_session') || 'null'); } catch {}
+    if (!session || Date.now() > session.expires_at) {
+      localStorage.removeItem('isr_session');
+      window.location.href = 'signin.html';
+      return;
+    }
+    // Inject tokens into the Supabase SDK so authenticated queries work
+    await supabase.auth.setSession({
+      access_token: session.access_token,
+      refresh_token: session.refresh_token,
+    });
     loadUserProfile();
-    loadFavorites(); // Load favorites by default since saved tab is active
+    loadFavorites();
   });
-
-  // Session check — redirect to sign in if not logged in
-  (function() {
-    try {
-      const s = JSON.parse(localStorage.getItem('isr_session') || 'null');
-      if (!s || Date.now() > s.expires_at) {
-        localStorage.removeItem('isr_session');
-        window.location.href = 'signin.html';
-      }
-    } catch { window.location.href = 'signin.html'; }
-  })();
 
   // Sign out
   document.getElementById('signout-btn')?.addEventListener('click', (e) => {

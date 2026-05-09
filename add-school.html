@@ -67,7 +67,7 @@
     }
     .notice-banner__text strong { color: var(--primary); }
 
-    /* ── Photo upload ── */
+    /* ── Photo upload slots ── */
     .photo-upload-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -85,6 +85,7 @@
       padding: 28px 16px;
       color: var(--muted);
       font-size: 0.85rem;
+      text-align: center;
       transition: border-color 0.15s, background 0.15s;
       background: var(--surface);
     }
@@ -104,12 +105,13 @@
       object-fit: cover;
       border-radius: 6px;
     }
-    .optional {
-      font-size: 0.75rem;
-      font-weight: 400;
+    .upload-status {
+      font-size: 0.85rem;
+      margin-top: 10px;
       color: var(--muted);
-      margin-left: 6px;
     }
+    .upload-status.uploading { color: var(--primary); }
+    .upload-status.error     { color: var(--danger); }
 
     /* ── Form card ── */
     .form-card {
@@ -497,49 +499,34 @@
         </div>
 
         <!-- ── Photos ── -->
-        <p class="field-section">School photos <span style="font-weight:400; text-transform:none; letter-spacing:0; font-size:0.85rem;">(optional)</span></p>
+        <p class="field-section">School photos <span style="font-weight:400; text-transform:none; letter-spacing:0; font-size:0.85rem;">(optional, up to 3)</span></p>
 
         <div class="field">
-          <label for="photo_link">Photo link <span class="opt">(optional)</span></label>
-          <input id="photo_link" name="photo_link" class="input" type="url"
-            placeholder="e.g. https://drive.google.com/drive/folders/…" />
-          <p class="hint">📸 Please upload clear photos of your school (building, classrooms, activities) to a shared <strong>Google Drive</strong> or <strong>Dropbox</strong> folder, then paste the link above. Our team will use them when publishing your listing.</p>
-        </div>
-
-        <!-- ── Photos ── -->
-        <div class="form-section">
-          <h3 class="form-section__title">Photos <span class="optional">optional</span></h3>
-          <p class="form-section__desc">Add up to 3 photos. The first will be the main image.</p>
           <div class="photo-upload-grid">
             <label class="photo-slot">
-              <input type="file" name="photo_1" accept="image/*" style="display:none">
+              <input type="file" id="photo_file_1" accept="image/*" style="display:none">
               <div class="photo-slot__inner" id="slot1">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 <span>Photo 1</span>
               </div>
             </label>
             <label class="photo-slot">
-              <input type="file" name="photo_2" accept="image/*" style="display:none">
+              <input type="file" id="photo_file_2" accept="image/*" style="display:none">
               <div class="photo-slot__inner" id="slot2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 <span>Photo 2</span>
               </div>
             </label>
             <label class="photo-slot">
-              <input type="file" name="photo_3" accept="image/*" style="display:none">
+              <input type="file" id="photo_file_3" accept="image/*" style="display:none">
               <div class="photo-slot__inner" id="slot3">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 <span>Photo 3</span>
               </div>
             </label>
           </div>
-        </div>
-
-        <!-- ── Video ── -->
-        <div class="form-section">
-          <h3 class="form-section__title">Video <span class="optional">optional</span></h3>
-          <p class="form-section__desc">Add a YouTube link for a virtual tour.</p>
-          <input type="url" name="video_url" placeholder="https://www.youtube.com/watch?v=..." class="input">
+          <p class="hint">📸 Photos are uploaded automatically when you submit. Clear photos of the building, classrooms, and activities help families get a feel for your school.</p>
+          <p class="upload-status" id="uploadStatus"></p>
         </div>
 
         <!-- ── Submit ── -->
@@ -608,43 +595,112 @@
 
 <script src="assets/main.js"></script>
 <script>
-  // Photo preview
-  document.querySelectorAll('.photo-slot input[type="file"]').forEach((input, i) => {
-    input.addEventListener('change', () => {
-      const slot = document.getElementById('slot' + (i + 1));
-      const file = input.files[0];
+  const SUPABASE_URL      = 'https://vprltwjduekabkizlbkv.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
+  const STORAGE_BUCKET    = 'school-photos';
+
+  /* ── Photo slot preview ── */
+  [1, 2, 3].forEach(i => {
+    document.getElementById('photo_file_' + i).addEventListener('change', function() {
+      const slot = document.getElementById('slot' + i);
+      const file = this.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = (e) => {
-        slot.innerHTML = `<img src="${e.target.result}" alt="Preview"><span>${file.name}</span>`;
+        slot.innerHTML = `<img src="${e.target.result}" alt="Preview"><span style="font-size:0.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">${file.name}</span>`;
         slot.classList.add('has-file');
       };
       reader.readAsDataURL(file);
     });
   });
 
+  /* ── Upload a single file to Supabase Storage, return public URL ── */
+  async function uploadPhoto(file, index) {
+    const ext  = file.name.split('.').pop();
+    const path = `submissions/${Date.now()}_${index}.${ext}`;
+    const res  = await fetch(`${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${path}`, {
+      method : 'POST',
+      headers: {
+        'apikey'       : SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type' : file.type,
+        'x-upsert'     : 'false',
+      },
+      body: file,
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `Upload failed (${res.status})`);
+    }
+    return `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${path}`;
+  }
+
   /* ── Formspree AJAX submit ── */
   document.getElementById('addSchoolForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    btn.disabled = true;
+    const btn      = this.querySelector('button[type="submit"]');
+    const statusEl = document.getElementById('uploadStatus');
+    btn.disabled   = true;
     btn.textContent = 'Submitting…';
 
-    const data = new FormData(this);
-    // Remove file inputs — Formspree free plan doesn't support uploads
-    ['photo_1', 'photo_2', 'photo_3'].forEach(k => data.delete(k));
-    const res  = await fetch(this.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
+    const data  = new FormData(this);
+    const files = [1, 2, 3]
+      .map(i => document.getElementById('photo_file_' + i).files[0])
+      .filter(Boolean);
+
+    // Upload any selected photos to Supabase Storage
+    if (files.length) {
+      statusEl.className   = 'upload-status uploading';
+      statusEl.textContent = `Uploading ${files.length} photo${files.length > 1 ? 's' : ''}…`;
+      try {
+        const urls = await Promise.all(files.map((f, i) => uploadPhoto(f, i + 1)));
+        urls.forEach((url, i) => data.append('photo_url_' + (i + 1), url));
+        statusEl.textContent = '';
+      } catch (err) {
+        statusEl.className   = 'upload-status error';
+        statusEl.textContent = 'Photo upload failed: ' + err.message + '. Submitting without photos.';
+      }
+    }
+
+    const res = await fetch(this.action, {
+      method : 'POST',
+      body   : data,
+      headers: { 'Accept': 'application/json' },
     });
 
     if (res.ok) {
+      // Also save to Supabase submissions table for the admin inbox
+      const photoUrls = [1, 2, 3].map(i => data.get('photo_url_' + i) || null);
+      const programs  = data.getAll('programs').join(', ') || null;
+      await fetch(`${SUPABASE_URL}/rest/v1/school_submissions`, {
+        method : 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+          'apikey'       : SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer'       : 'return=minimal',
+        },
+        body: JSON.stringify({
+          school_name  : data.get('school_name'),
+          city         : data.get('city'),
+          state        : data.get('state'),
+          phone        : data.get('phone')        || null,
+          website      : data.get('website')      || null,
+          description  : data.get('description')  || null,
+          contact_name : data.get('contact_name'),
+          contact_email: data.get('contact_email'),
+          programs,
+          photo_url_1  : photoUrls[0],
+          photo_url_2  : photoUrls[1],
+          photo_url_3  : photoUrls[2],
+        }),
+      }).catch(() => {}); // non-blocking — Formspree email is the primary notification
+
       this.style.display = 'none';
       document.getElementById('successScreen').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      btn.disabled = false;
+      btn.disabled    = false;
       btn.textContent = 'Submit school listing';
       alert('Something went wrong — please try again or email us at schools@islamicschoolreview.com');
     }
