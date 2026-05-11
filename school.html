@@ -385,7 +385,7 @@
             <!-- Compare picker panel -->
             <div id="comparePicker" style="display:none;margin-top:10px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:12px;">
               <p style="font-size:0.82rem;font-weight:600;margin:0 0 8px;color:var(--ink);">Compare with another school:</p>
-              <input id="compareSearch" type="text" placeholder="Search by name or city…"
+              <input id="compareSearch" type="text" placeholder="Search by name, state, city or zip…"
                 style="width:100%;padding:8px 10px;border:1.5px solid var(--line-strong);border-radius:var(--r-md);font:inherit;font-size:0.88rem;outline:none;margin-bottom:8px;"
                 oninput="filterCompareList(this.value)" />
               <div id="comparePickerList" style="max-height:200px;overflow-y:auto;"></div>
@@ -859,7 +859,8 @@ function _renderPicker(q) {
     ? _allSchools.filter(s =>
         s.name.toLowerCase().includes(term) ||
         s.city.toLowerCase().includes(term) ||
-        s.state.toLowerCase().includes(term))
+        s.state.toLowerCase().includes(term) ||
+        (s.address || '').toLowerCase().includes(term))
     : _allSchools;
 
   if (!shown.length) {
@@ -896,7 +897,7 @@ async function toggleComparePicker() {
   list.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);text-align:center;padding:8px 0;">Loading…</p>';
   try {
     const res = await fetch(
-      'https://vprltwjduekabkizlbkv.supabase.co/rest/v1/schools?order=name.asc&select=id,name,city,state',
+      'https://vprltwjduekabkizlbkv.supabase.co/rest/v1/schools?order=name.asc&select=id,name,city,state,address',
       { headers: { 'apikey': _SB_KEY, 'Authorization': `Bearer ${_SB_KEY}` } }
     );
     const data = await res.json();
