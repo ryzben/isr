@@ -834,7 +834,9 @@
       renderSchool(school);
       renderSimilar(school);
       loadReviews(school.id, school.name);
-      initComparePicker(school.id);
+      // Store school ID on compare button so picker can read it reliably
+      const cb = document.getElementById('compareBtn');
+      if (cb) cb.dataset.schoolId = school.id;
     } catch (err) {
       clearTimeout(watchdog);
       console.error("School page failed to load:", err);
@@ -844,20 +846,18 @@
 </script>
 
 <script>
-// Compare picker — shows list of schools to compare with
-let _currentSchoolId = '';
-
-function initComparePicker(schoolId) {
-  _currentSchoolId = schoolId;
-}
-
 async function toggleComparePicker() {
+  const btn    = document.getElementById('compareBtn');
   const picker = document.getElementById('comparePicker');
+  const currentId = btn.dataset.schoolId || '';
+
+  // Toggle open/close
   if (picker.style.display !== 'none') {
     picker.style.display = 'none';
     return;
   }
   picker.style.display = 'block';
+
   const list = document.getElementById('comparePickerList');
   list.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);text-align:center;padding:8px 0;">Loading schools…</p>';
 
@@ -870,17 +870,18 @@ async function toggleComparePicker() {
       }}
     );
     const schools = await res.json();
-    const others = schools.filter(s => s.id !== _currentSchoolId);
+    // Exclude the current school from the list
+    const others = schools.filter(s => s.id !== currentId);
 
     list.innerHTML = others.map(s => `
-      <a href="compare?ids=${encodeURIComponent(_currentSchoolId)},${encodeURIComponent(s.id)}"
-         style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--ink);font-size:0.85rem;border-bottom:1px solid var(--line);"
+      <a href="compare?ids=${encodeURIComponent(currentId)},${encodeURIComponent(s.id)}"
+         style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:4px;text-decoration:none;color:var(--ink);font-size:0.85rem;border-bottom:1px solid var(--line);"
          onmouseover="this.style.background='var(--primary-soft)'" onmouseout="this.style.background=''">
         <span><strong>${s.name}</strong><br><span style="color:var(--muted);font-size:0.78rem;">${s.city}, ${s.state}</span></span>
         <span style="color:var(--primary);font-size:0.8rem;font-weight:600;white-space:nowrap;margin-left:8px;">Compare →</span>
       </a>`).join('');
   } catch(e) {
-    list.innerHTML = '<p style="font-size:0.82rem;color:var(--danger);text-align:center;">Failed to load schools.</p>';
+    list.innerHTML = '<p style="font-size:0.82rem;color:var(--danger);text-align:center;">Failed to load.</p>';
   }
 }
 </script>
