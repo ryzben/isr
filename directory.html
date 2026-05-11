@@ -1009,8 +1009,11 @@
     updateTray();
   }
 
-  // Restore tray from localStorage on page load
-  document.addEventListener('DOMContentLoaded', () => updateTray());
+  // Clear compare list on every page load — fresh start each visit
+  document.addEventListener('DOMContentLoaded', () => {
+    saveCompareList([]);
+    updateTray();
+  });
 </script>
 
 </body>
