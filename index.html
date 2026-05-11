@@ -134,7 +134,7 @@
     }
     .hero-search__row {
       display: grid;
-      grid-template-columns: 2.2fr 1.2fr auto;
+      grid-template-columns: 1.4fr 1.4fr 1.2fr auto;
       gap: 0;
       align-items: stretch;
     }
@@ -1583,11 +1583,12 @@
 <script src="assets/main.js"></script>
 <script>
 // Populate hero city dropdown from Supabase when state changes
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
   const stateSel = document.getElementById('hero-state');
   const citySel  = document.getElementById('hero-city');
+  if (!stateSel || !citySel) return;
 
   async function loadCities(stateCode) {
     citySel.innerHTML = '<option value="">Any city</option>';
@@ -1601,11 +1602,11 @@
       const cities = [...new Set(rows.map(r => r.city).filter(Boolean))].sort();
       citySel.innerHTML = '<option value="">Any city</option>' +
         cities.map(c => `<option value="${c}">${c}</option>`).join('');
-    } catch {}
+    } catch(e) { console.error('City load failed:', e); }
   }
 
   stateSel.addEventListener('change', () => loadCities(stateSel.value));
-})();
+});
 </script>
 </body>
 </html>
