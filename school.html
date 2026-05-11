@@ -467,7 +467,7 @@
   }
 
   function showNotFound(reason) {
-    $("schoolSkeleton").hidden = true;
+    $("schoolSkeleton").style.display = "none";
     $("schoolMain").hidden = true;
     const nf = $("schoolNotFound");
     nf.hidden = false;
@@ -666,7 +666,8 @@
     $("schoolContact").innerHTML = contact.join("");
 
     // ---- REVEAL ----
-    $("schoolSkeleton").hidden = true;
+    // Use display:none directly — CSS `display:grid` on .school-skel overrides the `hidden` attribute
+    $("schoolSkeleton").style.display = "none";
     $("schoolMain").hidden = false;
   }
 
