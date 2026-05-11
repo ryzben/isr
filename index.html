@@ -856,11 +856,6 @@
             <label class="hero-search__label" for="hero-state">State</label>
             <select id="hero-state" name="state" class="hero-search__select">
               <option value="">Any state</option>
-              <option value="CA">California</option>
-              <option value="FL">Florida</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NY">New York</option>
-              <option value="TX">Texas</option>
             </select>
           </div>
         </div>
@@ -1582,13 +1577,24 @@
 
 <script src="assets/main.js"></script>
 <script>
-// Populate hero city dropdown from Supabase when state changes
-document.addEventListener('DOMContentLoaded', function() {
+// Populate hero state + city dropdowns dynamically from Supabase
+document.addEventListener('DOMContentLoaded', async function() {
   const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
+  const STATE_NAMES = { FL:'Florida', TX:'Texas', CA:'California', NY:'New York', NJ:'New Jersey', IA:'Iowa', IL:'Illinois', MI:'Michigan', VA:'Virginia', MD:'Maryland', GA:'Georgia', OH:'Ohio', PA:'Pennsylvania', MN:'Minnesota', CO:'Colorado', WA:'Washington' };
   const stateSel = document.getElementById('hero-state');
   const citySel  = document.getElementById('hero-city');
   if (!stateSel || !citySel) return;
+
+  // Load states dynamically
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/schools?select=state&order=state.asc`,
+      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+    const rows = await res.json();
+    const states = [...new Set(rows.map(r => r.state).filter(Boolean))].sort();
+    stateSel.innerHTML = '<option value="">Any state</option>' +
+      states.map(s => `<option value="${s}">${STATE_NAMES[s] || s}</option>`).join('');
+  } catch(e) { console.error('State load failed:', e); }
 
   async function loadCities(stateCode) {
     citySel.innerHTML = '<option value="">Any city</option>';
