@@ -126,7 +126,7 @@
 
     .dir-search-bar {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr auto;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
       gap: 10px;
       padding: 16px;
       background: var(--surface);
@@ -135,6 +135,23 @@
       box-shadow: var(--shadow-sm);
       margin-top: 20px;
     }
+    .dir-search-bar .search-input-wrap {
+      position: relative;
+    }
+    .dir-search-bar .search-input-wrap svg {
+      position: absolute;
+      left: 10px; top: 50%; transform: translateY(-50%);
+      width: 16px; height: 16px;
+      color: var(--muted); pointer-events: none;
+    }
+    .dir-search-bar .search-input {
+      width: 100%; padding: 10px 12px 10px 32px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      font: inherit; font-size: 0.95rem;
+      outline: none;
+    }
+    .dir-search-bar .search-input:focus { border-color: var(--primary); }
 
     /* Photo-driven school cards (replaces gradient placeholders) */
     .result__media--photo {
@@ -471,6 +488,7 @@
       .dir-layout { grid-template-columns: 1fr; }
       .filters { position: static; max-height: none; }
       .dir-search-bar { grid-template-columns: 1fr 1fr; }
+      .dir-search-bar .search-input-wrap { grid-column: 1 / -1; }
       .dir-search-bar .btn { grid-column: 1 / -1; }
       .result { grid-template-columns: 140px 1fr; }
       .result__side { display: none; }
@@ -536,6 +554,10 @@
     <p>Browse Islamic schools across Florida, Texas, California, New York, and New Jersey. Filter by state, city, and grade level to find the right fit for your family.</p>
 
     <form id="dirSearch" class="dir-search-bar" autocomplete="off">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="searchInput" type="text" class="search-input" placeholder="Search by name, city or zip…" aria-label="Search schools" />
+      </div>
       <select class="select" name="state" aria-label="State">
         <option value="">All states</option>
         <!-- options injected by JS from data -->
@@ -785,9 +807,11 @@
   }
 
   // ---- Form ↔ URL state ----
+  const searchInput = document.getElementById('searchInput');
+
   function readForm() {
     return {
-      q:     currentQ,
+      q:     (searchInput ? searchInput.value.trim() : currentQ),
       state: stateSel.value || "",
       city:  citySel.value  || "",
       grade: gradeSel.value || "",
@@ -896,6 +920,7 @@
 
   function clearFilters() {
     currentQ = "";
+    if (searchInput) searchInput.value = "";
     stateSel.value = "";
     rebuildCityOptions("", "").then(() => {
       gradeSel.value = "";
@@ -912,6 +937,7 @@
   citySel.addEventListener("change", refresh);
   gradeSel.addEventListener("change", refresh);
   sortSelect.addEventListener("change", refresh);
+  if (searchInput) searchInput.addEventListener("input", refresh);
 
   // ---- Boot ----
   (async () => {
@@ -925,6 +951,7 @@
       // Seed form from URL params (deep-link from homepage hero).
       const initial = readUrl();
       currentQ       = initial.q     || "";
+      if (searchInput && initial.q) searchInput.value = initial.q;
       stateSel.value = initial.state || "";
       gradeSel.value = initial.grade || "";
       // City list depends on selected state, so populate it last.
