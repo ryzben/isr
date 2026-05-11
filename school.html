@@ -381,7 +381,13 @@
             <a id="schoolWebsiteLink" href="#" class="btn btn--primary btn--block" target="_blank" rel="noopener" hidden>Visit school website</a>
             <a id="schoolPhoneLink" href="#" class="btn btn--ghost btn--block" hidden style="margin-top:8px;">Call school</a>
             <a id="schoolReviewLink" href="#" class="btn btn--ghost btn--block" style="margin-top:8px;">✏️ Write a review</a>
-            <a id="compareBtn" href="directory" class="btn btn--ghost btn--block" style="margin-top:8px;">⚖️ Compare schools</a>
+            <button id="compareBtn" class="btn btn--ghost btn--block" style="margin-top:8px;" onclick="toggleComparePicker()">⚖️ Compare schools</button>
+            <!-- Compare picker panel -->
+            <div id="comparePicker" style="display:none;margin-top:10px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:12px;">
+              <p style="font-size:0.82rem;font-weight:600;margin:0 0 8px;color:var(--ink);">Compare with:</p>
+              <div id="comparePickerList" style="max-height:220px;overflow-y:auto;"></div>
+              <a href="directory" style="font-size:0.8rem;color:var(--primary);margin-top:8px;display:block;text-align:center;">See all schools →</a>
+            </div>
             <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:ryzben@gmail.com">Email us</a> — we respond within 24 hours.</p>
           </div>
         </aside>
@@ -828,6 +834,7 @@
       renderSchool(school);
       renderSimilar(school);
       loadReviews(school.id, school.name);
+      initComparePicker(school.id);
     } catch (err) {
       clearTimeout(watchdog);
       console.error("School page failed to load:", err);
@@ -836,6 +843,47 @@
   })();
 </script>
 
+<script>
+// Compare picker — shows list of schools to compare with
+let _currentSchoolId = '';
+
+function initComparePicker(schoolId) {
+  _currentSchoolId = schoolId;
+}
+
+async function toggleComparePicker() {
+  const picker = document.getElementById('comparePicker');
+  if (picker.style.display !== 'none') {
+    picker.style.display = 'none';
+    return;
+  }
+  picker.style.display = 'block';
+  const list = document.getElementById('comparePickerList');
+  list.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);text-align:center;padding:8px 0;">Loading schools…</p>';
+
+  try {
+    const res = await fetch(
+      'https://vprltwjduekabkizlbkv.supabase.co/rest/v1/schools?order=name.asc&select=id,name,city,state',
+      { headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA'
+      }}
+    );
+    const schools = await res.json();
+    const others = schools.filter(s => s.id !== _currentSchoolId);
+
+    list.innerHTML = others.map(s => `
+      <a href="compare?ids=${encodeURIComponent(_currentSchoolId)},${encodeURIComponent(s.id)}"
+         style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--ink);font-size:0.85rem;border-bottom:1px solid var(--line);"
+         onmouseover="this.style.background='var(--primary-soft)'" onmouseout="this.style.background=''">
+        <span><strong>${s.name}</strong><br><span style="color:var(--muted);font-size:0.78rem;">${s.city}, ${s.state}</span></span>
+        <span style="color:var(--primary);font-size:0.8rem;font-weight:600;white-space:nowrap;margin-left:8px;">Compare →</span>
+      </a>`).join('');
+  } catch(e) {
+    list.innerHTML = '<p style="font-size:0.82rem;color:var(--danger);text-align:center;">Failed to load schools.</p>';
+  }
+}
+</script>
 </body>
 </html>
                                                                                                     
