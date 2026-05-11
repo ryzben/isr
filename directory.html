@@ -702,7 +702,7 @@
     const desc = s.description ? escapeHtml(s.description) : "";
 
     return `
-      <a href="school.html?id=${encodeURIComponent(s.id)}" class="result"
+      <a href="school?id=${encodeURIComponent(s.id)}" class="result"
          data-city="${escapeHtml(s.city || "")}" data-state="${escapeHtml(s.state || "")}">
         <div class="${photoCls}" ${photo}>
           <span>${initials(s.name)}</span>

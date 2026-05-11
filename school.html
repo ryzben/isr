@@ -244,7 +244,7 @@
   <div class="container site-header__inner">
     <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
     <nav class="nav-primary" aria-label="Primary">
-      <a href="directory.html">Directory</a>
+      <a href="directory">Directory</a>
       <a href="blog.html">Resources</a>
       <a href="about.html">About</a>
       <div class="nav-more">
@@ -258,7 +258,7 @@
     </nav>
     <div class="nav-utility">
       <span class="lang-toggle">🌐 EN</span>
-      <a href="signin.html" class="btn btn--cta btn--sm">Sign In</a><a href="add-school.html" class="btn btn--cta btn--sm">List Your School</a>
+      <a href="signin" class="btn btn--cta btn--sm">Sign In</a><a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
     </div>
   </div>
 </header>
@@ -292,7 +292,7 @@
 <section class="not-found" id="schoolNotFound" hidden>
   <h1>School not found</h1>
   <p id="schoolNotFoundMsg">We couldn't find a school matching that link.</p>
-  <a href="directory.html" class="btn btn--primary">Back to the school directory</a>
+  <a href="directory" class="btn btn--primary">Back to the school directory</a>
 </section>
 
 <!-- ========== School profile (filled in by JS) ========== -->
@@ -322,7 +322,7 @@
               <strong>Is this your school?</strong>
               <p>Tuition, contact info, and other details on this page come from publicly available sources. <span id="schoolClaimNudge"></span> can claim this listing to update information, respond to reviews, and post jobs — free in under 5 minutes.</p>
             </div>
-            <a id="schoolClaimLink" href="add-school.html?mode=claim" class="btn btn--accent btn--sm">Claim this listing →</a>
+            <a id="schoolClaimLink" href="add-school?mode=claim" class="btn btn--accent btn--sm">Claim this listing →</a>
           </div>
 
           <div class="claim-banner" id="schoolVerifiedBanner" hidden style="background: var(--primary-soft); border-color: var(--primary);">
@@ -385,7 +385,7 @@
           <h3>Helpful next steps</h3>
           <ul style="list-style:none; padding:0; margin:0;">
             <li style="padding:10px 0; border-bottom:1px solid var(--line);">
-              <a href="directory.html">← Back to all schools</a>
+              <a href="directory">← Back to all schools</a>
             </li>
             <li style="padding:10px 0;">
               <a id="schoolEditMailto" href="mailto:ryzben@gmail.com">Suggest an edit</a>
@@ -410,9 +410,9 @@
         </form>
       </div>
       <div class="footer-col"><h4>Directory</h4><ul>
-        <li><a href="directory.html">Browse all schools</a></li>
-        <li><a href="directory.html">Browse by state</a></li>
-        <li><a href="add-school.html">Claim your school</a></li>
+        <li><a href="directory">Browse all schools</a></li>
+        <li><a href="directory">Browse by state</a></li>
+        <li><a href="add-school">Claim your school</a></li>
       </ul></div>
       <div class="footer-col"><h4>Resources</h4><ul>
         <li><a href="blog.html">Guides &amp; stories</a></li>
@@ -503,7 +503,7 @@
   }
 
   function setJsonLd(school) {
-    const url = `${SITE}/school.html?id=${encodeURIComponent(school.id)}`;
+    const url = `${SITE}/school?id=${encodeURIComponent(school.id)}`;
     const data = {
       "@context": "https://schema.org",
       "@type": "School",
@@ -527,7 +527,7 @@
   }
 
   function renderSchool(s) {
-    const url = `${SITE}/school.html?id=${encodeURIComponent(s.id)}`;
+    const url = `${SITE}/school?id=${encodeURIComponent(s.id)}`;
     const where = [s.city, s.state].filter(Boolean).join(", ");
 
     // ---- HEAD ----
@@ -545,11 +545,11 @@
 
     // ---- BREADCRUMBS ----
     const stateName = STATE_NAMES[s.state] || s.state || "";
-    const stateHref = s.state ? `directory.html?state=${encodeURIComponent(s.state)}` : "directory.html";
-    const cityHref  = s.city  ? `directory.html?city=${encodeURIComponent(s.city)}`   : "directory.html";
+    const stateHref = s.state ? `directory?state=${encodeURIComponent(s.state)}` : "directory";
+    const cityHref  = s.city  ? `directory?city=${encodeURIComponent(s.city)}`   : "directory";
     $("schoolBreadcrumbs").innerHTML = `
       <a href="index.html">Home</a> ·
-      <a href="directory.html">Directory</a>
+      <a href="directory">Directory</a>
       ${stateName ? ` · <a href="${stateHref}">${escapeHtml(stateName)}</a>` : ""}
       ${s.city ? ` · <a href="${cityHref}">${escapeHtml(s.city)}</a>` : ""}
       · <span>${escapeHtml(s.name)}</span>
@@ -610,7 +610,7 @@
       `What needs to change (please be specific — address, phone, grades, tuition, photo, anything):\n\n` +
       `Your name and role at the school:\n\n`;
     const claim = $("schoolClaimLink");
-    if (claim) claim.href = `add-school.html?mode=claim&school=${enc(s.name)}`;
+    if (claim) claim.href = `add-school?mode=claim&school=${enc(s.name)}`;
     const edit = $("schoolEditMailto");
     if (edit) edit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
     const ood = $("schoolOutOfDateMailto");
@@ -644,7 +644,7 @@
 
     // ---- WRITE A REVIEW LINK ----
     const reviewLink = $("schoolReviewLink");
-    if (reviewLink) reviewLink.href = `write-review.html?school_id=${encodeURIComponent(s.id)}&school_name=${encodeURIComponent(s.name)}`;
+    if (reviewLink) reviewLink.href = `write-review?school_id=${encodeURIComponent(s.id)}&school_name=${encodeURIComponent(s.name)}`;
 
     // ---- ABOUT + FACTS ----
     $("schoolAboutHeading").textContent = `About ${s.name}`;
@@ -676,7 +676,7 @@
       ? `style="background-image:url('${escapeHtml(s.photo_url)}'); background-size:cover; background-position:center;"`
       : `style="background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%);"`;
     return `
-      <a href="school.html?id=${encodeURIComponent(s.id)}" class="card school-card">
+      <a href="school?id=${encodeURIComponent(s.id)}" class="card school-card">
         <div class="card__media" ${photo}>${s.photo_url ? "" : `<span>${escapeHtml(initials(s.name))}</span>`}</div>
         <div class="card__body">
           <h3 class="card__title">${escapeHtml(s.name)}</h3>
@@ -708,13 +708,18 @@
   (async () => {
     const id = getIdFromUrl();
     if (!id) {
-      // No school in the URL — bounce to the directory rather than
-      // stranding the visitor on an empty profile page.
-      location.replace("directory.html");
+      location.replace("directory");
       return;
     }
+
+    // Watchdog — if data hasn't loaded in 8 s, show error rather than infinite skeleton.
+    const watchdog = setTimeout(() => {
+      showNotFound("This school's data is taking too long to load. Please try refreshing the page.");
+    }, 8000);
+
     try {
       const school = await getSchoolById(id);
+      clearTimeout(watchdog);
       if (!school) {
         showNotFound(`We couldn't find a school with ID "${id}". It may have been removed or the link may be out of date.`);
         return;
@@ -722,6 +727,7 @@
       renderSchool(school);
       renderSimilar(school);
     } catch (err) {
+      clearTimeout(watchdog);
       console.error("School page failed to load:", err);
       showNotFound("We couldn't load this school's data. Please try refreshing — or browse the directory to pick another school.");
     }
