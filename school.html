@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -276,17 +276,17 @@
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <a href="index" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
     <nav class="nav-primary" aria-label="Primary">
       <a href="directory">Directory</a>
-      <a href="blog.html">Resources</a>
-      <a href="about.html">About</a>
+      <a href="blog">Resources</a>
+      <a href="about">About</a>
       <div class="nav-more">
         <button class="nav-more__btn" aria-expanded="false" aria-haspopup="true">More ▾</button>
         <div class="nav-more__menu" hidden>
-          <a href="jobs.html">Jobs <span class="nav-more__cs">coming soon</span></a>
-          <a href="membership.html">Membership <span class="nav-more__cs">coming soon</span></a>
-          <a href="blog.html">Community <span class="nav-more__cs">coming soon</span></a>
+          <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
+          <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
+          <a href="blog">Community <span class="nav-more__cs">coming soon</span></a>
         </div>
       </div>
     </nav>
@@ -449,7 +449,7 @@
       <div class="footer-col">
         <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
         <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <form class="newsletter-inline" action="confirmation.html" method="get">
+        <form class="newsletter-inline" action="confirmation" method="get">
           <input type="hidden" name="action" value="newsletter" />
           <input type="email" name="email" placeholder="Join our weekly newsletter" required />
           <button type="submit">Subscribe</button>
@@ -461,20 +461,20 @@
         <li><a href="add-school">Claim your school</a></li>
       </ul></div>
       <div class="footer-col"><h4>Resources</h4><ul>
-        <li><a href="blog.html">Guides &amp; stories</a></li>
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="blog">Guides &amp; stories</a></li>
+        <li><a href="jobs">Jobs</a></li>
+        <li><a href="about">About</a></li>
       </ul></div>
       <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="about.html">About us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="terms.html">Terms</a></li>
+        <li><a href="about">About us</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="privacy">Privacy</a></li>
+        <li><a href="terms">Terms</a></li>
       </ul></div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
-      <span><a href="privacy.html" style="margin-right:16px;">Privacy</a><a href="terms.html" style="margin-right:16px;">Terms</a><a href="privacy.html">Cookies</a></span>
+      <span><a href="privacy" style="margin-right:16px;">Privacy</a><a href="terms" style="margin-right:16px;">Terms</a><a href="privacy">Cookies</a></span>
     </div>
   </div>
 </footer>
@@ -596,7 +596,7 @@
     const stateHref = s.state ? `directory?state=${encodeURIComponent(s.state)}` : "directory";
     const cityHref  = s.city  ? `directory?city=${encodeURIComponent(s.city)}`   : "directory";
     $("schoolBreadcrumbs").innerHTML = `
-      <a href="index.html">Home</a> ·
+      <a href="index">Home</a> ·
       <a href="directory">Directory</a>
       ${stateName ? ` · <a href="${stateHref}">${escapeHtml(stateName)}</a>` : ""}
       ${s.city ? ` · <a href="${cityHref}">${escapeHtml(s.city)}</a>` : ""}

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -193,7 +193,7 @@
 <!-- ========== TOP BAR ========== -->
 <header class="site-header auth-top">
   <div class="container auth-top__inner">
-    <a href="index.html" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <a href="index" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
     <div class="nav-utility">
       <span class="preview-pill" aria-label="Preview"><span class="preview-pill__dot" aria-hidden="true"></span>ISR is in preview</span>
     </div>
@@ -267,7 +267,7 @@
       </div>
 
       <p class="legal-note">
-        By signing in, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
+        By signing in, you agree to our <a href="terms">Terms of Service</a> and <a href="privacy">Privacy Policy</a>.
       </p>
     </div>
   </section>
@@ -318,7 +318,7 @@ document.getElementById('signinForm').addEventListener('submit', async (e) => {
 
     statusEl.className   = 'auth-status auth-status--success';
     statusEl.textContent = 'Signed in! Redirecting…';
-    setTimeout(() => { window.location.href = 'account.html'; }, 1000);
+    setTimeout(() => { window.location.href = 'account'; }, 1000);
 
   } catch (err) {
     statusEl.className   = 'auth-status auth-status--error';
