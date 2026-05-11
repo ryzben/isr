@@ -866,6 +866,15 @@
       );
       if (cityMatch) c.city = cityMatch;
     }
+    // Strip any extracted city/state out of q so "Jacksonville, FL" doesn't
+    // also run as a text search (no school data contains that exact string).
+    if (c.city) {
+      c.q = c.q.replace(new RegExp(c.city + '[\\s,]*', 'i'), '').trim();
+    }
+    if (c.state) {
+      c.q = c.q.replace(/\b(FL|TX|CA|NY|NJ|Florida|Texas|California|New York|New Jersey)\b[,\s]*/gi, '').trim();
+    }
+    c.q = c.q.replace(/^[,\s]+|[,\s]+$/g, '').trim();
     return c;
   }
 
