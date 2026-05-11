@@ -721,6 +721,10 @@
           <div class="result__tuition">${tuition}</div>
           <div class="result__actions">
             <span class="btn btn--primary btn--sm">View school</span>
+            <button class="btn btn--ghost btn--sm compare-btn" data-id="${escapeHtml(s.id)}" data-name="${escapeHtml(s.name)}"
+              onclick="event.preventDefault(); event.stopPropagation(); toggleCompare(this)">
+              + Compare
+            </button>
           </div>
         </div>
       </a>
@@ -930,6 +934,65 @@
       renderError(err);
     }
   })();
+</script>
+
+<!-- ── Compare tray ── -->
+<div class="compare-tray" id="compareTray" style="display:none;">
+  <span style="font-weight:600;font-size:0.92rem;">Compare:</span>
+  <div id="compareChips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+  <a id="compareBtn" href="#" class="btn btn--cta btn--sm" style="white-space:nowrap;">Compare now →</a>
+  <button onclick="clearCompare()" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1.2rem;line-height:1;padding:0 4px;">✕</button>
+</div>
+
+<script>
+  let compareIds = [];
+
+  function toggleCompare(btn) {
+    const id   = btn.dataset.id;
+    const name = btn.dataset.name;
+    const idx  = compareIds.findIndex(s => s.id === id);
+
+    if (idx > -1) {
+      compareIds.splice(idx, 1);
+      btn.textContent = '+ Compare';
+      btn.classList.remove('btn--primary');
+      btn.classList.add('btn--ghost');
+    } else {
+      if (compareIds.length >= 3) {
+        alert('You can compare up to 3 schools at a time.');
+        return;
+      }
+      compareIds.push({ id, name });
+      btn.textContent = '✓ Added';
+      btn.classList.remove('btn--ghost');
+      btn.classList.add('btn--primary');
+    }
+    updateTray();
+  }
+
+  function updateTray() {
+    const tray   = document.getElementById('compareTray');
+    const chips  = document.getElementById('compareChips');
+    const btn    = document.getElementById('compareBtn');
+
+    if (!compareIds.length) { tray.style.display = 'none'; return; }
+
+    tray.style.display = 'flex';
+    chips.innerHTML = compareIds.map(s =>
+      `<span class="compare-chip">${s.name}</span>`
+    ).join('');
+    btn.href = `compare?ids=${compareIds.map(s => encodeURIComponent(s.id)).join(',')}`;
+  }
+
+  function clearCompare() {
+    compareIds = [];
+    document.querySelectorAll('.compare-btn').forEach(b => {
+      b.textContent = '+ Compare';
+      b.classList.remove('btn--primary');
+      b.classList.add('btn--ghost');
+    });
+    updateTray();
+  }
 </script>
 
 </body>

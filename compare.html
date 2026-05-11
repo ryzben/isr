@@ -605,5 +605,76 @@
 </footer>
 
 <script src="assets/main.js"></script>
+<script type="module">
+  import { getSchoolById } from './assets/schools-data.js';
+
+  const params = new URLSearchParams(location.search);
+  const ids    = (params.get('ids') || '').split(',').map(s => s.trim()).filter(Boolean);
+
+  if (!ids.length) {
+    // No schools in URL — redirect to directory
+    location.replace('directory');
+  } else {
+    loadCompare(ids);
+  }
+
+  async function loadCompare(ids) {
+    const container = document.querySelector('.compare-section .container') || document.querySelector('main') || document.body;
+    try {
+      const schools = (await Promise.all(ids.map(id => getSchoolById(id)))).filter(Boolean);
+      if (!schools.length) { location.replace('directory'); return; }
+
+      const cols = schools.map(s => `
+        <div class="compare-header__card">
+          <div style="width:100%;aspect-ratio:16/9;border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;background:linear-gradient(135deg,#0F5132,#1d7a4e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:Fraunces,serif;${s.photo_url ? `background-image:url('${s.photo_url}');background-size:cover;background-position:center;` : ''}"></div>
+          <strong style="font-size:1rem;">${s.name}</strong>
+          ${s.verified ? '<span style="font-size:0.75rem;background:var(--primary-soft);color:var(--primary);padding:2px 8px;border-radius:99px;font-weight:700;margin-left:6px;">Verified</span>' : ''}
+          <div style="font-size:0.85rem;color:var(--muted);margin-top:4px;">📍 ${s.city}, ${s.state}</div>
+        </div>`).join('');
+
+      function row(label, vals) {
+        return `<div class="compare-row">
+          <div class="compare-row__label">${label}</div>
+          ${vals.map(v => `<div class="compare-row__cell">${v || '<span style="color:var(--muted)">—</span>'}</div>`).join('')}
+        </div>`;
+      }
+
+      const tableHTML = `
+        <div class="compare-table">
+          <div class="compare-header">
+            <div class="compare-header__spacer"></div>
+            ${cols}
+          </div>
+          ${row('Grades',      schools.map(s => s.grades))}
+          ${row('Tuition',     schools.map(s => s.tuition_range))}
+          ${row('Location',    schools.map(s => `${s.city}, ${s.state}`))}
+          ${row('Address',     schools.map(s => s.address))}
+          ${row('Phone',       schools.map(s => s.phone ? `<a href="tel:${s.phone}">${s.phone}</a>` : null))}
+          ${row('Website',     schools.map(s => s.website ? `<a href="${s.website}" target="_blank" rel="noopener">${s.website.replace(/^https?:\/\//,'')}</a>` : null))}
+          ${row('Accreditation', schools.map(s => s.accreditation))}
+          ${row('Enrollment',  schools.map(s => s.enrollment))}
+          ${row('Status',      schools.map(s => s.verified ? '✓ Verified listing' : 'Preview listing'))}
+          <div class="compare-row" style="border-top:2px solid var(--line);margin-top:8px;padding-top:16px;">
+            <div class="compare-row__label"></div>
+            ${schools.map(s => `<div class="compare-row__cell"><a href="school?id=${s.id}" class="btn btn--primary btn--sm" style="width:100%;text-align:center;">View full profile</a></div>`).join('')}
+          </div>
+        </div>`;
+
+      // Replace page content
+      const section = document.querySelector('.compare-section');
+      if (section) {
+        section.innerHTML = `<div class="container">
+          <h1 style="margin-bottom:8px;">Compare ${schools.length} school${schools.length>1?'s':''}</h1>
+          <p style="color:var(--ink-soft);margin-bottom:32px;">Side-by-side comparison · <a href="directory">← Back to directory</a></p>
+          ${tableHTML}
+        </div>`;
+      }
+
+      document.title = `Compare: ${schools.map(s=>s.name).join(' vs ')} — Islamic School Review`;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+</script>
 </body>
 </html>
