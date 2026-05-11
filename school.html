@@ -214,6 +214,40 @@
     .school-skel .bar--photo { aspect-ratio: 16/9; height: auto; border-radius: var(--r-lg); }
     @keyframes shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
 
+    /* ── Reviews ── */
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+    .review-card__header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px; margin-bottom: 10px;
+    }
+    .review-card__stars { color: #f59e0b; font-size: 1rem; letter-spacing: 1px; }
+    .review-card__title { font-weight: 700; font-size: 0.97rem; margin-bottom: 2px; }
+    .review-card__meta  { font-size: 0.82rem; color: var(--muted); }
+    .review-card__body  { font-size: 0.93rem; color: var(--ink-soft); line-height: 1.65; }
+    .review-card__verified {
+      font-size: 0.75rem; font-weight: 700; color: var(--primary);
+      background: var(--primary-soft); padding: 2px 8px; border-radius: 99px;
+      white-space: nowrap; flex: 0 0 auto;
+    }
+    .reviews-empty {
+      text-align: center; padding: 40px 24px;
+      border: 1.5px dashed var(--line-strong);
+      border-radius: var(--r-lg);
+      color: var(--muted);
+    }
+    .reviews-empty p { margin: 8px 0 20px; font-size: 0.95rem; }
+    .rating-avg {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 1.05rem; font-weight: 700; color: var(--ink);
+    }
+    .rating-avg .stars { color: #f59e0b; }
+
     .not-found {
       max-width: 580px;
       margin: 80px auto;
@@ -372,6 +406,17 @@
           <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a id="schoolOutOfDateMailto" href="mailto:ryzben@gmail.com">let us know</a>.</p>
         </section>
 
+        <section id="reviews">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+            <div>
+              <h2 style="margin:0 0 4px;">Parent reviews</h2>
+              <div id="reviewsSummary" style="font-size:0.92rem;color:var(--muted);"></div>
+            </div>
+            <a id="writeReviewBtn" href="#" class="btn btn--primary btn--sm">✏️ Write a review</a>
+          </div>
+          <div id="reviewsList"></div>
+        </section>
+
         <section id="similar">
           <h2>Similar schools</h2>
           <div class="similar-grid mt-16" id="schoolSimilar">
@@ -443,8 +488,10 @@
     filterSchools,
   } from "./assets/schools-data.js";
 
+  const SUPABASE_URL      = 'https://vprltwjduekabkizlbkv.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
   const STATE_NAMES = {
-    FL: "Florida", TX: "Texas", CA: "California", NY: "New York", NJ: "New Jersey",
+    FL: "Florida", TX: "Texas", CA: "California", NY: "New York", NJ: "New Jersey", IA: "Iowa",
   };
   const SITE = "https://islamicschoolreview.com";
 
@@ -705,6 +752,57 @@
     }
   }
 
+  // ---- Reviews ----
+  async function loadReviews(schoolId, schoolName) {
+    const list    = $("reviewsList");
+    const summary = $("reviewsSummary");
+    const btn     = $("writeReviewBtn");
+    if (btn) btn.href = `write-review?school_id=${encodeURIComponent(schoolId)}&school_name=${encodeURIComponent(schoolName)}`;
+
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/reviews?school_id=eq.${encodeURIComponent(schoolId)}&order=created_at.desc`,
+        { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+      );
+      const reviews = await res.json();
+
+      if (!reviews.length) {
+        summary.textContent = 'No reviews yet';
+        list.innerHTML = `
+          <div class="reviews-empty">
+            <div style="font-size:2rem;">⭐</div>
+            <p>No reviews yet — be the first to share your experience with this school.</p>
+            <a href="write-review?school_id=${encodeURIComponent(schoolId)}&school_name=${encodeURIComponent(schoolName)}" class="btn btn--primary btn--sm">Write the first review</a>
+          </div>`;
+        return;
+      }
+
+      const avg = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
+      const stars = '★'.repeat(Math.round(avg)) + '☆'.repeat(5 - Math.round(avg));
+      summary.innerHTML = `<span class="rating-avg"><span class="stars">${stars}</span> ${avg} · ${reviews.length} review${reviews.length !== 1 ? 's' : ''}</span>`;
+
+      list.innerHTML = reviews.map(r => {
+        const filled  = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        const date    = new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return `
+          <div class="review-card">
+            <div class="review-card__header">
+              <div>
+                <div class="review-card__stars">${filled}</div>
+                <div class="review-card__title">${escapeHtml(r.title)}</div>
+                <div class="review-card__meta">${escapeHtml(r.user_name)} · ${date}</div>
+              </div>
+              ${r.verified_parent ? '<span class="review-card__verified">✓ Verified parent</span>' : ''}
+            </div>
+            <div class="review-card__body">${escapeHtml(r.content)}</div>
+          </div>`;
+      }).join('');
+    } catch (err) {
+      console.warn('Could not load reviews:', err);
+      list.innerHTML = '';
+    }
+  }
+
   // ---- Boot ----
   (async () => {
     const id = getIdFromUrl();
@@ -727,6 +825,7 @@
       }
       renderSchool(school);
       renderSimilar(school);
+      loadReviews(school.id, school.name);
     } catch (err) {
       clearTimeout(watchdog);
       console.error("School page failed to load:", err);
