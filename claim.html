@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claim Your School Listing — Islamic School Review</title>
+  <meta name="description" content="Claim your Islamic school's listing on IslamicSchoolReview.com. Update your information, respond to reviews, and connect with families." />
+  <link rel="canonical" href="https://islamicschoolreview.com/claim" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0F5132" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .claim-hero {
+      padding: 64px 0 56px;
+      background: linear-gradient(135deg, #0F5132 0%, #0B3D25 100%);
+      color: #fff;
+      text-align: center;
+    }
+    .claim-hero .eyebrow { color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+    .claim-hero h1 { font-size: clamp(2rem, 4vw, 2.8rem); color: #fff; margin-bottom: 14px; }
+    .claim-hero p { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 52ch; margin: 0 auto; }
+
+    .benefits-strip {
+      background: var(--primary-soft);
+      border-bottom: 1px solid #A8D5BC;
+      padding: 20px 0;
+    }
+    .benefits-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .benefit-item span { font-size: 1.2rem; }
+
+    .claim-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      padding: 56px 0 96px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .claim-layout { grid-template-columns: 1fr; }
+      .claim-sidebar { order: -1; }
+    }
+
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      padding: 40px 44px;
+      box-shadow: var(--shadow-md);
+    }
+    .form-card h2 { font-size: 1.4rem; margin-bottom: 6px; }
+    .form-card > p { color: var(--ink-soft); margin-bottom: 32px; }
+
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
+    .field label .req { color: var(--danger); margin-left: 2px; }
+    .field label .opt { font-weight: 400; color: var(--muted); font-size: 0.82rem; margin-left: 4px; }
+    .field .input, .field .select, .field .textarea {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid var(--line-strong);
+      border-radius: var(--r-md);
+      font: inherit; font-size: 0.97rem;
+      outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field .input:focus, .field .select:focus, .field .textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-soft);
+    }
+    .field .textarea { resize: vertical; min-height: 100px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+
+    .submit-area { margin-top: 28px; }
+    .submit-area .btn--submit { width: 100%; padding: 14px; font-size: 1.05rem; font-weight: 700; }
+    .submit-area .note { font-size: 0.82rem; color: var(--muted); text-align: center; margin-top: 10px; }
+
+    .success-screen { display: none; text-align: center; padding: 48px 32px; }
+    .success-screen__icon {
+      width: 72px; height: 72px; background: var(--primary-soft);
+      border-radius: 50%; display: grid; place-items: center;
+      font-size: 2rem; margin: 0 auto 20px;
+    }
+    .success-screen h2 { color: var(--primary); margin-bottom: 10px; }
+    .success-screen p { color: var(--ink-soft); max-width: 44ch; margin: 0 auto 24px; }
+
+    /* Sidebar */
+    .claim-sidebar .side-block {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .claim-sidebar .side-block h3 { font-size: 1rem; margin-bottom: 16px; color: var(--primary); }
+    .feature-list { list-style: none; padding: 0; margin: 0; }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+    .feature-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .feature-list li .icon { font-size: 1.1rem; flex: 0 0 auto; margin-top: 1px; }
+    .feature-list li strong { display: block; margin-bottom: 2px; }
+    .feature-list li span { color: var(--ink-soft); font-size: 0.85rem; }
+
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+    .stat-box {
+      background: var(--bg);
+      border-radius: var(--r-md);
+      padding: 14px;
+      text-align: center;
+    }
+    .stat-box .num { font-family: "Fraunces", serif; font-size: 1.6rem; font-weight: 600; color: var(--primary); }
+    .stat-box .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
+    <nav class="nav-primary" aria-label="Primary">
+      <a href="directory">Directory</a>
+      <a href="blog">Resources</a>
+      <a href="about">About</a>
+    </nav>
+    <div class="nav-utility">
+      <a href="signin" class="btn btn--ghost btn--sm">Sign In</a>
+      <a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
+    </div>
+  </div>
+</header>
+
+<section class="claim-hero">
+  <div class="container">
+    <p class="eyebrow">For school administrators</p>
+    <h1>Claim your school's listing</h1>
+    <p>Your school is already listed. Take control — update your information, respond to reviews, and connect with families actively searching for Islamic education.</p>
+  </div>
+</section>
+
+<div class="benefits-strip">
+  <div class="container">
+    <div class="benefits-row">
+      <div class="benefit-item"><span>✓</span> Free forever for basic listing</div>
+      <div class="benefit-item"><span>✓</span> Verified badge on your profile</div>
+      <div class="benefit-item"><span>✓</span> Respond to parent reviews</div>
+      <div class="benefit-item"><span>✓</span> Post jobs & find educators</div>
+    </div>
+  </div>
+</div>
+
+<section class="form-section" style="padding: 0;">
+  <div class="container">
+    <div class="claim-layout">
+
+      <!-- Form -->
+      <div>
+        <div class="form-card">
+          <h2>Claim your listing</h2>
+          <p>Fill in your details and we'll verify your connection to the school within 24 hours.</p>
+
+          <form id="claimForm" action="https://formspree.io/f/mjglvggk" method="POST">
+            <input type="hidden" name="_subject" value="School claim request — IslamicSchoolReview.com" />
+            <input type="hidden" name="form_type" value="school_claim" />
+            <input type="hidden" name="school_id" id="hidden_school_id" />
+
+            <div class="field">
+              <label for="school_name">School name <span class="req">*</span></label>
+              <input id="school_name" name="school_name" class="input" type="text" required
+                placeholder="e.g. Al-Furqan Academy" />
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="contact_name">Your name <span class="req">*</span></label>
+                <input id="contact_name" name="contact_name" class="input" type="text" required placeholder="First Last" />
+              </div>
+              <div class="field">
+                <label for="role">Your role <span class="req">*</span></label>
+                <select id="role" name="role" class="select" required>
+                  <option value="">Select…</option>
+                  <option>Principal / Head of School</option>
+                  <option>Administrator</option>
+                  <option>Owner / Board Member</option>
+                  <option>Marketing / Admissions</option>
+                  <option>Teacher</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="email">Work email <span class="req">*</span></label>
+                <input id="email" name="email" class="input" type="email" required placeholder="you@yourschool.org" />
+              </div>
+              <div class="field">
+                <label for="phone">Phone <span class="opt">(optional)</span></label>
+                <input id="phone" name="phone" class="input" type="tel" placeholder="(000) 000-0000" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="updates">What would you like to update? <span class="opt">(optional)</span></label>
+              <textarea id="updates" name="updates" class="textarea"
+                placeholder="e.g. Our tuition is now $8,500/yr, we added a Hifz program, new photos, etc."></textarea>
+            </div>
+
+            <div class="submit-area">
+              <button type="submit" class="btn btn--primary btn--submit">Submit claim request →</button>
+              <p class="note">We verify all claims within 24 hours. You'll receive a confirmation email.</p>
+            </div>
+          </form>
+
+          <div class="success-screen" id="successScreen">
+            <div class="success-screen__icon">✓</div>
+            <h2>Request received!</h2>
+            <p>JazakAllah Khair. We'll verify your connection to the school and reach out within 24 hours to complete your verified listing.</p>
+            <a href="directory" class="btn btn--primary">Browse the directory →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="claim-sidebar">
+        <div class="side-block">
+          <h3>What you get as a verified school</h3>
+          <ul class="feature-list">
+            <li>
+              <span class="icon">✓</span>
+              <div><strong>Verified badge</strong><span>Families trust verified listings more — yours stands out in search results.</span></div>
+            </li>
+            <li>
+              <span class="icon">📸</span>
+              <div><strong>Full photo gallery</strong><span>Upload building photos, classrooms, events, and activities.</span></div>
+            </li>
+            <li>
+              <span class="icon">💬</span>
+              <div><strong>Respond to reviews</strong><span>Address parent feedback publicly and professionally.</span></div>
+            </li>
+            <li>
+              <span class="icon">📋</span>
+              <div><strong>Post job openings</strong><span>Reach qualified Islamic educators actively looking for positions.</span></div>
+            </li>
+            <li>
+              <span class="icon">📊</span>
+              <div><strong>Listing analytics</strong><span>See how many families viewed your school this month. <em>Coming soon.</em></span></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="side-block">
+          <h3>Platform at a glance</h3>
+          <div class="stat-row">
+            <div class="stat-box"><div class="num">33+</div><div class="lbl">Schools listed</div></div>
+            <div class="stat-box"><div class="num">5</div><div class="lbl">States covered</div></div>
+            <div class="stat-box"><div class="num">Free</div><div class="lbl">Basic listing</div></div>
+            <div class="stat-box"><div class="num">24h</div><div class="lbl">Claim response</div></div>
+          </div>
+        </div>
+
+        <div class="side-block" style="background: var(--primary-soft); border-color: #A8D5BC;">
+          <p style="font-size:0.92rem; color: var(--primary-ink); margin:0;">
+            <strong>Questions?</strong> Email us at
+            <a href="mailto:schools@islamicschoolreview.com" style="color:var(--primary);font-weight:600;">schools@islamicschoolreview.com</a>
+            — we respond within 24 hours.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
+        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
+      </div>
+      <div class="footer-col"><h4>Directory</h4><ul>
+        <li><a href="directory">Browse all schools</a></li>
+        <li><a href="add-school">List your school</a></li>
+        <li><a href="claim">Claim your listing</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about">About us</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="privacy">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  // Pre-fill school name from URL params (when coming from school detail page)
+  const params = new URLSearchParams(location.search);
+  const schoolId   = params.get('school_id')   || '';
+  const schoolName = params.get('school_name') || '';
+  if (schoolName) document.getElementById('school_name').value = decodeURIComponent(schoolName);
+  if (schoolId)   document.getElementById('hidden_school_id').value = schoolId;
+
+  // Formspree AJAX submit
+  document.getElementById('claimForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    btn.disabled = true; btn.textContent = 'Submitting…';
+    const data = new FormData(this);
+    const res = await fetch(this.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+    if (res.ok) {
+      this.style.display = 'none';
+      document.getElementById('successScreen').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Submit claim request →';
+      alert('Something went wrong — please email schools@islamicschoolreview.com directly.');
+    }
+  });
+</script>
+</body>
+</html>

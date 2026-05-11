@@ -610,7 +610,7 @@
       `What needs to change (please be specific — address, phone, grades, tuition, photo, anything):\n\n` +
       `Your name and role at the school:\n\n`;
     const claim = $("schoolClaimLink");
-    if (claim) claim.href = `add-school?mode=claim&school=${enc(s.name)}`;
+    if (claim) claim.href = `claim?school_id=${enc(s.id)}&school_name=${enc(s.name)}`;
     const edit = $("schoolEditMailto");
     if (edit) edit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
     const ood = $("schoolOutOfDateMailto");
