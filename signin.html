@@ -242,7 +242,7 @@
           <label>
             <input type="checkbox" name="remember"> Remember me
           </label>
-          <a href="#" onclick="alert('Password reset coming soon!')">Forgot password?</a>
+          <a href="#" id="forgotLink">Forgot password?</a>
         </div>
 
         <button type="submit" class="btn btn--cta btn--block btn--lg auth-submit">
@@ -250,8 +250,20 @@
         </button>
       </form>
 
+      <!-- Forgot password form (hidden until link is clicked) -->
+      <div id="resetForm" style="display:none; margin-top:24px; padding-top:24px; border-top:1px solid var(--line);">
+        <h3 style="font-size:1.1rem; margin:0 0 6px;">Reset your password</h3>
+        <p style="font-size:0.88rem; color:var(--muted); margin:0 0 16px;">Enter your email and we'll send you a reset link.</p>
+        <div id="reset-status" style="margin-bottom:12px;"></div>
+        <div class="field">
+          <input type="email" id="resetEmail" class="input" placeholder="your.email@example.com" autocomplete="email" />
+        </div>
+        <button id="resetBtn" class="btn btn--cta btn--block" style="margin-bottom:10px;">Send reset link</button>
+        <a href="#" id="cancelReset" style="display:block; text-align:center; font-size:0.88rem; color:var(--muted);">← Back to sign in</a>
+      </div>
+
       <div class="auth-alt">
-        Don't have an account? <a href="signup.html">Create one →</a>
+        Don't have an account? <a href="signup">Create one →</a>
       </div>
 
       <p class="legal-note">
@@ -314,6 +326,52 @@ document.getElementById('signinForm').addEventListener('submit', async (e) => {
   } finally {
     submitBtn.disabled    = false;
     submitBtn.textContent = 'Sign In';
+  }
+});
+
+// ── Forgot password ──
+document.getElementById('forgotLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('signinForm').style.display = 'none';
+  document.getElementById('resetForm').style.display = 'block';
+  const email = document.querySelector('[name="email"]').value;
+  if (email) document.getElementById('resetEmail').value = email;
+});
+
+document.getElementById('cancelReset').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('resetForm').style.display = 'none';
+  document.getElementById('signinForm').style.display = 'block';
+  document.getElementById('reset-status').innerHTML = '';
+});
+
+document.getElementById('resetBtn').addEventListener('click', async () => {
+  const btn      = document.getElementById('resetBtn');
+  const statusEl = document.getElementById('reset-status');
+  const email    = document.getElementById('resetEmail').value.trim();
+
+  if (!email) {
+    statusEl.innerHTML = '<p style="color:var(--danger);font-size:0.88rem;">Please enter your email address.</p>';
+    return;
+  }
+
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
+      body   : JSON.stringify({ email }),
+    });
+
+    // Supabase returns 200 even if email not found (security best practice)
+    statusEl.innerHTML = '<p style="color:var(--primary);font-size:0.88rem;">✓ If an account exists for that email, a reset link has been sent. Check your inbox.</p>';
+    btn.textContent = 'Sent!';
+  } catch (err) {
+    statusEl.innerHTML = `<p style="color:var(--danger);font-size:0.88rem;">${err.message}</p>`;
+    btn.disabled    = false;
+    btn.textContent = 'Send reset link';
   }
 });
 </script>
