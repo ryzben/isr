@@ -381,7 +381,7 @@
             <a id="schoolWebsiteLink" href="#" class="btn btn--primary btn--block" target="_blank" rel="noopener" hidden>Visit school website</a>
             <a id="schoolPhoneLink" href="#" class="btn btn--ghost btn--block" hidden style="margin-top:8px;">Call school</a>
             <a id="schoolReviewLink" href="#" class="btn btn--ghost btn--block" style="margin-top:8px;">✏️ Write a review</a>
-            <button id="compareBtn" class="btn btn--ghost btn--block" style="margin-top:8px;" onclick="toggleCompareThis()">⚖️ Add to compare</button>
+            <a id="compareBtn" href="directory" class="btn btn--ghost btn--block" style="margin-top:8px;">⚖️ Compare schools</a>
             <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:ryzben@gmail.com">Email us</a> — we respond within 24 hours.</p>
           </div>
         </aside>
@@ -694,13 +694,6 @@
     const reviewLink = $("schoolReviewLink");
     if (reviewLink) reviewLink.href = `write-review?school_id=${encodeURIComponent(s.id)}&school_name=${encodeURIComponent(s.name)}`;
 
-    // ---- COMPARE BUTTON ----
-    const compareBtn = $("compareBtn");
-    if (compareBtn) {
-      compareBtn.dataset.id   = s.id;
-      compareBtn.dataset.name = s.name;
-      updateCompareBtn(compareBtn, s.id);
-    }
 
     // ---- ABOUT + FACTS ----
     $("schoolAboutHeading").textContent = `About ${s.name}`;
@@ -843,62 +836,6 @@
   })();
 </script>
 
-<script>
-  // Compare feature — uses localStorage so selections persist across pages
-  function getCompareList() {
-    try { return JSON.parse(localStorage.getItem('isr_compare') || '[]'); } catch { return []; }
-  }
-  function saveCompareList(list) {
-    localStorage.setItem('isr_compare', JSON.stringify(list));
-  }
-  function updateCompareBtn(btn, id) {
-    const list = getCompareList();
-    const added = list.some(s => s.id === id);
-    btn.textContent = added ? '✓ Added to compare' : '⚖️ Add to compare';
-    btn.style.background = added ? 'var(--primary-soft)' : '';
-    btn.style.color      = added ? 'var(--primary)' : '';
-    btn.style.borderColor= added ? 'var(--primary)' : '';
-  }
-  function toggleCompareThis() {
-    const btn  = document.getElementById('compareBtn');
-    const id   = btn.dataset.id;
-    const name = btn.dataset.name;
-    let list   = getCompareList();
-    const idx  = list.findIndex(s => s.id === id);
-    if (idx > -1) {
-      list.splice(idx, 1);
-    } else {
-      if (list.length >= 3) {
-        alert('You can compare up to 3 schools. Go to the directory to manage your selection.');
-        return;
-      }
-      list.push({ id, name });
-    }
-    saveCompareList(list);
-    updateCompareBtn(btn, id);
-
-    // If 2+ schools selected, show Compare now link
-    if (list.length >= 2) {
-      const ids = list.map(s => encodeURIComponent(s.id)).join(',');
-      const existing = document.getElementById('compareNowLink');
-      if (!existing) {
-        const link = document.createElement('a');
-        link.id        = 'compareNowLink';
-        link.href      = `compare?ids=${ids}`;
-        link.className = 'btn btn--primary btn--block';
-        link.style.marginTop = '8px';
-        link.textContent = `Compare ${list.length} schools →`;
-        btn.insertAdjacentElement('afterend', link);
-      } else {
-        existing.href        = `compare?ids=${ids}`;
-        existing.textContent = `Compare ${list.length} schools →`;
-      }
-    } else {
-      const existing = document.getElementById('compareNowLink');
-      if (existing) existing.remove();
-    }
-  }
-</script>
 </body>
 </html>
                                                                                                     
