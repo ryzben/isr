@@ -716,15 +716,16 @@
             <span class="small muted">${s.verified ? "Verified listing" : "Listing awaiting claim"}</span>
           </div>
           <p class="result__snippet">${desc}</p>
+          <button class="btn btn--ghost btn--sm compare-btn" data-id="${escapeHtml(s.id)}" data-name="${escapeHtml(s.name)}"
+            onclick="event.preventDefault(); event.stopPropagation(); toggleCompare(this)"
+            style="margin-top:10px;align-self:flex-start;">
+            + Compare
+          </button>
         </div>
         <div class="result__side">
           <div class="result__tuition">${tuition}</div>
           <div class="result__actions">
             <span class="btn btn--primary btn--sm">View school</span>
-            <button class="btn btn--ghost btn--sm compare-btn" data-id="${escapeHtml(s.id)}" data-name="${escapeHtml(s.name)}"
-              onclick="event.preventDefault(); event.stopPropagation(); toggleCompare(this)">
-              + Compare
-            </button>
           </div>
         </div>
       </a>
