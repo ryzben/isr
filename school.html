@@ -770,7 +770,7 @@
     try {
       const res = await fetch(
         `${SUPABASE_URL}/rest/v1/reviews?school_id=eq.${encodeURIComponent(schoolId)}&order=created_at.desc`,
-        { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        { headers: { 'apikey': _SB_KEY, 'Authorization': `Bearer ${_SB_KEY}` } }
       );
       const reviews = await res.json();
 
@@ -846,6 +846,9 @@
 </script>
 
 <script>
+const _SB_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
+const _SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
+
 async function toggleComparePicker() {
   const btn    = document.getElementById('compareBtn');
   const picker = document.getElementById('comparePicker');
@@ -863,11 +866,8 @@ async function toggleComparePicker() {
 
   try {
     const res = await fetch(
-      'https://vprltwjduekabkizlbkv.supabase.co/rest/v1/schools?order=name.asc&select=id,name,city,state',
-      { headers: {
-        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA'
-      }}
+      `${SUPABASE_URL}/rest/v1/schools?order=name.asc&select=id,name,city,state`,
+      { headers: { 'apikey': _SB_KEY, 'Authorization': `Bearer ${_SB_KEY}` }
     );
     const schools = await res.json();
     // Exclude the current school from the list
