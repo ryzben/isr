@@ -2,9 +2,17 @@
 -- Run in Supabase SQL Editor
 
 -- Restore INSERT policy so admin dashboard can publish schools
-CREATE POLICY IF NOT EXISTS "Admin can insert schools"
-  ON schools FOR INSERT
-  WITH CHECK (true);
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies
+    WHERE tablename = 'schools' AND policyname = 'Admin can insert schools'
+  ) THEN
+    CREATE POLICY "Admin can insert schools"
+      ON schools FOR INSERT
+      WITH CHECK (true);
+  END IF;
+END $$;
 
 -- Add The Lighthouse Schools
 INSERT INTO schools (id, name, city, state, address, phone, website, grades, description, photo_url, verified)
