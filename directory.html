@@ -946,47 +946,61 @@
 </div>
 
 <script>
-  let compareIds = [];
+  function getCompareList() {
+    try { return JSON.parse(localStorage.getItem('isr_compare') || '[]'); } catch { return []; }
+  }
+  function saveCompareList(list) {
+    localStorage.setItem('isr_compare', JSON.stringify(list));
+  }
 
   function toggleCompare(btn) {
     const id   = btn.dataset.id;
     const name = btn.dataset.name;
-    const idx  = compareIds.findIndex(s => s.id === id);
+    let list   = getCompareList();
+    const idx  = list.findIndex(s => s.id === id);
 
     if (idx > -1) {
-      compareIds.splice(idx, 1);
+      list.splice(idx, 1);
       btn.textContent = '+ Compare';
       btn.classList.remove('btn--primary');
       btn.classList.add('btn--ghost');
     } else {
-      if (compareIds.length >= 3) {
+      if (list.length >= 3) {
         alert('You can compare up to 3 schools at a time.');
         return;
       }
-      compareIds.push({ id, name });
+      list.push({ id, name });
       btn.textContent = '✓ Added';
       btn.classList.remove('btn--ghost');
       btn.classList.add('btn--primary');
     }
+    saveCompareList(list);
     updateTray();
   }
 
   function updateTray() {
+    const list   = getCompareList();
     const tray   = document.getElementById('compareTray');
     const chips  = document.getElementById('compareChips');
     const btn    = document.getElementById('compareBtn');
 
-    if (!compareIds.length) { tray.style.display = 'none'; return; }
+    if (!list.length) { tray.style.display = 'none'; return; }
 
     tray.style.display = 'flex';
-    chips.innerHTML = compareIds.map(s =>
-      `<span class="compare-chip">${s.name}</span>`
-    ).join('');
-    btn.href = `compare?ids=${compareIds.map(s => encodeURIComponent(s.id)).join(',')}`;
+    chips.innerHTML = list.map(s => `<span class="compare-chip">${s.name}</span>`).join('');
+    btn.href = `compare?ids=${list.map(s => encodeURIComponent(s.id)).join(',')}`;
+
+    // Sync button states with stored list
+    document.querySelectorAll('.compare-btn').forEach(b => {
+      const inList = list.some(s => s.id === b.dataset.id);
+      b.textContent = inList ? '✓ Added' : '+ Compare';
+      b.classList.toggle('btn--primary', inList);
+      b.classList.toggle('btn--ghost', !inList);
+    });
   }
 
   function clearCompare() {
-    compareIds = [];
+    saveCompareList([]);
     document.querySelectorAll('.compare-btn').forEach(b => {
       b.textContent = '+ Compare';
       b.classList.remove('btn--primary');
@@ -994,6 +1008,9 @@
     });
     updateTray();
   }
+
+  // Restore tray from localStorage on page load
+  document.addEventListener('DOMContentLoaded', () => updateTray());
 </script>
 
 </body>
