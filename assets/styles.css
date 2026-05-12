@@ -4,7 +4,7 @@
    ========================================================= */
 
 /* Tawk.to chat — temporarily hidden. Remove this rule to re-enable. */
-#tawk-bubble-container, .tawk-min-container { display: none !important; }
+iframe[src*="tawk.to"], div[id*="tawk"], div[class*="tawk"] { display: none !important; }
 
 /* ---------- Design tokens ---------- */
 :root {
