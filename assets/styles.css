@@ -3,8 +3,6 @@
    Visual tone: Modern & Warm
    ========================================================= */
 
-/* Tawk.to chat — temporarily hidden. Remove this rule to re-enable. */
-iframe[src*="tawk.to"], div[id*="tawk"], div[class*="tawk"] { display: none !important; }
 
 /* ---------- Design tokens ---------- */
 :root {

@@ -1,5 +1,9 @@
 // Lightweight prototype interactions — no frameworks.
 
+// Tawk.to — temporarily hidden. Remove these lines to re-enable.
+window.Tawk_API = window.Tawk_API || {};
+window.Tawk_API.onLoad = function() { Tawk_API.hideWidget(); };
+
 // Active nav highlighting based on current page path.
 document.addEventListener("DOMContentLoaded", () => {
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
