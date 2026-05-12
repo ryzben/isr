@@ -738,11 +738,6 @@
             <span class="small muted">${s.verified ? "Verified listing" : "Listing awaiting claim"}</span>
           </div>
           <p class="result__snippet">${desc}</p>
-          <button class="btn btn--ghost btn--sm compare-btn" data-id="${escapeHtml(s.id)}" data-name="${escapeHtml(s.name)}"
-            onclick="event.preventDefault(); event.stopPropagation(); toggleCompare(this)"
-            style="margin-top:10px;align-self:flex-start;">
-            + Compare
-          </button>
         </div>
         <div class="result__side">
           <div class="result__tuition">${tuition}</div>
@@ -964,13 +959,6 @@
   })();
 </script>
 
-<!-- ── Compare tray ── -->
-<div class="compare-tray" id="compareTray" style="display:none;">
-  <span style="font-weight:600;font-size:0.92rem;">Compare:</span>
-  <div id="compareChips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
-  <a id="compareBtn" href="#" class="btn btn--cta btn--sm" style="white-space:nowrap;">Compare now →</a>
-  <button onclick="clearCompare()" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1.2rem;line-height:1;padding:0 4px;">✕</button>
-</div>
 
 <script>
   function getCompareList() {
