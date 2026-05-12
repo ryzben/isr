@@ -3,6 +3,9 @@
    Visual tone: Modern & Warm
    ========================================================= */
 
+/* Tawk.to chat — temporarily hidden. Remove this rule to re-enable. */
+#tawk-bubble-container, .tawk-min-container { display: none !important; }
+
 /* ---------- Design tokens ---------- */
 :root {
   /* Warm neutrals */
