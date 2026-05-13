@@ -255,7 +255,7 @@
     /* Mobile — collapse into stacked columns */
     @media (max-width: 900px) {
       .compare-header, .compare-row, .compare-footer {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
       }
       .compare-header {
         position: static;
@@ -629,10 +629,11 @@
 
       const cols = schools.map(s => `
         <div class="compare-header__card">
-          <div style="width:100%;aspect-ratio:16/9;border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;
-            background:linear-gradient(135deg,#0F5132,#1d7a4e);background-size:cover;background-position:center;
+          <div class="compare-photo" style="
+            width:100%;height:160px;border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;
+            background:linear-gradient(135deg,#0F5132,#1d7a4e) center/cover no-repeat;
             ${s.photo_url ? `background-image:url('${s.photo_url}');` : ''}
-            display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:Fraunces,serif;">
+            display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:Fraunces,serif;flex-shrink:0;">
             ${s.photo_url ? '' : (s.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}
           </div>
           <strong style="font-size:1rem;">${s.name}</strong>
