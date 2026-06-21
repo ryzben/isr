@@ -440,6 +440,15 @@ p  { margin: 0 0 1em; color: var(--ink-soft); }
   font-weight: 600;
   cursor: pointer;
 }
+.newsletter-soon {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: #B7BDBA;
+  font-size: 0.88rem;
+}
 
 /* ---------- Utility ---------- */
 .stack-4 { display: grid; gap: 4px; }

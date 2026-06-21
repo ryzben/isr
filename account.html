@@ -6,7 +6,7 @@
   <title>My account — Islamic School Review</title>
   <meta name="description" content="Your Islamic School Review dashboard — saved schools, reviews you've written, inquiries you've sent, and account settings." />
   <meta name="robots" content="noindex, nofollow" />
-  <link rel="canonical" href="https://islamicschoolreview.com/account.html" />
+  <link rel="canonical" href="https://islamicschoolreview.com/account" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="website" />
@@ -675,13 +675,13 @@
             </div>
             <div class="settings-row">
               <label for="email-address">Email</label>
-              <input type="email" id="email-address" value="ryzben@gmail.com" />
+              <input type="email" id="email-address" value="hello@islamicschoolreview.com" />
               <span></span>
             </div>
             <div class="settings-row">
               <label for="role-select">Role</label>
-              <span class="val">Parent · 1 child enrolled</span>
-              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Change</a>
+              <span class="val">Parent</span>
+              <span class="nav-more__cs">coming soon</span>
             </div>
             <div class="settings-row">
               <label for="location">Location</label>
@@ -696,22 +696,22 @@
 
           <div class="settings-card" id="password">
             <h3>Password &amp; security</h3>
-            <p class="helper">Last changed 58 days ago. We recommend changing every 6 months.</p>
+            <p class="helper">We recommend changing your password every 6 months.</p>
 
             <div class="settings-row">
               <label>Password</label>
               <span class="val">••••••••••</span>
-              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Change password</a>
+              <span class="nav-more__cs">coming soon</span>
             </div>
             <div class="settings-row">
               <label>Two-factor auth</label>
               <span class="val">Not enabled</span>
-              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Set up</a>
+              <span class="nav-more__cs">coming soon</span>
             </div>
             <div class="settings-row">
               <label>Active sessions</label>
-              <span class="val">2 devices signed in</span>
-              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Review</a>
+              <span class="val">Session tracking not yet available</span>
+              <span class="nav-more__cs">coming soon</span>
             </div>
           </div>
 
@@ -763,7 +763,7 @@
             <div class="settings-row">
               <label>Download my data</label>
               <span class="val">Export a .zip of your profile, reviews, inquiries, and saved schools.</span>
-              <a href="#" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Request export</a>
+              <span class="nav-more__cs">coming soon</span>
             </div>
           </div>
 
@@ -790,7 +790,6 @@
       <div class="footer-col"><h4>Directory</h4><ul>
         <li><a href="directory">Browse all schools</a></li>
         <li><a href="directory">Browse by state</a></li>
-        <li><a href="directory">Top-rated schools</a></li>
         <li><a href="add-school">Claim your school</a></li>
       </ul></div>
       <div class="footer-col"><h4>Resources</h4><ul>
@@ -967,7 +966,7 @@
               <p class="review-item__body">${review.review_text}</p>
               <div class="review-item__foot">
                 <span>Posted ${new Date(review.created_at).toLocaleDateString()}</span>
-                <a href="#">Edit</a>
+                <span class="nav-more__cs">edit coming soon</span>
               </div>
             </div>
           `;

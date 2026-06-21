@@ -8,12 +8,12 @@
        fallbacks for crawlers that don't run JS. -->
   <title>School profile — Islamic School Review</title>
   <meta name="description" content="Detailed profile of an Islamic school listed on IslamicSchoolReview.com — grades, tuition, location, accreditation, and program highlights." />
-  <link rel="canonical" href="https://islamicschoolreview.com/school.html" />
+  <link rel="canonical" href="https://islamicschoolreview.com/school" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Islamic School Review" />
-  <meta property="og:url" content="https://islamicschoolreview.com/school.html" />
+  <meta property="og:url" content="https://islamicschoolreview.com/school" />
   <meta property="og:title" content="School profile — Islamic School Review" />
   <meta property="og:description" content="Grades, tuition, location, and program highlights for Islamic schools listed on IslamicSchoolReview.com." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
@@ -306,7 +306,7 @@
       Spotted something wrong, or have ideas?
     </span>
     <a class="beta-strip__cta"
-       href="mailto:ryzben@gmail.com?subject=ISR%20feedback&amp;body=What%20you%20saw%3A%0A%0AWhat%20would%20make%20it%20better%3A%0A%0AYour%20name%20and%20role%3A%0A">
+       href="mailto:hello@islamicschoolreview.com?subject=ISR%20feedback&amp;body=What%20you%20saw%3A%0A%0AWhat%20would%20make%20it%20better%3A%0A%0AYour%20name%20and%20role%3A%0A">
       Email feedback →
     </a>
   </div>
@@ -390,7 +390,7 @@
                 oninput="filterCompareList(this.value)" />
               <div id="comparePickerList" style="max-height:200px;overflow-y:auto;"></div>
             </div>
-            <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:ryzben@gmail.com">Email us</a> — we respond within 24 hours.</p>
+            <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:hello@islamicschoolreview.com">Email us</a> — we respond within 24 hours.</p>
           </div>
         </aside>
       </div>
@@ -412,7 +412,7 @@
         <section id="contact">
           <h2>Contact</h2>
           <div class="facts-grid" id="schoolContact"></div>
-          <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a id="schoolOutOfDateMailto" href="mailto:ryzben@gmail.com">let us know</a>.</p>
+          <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a id="schoolOutOfDateMailto" href="mailto:hello@islamicschoolreview.com">let us know</a>.</p>
         </section>
 
         <section id="reviews">
@@ -442,7 +442,7 @@
               <a href="directory">← Back to all schools</a>
             </li>
             <li style="padding:10px 0;">
-              <a id="schoolEditMailto" href="mailto:ryzben@gmail.com">Suggest an edit</a>
+              <a id="schoolEditMailto" href="mailto:hello@islamicschoolreview.com">Suggest an edit</a>
             </li>
           </ul>
         </div>
@@ -668,9 +668,9 @@
     const claim = $("schoolClaimLink");
     if (claim) claim.href = `claim?school_id=${enc(s.id)}&school_name=${enc(s.name)}`;
     const edit = $("schoolEditMailto");
-    if (edit) edit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
+    if (edit) edit.href = `mailto:hello@islamicschoolreview.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
     const ood = $("schoolOutOfDateMailto");
-    if (ood) ood.href = `mailto:ryzben@gmail.com?subject=${enc(subjOutdate)}&body=${enc(body)}`;
+    if (ood) ood.href = `mailto:hello@islamicschoolreview.com?subject=${enc(subjOutdate)}&body=${enc(body)}`;
 
     // ---- SIDE CARD TUITION ----
     if (s.tuition_range) {
@@ -696,7 +696,7 @@
       sidePhone.hidden = false;
     }
     const sideEdit = $("schoolSidebarEditMailto");
-    if (sideEdit) sideEdit.href = `mailto:ryzben@gmail.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
+    if (sideEdit) sideEdit.href = `mailto:hello@islamicschoolreview.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
 
     // ---- WRITE A REVIEW LINK ----
     const reviewLink = $("schoolReviewLink");
