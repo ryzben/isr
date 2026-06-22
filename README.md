@@ -7,23 +7,54 @@ A directory and review platform for Islamic schools across the United States. He
 
 ---
 
-## Current state (as of May 2026)
+## Current state (as of June 2026)
 
-- **34 schools** across FL, TX, CA, NY, NJ, IA
-- Reviews section live on school detail pages (sample reviews in Supabase SQL files below)
+- **35 schools** across FL, TX, CA, NY, NJ, IA
+- Reviews are live and real end-to-end — school pages, the directory, and the homepage all pull actual Supabase review data (no more "coming soon" placeholders anywhere reviews should show)
 - Claim Your School form at `/claim`
 - Jobs board waitlist at `/jobs`
 - Admin dashboard fully functional (publish, edit, delete, approve submissions)
-- Auth working (signup, signin, forgot password, account page)
+- Auth working (signup, signin, forgot password, account page) — see **Pending** below for the one real gap (email delivery)
 - Homepage search uses dynamic state/city dropdowns from Supabase
+- Account page (`/account`) now has working password change, TOTP two-factor setup, a JSON data export, and inline review editing
+- Newsletter sign-up (footer + homepage + blog sidebar) is wired to Formspree and actually captures emails
+- Homepage prayer times widget pulls live data from the Aladhan API
+- Compare tray on `/directory` works — "+ Compare" on a result card now actually adds it to the floating compare bar
 
 ### Pending before full launch
-- [ ] Run `supabase-sample-reviews.sql` — adds sample reviews for AFA + MY Academy
-- [ ] Run `supabase-lighthouse-reviews.sql` — adds sample reviews for The Lighthouse Schools
-- [ ] Run `supabase-fix-schools.sql` — fixes wrong city/state data on 30+ schools
-- [ ] Set up Resend SMTP (see Auth section below) — fixes email confirmation + password reset
+- [ ] Set up Resend SMTP (see Auth section below) — Supabase's default mailer is capped at ~2 emails/hour, so signup confirmation and password-reset emails are unreliable. Confirmed via DNS on 2026-06-21 that Resend has not been set up yet (no `resend._domainkey` TXT record, SPF only includes Hostinger).
 - [ ] Customize email templates in Supabase → Auth → Email Templates
 - [ ] Replace "Ibrahim Karim" placeholder on About page with real team member
+- [ ] Test the new TOTP two-factor enrollment flow on `/account` end-to-end with a real account + authenticator app (built this session but not yet verified live — see June 2026 work below)
+
+---
+
+## Work done — June 2026 session
+
+**Site audit fixes** (fake/stale content, broken links, data accuracy):
+- Replaced fabricated About-page stats (2,400+ schools, 18,000 reviews, etc.) with real numbers
+- Fixed the live school/state count everywhere it was hardcoded (was stuck at 33, corrected to 35 schools / 6 states across about.html, index.html, directory.html's JSON-LD and noscript fallback)
+- Found and fixed real data corruption in Supabase: ~10 schools had wrong city/state (e.g. a NJ school tagged as being in CA) from a bad original import; ran a corrected `supabase-fix-schools.sql` and removed two leftover duplicate rows that turned out to be seed/test data (giveaway: identical-microsecond timestamps and `555-` fake phone numbers)
+- Normalized canonical/`og:url` tags to drop `.html` (matches `vercel.json`'s `cleanUrls`)
+- Added a static `<noscript>` fallback to `/directory` for crawlers and no-JS visitors
+- Removed a stray "Example" badge job listing from the homepage jobs feed
+- Removed footer links to directory views that can't actually be filtered yet (e.g. "Top-rated schools")
+- Fixed dead `href="#"` links and fabricated per-user account details (fake "Last changed 58 days ago", fake "2 devices signed in") across about.html, blog.html, and account.html
+- Connected the homepage prayer-times widget to the real Aladhan API instead of static placeholder times
+
+**Reviews were already live but mislabeled "coming soon" almost everywhere except the school page itself** — fixed:
+- Homepage's 3 featured-school rating blocks and the entire `/directory` result list now show real per-school average ratings and review counts (new `assets/featured-ratings.js`)
+- Rewrote the homepage's "Reviews — coming soon" section, since reviews have been open since launch
+- blog-post.html's related-schools block was showing 3 entirely fabricated schools with fake star ratings — replaced with real schools and honest "No reviews yet" wording
+
+**Built real functionality instead of fake placeholders**, per a "everything listed on the site should work" pass:
+- Newsletter forms (footer, homepage hero, blog sidebar) now POST to the existing Formspree endpoint via AJAX with inline success state — previously all of them did nothing
+- `/account` settings: real password change (`supabase.auth.updateUser`), real TOTP 2FA enrollment (`supabase.auth.mfa`), real "download my data" JSON export, and real inline review editing (the owner-scoped RLS policy already existed — it just had no UI). Removed the "Active sessions" row entirely since listing sessions requires the Supabase Admin API, which isn't available client-side
+- blog-post.html's fake "Checklist PDF — coming soon" button now opens a real print-friendly checklist via the browser's print-to-PDF
+
+**Two real bugs found only by running the site in a browser (Playwright), not by reading the code:**
+- `/account` was completely broken — `const supabase = window.supabase.createClient(...)` collided with the global `window.supabase` the SDK itself sets, throwing a `SyntaxError` that silently killed the entire inline script block. Profile loading, favorites, reviews, sign-out — none of it ever ran. Renamed the local client to `sb` throughout.
+- `/directory`'s compare tray had working CSS/JS but the actual `#compareTray` markup and `.compare-btn` elements were never added to the page, throwing a `pageerror` on every load. Added the missing tray markup and a working "+ Compare" button on each result card.
 
 ---
 
@@ -77,7 +108,7 @@ islamicschoolreview/
 ├── supabase-submissions.sql      # school_submissions table + RLS
 ├── supabase-admin-policies.sql   # UPDATE + DELETE + INSERT policies for schools
 ├── supabase-add-lighthouse.sql   # Adds The Lighthouse Schools + INSERT policy fix
-├── supabase-fix-schools.sql      # Fixes wrong city/state data for all 33 schools
+├── supabase-fix-schools.sql      # Fixes wrong city/state data for the original 33 schools — run June 2026
 ├── supabase-sample-reviews.sql   # Sample parent reviews for AFA + MY Academy
 └── supabase-lighthouse-reviews.sql # Sample parent reviews for The Lighthouse Schools
 ```
@@ -239,9 +270,9 @@ Then:
 | State | Count | Notes |
 |---|---|---|
 | Florida | 13 | AFA + MY Academy have real photos and sample reviews |
-| Texas | 11 | Data from schools.json — run supabase-fix-schools.sql to correct |
-| California | 4 | |
-| New York | 3 | |
+| Texas | 11 | City/state data corrected (June 2026) |
+| New York | 4 | Includes Muslim Center School (added since launch) |
+| California | 3 | |
 | New Jersey | 3 | |
 | Iowa | 1 | The Lighthouse Schools — boarding school, Clinton IA |
-| **Total** | **34** | |
+| **Total** | **35** | |
