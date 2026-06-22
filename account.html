@@ -701,17 +701,31 @@
             <div class="settings-row">
               <label>Password</label>
               <span class="val">••••••••••</span>
-              <span class="nav-more__cs">coming soon</span>
+              <a href="#" id="changePasswordToggle" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Change password</a>
             </div>
+            <form id="changePasswordForm" hidden style="margin: -6px 0 16px; display: grid; gap: 8px; max-width: 360px;">
+              <input type="password" id="newPassword" class="input" placeholder="New password (min 6 characters)" minlength="6" required autocomplete="new-password" />
+              <input type="password" id="confirmPassword" class="input" placeholder="Confirm new password" minlength="6" required autocomplete="new-password" />
+              <div style="display:flex; gap:8px;">
+                <button type="submit" class="btn btn--primary btn--sm">Save new password</button>
+                <button type="button" class="btn btn--ghost btn--sm" id="cancelPasswordChange">Cancel</button>
+              </div>
+              <p id="passwordChangeMsg" class="small" style="margin:0;"></p>
+            </form>
             <div class="settings-row">
               <label>Two-factor auth</label>
-              <span class="val">Not enabled</span>
-              <span class="nav-more__cs">coming soon</span>
+              <span class="val" id="mfaStatus">Not enabled</span>
+              <a href="#" id="mfaToggle" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Set up</a>
             </div>
-            <div class="settings-row">
-              <label>Active sessions</label>
-              <span class="val">Session tracking not yet available</span>
-              <span class="nav-more__cs">coming soon</span>
+            <div id="mfaSetup" hidden style="margin: -6px 0 16px; max-width: 360px;">
+              <p class="small muted" style="margin: 0 0 10px;">Scan this QR code with an authenticator app (Google Authenticator, Authy, etc.), then enter the 6-digit code it gives you.</p>
+              <div id="mfaQrCode" style="margin-bottom: 10px;"></div>
+              <div style="display:flex; gap:8px;">
+                <input type="text" id="mfaCode" class="input" placeholder="6-digit code" maxlength="6" inputmode="numeric" style="max-width:140px;" />
+                <button type="button" class="btn btn--primary btn--sm" id="mfaVerifyBtn">Verify &amp; enable</button>
+                <button type="button" class="btn btn--ghost btn--sm" id="mfaCancelBtn">Cancel</button>
+              </div>
+              <p id="mfaMsg" class="small" style="margin:8px 0 0;"></p>
             </div>
           </div>
 
@@ -762,8 +776,8 @@
             </div>
             <div class="settings-row">
               <label>Download my data</label>
-              <span class="val">Export a .zip of your profile, reviews, inquiries, and saved schools.</span>
-              <span class="nav-more__cs">coming soon</span>
+              <span class="val">Export a .json file of your profile, reviews, and saved schools.</span>
+              <a href="#" id="exportDataLink" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Download</a>
             </div>
           </div>
 
@@ -819,18 +833,18 @@
   // Initialize Supabase client
   const supabaseUrl = 'https://vprltwjduekabkizlbkv.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
-  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+  const sb = window.supabase.createClient(supabaseUrl, supabaseKey);
 
   // Load user profile and update UI
   async function loadUserProfile() {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user } } = await sb.auth.getUser();
       if (!user) {
         window.location.href = 'signin';
         return;
       }
 
-      const { data: profile } = await supabase
+      const { data: profile } = await sb
         .from('user_profiles')
         .select('*')
         .eq('id', user.id)
@@ -859,10 +873,10 @@
   // Load user's favorite schools
   async function loadFavorites() {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user } } = await sb.auth.getUser();
       if (!user) return;
 
-      const { data: favorites } = await supabase
+      const { data: favorites } = await sb
         .from('user_favorites')
         .select('*')
         .eq('user_id', user.id);
@@ -877,7 +891,7 @@
 
         // Get school data for favorites
         const schoolIds = favorites.map(f => f.school_id);
-        const { data: schools } = await supabase
+        const { data: schools } = await sb
           .from('schools')
           .select('*')
           .in('id', schoolIds);
@@ -922,10 +936,10 @@
   // Load user's reviews
   async function loadReviews() {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user } } = await sb.auth.getUser();
       if (!user) return;
 
-      const { data: reviews } = await supabase
+      const { data: reviews } = await sb
         .from('reviews')
         .select('*')
         .eq('user_id', user.id)
@@ -941,7 +955,7 @@
 
         // Get school data for reviews
         const schoolIds = [...new Set(reviews.map(r => r.school_id))];
-        const { data: schools } = await supabase
+        const { data: schools } = await sb
           .from('schools')
           .select('*')
           .in('id', schoolIds);
@@ -963,10 +977,21 @@
                 </div>
                 <span class="status-chip status-chip--live">Live</span>
               </div>
-              <p class="review-item__body">${review.review_text}</p>
+              <p class="review-item__body" id="reviewBody-${review.id}">${review.review_text}</p>
+              <div class="review-edit-form" id="reviewEdit-${review.id}" hidden style="display:grid; gap:8px; margin-bottom:12px; max-width:480px;">
+                <select id="reviewRating-${review.id}" class="select">
+                  ${[5, 4, 3, 2, 1].map((n) => `<option value="${n}" ${n === review.rating ? "selected" : ""}>${n} star${n === 1 ? "" : "s"}</option>`).join("")}
+                </select>
+                <textarea id="reviewText-${review.id}" class="input" rows="4">${review.review_text}</textarea>
+                <div style="display:flex; gap:8px;">
+                  <button type="button" class="btn btn--primary btn--sm" onclick="saveReviewEdit('${review.id}')">Save</button>
+                  <button type="button" class="btn btn--ghost btn--sm" onclick="cancelReviewEdit('${review.id}')">Cancel</button>
+                </div>
+                <p id="reviewEditMsg-${review.id}" class="small" style="margin:0;"></p>
+              </div>
               <div class="review-item__foot">
                 <span>Posted ${new Date(review.created_at).toLocaleDateString()}</span>
-                <span class="nav-more__cs">edit coming soon</span>
+                <a href="#" onclick="toggleReviewEdit('${review.id}'); return false;">Edit</a>
               </div>
             </div>
           `;
@@ -983,10 +1008,10 @@
   // Remove favorite
   async function removeFavorite(schoolId) {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user } } = await sb.auth.getUser();
       if (!user) return;
 
-      await supabase
+      await sb
         .from('user_favorites')
         .delete()
         .eq('user_id', user.id)
@@ -995,6 +1020,48 @@
       loadFavorites(); // Reload favorites
     } catch (error) {
       console.error('Error removing favorite:', error);
+    }
+  }
+
+  // Edit review
+  function toggleReviewEdit(reviewId) {
+    const body = document.getElementById(`reviewBody-${reviewId}`);
+    const editForm = document.getElementById(`reviewEdit-${reviewId}`);
+    const opening = editForm.hidden;
+    editForm.hidden = !opening;
+    body.hidden = opening;
+  }
+
+  function cancelReviewEdit(reviewId) {
+    document.getElementById(`reviewBody-${reviewId}`).hidden = false;
+    document.getElementById(`reviewEdit-${reviewId}`).hidden = true;
+  }
+
+  async function saveReviewEdit(reviewId) {
+    const msg = document.getElementById(`reviewEditMsg-${reviewId}`);
+    const rating = Number(document.getElementById(`reviewRating-${reviewId}`).value);
+    const text = document.getElementById(`reviewText-${reviewId}`).value.trim();
+    if (!text) {
+      msg.textContent = 'Review text cannot be empty.';
+      msg.style.color = 'var(--danger)';
+      return;
+    }
+    msg.textContent = 'Saving…';
+    msg.style.color = 'var(--muted)';
+    try {
+      const { data: { user } } = await sb.auth.getUser();
+      const { error } = await sb
+        .from('reviews')
+        .update({ rating, review_text: text, updated_at: new Date().toISOString() })
+        .eq('id', reviewId)
+        .eq('user_id', user.id);
+      if (error) throw error;
+      msg.textContent = 'Saved.';
+      msg.style.color = 'var(--primary)';
+      loadReviews();
+    } catch (error) {
+      msg.textContent = error.message || 'Could not save your changes.';
+      msg.style.color = 'var(--danger)';
     }
   }
 
@@ -1044,7 +1111,7 @@
       return;
     }
     // Inject tokens into the Supabase SDK so authenticated queries work
-    await supabase.auth.setSession({
+    await sb.auth.setSession({
       access_token: session.access_token,
       refresh_token: session.refresh_token,
     });
@@ -1057,6 +1124,175 @@
     e.preventDefault();
     localStorage.removeItem('isr_session');
     window.location.href = 'index';
+  });
+
+  // Change password
+  const changePasswordToggle = document.getElementById('changePasswordToggle');
+  const changePasswordForm = document.getElementById('changePasswordForm');
+  const passwordChangeMsg = document.getElementById('passwordChangeMsg');
+
+  changePasswordToggle?.addEventListener('click', (e) => {
+    e.preventDefault();
+    changePasswordForm.hidden = !changePasswordForm.hidden;
+  });
+  document.getElementById('cancelPasswordChange')?.addEventListener('click', () => {
+    changePasswordForm.hidden = true;
+    changePasswordForm.reset();
+    passwordChangeMsg.textContent = '';
+  });
+  changePasswordForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    if (newPassword !== confirmPassword) {
+      passwordChangeMsg.textContent = 'Passwords do not match.';
+      passwordChangeMsg.style.color = 'var(--danger)';
+      return;
+    }
+    const submitBtn = changePasswordForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    passwordChangeMsg.textContent = 'Saving…';
+    passwordChangeMsg.style.color = 'var(--muted)';
+    const { error } = await sb.auth.updateUser({ password: newPassword });
+    submitBtn.disabled = false;
+    if (error) {
+      passwordChangeMsg.textContent = error.message || 'Could not update password.';
+      passwordChangeMsg.style.color = 'var(--danger)';
+      return;
+    }
+    passwordChangeMsg.textContent = 'Password updated.';
+    passwordChangeMsg.style.color = 'var(--primary)';
+    changePasswordForm.reset();
+    setTimeout(() => { changePasswordForm.hidden = true; passwordChangeMsg.textContent = ''; }, 2000);
+  });
+
+  // Two-factor authentication (TOTP) via Supabase MFA
+  let mfaEnrollId = null;
+
+  async function refreshMfaStatus() {
+    const mfaStatus = document.getElementById('mfaStatus');
+    const mfaToggle = document.getElementById('mfaToggle');
+    try {
+      const { data, error } = await sb.auth.mfa.listFactors();
+      if (error) throw error;
+      const verified = (data?.totp || []).some((f) => f.status === 'verified');
+      if (verified) {
+        mfaStatus.textContent = 'Enabled';
+        mfaToggle.textContent = 'Disable';
+      } else {
+        mfaStatus.textContent = 'Not enabled';
+        mfaToggle.textContent = 'Set up';
+      }
+    } catch (error) {
+      console.warn('Could not load MFA status:', error);
+    }
+  }
+
+  document.getElementById('mfaToggle')?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const mfaSetup = document.getElementById('mfaSetup');
+    const mfaMsg = document.getElementById('mfaMsg');
+    const mfaToggle = document.getElementById('mfaToggle');
+
+    if (mfaToggle.textContent === 'Disable') {
+      try {
+        const { data } = await sb.auth.mfa.listFactors();
+        const factor = (data?.totp || []).find((f) => f.status === 'verified');
+        if (factor) await sb.auth.mfa.unenroll({ factorId: factor.id });
+        await refreshMfaStatus();
+      } catch (error) {
+        alert('Could not disable two-factor auth: ' + (error.message || error));
+      }
+      return;
+    }
+
+    mfaMsg.textContent = '';
+    try {
+      const { data, error } = await sb.auth.mfa.enroll({ factorType: 'totp' });
+      if (error) throw error;
+      mfaEnrollId = data.id;
+      document.getElementById('mfaQrCode').innerHTML = data.totp.qr_code
+        ? `<img src="${data.totp.qr_code}" alt="Scan with your authenticator app" width="180" height="180" />`
+        : `<code class="small">${data.totp.secret}</code>`;
+      mfaSetup.hidden = false;
+    } catch (error) {
+      mfaMsg.textContent = error.message || 'Two-factor auth is not available on this account yet.';
+      mfaMsg.style.color = 'var(--danger)';
+      mfaSetup.hidden = false;
+    }
+  });
+
+  document.getElementById('mfaCancelBtn')?.addEventListener('click', () => {
+    document.getElementById('mfaSetup').hidden = true;
+    document.getElementById('mfaCode').value = '';
+    document.getElementById('mfaMsg').textContent = '';
+  });
+
+  document.getElementById('mfaVerifyBtn')?.addEventListener('click', async () => {
+    const mfaMsg = document.getElementById('mfaMsg');
+    const code = document.getElementById('mfaCode').value.trim();
+    if (!mfaEnrollId || !code) return;
+    mfaMsg.textContent = 'Verifying…';
+    mfaMsg.style.color = 'var(--muted)';
+    try {
+      const { data: challenge, error: challengeError } = await sb.auth.mfa.challenge({ factorId: mfaEnrollId });
+      if (challengeError) throw challengeError;
+      const { error: verifyError } = await sb.auth.mfa.verify({
+        factorId: mfaEnrollId,
+        challengeId: challenge.id,
+        code,
+      });
+      if (verifyError) throw verifyError;
+      mfaMsg.textContent = 'Two-factor auth enabled.';
+      mfaMsg.style.color = 'var(--primary)';
+      document.getElementById('mfaSetup').hidden = true;
+      await refreshMfaStatus();
+    } catch (error) {
+      mfaMsg.textContent = error.message || 'That code did not verify — try again.';
+      mfaMsg.style.color = 'var(--danger)';
+    }
+  });
+
+  refreshMfaStatus();
+
+  // Export my data
+  document.getElementById('exportDataLink')?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const link = e.currentTarget;
+    const originalText = link.textContent;
+    link.textContent = 'Preparing…';
+    try {
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) return;
+
+      const [{ data: profile }, { data: reviews }, { data: favorites }] = await Promise.all([
+        sb.from('user_profiles').select('*').eq('id', user.id).single(),
+        sb.from('reviews').select('*').eq('user_id', user.id),
+        sb.from('user_favorites').select('*').eq('user_id', user.id),
+      ]);
+
+      const exportData = {
+        exported_at: new Date().toISOString(),
+        profile: profile || null,
+        reviews: reviews || [],
+        saved_schools: favorites || [],
+      };
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'islamicschoolreview-my-data.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Export failed:', error);
+      alert('Could not export your data — please try again.');
+    } finally {
+      link.textContent = originalText;
+    }
   });
 </script>
 

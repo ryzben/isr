@@ -39,17 +39,20 @@
     .then((res) => res.json())
     .then((data) => {
       const timings = data?.data?.timings;
-      if (!timings) return;
+      if (!timings) throw new Error("No timings in response");
 
       const prayers = Array.from(widget.querySelectorAll(".prayer"));
       prayers.forEach((el) => {
         const name = el.dataset.prayer;
         const raw = timings[name];
-        if (!raw) return;
+        const timeEl = el.querySelector(".prayer__time");
+        if (!raw) {
+          if (timeEl) timeEl.textContent = "N/A";
+          return;
+        }
         const clean = raw.split(" ")[0];
         const [hh, mm] = clean.split(":").map(Number);
         el.dataset.minutes = hh * 60 + mm;
-        const timeEl = el.querySelector(".prayer__time");
         if (timeEl) timeEl.textContent = to12Hour(clean);
       });
 

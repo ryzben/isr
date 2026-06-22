@@ -62,6 +62,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Newsletter sign-up forms (footer mini-form + hero form) — AJAX POST to Formspree.
+  document.querySelectorAll(".newsletter-inline, .newsletter__form, .side-newsletter form").forEach((form) => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const button = form.querySelector("button");
+      const originalLabel = button ? button.textContent : "";
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Subscribing…";
+      }
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (!res.ok) throw new Error("Submission failed");
+        form.outerHTML = '<p class="newsletter-soon">✅ Subscribed — thanks for joining!</p>';
+      } catch {
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalLabel;
+        }
+        alert("Something went wrong — please try again.");
+      }
+    });
+  });
+
   // Directory search:
   // The legacy DOM-filter handler that ran here lived on directory.html when
   // the page rendered hardcoded cards. Phase 2 moved directory rendering and

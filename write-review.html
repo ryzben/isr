@@ -543,7 +543,12 @@
       <div class="footer-col">
         <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
         <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <p class="newsletter-soon">Newsletter — coming soon. We will post here when sign-ups open.</p>
+        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
+          <input type="hidden" name="form-name" value="newsletter-signup" />
+          <input type="hidden" name="_subject" value="Newsletter signup" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
       <div class="footer-col"><h4>Directory</h4><ul>
         <li><a href="directory">Browse all schools</a></li>

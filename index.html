@@ -972,11 +972,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Jacksonville, FL · PreK–12 · 270+ students
           </div>
-          <div class="rating-block">
+          <div class="rating-block" data-school-id="al-furqan-academy">
             <span class="rating-block__num">—</span>
             <div class="rating-block__body">
               <div class="rating-block__stars" style="opacity:0.35;">★★★★★</div>
-              <div class="rating-block__count">Reviews coming soon</div>
+              <div class="rating-block__count">Loading reviews…</div>
             </div>
             <div class="rating-block__tuition">
               <span class="rating-block__tuition-label">Tuition</span>
@@ -1006,11 +1006,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Tampa, FL · PreK–12
           </div>
-          <div class="rating-block">
+          <div class="rating-block" data-school-id="universal-academy-of-florida">
             <span class="rating-block__num">—</span>
             <div class="rating-block__body">
-              <div class="rating-block__stars">☆☆☆☆☆</div>
-              <div class="rating-block__count">Reviews coming soon</div>
+              <div class="rating-block__stars" style="opacity:0.35;">★★★★★</div>
+              <div class="rating-block__count">Loading reviews…</div>
             </div>
             <div class="rating-block__tuition">
               <span class="rating-block__tuition-label">Tuition</span>
@@ -1040,11 +1040,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Orlando, FL · PreK–12
           </div>
-          <div class="rating-block">
+          <div class="rating-block" data-school-id="ibn-seena-academy">
             <span class="rating-block__num">—</span>
             <div class="rating-block__body">
-              <div class="rating-block__stars">☆☆☆☆☆</div>
-              <div class="rating-block__count">Reviews coming soon</div>
+              <div class="rating-block__stars" style="opacity:0.35;">★★★★★</div>
+              <div class="rating-block__count">Loading reviews…</div>
             </div>
             <div class="rating-block__tuition">
               <span class="rating-block__tuition-label">Tuition</span>
@@ -1190,24 +1190,22 @@
   </div>
 </section>
 
-<!-- ========== REVIEWS — preview ========== -->
+<!-- ========== REVIEWS ========== -->
 <section class="section section--alt">
   <div class="container">
     <div class="section-title">
       <div>
-        <span class="eyebrow">Coming soon</span>
+        <span class="eyebrow">Live now</span>
         <h2>Honest reviews, from real families</h2>
       </div>
     </div>
 
     <p style="max-width: 60ch; color: var(--ink-soft);">
-      We're building moderated parent reviews next — every review will be tied to a real family experience and screened before going live. If you've been part of an Islamic school as a parent or student, we'd love to feature your perspective when reviews open.
+      Parent reviews are open — every review is tied to a real account and screened before going live. If you've been part of an Islamic school as a parent or student, share your experience to help other families decide.
     </p>
     <p style="margin-top: 16px;">
-      <a class="btn btn--ghost btn--sm"
-         href="mailto:hello@islamicschoolreview.com?subject=I%20want%20to%20be%20an%20early%20reviewer&amp;body=School%20I'd%20review%3A%0A%0AMy%20relationship%20to%20the%20school%20(parent%2C%20alum%2C%20etc.)%3A%0A%0A">
-        Email us to be an early reviewer
-      </a>
+      <a class="btn btn--primary btn--sm" href="write-review">Write a review</a>
+      <a class="btn btn--ghost btn--sm" href="directory" style="margin-left:8px;">Browse schools with reviews →</a>
     </p>
   </div>
 </section>
@@ -1476,11 +1474,15 @@
       <div>
         <span class="eyebrow" style="color: var(--accent-soft)">Free · No spam</span>
         <h2>The weekly digest for Muslim families and educators</h2>
-        <p>Get an early-access email when reviews open and we add new schools to the directory. We'll only email when there's something genuinely new.</p>
+        <p>Get an email when we add new schools to the directory and new reviews come in. We'll only email when there's something genuinely new.</p>
       </div>
-      <div class="newsletter__form">
-        <p class="small" style="color: rgba(255,255,255,0.9); margin: 0;">📬 Sign-ups are coming soon — check back here when the newsletter launches.</p>
-      </div>
+      <form class="newsletter__form" action="https://formspree.io/f/mjglvggk" method="POST">
+        <input type="hidden" name="form-name" value="newsletter-signup" />
+        <input type="hidden" name="_subject" value="Newsletter signup" />
+        <label class="label" for="newsletter-email" style="color: #fff; margin-bottom: 8px;">Get the free 10-point school checklist too</label>
+        <input id="newsletter-email" class="input" type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
+        <button class="btn btn--cta btn--block btn--lg" type="submit">Subscribe &amp; get checklist</button>
+      </form>
     </div>
   </div>
 </section>
@@ -1510,7 +1512,12 @@
           Islamic School Review
         </div>
         <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <p class="newsletter-soon">Newsletter — coming soon. We will post here when sign-ups open.</p>
+        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
+          <input type="hidden" name="form-name" value="newsletter-signup" />
+          <input type="hidden" name="_subject" value="Newsletter signup" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
       <div class="footer-col">
         <h4>Directory</h4>
@@ -1555,6 +1562,7 @@
 
 <script src="assets/main.js"></script>
 <script src="assets/prayer-times.js"></script>
+<script src="assets/featured-ratings.js"></script>
 <script>
 // Populate hero state + city dropdowns dynamically from Supabase
 document.addEventListener('DOMContentLoaded', async function() {

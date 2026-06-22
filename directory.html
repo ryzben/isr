@@ -686,7 +686,12 @@
       <div class="footer-col">
         <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
         <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <p class="newsletter-soon">Newsletter — coming soon. We will post here when sign-ups open.</p>
+        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
+          <input type="hidden" name="form-name" value="newsletter-signup" />
+          <input type="hidden" name="_subject" value="Newsletter signup" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
       <div class="footer-col"><h4>Directory</h4><ul>
         <li><a href="directory">Browse all schools</a></li>
@@ -711,6 +716,13 @@
     </div>
   </div>
 </footer>
+
+<!-- ========== COMPARE TRAY ========== -->
+<div id="compareTray" class="compare-tray" style="display:none;">
+  <span id="compareChips"></span>
+  <a id="compareBtn" href="compare" class="btn btn--primary btn--sm">Compare →</a>
+  <button type="button" class="btn btn--ghost btn--sm" onclick="clearCompare()">Clear</button>
+</div>
 
 <script src="assets/main.js"></script>
 
@@ -794,6 +806,14 @@
       : `<strong>Contact</strong><span class="small muted">For tuition</span>`;
     const desc = s.description ? escapeHtml(s.description) : "";
 
+    const ratings = _reviewsBySchool[s.id] || [];
+    const ratingHTML = ratings.length
+      ? (() => {
+          const avg = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
+          return `<span class="rating"><span class="rating__star">★</span> ${avg.toFixed(1)} <span class="rating__count">(${ratings.length} review${ratings.length === 1 ? "" : "s"})</span></span>`;
+        })()
+      : `<span class="rating"><span class="rating__star">★</span> — <span class="rating__count">No reviews yet</span></span>`;
+
     return `
       <a href="school?id=${encodeURIComponent(s.id)}" class="result"
          data-city="${escapeHtml(s.city || "")}" data-state="${escapeHtml(s.state || "")}">
@@ -805,7 +825,7 @@
           <h3 class="result__title">${escapeHtml(s.name)}</h3>
           <div class="result__loc">📍 ${escapeHtml(cityLine)}${grades}${websiteLine}</div>
           <div class="result__rating-row">
-            <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">Reviews coming soon</span></span>
+            ${ratingHTML}
             <span class="small muted">${s.verified ? "Verified listing" : "Listing awaiting claim"}</span>
           </div>
           <p class="result__snippet">${desc}</p>
@@ -814,6 +834,8 @@
           <div class="result__tuition">${tuition}</div>
           <div class="result__actions">
             <span class="btn btn--primary btn--sm">View school</span>
+            <button type="button" class="btn btn--ghost btn--sm compare-btn" data-id="${escapeHtml(s.id)}" data-name="${escapeHtml(s.name)}"
+              onclick="event.preventDefault(); event.stopPropagation(); toggleCompare(this);">+ Compare</button>
           </div>
         </div>
       </a>
@@ -957,6 +979,26 @@
   // ---- Dropdown population ----
   let _allSchools = [];
   let _statesList = [];
+  let _reviewsBySchool = {};
+
+  const SUPABASE_URL = "https://vprltwjduekabkizlbkv.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA";
+
+  async function loadReviewAggregates() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?select=school_id,rating`, {
+        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+      });
+      const reviews = await res.json();
+      const byId = {};
+      reviews.forEach((r) => {
+        (byId[r.school_id] = byId[r.school_id] || []).push(r.rating);
+      });
+      _reviewsBySchool = byId;
+    } catch {
+      _reviewsBySchool = {};
+    }
+  }
 
   async function populateStateDropdown() {
     _statesList = await uniqueStates();
@@ -1009,6 +1051,7 @@
   (async () => {
     try {
       _allSchools = await getSchools();
+      await loadReviewAggregates();
       await populateStateDropdown();
 
       // Seed the city catalog used by readUrl()'s free-text city sniffer.

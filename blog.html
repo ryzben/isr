@@ -578,7 +578,13 @@
       <h4>Weekly digest</h4>
       <h3>One trusted email each Friday.</h3>
       <p>New guides, school spotlights, and the week's best stories — curated by our editors.</p>
-      <p class="small" style="color: rgba(255,255,255,0.9); margin: 0;">📬 Coming soon — check back here when the newsletter launches.</p>
+      <form action="https://formspree.io/f/mjglvggk" method="POST">
+        <input type="hidden" name="form-name" value="newsletter-signup" />
+        <input type="hidden" name="_subject" value="Newsletter signup" />
+        <input class="input" type="email" name="email" placeholder="you@example.com" aria-label="Your email" required />
+        <button class="btn btn--accent btn--block" type="submit">Subscribe</button>
+      </form>
+      <p style="font-size:0.78rem; margin:10px 0 0;">Free. No spam. Unsubscribe any time.</p>
     </div>
 
     <div class="side-card">
@@ -646,7 +652,12 @@
       <div class="footer-col">
         <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
         <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <p class="newsletter-soon">Newsletter — coming soon. We will post here when sign-ups open.</p>
+        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
+          <input type="hidden" name="form-name" value="newsletter-signup" />
+          <input type="hidden" name="_subject" value="Newsletter signup" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
       <div class="footer-col"><h4>Directory</h4><ul>
         <li><a href="directory">Browse all schools</a></li>

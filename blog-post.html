@@ -396,6 +396,22 @@
       .upnext-grid { grid-template-columns: 1fr; }
       .post-actions { margin-left: 0; }
     }
+
+    .checklist-print { display: none; }
+    @media print {
+      body * { visibility: hidden; }
+      .checklist-print, .checklist-print * { visibility: visible; }
+      .checklist-print {
+        display: block;
+        position: absolute; top: 0; left: 0;
+        width: 100%; padding: 24px;
+      }
+      .checklist-print h1 { font-size: 1.6rem; margin-bottom: 4px; }
+      .checklist-print__sub { color: #555; font-size: 0.85rem; margin-bottom: 20px; }
+      .checklist-print h2 { font-size: 1.1rem; margin: 18px 0 8px; }
+      .checklist-print ul { list-style: none; padding: 0; margin: 0; }
+      .checklist-print li { padding: 4px 0; font-size: 0.95rem; }
+    }
   </style>
 </head>
 <body>
@@ -449,7 +465,7 @@
         <div class="post-actions">
           <span class="nav-more__cs" style="padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--surface);">🔖 Save — coming soon</span>
           <a href="#" onclick="location.href='mailto:?subject=' + encodeURIComponent(document.title) + '&body=' + encodeURIComponent(location.href); return false;">✉ Email</a>
-          <a href="#" onclick="if(navigator.share){navigator.share({title:document.title,url:location.href});}else{navigator.clipboard.writeText(location.href);alert('Link copied!');} return false;">↗ Share</a>
+          <a href="#" onclick="sharePost(); return false;">↗ Share</a>
         </div>
       </div>
     </div>
@@ -564,9 +580,62 @@
     <div class="checklist-card">
       <div>
         <h3>Free download: the school-visit checklist</h3>
-        <p>40 questions grouped by category — academics, Islamic environment, community, tuition, logistics. Print it, clip it to a folder, and bring it on every visit.</p>
+        <p>Questions grouped by category — academics, Islamic environment, community, tuition, logistics. Print it, clip it to a folder, and bring it on every visit.</p>
       </div>
-      <span class="btn btn--ghost btn--lg" style="cursor:default;" aria-disabled="true">Checklist PDF — coming soon</span>
+      <a href="#" class="btn btn--ghost btn--lg" onclick="printChecklist(); return false;">Get the checklist (PDF)</a>
+    </div>
+
+    <div id="checklist-print" class="checklist-print" aria-hidden="true">
+      <h1>Islamic School Visit Checklist</h1>
+      <p class="checklist-print__sub">From "How to choose an Islamic school" — islamicschoolreview.com</p>
+
+      <h2>Academic rigor</h2>
+      <ul>
+        <li>☐ What curriculum do you use, and who chose it?</li>
+        <li>☐ Where do your graduates end up?</li>
+        <li>☐ What are your standardized-test results?</li>
+        <li>☐ How do you handle students who are ahead or behind?</li>
+      </ul>
+
+      <h2>The Islamic environment</h2>
+      <ul>
+        <li>☐ How is salah conducted — pro forma, or attended to with care?</li>
+        <li>☐ Is Quran taught by qualified huffadh, with a coherent grade-to-grade progression?</li>
+        <li>☐ Is Arabic taught as a living language, or only as grammar exercises?</li>
+        <li>☐ What is the adab in the hallways — how do students speak to each other and to teachers?</li>
+        <li>☐ Are Islamic values integrated into other subjects, or kept in a separate silo?</li>
+      </ul>
+
+      <h2>Community &amp; culture</h2>
+      <ul>
+        <li>☐ Are these the friendships you want for your child?</li>
+        <li>☐ Are these the families you want to be in community with for the next decade?</li>
+      </ul>
+
+      <h2>Facilities &amp; safety</h2>
+      <ul>
+        <li>☐ What do the library, labs, prayer spaces, and lunchroom actually look like day to day?</li>
+        <li>☐ How does the school handle safety, mental health, bullying, and child protection?</li>
+      </ul>
+
+      <h2>Tuition &amp; financial aid</h2>
+      <ul>
+        <li>☐ What is the all-in cost (tuition, registration, books, uniforms, lunches, activities, tech fees)?</li>
+        <li>☐ How does tuition change by grade level?</li>
+        <li>☐ Are multi-child discounts available?</li>
+        <li>☐ Is financial aid real, or aspirational?</li>
+        <li>☐ What happens if you fall behind on payments?</li>
+      </ul>
+
+      <h2>The visit</h2>
+      <ul>
+        <li>☐ Visit twice — once for the official tour, once unannounced.</li>
+        <li>☐ Observe how teachers and students actually speak to each other.</li>
+        <li>☐ Visit during Dhuhr to see how the community prays together.</li>
+        <li>☐ Ask to speak to current parents, not just the ones the school picks.</li>
+        <li>☐ Eat the lunch.</li>
+        <li>☐ Bring your child if they're old enough to have a real reaction.</li>
+      </ul>
     </div>
 
     <h2 id="decide">7. Making the decision</h2>
@@ -584,15 +653,15 @@
       <ul>
         <li>
           <a href="school?id=darul-arqam-school">Darul Arqam School · Houston, TX</a>
-          <span class="rating muted small">Reviews coming soon</span>
+          <span class="rating muted small">No reviews yet</span>
         </li>
         <li>
           <a href="school?id=dallas-islamic-school">Dallas Islamic School · Richardson, TX</a>
-          <span class="rating muted small">Reviews coming soon</span>
+          <span class="rating muted small">No reviews yet</span>
         </li>
         <li>
           <a href="school?id=austin-peace-academy">Austin Peace Academy · Austin, TX</a>
-          <span class="rating muted small">Reviews coming soon</span>
+          <span class="rating muted small">No reviews yet</span>
         </li>
       </ul>
       <p class="small mt-16" style="margin-bottom:0;"><a href="directory">Browse all Islamic schools →</a></p>
@@ -662,7 +731,12 @@
       <div class="footer-col">
         <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
         <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <p class="newsletter-soon">Newsletter — coming soon. We will post here when sign-ups open.</p>
+        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
+          <input type="hidden" name="form-name" value="newsletter-signup" />
+          <input type="hidden" name="_subject" value="Newsletter signup" />
+          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
       <div class="footer-col"><h4>Directory</h4><ul>
         <li><a href="directory">Browse all schools</a></li>
@@ -690,6 +764,19 @@
 </footer>
 
 <script src="assets/main.js"></script>
+<script>
+  function sharePost() {
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: location.href }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(location.href);
+      alert('Link copied!');
+    }
+  }
+  function printChecklist() {
+    window.print();
+  }
+</script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}; Tawk_API.onLoad=function(){Tawk_API.hideWidget();}, Tawk_LoadStart=new Date();
