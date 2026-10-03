@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Islamic School Review — Find the best Islamic school for your child's future</title>
+  <script>
+    // Password-reset emails can land here; hand them to the sign-in page, which owns that flow.
+    if (/type=recovery|error_description=/.test(location.hash)) location.replace('signin' + location.hash);
+  </script>
   <meta name="description" content="A growing directory of Islamic schools across the U.S. Find programs near you, see who serves your community, and help us build the most trusted resource for Islamic education." />
   <link rel="canonical" href="https://www.islamicschoolreview.com/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />

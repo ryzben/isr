@@ -267,6 +267,20 @@
         <a href="#" id="cancelReset" style="display:block; text-align:center; font-size:0.88rem; color:var(--muted);">← Back to sign in</a>
       </div>
 
+      <!-- New password form (shown when arriving from a reset-link email) -->
+      <form id="newPassForm" style="display:none;">
+        <h3 style="font-size:1.1rem; margin:0 0 6px;">Choose a new password</h3>
+        <div class="field">
+          <label for="newPass">New password</label>
+          <input type="password" id="newPass" class="input" required minlength="6" placeholder="At least 6 characters" autocomplete="new-password">
+        </div>
+        <div class="field">
+          <label for="newPass2">Confirm new password</label>
+          <input type="password" id="newPass2" class="input" required minlength="6" placeholder="Type it again" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn--cta btn--block btn--lg auth-submit">Save new password</button>
+      </form>
+
       <div class="auth-alt">
         Don't have an account? <a href="signup">Create one →</a>
       </div>
@@ -364,11 +378,20 @@ document.getElementById('resetBtn').addEventListener('click', async () => {
   btn.textContent = 'Sending…';
 
   try {
-    const res = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
+    // The emailed link comes back to this page, which shows the new-password form.
+    const back = encodeURIComponent(location.origin + '/signin');
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/recover?redirect_to=${back}`, {
       method : 'POST',
       headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
       body   : JSON.stringify({ email }),
     });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(res.status === 429
+        ? 'Too many reset emails were requested. Please wait a few minutes and try again.'
+        : (data.msg || data.error_description || 'Could not send the reset email. Please try again.'));
+    }
 
     // Supabase returns 200 even if email not found (security best practice)
     statusEl.innerHTML = '<p style="color:var(--primary);font-size:0.88rem;">✓ If an account exists for that email, a reset link has been sent. Check your inbox.</p>';
@@ -379,6 +402,67 @@ document.getElementById('resetBtn').addEventListener('click', async () => {
     btn.textContent = 'Send reset link';
   }
 });
+
+// ── Arriving from a reset-link email ──
+// Supabase puts the result in the URL hash: a short-lived access token on
+// success, or error_description when the link is expired or already used.
+(function () {
+  const hash     = new URLSearchParams(location.hash.replace(/^#/, ''));
+  const statusEl = document.getElementById('auth-status');
+
+  if (hash.get('error_description')) {
+    statusEl.className   = 'auth-status auth-status--error';
+    statusEl.textContent = 'That reset link is no longer valid. Use "Forgot password?" to request a new one.';
+    history.replaceState(null, '', location.pathname);
+    return;
+  }
+  if (hash.get('type') !== 'recovery' || !hash.get('access_token')) return;
+
+  const token = hash.get('access_token');
+  const form  = document.getElementById('newPassForm');
+  history.replaceState(null, '', location.pathname);
+  document.getElementById('signinForm').style.display = 'none';
+  form.style.display = 'block';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn  = form.querySelector('button[type="submit"]');
+    const pass = document.getElementById('newPass').value;
+
+    if (pass !== document.getElementById('newPass2').value) {
+      statusEl.className   = 'auth-status auth-status--error';
+      statusEl.textContent = 'The two passwords do not match.';
+      return;
+    }
+
+    btn.disabled    = true;
+    btn.textContent = 'Saving…';
+    try {
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+        method : 'PUT',
+        headers: {
+          'Content-Type' : 'application/json',
+          'apikey'       : SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ password: pass }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.msg || data.error_description || 'Could not save the new password.');
+      }
+      form.style.display = 'none';
+      document.getElementById('signinForm').style.display = 'block';
+      statusEl.className   = 'auth-status auth-status--success';
+      statusEl.textContent = 'Password updated. Sign in with your new password.';
+    } catch (err) {
+      statusEl.className   = 'auth-status auth-status--error';
+      statusEl.textContent = err.message;
+      btn.disabled    = false;
+      btn.textContent = 'Save new password';
+    }
+  });
+})();
 </script>
 </body>
 </html>
