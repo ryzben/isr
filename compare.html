@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Compare schools — Islamic School Review</title>
   <meta name="description" content="Compare Islamic schools side by side. Location, grades, tuition, accreditation, Islamic program, and more — all in one view." />
-  <link rel="canonical" href="https://islamicschoolreview.com/compare" />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/compare" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Islamic School Review" />
-  <meta property="og:url" content="https://islamicschoolreview.com/compare" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/compare" />
   <meta property="og:title" content="Compare schools — Islamic School Review" />
   <meta property="og:description" content="Compare Islamic schools side by side — location, grades, tuition, Islamic program, and more." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
@@ -20,8 +20,8 @@
   <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20261002" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -104,9 +104,9 @@
     .compare-header__mark {
       width: 48px; height: 48px; border-radius: 10px;
       color: #fff; display: grid; place-items: center;
-      font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.1rem;
+      font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem;
     }
-    .compare-header__mark--1 { background: linear-gradient(135deg, #0F5132 0%, #1d7a4e 100%); }
+    .compare-header__mark--1 { background: linear-gradient(135deg, var(--primary) 0%, #1d7a4e 100%); }
     .compare-header__mark--2 { background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%); }
     .compare-header__mark--3 { background: linear-gradient(135deg, #5c2e2e 0%, #894848 100%); }
     .compare-header__card h3 {
@@ -151,7 +151,7 @@
     .compare-row--category {
       background: var(--surface-alt);
       padding: 14px 20px;
-      font-family: "Inter", sans-serif;
+      font-family: var(--font-sans);
       font-size: 0.82rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -293,28 +293,9 @@
 <body>
 
 <!-- ========== HEADER ========== -->
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a href="index" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
-    <nav class="nav-primary" aria-label="Primary">
-      <a href="directory">Directory</a>
-      <a href="blog">Resources</a>
-      <a href="about">About</a>
-      <div class="nav-more">
-        <button class="nav-more__btn" aria-expanded="false" aria-haspopup="true">More ▾</button>
-        <div class="nav-more__menu" hidden>
-          <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
-          <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
-          <a href="blog">Community <span class="nav-more__cs">coming soon</span></a>
-        </div>
-      </div>
-    </nav>
-    <div class="nav-utility">
-      <span class="lang-toggle">🌐 EN</span>
-      <a href="signin" class="btn btn--cta btn--sm">Sign In</a><a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
-    </div>
-  </div>
-</header>
+<script src="assets/site-chrome.js?v=20261002"></script>
+
+<main id="main">
 
 <!-- ========== HERO ========== -->
 <section class="compare-hero">
@@ -350,7 +331,7 @@
           <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
           <div class="compare-header__mark compare-header__mark--1">AF</div>
           <h3>Al-Furqan Academy</h3>
-          <div class="small">📍 Jacksonville, FL</div>
+          <div class="small"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jacksonville, FL</div>
           <a href="school" class="profile-link">View full profile →</a>
         </div>
 
@@ -358,7 +339,7 @@
           <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
           <div class="compare-header__mark compare-header__mark--2">MY</div>
           <h3>MY Academy</h3>
-          <div class="small">📍 Jacksonville, FL</div>
+          <div class="small"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jacksonville, FL</div>
           <a href="school" class="profile-link">View full profile →</a>
         </div>
 
@@ -366,7 +347,7 @@
           <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
           <div class="compare-header__mark compare-header__mark--3">AZ</div>
           <h3>Al-Zahra Academy</h3>
-          <div class="small">📍 Jacksonville, FL</div>
+          <div class="small"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jacksonville, FL</div>
           <a href="school" class="profile-link">View full profile →</a>
         </div>
       </div>
@@ -566,47 +547,13 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
-        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
-          <input type="hidden" name="form-name" value="newsletter-signup" />
-          <input type="hidden" name="_subject" value="Newsletter signup" />
-          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-col"><h4>Directory</h4><ul>
-        <li><a href="directory">Browse all schools</a></li>
-        <li><a href="directory">Browse by state</a></li>
-        <li><a href="add-school">Claim your school</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Resources</h4><ul>
-        <li><a href="blog">Guides &amp; stories</a></li>
-        <li><a href="blog">For parents</a></li>
-        <li><a href="blog">For educators</a></li>
-        <li><a href="blog">Downloads</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="about">About us</a></li>
-        <li><a href="about">Editorial policy</a></li>
-        <li><a href="membership">Advertise</a></li>
-        <li><a href="contact">Contact</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
-      <span><a href="privacy" style="margin-right:16px;">Privacy</a><a href="terms" style="margin-right:16px;">Terms</a><a href="privacy">Cookies</a></span>
-    </div>
-  </div>
-</footer>
+</main>
 
-<script src="assets/main.js"></script>
+<div id="site-footer"></div>
+
+<script src="assets/main.js?v=20261002"></script>
 <script type="module">
-  import { getSchoolById } from './assets/schools-data.js';
+  import { getSchoolById } from './assets/schools-data.js?v=20261002';
 
   const params = new URLSearchParams(location.search);
   const ids    = (params.get('ids') || '').split(',').map(s => s.trim()).filter(Boolean);
@@ -631,14 +578,14 @@
         <div class="compare-header__card">
           <div class="compare-photo" style="
             width:100%;height:160px;border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;
-            background:linear-gradient(135deg,#0F5132,#1d7a4e) center/cover no-repeat;
+            background:linear-gradient(135deg,var(--primary),#1d7a4e) center/cover no-repeat;
             ${s.photo_url ? `background-image:url('${s.photo_url}');` : ''}
-            display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:Fraunces,serif;flex-shrink:0;">
+            display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:var(--font-serif);flex-shrink:0;">
             ${s.photo_url ? '' : (s.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}
           </div>
           <strong style="font-size:1rem;">${s.name}</strong>
           ${s.verified ? '<span style="font-size:0.75rem;background:var(--primary-soft);color:var(--primary);padding:2px 8px;border-radius:99px;font-weight:700;">Verified</span>' : ''}
-          <div style="font-size:0.85rem;color:var(--muted);">📍 ${s.city}, ${s.state}</div>
+          <div style="font-size:0.85rem;color:var(--muted);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${s.city}, ${s.state}</div>
           <a href="school?id=${s.id}" class="btn btn--primary btn--sm" style="margin-top:8px;text-align:center;">View profile</a>
         </div>`).join('');
 
@@ -670,7 +617,7 @@
       const section = document.querySelector('.compare-section');
       if (section) {
         section.innerHTML = `<div class="container">
-          <h1 style="margin-bottom:8px;">Compare ${n} school${n>1?'s':''}</h1>
+          <h2 style="margin-bottom:8px;">Compare ${n} school${n>1?'s':''}</h2>
           <p style="color:var(--ink-soft);margin-bottom:32px;">Side-by-side comparison · <a href="directory">← Back to directory</a></p>
           ${tableHTML}
         </div>`;
@@ -682,18 +629,5 @@
     }
   }
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}; Tawk_API.onLoad=function(){Tawk_API.hideWidget();}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a027f1cee7ca01c362e9288/1jocs128c';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 </body>
 </html>

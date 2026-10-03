@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Add Your School — Islamic School Review</title>
   <meta name="description" content="List your Islamic school on IslamicSchoolReview.com. Submit your details and our team will publish your listing within 24–48 hours." />
-  <link rel="canonical" href="https://islamicschoolreview.com/add-school" />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/add-school" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Islamic School Review" />
-  <meta property="og:url" content="https://islamicschoolreview.com/add-school" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/add-school" />
   <meta property="og:title" content="Add Your School — Islamic School Review" />
   <meta property="og:description" content="Get your Islamic school listed on IslamicSchoolReview.com." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20261002" />
   <style>
 
     /* ── Hero ── */
@@ -355,28 +355,9 @@
 <body>
 
 <!-- ========== HEADER ========== -->
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a href="index" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
-    <nav class="nav-primary" aria-label="Primary">
-      <a href="directory">Directory</a>
-      <a href="blog">Resources</a>
-      <a href="about">About</a>
-      <div class="nav-more">
-        <button class="nav-more__btn" aria-expanded="false" aria-haspopup="true">More ▾</button>
-        <div class="nav-more__menu" hidden>
-          <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
-          <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
-          <a href="blog">Community <span class="nav-more__cs">coming soon</span></a>
-        </div>
-      </div>
-    </nav>
-    <div class="nav-utility">
-      <span class="lang-toggle">🌐 EN</span>
-      <a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
-    </div>
-  </div>
-</header>
+<script src="assets/site-chrome.js?v=20261002"></script>
+
+<main id="main">
 
 <!-- ========== HERO ========== -->
 <section class="page-hero">
@@ -555,44 +536,11 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
-        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <form class="newsletter-inline" action="confirmation" method="get">
-          <input type="hidden" name="action" value="newsletter" />
-          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-col"><h4>Directory</h4><ul>
-        <li><a href="directory">Browse all schools</a></li>
-        <li><a href="directory">Browse by state</a></li>
-        <li><a href="add-school">Add your school</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Resources</h4><ul>
-        <li><a href="blog">Guides &amp; stories</a></li>
-        <li><a href="blog">For parents</a></li>
-        <li><a href="blog">For educators</a></li>
-        <li><a href="blog">Downloads</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="about">About us</a></li>
-        <li><a href="about">Editorial policy</a></li>
-        <li><a href="membership">Membership</a></li>
-        <li><a href="contact">Contact</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
-      <span><a href="privacy" style="margin-right:16px;">Privacy</a><a href="terms" style="margin-right:16px;">Terms</a><a href="privacy">Cookies</a></span>
-    </div>
-  </div>
-</footer>
+</main>
 
-<script src="assets/main.js"></script>
+<div id="site-footer"></div>
+
+<script src="assets/main.js?v=20261002"></script>
 <script>
   const SUPABASE_URL      = 'https://vprltwjduekabkizlbkv.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
@@ -701,23 +649,10 @@
     } else {
       btn.disabled    = false;
       btn.textContent = 'Submit school listing';
-      alert('Something went wrong — please try again or email us at schools@islamicschoolreview.com');
+      ISR.toast('Something went wrong — please try again or email us at schools@islamicschoolreview.com', 'error');
     }
   });
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}; Tawk_API.onLoad=function(){Tawk_API.hideWidget();}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a027f1cee7ca01c362e9288/1jocs128c';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 </body>
 </html>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

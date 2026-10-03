@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>How to choose an Islamic school — Islamic School Review</title>
   <meta name="description" content="A step-by-step guide for Muslim parents choosing an Islamic school — the 12 questions we wish every family asked before enrolling." />
-  <link rel="canonical" href="https://islamicschoolreview.com/blog-post" />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/blog-post" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Islamic School Review" />
-  <meta property="og:url" content="https://islamicschoolreview.com/blog-post" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/blog-post" />
   <meta property="og:title" content="How to choose an Islamic school — the 12 questions to ask" />
   <meta property="og:description" content="A step-by-step guide for Muslim parents choosing an Islamic school." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
@@ -46,8 +46,8 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20261002" />
   <style>
     /* Post reading typography */
     .post-breadcrumb {
@@ -105,7 +105,7 @@
       display: grid; place-items: center;
       font-weight: 600;
       font-size: 0.9rem;
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
     }
     .byline__name { color: var(--ink); font-weight: 600; }
     .byline__meta { color: var(--muted); font-size: 0.85rem; }
@@ -127,7 +127,7 @@
 
     .post-cover {
       aspect-ratio: 16 / 7;
-      background: linear-gradient(135deg, #0F5132 0%, #1f7b4f 55%, #B8823A 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, #1f7b4f 55%, var(--accent) 100%);
       border-radius: var(--r-lg);
       margin: 32px auto;
       max-width: 880px;
@@ -158,7 +158,7 @@
     }
     .post-toc { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
     .post-toc h4 {
-      font-family: "Inter", sans-serif;
+      font-family: var(--font-sans);
       font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -186,7 +186,7 @@
       color: var(--ink-soft);
     }
     .post-body h2 {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       color: var(--ink);
       font-size: 1.7rem;
       margin: 40px 0 14px;
@@ -194,14 +194,14 @@
       scroll-margin-top: 100px;
     }
     .post-body h3 {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       color: var(--ink);
       font-size: 1.25rem;
       margin: 28px 0 10px;
     }
     .post-body p { margin: 0 0 1.2em; }
     .post-body p:first-of-type::first-letter {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 3.2rem;
       line-height: 0.9;
       float: left;
@@ -220,17 +220,18 @@
 
     /* Pull quote */
     .pullquote {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.6rem;
       line-height: 1.35;
       color: var(--ink);
-      padding: 28px 0 28px 28px;
-      border-left: 4px solid var(--accent);
+      padding: 28px 0;
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line-strong);
       margin: 32px 0;
       font-style: italic;
     }
     .pullquote footer {
-      font-family: "Inter", sans-serif;
+      font-family: var(--font-sans);
       font-size: 0.85rem;
       font-style: normal;
       color: var(--muted);
@@ -244,10 +245,10 @@
       border-radius: var(--r-lg);
       padding: 22px 24px;
       margin: 28px 0;
-      border-left: 4px solid var(--primary);
+      border: 1px solid var(--primary-line);
     }
     .callout h4 {
-      font-family: "Inter", sans-serif;
+      font-family: var(--font-sans);
       font-size: 0.78rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -256,8 +257,8 @@
       font-weight: 600;
     }
     .callout p { margin: 0; color: var(--ink); }
-    .callout.callout--accent { background: var(--accent-soft); border-left-color: var(--accent); }
-    .callout.callout--accent h4 { color: var(--accent-hover); }
+    .callout.callout--accent { background: var(--accent-soft); border-color: var(--line-strong); }
+    .callout.callout--accent h4 { color: var(--accent-text); }
 
     /* Checklist card (lead magnet) */
     .checklist-card {
@@ -275,7 +276,7 @@
     }
     .checklist-card h3 {
       color: #fff;
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.5rem;
       margin: 0 0 10px;
     }
@@ -291,7 +292,7 @@
       margin: 28px 0;
     }
     .related-schools h4 {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.1rem;
       margin: 0 0 14px;
       color: var(--ink);
@@ -339,9 +340,9 @@
       display: grid; place-items: center;
       font-weight: 600;
       font-size: 1.4rem;
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
     }
-    .author-card h4 { margin: 0 0 4px; font-family: "Fraunces", Georgia, serif; font-size: 1.15rem; }
+    .author-card h4 { margin: 0 0 4px; font-family: var(--font-serif); font-size: 1.15rem; }
     .author-card p { margin: 0; color: var(--ink-soft); font-size: 0.93rem; }
     .author-card__role { color: var(--primary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; display: block; }
 
@@ -375,7 +376,7 @@
       display: block;
     }
     .upnext-card h4 {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.1rem;
       margin: 0 0 10px;
       line-height: 1.35;
@@ -417,28 +418,9 @@
 <body>
 
 <!-- ========== HEADER ========== -->
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a href="index" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
-    <nav class="nav-primary" aria-label="Primary">
-      <a href="directory">Directory</a>
-      <a href="blog">Resources</a>
-      <a href="about">About</a>
-      <div class="nav-more">
-        <button class="nav-more__btn" aria-expanded="false" aria-haspopup="true">More ▾</button>
-        <div class="nav-more__menu" hidden>
-          <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
-          <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
-          <a href="blog">Community <span class="nav-more__cs">coming soon</span></a>
-        </div>
-      </div>
-    </nav>
-    <div class="nav-utility">
-      <span class="lang-toggle">🌐 EN</span>
-      <a href="signin" class="btn btn--cta btn--sm">Sign In</a><a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
-    </div>
-  </div>
-</header>
+<script src="assets/site-chrome.js?v=20261002"></script>
+
+<main id="main">
 
 <!-- ========== BREADCRUMB ========== -->
 <div class="container">
@@ -464,7 +446,7 @@
         </div>
         <div class="post-actions">
           <span class="nav-more__cs" style="padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--surface);">🔖 Save — coming soon</span>
-          <a href="#" onclick="location.href='mailto:?subject=' + encodeURIComponent(document.title) + '&body=' + encodeURIComponent(location.href); return false;">✉ Email</a>
+          <a href="#" onclick="location.href='mailto:?subject=' + encodeURIComponent(document.title) + '&body=' + encodeURIComponent(location.href); return false;" class="share-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Email</a>
           <a href="#" onclick="sharePost(); return false;">↗ Share</a>
         </div>
       </div>
@@ -480,7 +462,7 @@
 </div>
 
 <!-- ========== ARTICLE ========== -->
-<main class="container post-layout">
+<div class="container post-layout">
 
   <!-- TOC -->
   <aside class="post-toc" aria-label="Table of contents">
@@ -672,7 +654,7 @@
 
     <p>May Allah guide your family to the best choice. And when you've made it, <a href="directory">come back and leave a review</a> — the next family is starting where you are now.</p>
   </article>
-</main>
+</div>
 
 <!-- ========== POST FOOTER ========== -->
 <div class="container">
@@ -725,70 +707,23 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
-        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
-          <input type="hidden" name="form-name" value="newsletter-signup" />
-          <input type="hidden" name="_subject" value="Newsletter signup" />
-          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-col"><h4>Directory</h4><ul>
-        <li><a href="directory">Browse all schools</a></li>
-        <li><a href="directory">Browse by state</a></li>
-        <li><a href="add-school">Claim your school</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Resources</h4><ul>
-        <li><a href="blog">Guides &amp; stories</a></li>
-        <li><a href="blog">For parents</a></li>
-        <li><a href="blog">For educators</a></li>
-        <li><a href="blog">Downloads</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="about">About us</a></li>
-        <li><a href="about">Editorial policy</a></li>
-        <li><a href="membership">Advertise</a></li>
-        <li><a href="contact">Contact</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
-      <span><a href="privacy" style="margin-right:16px;">Privacy</a><a href="terms" style="margin-right:16px;">Terms</a><a href="privacy">Cookies</a></span>
-    </div>
-  </div>
-</footer>
+</main>
 
-<script src="assets/main.js"></script>
+<div id="site-footer"></div>
+
+<script src="assets/main.js?v=20261002"></script>
 <script>
   function sharePost() {
     if (navigator.share) {
       navigator.share({ title: document.title, url: location.href }).catch(() => {});
     } else {
       navigator.clipboard.writeText(location.href);
-      alert('Link copied!');
+      ISR.toast('Link copied', 'success');
     }
   }
   function printChecklist() {
     window.print();
   }
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}; Tawk_API.onLoad=function(){Tawk_API.hideWidget();}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a027f1cee7ca01c362e9288/1jocs128c';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 </body>
 </html>

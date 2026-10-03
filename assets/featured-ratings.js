@@ -9,10 +9,17 @@
   const ids = Array.from(blocks).map((b) => b.dataset.schoolId);
   const filter = ids.map((id) => `"${id}"`).join(",");
 
-  fetch(`${SUPABASE_URL}/rest/v1/reviews?select=school_id,rating&school_id=in.(${filter})`, {
+  fetch(`${SUPABASE_URL}/rest/v1/reviews?select=school_id,rating&status=eq.approved&school_id=in.(${filter})`, {
     headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
   })
-    .then((res) => res.json())
+    .then((res) =>
+      res.ok
+        ? res.json()
+        // Fallback for a database that hasn't run migration 01 yet (no status column).
+        : fetch(`${SUPABASE_URL}/rest/v1/reviews?select=school_id,rating&school_id=in.(${filter})`, {
+            headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+          }).then((r) => r.json())
+    )
     .then((reviews) => {
       const byId = {};
       reviews.forEach((r) => {

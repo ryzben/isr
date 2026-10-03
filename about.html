@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — Islamic School Review</title>
   <meta name="description" content="Our mission, editorial policy, and the team building Islamic School Review." />
-  <link rel="canonical" href="https://islamicschoolreview.com/about" />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/about" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Islamic School Review" />
-  <meta property="og:url" content="https://islamicschoolreview.com/about" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/about" />
   <meta property="og:title" content="About — Islamic School Review" />
   <meta property="og:description" content="Our mission, editorial policy, and the team building Islamic School Review." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
@@ -29,8 +29,8 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20261002" />
   <style>
     .about-hero {
       padding: 80px 0 60px;
@@ -63,7 +63,7 @@
       font-size: 1.4rem;
       margin-bottom: 14px;
     }
-    .pillar h3 { margin: 0 0 8px; font-size: 1.1rem; font-family: "Inter", sans-serif; }
+    .pillar h3 { margin: 0 0 8px; font-size: 1.1rem; font-family: var(--font-sans); }
     .pillar p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
 
     /* Story section */
@@ -87,15 +87,23 @@
       background: rgba(255,255,255,0.05);
     }
     .story-card h3 {
-      color: #fff; font-family: "Fraunces", Georgia, serif;
+      color: #fff; font-family: var(--font-serif);
       font-size: 1.8rem; line-height: 1.2; margin-bottom: 16px;
     }
     .story-card p { color: rgba(255,255,255,0.85); margin: 0 0 14px; }
+    .story-card blockquote::before {
+      content: "\201C";
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      line-height: 0.6;
+      color: var(--accent-on-dark);
+      margin-bottom: 10px;
+    }
     .story-card blockquote {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.2rem; font-style: italic;
-      margin: 20px 0 0; padding-left: 20px;
-      border-left: 3px solid var(--accent);
+      margin: 20px 0 0;
       color: rgba(255,255,255,0.9);
     }
 
@@ -113,7 +121,7 @@
       text-align: center;
     }
     .num-big {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 2.8rem;
       font-weight: 600;
       color: var(--primary);
@@ -145,11 +153,11 @@
       width: 96px; height: 96px; border-radius: 50%;
       margin: 0 auto 14px;
       display: grid; place-items: center;
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.8rem; font-weight: 600;
       color: rgba(255,255,255,0.9);
     }
-    .team-card h4 { margin: 0 0 4px; font-family: "Inter", sans-serif; font-size: 1rem; }
+    .team-card h4 { margin: 0 0 4px; font-family: var(--font-sans); font-size: 1rem; }
     .team-card .role { color: var(--primary); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
     .team-card .bio { color: var(--muted); font-size: 0.85rem; margin: 0; }
 
@@ -165,7 +173,7 @@
       border-radius: var(--r-lg);
       padding: 28px;
     }
-    .policy-card h3 { margin: 0 0 12px; font-size: 1.15rem; font-family: "Inter", sans-serif; display: flex; align-items: center; gap: 10px; }
+    .policy-card h3 { margin: 0 0 12px; font-size: 1.15rem; font-family: var(--font-sans); display: flex; align-items: center; gap: 10px; }
     .policy-card h3 .dot {
       width: 28px; height: 28px; border-radius: 8px;
       background: var(--primary-soft); color: var(--primary);
@@ -192,9 +200,9 @@
       width: 48px; height: 48px; border-radius: 999px;
       flex-shrink: 0;
       background: var(--accent-soft);
-      color: var(--accent-hover);
+      color: var(--accent-text);
       display: grid; place-items: center;
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-weight: 600;
     }
     .advisor strong { display: block; }
@@ -234,28 +242,9 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a href="index" class="brand"><span class="brand__mark">ISR</span>Islamic School Review</a>
-    <nav class="nav-primary" aria-label="Primary">
-      <a href="directory">Directory</a>
-      <a href="blog">Resources</a>
-      <a href="about">About</a>
-      <div class="nav-more">
-        <button class="nav-more__btn" aria-expanded="false" aria-haspopup="true">More ▾</button>
-        <div class="nav-more__menu" hidden>
-          <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
-          <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
-          <a href="blog">Community <span class="nav-more__cs">coming soon</span></a>
-        </div>
-      </div>
-    </nav>
-    <div class="nav-utility">
-      <span class="lang-toggle">🌐 EN</span>
-      <a href="signin" class="btn btn--cta btn--sm">Sign In</a><a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
-    </div>
-  </div>
-</header>
+<script src="assets/site-chrome.js?v=20261002"></script>
+
+<main id="main">
 
 <!-- ========== HERO ========== -->
 <section class="about-hero">
@@ -279,17 +268,17 @@
 
     <div class="mission-grid">
       <div class="pillar">
-        <div class="pillar__icon">🤝</div>
+        <div class="pillar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Trustworthy by design</h3>
         <p>Every review is verified by email — and many by document upload. Schools can respond, but never delete, a review. Moderators are humans, not algorithms.</p>
       </div>
       <div class="pillar">
-        <div class="pillar__icon">🧭</div>
+        <div class="pillar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
         <h3>Community-first</h3>
         <p>We're built for parents, students, educators, and schools — not investors. Revenue funds better tools for those four audiences; it never buys favorable placement.</p>
       </div>
       <div class="pillar">
-        <div class="pillar__icon">🌍</div>
+        <div class="pillar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <h3>Global from day one</h3>
         <p>Launching in English, Arabic, and Urdu. Built with RTL support, multilingual content, and the diversity of the ummah at the core — not as an afterthought.</p>
       </div>
@@ -354,13 +343,13 @@
 
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-avatar" style="background: linear-gradient(135deg, #0F5132, #1d7a4e);">AB</div>
+        <div class="team-avatar" style="background: linear-gradient(135deg, var(--primary), #1d7a4e);">AB</div>
         <h4>Abdellah Benaoussar</h4>
         <div class="role">Founder &amp; CEO</div>
         <p class="bio">Former head of admissions at a K–12 Islamic school. Father of three.</p>
       </div>
       <div class="team-card">
-        <div class="team-avatar" style="background: linear-gradient(135deg, #B8823A, #d29c51);">HR</div>
+        <div class="team-avatar" style="background: linear-gradient(135deg, var(--accent), #d29c51);">HR</div>
         <h4>Dr. Rabah</h4>
         <div class="role">Head of Product</div>
         <p class="bio">20 years in consumer tech. Previously education startups in NJ.</p>
@@ -504,57 +493,10 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="brand" style="color:#fff"><span class="brand__mark">ISR</span>Islamic School Review</div>
-        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
-          <input type="hidden" name="form-name" value="newsletter-signup" />
-          <input type="hidden" name="_subject" value="Newsletter signup" />
-          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-col"><h4>Directory</h4><ul>
-        <li><a href="directory">Browse all schools</a></li>
-        <li><a href="directory">Browse by state</a></li>
-        <li><a href="add-school">Claim your school</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Resources</h4><ul>
-        <li><a href="blog">Guides &amp; stories</a></li>
-        <li><a href="blog">For parents</a></li>
-        <li><a href="blog">For educators</a></li>
-        <li><a href="blog">Downloads</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Company</h4><ul>
-        <li><a href="about">About us</a></li>
-        <li><a href="about">Editorial policy</a></li>
-        <li><a href="membership">Advertise</a></li>
-        <li><a href="contact">Contact</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
-      <span><a href="privacy" style="margin-right:16px;">Privacy</a><a href="terms" style="margin-right:16px;">Terms</a><a href="privacy">Cookies</a></span>
-    </div>
-  </div>
-</footer>
+</main>
 
-<script src="assets/main.js"></script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}; Tawk_API.onLoad=function(){Tawk_API.hideWidget();}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a027f1cee7ca01c362e9288/1jocs128c';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+<div id="site-footer"></div>
+
+<script src="assets/main.js?v=20261002"></script>
 </body>
 </html>

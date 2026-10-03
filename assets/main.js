@@ -1,24 +1,51 @@
 // Lightweight prototype interactions — no frameworks.
 
-// Tawk.to — temporarily hidden. Remove these lines to re-enable.
-window.Tawk_API = window.Tawk_API || {};
-window.Tawk_API.onLoad = function() { Tawk_API.hideWidget(); };
+// Tawk.to live chat — currently switched off. While it was merely hidden the
+// widget still cost ~13 requests on every page, so it is no longer loaded at
+// all. Set TAWK_ENABLED = true to bring it back (loads once the page is idle).
+const TAWK_ENABLED = false;
+if (TAWK_ENABLED) {
+  const loadTawk = () => {
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://embed.tawk.to/6a027f1cee7ca01c362e9288/1jocs128c";
+    s.charset = "UTF-8";
+    s.setAttribute("crossorigin", "*");
+    document.head.appendChild(s);
+  };
+  if ("requestIdleCallback" in window) requestIdleCallback(loadTawk, { timeout: 4000 });
+  else window.addEventListener("load", () => setTimeout(loadTawk, 2000));
+}
 
-// Active nav highlighting based on current page path.
+// Nav, dropdown, auth-aware utility links, and mobile drawer live in
+// assets/site-chrome.js (injected header/footer). Session helpers are on
+// window.ISR (getSession / signOut).
 document.addEventListener("DOMContentLoaded", () => {
-  const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-  document.querySelectorAll(".nav-primary a").forEach((a) => {
-    const href = (a.getAttribute("href") || "").toLowerCase();
-    if (href === path) a.classList.add("is-active");
-  });
+  // Favorite (heart) toggles live in assets/favorites.js (real user_favorites
+  // persistence with sign-in gating) — no cosmetic handler here.
 
-  // Favorite (heart) toggles
-  document.querySelectorAll("[data-fav]").forEach((el) => {
-    el.addEventListener("click", (e) => {
-      e.preventDefault();
-      el.classList.toggle("is-active");
+  // Scroll reveal: elements with .reveal fade/rise in once. Content is fully
+  // visible by default; the pending state is only applied when the observer
+  // is available and motion is allowed, so nothing can ship hidden.
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.removeAttribute("data-reveal-pending");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    document.querySelectorAll(".reveal").forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top > window.innerHeight) {           // never hide above-the-fold content
+        el.setAttribute("data-reveal-pending", "");
+        io.observe(el);
+      }
     });
-  });
+  }
 
   // Compare tray toggle (directory page)
   const tray = document.getElementById("compareTray");
@@ -79,13 +106,15 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: { Accept: "application/json" },
         });
         if (!res.ok) throw new Error("Submission failed");
-        form.outerHTML = '<p class="newsletter-soon">✅ Subscribed — thanks for joining!</p>';
+        form.outerHTML = '<p class="newsletter-soon">Subscribed. Thanks for joining!</p>';
       } catch {
         if (button) {
           button.disabled = false;
           button.textContent = originalLabel;
         }
-        alert("Something went wrong — please try again.");
+        const msg = "Something went wrong. Please try again.";
+        if (window.ISR && ISR.toast) ISR.toast(msg, "error");
+        else if (button) button.textContent = "Try again";
       }
     });
   });
@@ -97,65 +126,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // and owns the form, the URL state, and the result list. We deliberately
   // do NOTHING here so the two don't double-handle submit/filter events.
 
-  // ----------------------------------------------------------------
-  // Supabase Authentication & User Features
-  // ----------------------------------------------------------------
-
-  // More dropdown toggle
-  const moreBtn = document.querySelector('.nav-more__btn');
-  const moreMenu = document.querySelector('.nav-more__menu');
-  if (moreBtn && moreMenu) {
-    moreBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = !moreMenu.hidden;
-      moreMenu.hidden = isOpen;
-      moreBtn.setAttribute('aria-expanded', String(!isOpen));
-    });
-    document.addEventListener('click', () => {
-      moreMenu.hidden = true;
-      moreBtn.setAttribute('aria-expanded', 'false');
-    });
-    moreMenu.addEventListener('click', (e) => e.stopPropagation());
-  }
-
-  // Read session from localStorage (set by signin.html)
-  function getSession() {
-    try {
-      const raw = localStorage.getItem('isr_session');
-      if (!raw) return null;
-      const s = JSON.parse(raw);
-      if (Date.now() > s.expires_at) { localStorage.removeItem('isr_session'); return null; }
-      return s;
-    } catch { return null; }
-  }
-
-  const session     = getSession();
-  const currentUser = session?.user || null;
-
-  // Update navigation based on auth state
-  const updateNavigation = () => {
-    const navUtility = document.querySelector('.nav-utility');
-    if (!navUtility) return;
-
-    if (currentUser) {
-      const name = currentUser.user_metadata?.full_name?.split(' ')[0] || 'Account';
-      navUtility.innerHTML = `
-        <a href="add-school.html" class="btn btn--cta btn--sm">List Your School</a>
-        <a href="account.html">Hi, ${name}</a>
-        <a href="#" id="signout-link">Sign Out</a>
-      `;
-      document.getElementById('signout-link')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        localStorage.removeItem('isr_session');
-        window.location.reload();
-      });
-    } else {
-      navUtility.innerHTML = `
-        <a href="signin.html" class="btn btn--cta btn--sm">Sign In</a>
-        <a href="add-school.html" class="btn btn--cta btn--sm">List Your School</a>
-      `;
-    }
-  };
-
-  updateNavigation();
 });

@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Islamic School Review — Find the best Islamic school for your child's future</title>
   <meta name="description" content="A growing directory of Islamic schools across the U.S. Find programs near you, see who serves your community, and help us build the most trusted resource for Islamic education." />
-  <link rel="canonical" href="https://islamicschoolreview.com/" />
+  <link rel="canonical" href="https://www.islamicschoolreview.com/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Islamic School Review" />
-  <meta property="og:url" content="https://islamicschoolreview.com/" />
+  <meta property="og:url" content="https://www.islamicschoolreview.com/" />
   <meta property="og:title" content="Islamic School Review — Find the best Islamic school for your child" />
   <meta property="og:description" content="A growing directory of Islamic schools across the U.S. Find programs near you and help us build the most trusted resource for Islamic education." />
   <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
@@ -45,8 +45,8 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20261002" />
   <style>
     /* =========================================================
        HOME — redesigned for search-first hero + stronger trust
@@ -55,9 +55,10 @@
     /* ----- HERO: single-column, centered, search-dominant ----- */
     .hero {
       position: relative;
-      padding: 96px 0 80px;
+      padding: 100px 0 84px;
       text-align: center;
       background:
+        var(--pattern-ink),
         radial-gradient(1100px 520px at 50% -20%, var(--primary-soft) 0%, transparent 60%),
         radial-gradient(900px 460px at 0% 100%, var(--accent-soft) 0%, transparent 55%),
         radial-gradient(700px 380px at 100% 100%, var(--cta-soft) 0%, transparent 55%),
@@ -92,16 +93,17 @@
       box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.15);
     }
     .hero h1 {
-      font-size: clamp(1.9rem, 4vw, 2.8rem);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin: 0 auto 14px;
-      max-width: 22ch;
+      font-size: clamp(2.3rem, 5vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      margin: 0 auto 16px;
+      max-width: 20ch;
       font-weight: 600;
     }
-    /* Kept green color on the keyphrase, removed the amber underline pill */
+    /* Newsreader italic on the keyphrase — the one serif flourish */
     .hero h1 em {
-      font-style: normal;
+      font-style: italic;
+      font-weight: 500;
       color: var(--primary);
     }
     .hero p.lede {
@@ -175,12 +177,22 @@
       font-weight: 600;
       font-size: 1.1rem;
       color: var(--ink);
-      outline: none;
       appearance: none;
     }
     .hero-search__input::placeholder { color: var(--muted); font-weight: 400; }
+    /* The field (icon + label + control) carries the focus indicator, so the
+       bare control inside it stays unringed. */
     .hero-search__input:focus,
     .hero-search__select:focus { outline: none; box-shadow: none; }
+    .hero-search__field:focus-within {
+      background: var(--surface-alt);
+      box-shadow: inset 0 -3px 0 var(--primary);
+    }
+    @media (pointer: coarse) {
+      .hero-search__select { padding-block: 9px; margin-block: -9px; }
+      .checklist-card__body a { position: relative; }
+      .checklist-card__body a::after { content: ""; position: absolute; inset: -12px -8px; }
+    }
     .hero-search__submit {
       align-self: stretch;
       padding: 0 34px;
@@ -265,7 +277,7 @@
     }
     .trust-stat__icon svg { width: 22px; height: 22px; }
     .trust-stat__num {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: clamp(2.8rem, 5.5vw, 4rem);
       font-weight: 700;
       color: var(--primary);
@@ -317,7 +329,7 @@
     .audience-card h3 {
       margin: 0 0 8px;
       font-size: 1.08rem;
-      font-family: "Inter", sans-serif;
+      font-family: var(--font-sans);
       font-weight: 600;
       color: var(--ink);
       line-height: 1.3;
@@ -374,6 +386,18 @@
       transition: transform 0.4s ease;
     }
     .school-card:hover .school-card__photo-img { transform: scale(1.04); }
+    .school-card__photo-initials {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, var(--primary) 0%, #1B6B45 55%, var(--accent) 130%);
+    }
     /* Tint overlay to unify the three photos with the brand palette */
     .school-card__photo::before {
       content: "";
@@ -429,7 +453,7 @@
     }
     .school-card__body { padding: 20px 20px 22px; }
     .school-card__title {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--ink);
@@ -457,7 +481,7 @@
       margin-bottom: 14px;
     }
     .rating-block__num {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-size: 1.7rem;
       font-weight: 600;
       color: var(--ink);
@@ -534,14 +558,14 @@
     }
     .prayer-widget__header h3 {
       margin: 0;
-      font-family: "Inter", sans-serif;
+      font-family: var(--font-sans);
       font-size: 1rem;
       font-weight: 600;
     }
     .prayer-widget__city { font-size: 0.85rem; color: var(--muted); }
     .prayer-widget__grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 8px;
     }
     .prayer {
@@ -570,28 +594,30 @@
     }
 
     .checklist-card {
-      background: linear-gradient(135deg, var(--primary) 0%, #0b3d25 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
       color: #fff;
       border-radius: var(--r-lg);
       padding: 24px;
       display: flex;
       align-items: center;
       gap: 16px;
+      min-width: 0;
     }
+    .checklist-card > * { min-width: 0; }
     .checklist-card__icon {
       width: 52px; height: 52px;
       border-radius: 12px;
       background: rgba(255,255,255,0.12);
       display: grid; place-items: center;
       flex-shrink: 0;
-      color: var(--accent);
+      color: var(--accent-on-dark);
     }
     .checklist-card__icon svg { width: 24px; height: 24px; }
     .checklist-card__body { flex: 1; }
     .checklist-card__body strong { color: #fff; display: block; margin-bottom: 4px; font-size: 1rem; }
     .checklist-card__body p { margin: 0 0 10px; color: rgba(255,255,255,0.82); font-size: 0.9rem; }
     .checklist-card__body a {
-      color: var(--accent);
+      color: var(--accent-on-dark);
       font-weight: 600;
       font-size: 0.88rem;
       display: inline-flex;
@@ -644,7 +670,7 @@
       padding: 24px;
     }
     .review__stars { color: var(--accent); font-size: 1rem; margin-bottom: 10px; letter-spacing: 1px; }
-    .review__text { font-family: "Fraunces", Georgia, serif; font-size: 1.05rem; color: var(--ink); margin: 0 0 16px; font-weight: 500; line-height: 1.5; }
+    .review__text { font-family: var(--font-serif); font-size: 1.05rem; color: var(--ink); margin: 0 0 16px; font-weight: 500; line-height: 1.5; }
     .review__author { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--ink-soft); }
     .review__avatar {
       width: 40px; height: 40px; border-radius: 999px;
@@ -680,10 +706,10 @@
       font-weight: 700;
       color: var(--primary);
       flex-shrink: 0;
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
     }
     .job__body { flex: 1; }
-    .job h4 { margin: 0 0 2px; font-family: "Inter", sans-serif; font-size: 1rem; color: var(--ink); font-weight: 600; }
+    .job h4 { margin: 0 0 2px; font-family: var(--font-sans); font-size: 1rem; color: var(--ink); font-weight: 600; }
     .job__meta { font-size: 0.85rem; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
 
     /* ----- BLOG ----- */
@@ -717,7 +743,7 @@
       text-transform: uppercase; letter-spacing: 0.08em;
       margin-bottom: 6px;
     }
-    .post-card h3 { font-family: "Fraunces", Georgia, serif; font-size: 1.15rem; margin: 0 0 8px; color: var(--ink); font-weight: 600; line-height: 1.3; }
+    .post-card h3 { font-family: var(--font-serif); font-size: 1.15rem; margin: 0 0 8px; color: var(--ink); font-weight: 600; line-height: 1.3; }
     .post-card--soon { cursor: default; opacity: 0.7; }
     .post-card--soon:hover { transform: none; box-shadow: none; border-color: var(--line); }
     .post-card__cat--soon { color: var(--muted); }
@@ -769,7 +795,7 @@
       opacity: 0.72;
     }
     .partner-logo {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font-serif);
       font-weight: 600;
       font-size: 1.1rem;
       color: var(--muted);
@@ -806,43 +832,21 @@
     @media (max-width: 600px) {
       .school-grid, .blog-grid, .review-strip { grid-template-columns: 1fr; }
       .audience-grid { grid-template-columns: 1fr; }
-      .prayer-widget__grid { grid-template-columns: repeat(5, 1fr); font-size: 0.78rem; }
+      .prayer-widget__grid { grid-template-columns: repeat(5, minmax(0, 1fr)); font-size: 0.78rem; }
     }
   </style>
 </head>
 <body>
 
 <!-- ========== HEADER ========== -->
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a href="index" class="brand">
-      <span class="brand__mark">ISR</span>
-      Islamic School Review
-    </a>
-    <nav class="nav-primary" aria-label="Primary">
-      <a href="directory">Directory</a>
-      <a href="blog">Resources</a>
-      <a href="about">About</a>
-      <div class="nav-more">
-        <button class="nav-more__btn" aria-expanded="false" aria-haspopup="true">More ▾</button>
-        <div class="nav-more__menu" hidden>
-          <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
-          <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
-          <a href="blog">Community <span class="nav-more__cs">coming soon</span></a>
-        </div>
-      </div>
-    </nav>
-    <div class="nav-utility">
-      <span class="lang-toggle" title="Language">🌐 EN</span>
-      <a href="signin" class="btn btn--cta btn--sm">Sign In</a><a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
-    </div>
-  </div>
-</header>
+<script src="assets/site-chrome.js?v=20261002"></script>
+
+<main id="main">
 
 <!-- ========== HERO — SEARCH-FIRST ========== -->
 <section class="hero">
   <div class="hero__inner">
-    <span class="hero__eyebrow"><span class="dot" aria-hidden="true"></span><strong>Now in preview</strong> — building the trusted home for Islamic-school discovery</span>
+    <span class="hero__eyebrow"><span class="dot" aria-hidden="true"></span><strong>Now in preview:</strong> building the trusted home for Islamic-school discovery</span>
 
     <h1>Find the <em>best Islamic school</em> for your child's future.</h1>
 
@@ -916,7 +920,7 @@
 <section class="trust-band" aria-label="Platform stats">
   <div class="container">
     <p class="trust-band__eyebrow">A new home for the Islamic-school community</p>
-    <div class="trust-grid">
+    <div class="trust-grid reveal">
       <div class="trust-stat">
         <span class="trust-stat__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/></svg>
@@ -956,13 +960,13 @@
       <a href="directory" class="btn btn--ghost">Browse all schools →</a>
     </div>
 
-    <div class="school-grid">
+    <div class="school-grid reveal">
       <!-- Card 1: Al-Furqan Academy -->
       <a href="school?id=al-furqan-academy" class="school-card">
         <div class="school-card__photo">
           <img class="school-card__photo-img"
-               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
-               alt="Al-Furqan Academy school building" loading="lazy" />
+               src="assets/images/schools/al-furqan-academy/AFA1.jpg"
+               alt="Al-Furqan Academy campus" loading="lazy" />
           <span class="school-card__badge">Preview listing</span>
           <span class="school-card__photo-caption">Full-time day school · Est. 1997</span>
         </div>
@@ -994,9 +998,7 @@
       <!-- Card 2: Universal Academy of Florida -->
       <a href="school?id=universal-academy-of-florida" class="school-card">
         <div class="school-card__photo">
-          <img class="school-card__photo-img"
-               src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
-               alt="Universal Academy of Florida classroom" loading="lazy" />
+          <div class="school-card__photo-initials" aria-hidden="true">UA</div>
           <span class="school-card__badge">Preview listing</span>
           <span class="school-card__photo-caption">PreK through 12th</span>
         </div>
@@ -1028,9 +1030,7 @@
       <!-- Card 3: Ibn Seena Academy -->
       <a href="school?id=ibn-seena-academy" class="school-card">
         <div class="school-card__photo">
-          <img class="school-card__photo-img"
-               src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&amp;auto=format&amp;fit=crop&amp;q=75"
-               alt="Ibn Seena Academy library" loading="lazy" />
+          <div class="school-card__photo-initials" aria-hidden="true">IS</div>
           <span class="school-card__badge">Preview listing</span>
           <span class="school-card__photo-caption">Co-ed · PreK–12</span>
         </div>
@@ -1067,18 +1067,18 @@
     <div class="section-title">
       <div>
         <span class="eyebrow">Built for everyone</span>
-        <h2>Islamic schools across the country</h2>
+        <h2>Made for parents, students, and educators</h2>
       </div>
       <p>Pick your path and we'll tailor what you see.</p>
     </div>
 
-    <div class="audience-grid">
+    <div class="audience-grid reveal">
       <a href="directory" class="audience-card">
         <div class="audience-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <h3>Find the best Islamic school for your child</h3>
-        <p>Search, compare, save favorites, and request info from verified schools — in minutes.</p>
+        <p>Search, compare, save favorites, and request info from verified schools, all in minutes.</p>
         <span class="audience-card__link">For parents →</span>
       </a>
 
@@ -1115,7 +1115,7 @@
 <!-- ========== UTILITY BAND — Prayer + Checklist (moved below the fold) ========== -->
 <section class="utility-band">
   <div class="container">
-    <div class="utility-grid">
+    <div class="utility-grid reveal">
 
       <!-- Prayer times — compact, helpful, no longer dominant -->
       <div class="prayer-widget" id="prayerWidget" data-city="Jacksonville" data-state="FL" data-country="US">
@@ -1221,7 +1221,7 @@
       <a href="jobs" class="btn btn--ghost">Browse all jobs →</a>
     </div>
 
-    <div class="job-list">
+    <div class="job-list reveal">
       <a href="jobs" class="job">
         <div class="job__logo">AF</div>
         <div class="job__body">
@@ -1273,23 +1273,23 @@
       <a href="blog" class="btn btn--ghost">All articles →</a>
     </div>
 
-    <div class="blog-grid">
+    <div class="blog-grid reveal">
       <a href="blog-post" class="post-card">
         <div class="post-card__media" style="background: linear-gradient(135deg, var(--accent-soft), #E7DBC1);"></div>
         <div class="post-card__body">
           <div class="post-card__cat">Guides · For parents</div>
           <h3>How to choose an Islamic school: a 10-point checklist</h3>
-          <p class="muted small">The questions every parent should ask before enrolling — academics, Quran program, safeguarding, and more.</p>
+          <p class="muted small">The questions every parent should ask before enrolling: academics, Quran program, safeguarding, and more.</p>
           <div class="card__meta mt-8"><span>6 min read</span><span>·</span><span>Apr 18</span></div>
         </div>
       </a>
 
       <div class="post-card post-card--soon" aria-disabled="true">
-        <div class="post-card__media" style="background: linear-gradient(135deg, #DDEBE2, #BDD8C6);"></div>
+        <div class="post-card__media" style="background: linear-gradient(135deg, var(--primary-soft), #BDD8C6);"></div>
         <div class="post-card__body">
           <div class="post-card__cat post-card__cat--soon">Coming soon</div>
           <h3>Inside a full-time Hifz program: a week in the life</h3>
-          <p class="muted small">Balancing memorization, academics, and childhood — how top Hifz schools structure their day.</p>
+          <p class="muted small">Balancing memorization, academics, and childhood: how top Hifz schools structure their day.</p>
         </div>
       </div>
 
@@ -1298,7 +1298,7 @@
         <div class="post-card__body">
           <div class="post-card__cat post-card__cat--soon">Coming soon</div>
           <h3>Teaching Islamic Studies that sticks: 5 classroom ideas</h3>
-          <p class="muted small">Veteran teachers share what works — projects, discussions, and storytelling that keep students engaged.</p>
+          <p class="muted small">Veteran teachers share what works: projects, discussions, and storytelling that keep students engaged.</p>
         </div>
       </div>
     </div>
@@ -1308,13 +1308,13 @@
 <!-- ========== FOR SCHOOLS CTA ========== -->
 <section class="school-cta-section">
   <div class="container">
-    <div class="school-cta-inner">
+    <div class="school-cta-inner reveal">
       <div class="school-cta-text">
         <span class="eyebrow" style="color: var(--primary-soft); opacity: 0.85;">For Islamic schools</span>
         <h2>Is your school listed?</h2>
-        <p>Over 35 schools are already on Islamic School Review — and families are actively searching. Get listed free in under 5 minutes, or claim your existing profile to keep it accurate.</p>
+        <p>Over 35 schools are already on Islamic School Review, and families are actively searching. Get listed free in under 5 minutes, or claim your existing profile to keep it accurate.</p>
         <ul class="school-cta-bullets">
-          <li><span class="bullet-check">✓</span> Free basic listing — no credit card needed</li>
+          <li><span class="bullet-check">✓</span> Free basic listing, no credit card needed</li>
           <li><span class="bullet-check">✓</span> Reach families actively searching for Islamic schools</li>
           <li><span class="bullet-check">✓</span> Update your info, photos, and grades any time</li>
           <li><span class="bullet-check">✓</span> Post jobs and respond to parent reviews</li>
@@ -1340,8 +1340,12 @@
 
 <style>
   .school-cta-section {
-    background: linear-gradient(135deg, #0B3D25 0%, #0F5132 60%, #1a6b43 100%);
-    padding: 80px 0;
+    background:
+      var(--pattern-light),
+      radial-gradient(900px 420px at 85% 0%, rgba(184, 130, 58, 0.16) 0%, transparent 55%),
+      linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 60%, #1a6b43 100%);
+    padding: 88px 0;
+    border-top: 3px solid var(--accent);
   }
   .school-cta-inner {
     display: grid;
@@ -1420,7 +1424,7 @@
     margin-bottom: 8px;
   }
   .cta-card-count {
-    font-family: "Fraunces", Georgia, serif;
+    font-family: var(--font-serif);
     font-size: 4rem;
     font-weight: 700;
     color: #fff;
@@ -1503,66 +1507,13 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="brand" style="color:#fff">
-          <span class="brand__mark">ISR</span>
-          Islamic School Review
-        </div>
-        <p class="footer-mission">Connecting parents, students, educators, and schools around trustworthy information, honest reviews, and practical resources for Islamic education.</p>
-        <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
-          <input type="hidden" name="form-name" value="newsletter-signup" />
-          <input type="hidden" name="_subject" value="Newsletter signup" />
-          <input type="email" name="email" placeholder="Join our weekly newsletter" required />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-col">
-        <h4>Directory</h4>
-        <ul>
-          <li><a href="directory">Browse all schools</a></li>
-          <li><a href="directory">Browse by state</a></li>
-          <li><a href="add-school">Claim your school</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="blog">Guides &amp; stories</a></li>
-          <li><a href="blog">For parents</a></li>
-          <li><a href="blog">For students</a></li>
-          <li><a href="jobs">For educators</a></li>
-          <li><a href="blog">Downloads</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about">About us</a></li>
-          <li><a href="about">Editorial policy</a></li>
-          <li><a href="membership">Advertise</a></li>
-          <li><a href="contact">Contact</a></li>
-          <li><a href="contact">Press</a></li>
-        </ul>
-      </div>
-    </div>
+</main>
 
-    <div class="footer-bottom">
-      <span>© 2026 IslamicSchoolReview.com — All rights reserved.</span>
-      <span>
-        <a href="privacy" style="margin-right: 16px;">Privacy</a>
-        <a href="terms" style="margin-right: 16px;">Terms</a>
-        <a href="privacy">Cookies</a>
-      </span>
-    </div>
-  </div>
-</footer>
+<div id="site-footer"></div>
 
-<script src="assets/main.js"></script>
-<script src="assets/prayer-times.js"></script>
-<script src="assets/featured-ratings.js"></script>
+<script src="assets/main.js?v=20261002"></script>
+<script src="assets/prayer-times.js?v=20261002"></script>
+<script src="assets/featured-ratings.js?v=20261002"></script>
 <script>
 // Populate hero state + city dropdowns dynamically from Supabase
 document.addEventListener('DOMContentLoaded', async function() {
@@ -1601,18 +1552,5 @@ document.addEventListener('DOMContentLoaded', async function() {
   stateSel.addEventListener('change', () => loadCities(stateSel.value));
 });
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}; Tawk_API.onLoad=function(){Tawk_API.hideWidget();}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a027f1cee7ca01c362e9288/1jocs128c';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 </body>
 </html>

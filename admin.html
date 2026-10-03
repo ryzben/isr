@@ -6,10 +6,10 @@
   <title>Admin — Islamic School Review</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #f4f6f9; color: #1a1a2e; min-height: 100vh; }
+    body { font-family: var(--font-sans); background: #f4f6f9; color: #1a1a2e; min-height: 100vh; }
 
     .auth-wrap {
       min-height: 100vh;
@@ -194,6 +194,7 @@
       <button class="tab-btn active" onclick="switchTab('add', this)">Add School</button>
       <button class="tab-btn" onclick="switchTab('list', this)">All Schools</button>
       <button class="tab-btn" onclick="switchTab('pending', this)">Pending <span id="pendingBadge" style="display:none;background:#ef4444;color:#fff;border-radius:99px;padding:1px 7px;font-size:0.75rem;margin-left:4px;"></span></button>
+      <button class="tab-btn" onclick="switchTab('reviews', this)">Reviews <span id="reviewBadge" style="display:none;background:#ef4444;color:#fff;border-radius:99px;padding:1px 7px;font-size:0.75rem;margin-left:4px;"></span></button>
     </div>
 
     <div class="tab-pane active" id="tab-add">
@@ -290,6 +291,18 @@
         <div id="pendingList"><div class="empty">Loading...</div></div>
       </div>
     </div>
+
+    <div class="tab-pane" id="tab-reviews">
+      <div class="card">
+        <h2>Review Moderation (<span id="reviewQueueCount">0</span> pending)</h2>
+        <p class="field-hint" id="reviewAuthHint" style="display:none;">
+          To moderate reviews you must first sign in on the main site with the admin account
+          (pending reviews are only readable by admins). Open <a href="signin" target="_blank">the sign-in page</a>,
+          sign in, then reload this dashboard.
+        </p>
+        <div id="reviewQueueList"><div class="empty">Loading...</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -307,6 +320,7 @@
       document.getElementById('dash').classList.add('active');
       loadSchools();
       loadPendingBadge();
+      loadReviewBadge();
     } else {
       document.getElementById('authError').textContent = 'Incorrect password.';
     }
@@ -326,6 +340,116 @@
     btn.classList.add('active');
     if (name === 'list')    loadSchools();
     if (name === 'pending') loadPending();
+    if (name === 'reviews') loadReviewQueue();
+  }
+
+  // ---- Review moderation ----
+  // Pending reviews are only readable/updatable by the promoted admin account
+  // (enforced server-side by the is_admin() RLS policies from migration 01).
+  // The dashboard reuses the site session created on signin.html.
+  function getIsrSession() {
+    try {
+      const s = JSON.parse(localStorage.getItem('isr_session') || 'null');
+      if (!s || Date.now() > s.expires_at) return null;
+      return s;
+    } catch { return null; }
+  }
+
+  function reviewAuthHeaders() {
+    const session = getIsrSession();
+    return {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${session ? session.access_token : SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+    };
+  }
+
+  async function loadReviewQueue() {
+    const list = document.getElementById('reviewQueueList');
+    const hint = document.getElementById('reviewAuthHint');
+    const session = getIsrSession();
+    hint.style.display = session ? 'none' : 'block';
+    list.innerHTML = '<div class="empty">Loading...</div>';
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?status=eq.pending&order=created_at.asc&select=*`,
+        { headers: reviewAuthHeaders() });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const reviews = await res.json();
+      document.getElementById('reviewQueueCount').textContent = reviews.length;
+      updateReviewBadge(reviews.length);
+      if (!reviews.length) {
+        list.innerHTML = '<div class="empty">No reviews waiting for moderation.</div>';
+        return;
+      }
+      list.innerHTML = reviews.map(r => {
+        const subs = [
+          ['Academics', r.rating_academics], ['Islamic env.', r.rating_islamic],
+          ['Community', r.rating_community], ['Communication', r.rating_communication],
+          ['Value', r.rating_value],
+        ].filter(([, v]) => v).map(([l, v]) => `${l}: ${v}/5`).join(' · ');
+        return `
+        <div class="pending-item" style="border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <strong>${escapeAdmin(r.title || '(no title)')}</strong>
+            <span>${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)} for <code>${escapeAdmin(r.school_id)}</code></span>
+          </div>
+          <p style="margin:8px 0;white-space:pre-wrap;">${escapeAdmin(r.content || '')}</p>
+          <div style="font-size:0.85rem;color:#6b7280;margin-bottom:10px;">
+            By ${escapeAdmin(r.user_name || 'unknown')} (${escapeAdmin(r.user_email || 'no email')})
+            ${r.reviewer_role ? ' · ' + escapeAdmin(r.reviewer_role) : ''}
+            ${r.years_attended ? ' · ' + escapeAdmin(r.years_attended) : ''}
+            ${r.recommend ? ' · recommends: ' + escapeAdmin(r.recommend) : ''}
+            · ${new Date(r.created_at).toLocaleDateString()}
+            ${subs ? '<br>' + subs : ''}
+          </div>
+          <label style="display:inline-flex;align-items:center;gap:6px;font-size:0.88rem;margin-right:12px;">
+            <input type="checkbox" id="vp-${r.id}" /> Verified parent (identity checked)
+          </label>
+          <button class="btn-publish" style="width:auto;padding:8px 16px;margin:0 8px 0 0;"
+            onclick="moderateReview('${r.id}', 'approved')">Approve</button>
+          <button style="width:auto;padding:8px 16px;background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;border-radius:8px;cursor:pointer;"
+            onclick="moderateReview('${r.id}', 'rejected')">Reject</button>
+        </div>`;
+      }).join('');
+    } catch (err) {
+      list.innerHTML = `<div class="empty">Could not load the moderation queue (${escapeAdmin(err.message)}). ${getIsrSession() ? 'Is this account promoted to admin?' : 'Sign in on the main site first.'}</div>`;
+    }
+  }
+
+  async function moderateReview(id, status) {
+    const verified = document.getElementById('vp-' + id)?.checked || false;
+    const body = { status };
+    if (status === 'approved' && verified) body.verified_parent = true;
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?id=eq.${encodeURIComponent(id)}`, {
+        method: 'PATCH',
+        headers: { ...reviewAuthHeaders(), 'Prefer': 'return=minimal' },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      loadReviewQueue();
+    } catch (err) {
+      alert('Moderation failed: ' + err.message + ' (are you signed in as the admin account?)');
+    }
+  }
+
+  function updateReviewBadge(count) {
+    const badge = document.getElementById('reviewBadge');
+    if (!badge) return;
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-block' : 'none';
+  }
+
+  async function loadReviewBadge() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?status=eq.pending&select=id`,
+        { headers: reviewAuthHeaders() });
+      if (res.ok) updateReviewBadge((await res.json()).length);
+    } catch {}
+  }
+
+  function escapeAdmin(str) {
+    return String(str ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 
   document.getElementById('f-name').addEventListener('input', function() {
