@@ -63,7 +63,9 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--r-lg);
-      overflow: hidden;
+      /* clip, not hidden: hidden makes the table the sticky header's scroll box,
+         which pushed the header 64px down over the first row. */
+      overflow: clip;
     }
 
     /* Header row — sticky school cards */
@@ -254,22 +256,31 @@
 
     /* Mobile — collapse into stacked columns */
     @media (max-width: 900px) {
+      /* One column per school; each row's label spans the full width above its values. */
       .compare-header, .compare-row, .compare-footer {
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)) !important;
       }
       .compare-header {
         position: static;
       }
-      .compare-header__spacer, .compare-cell--label,
+      .compare-header__spacer,
       .compare-footer__spacer {
         display: none;
       }
-      .compare-header__card,
-      .compare-cell,
-      .compare-footer__cta {
+      .compare-cell--label {
+        grid-column: 1 / -1;
+        min-height: 0;
+        padding: 8px 12px 6px !important;
         border-right: 0;
-        border-bottom: 1px solid var(--line);
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
+      .compare-header__card { padding: 12px 10px; min-width: 0; }
+      .compare-header__card .compare-photo { height: 84px !important; }
+      .compare-header__card strong { font-size: 0.9rem !important; overflow-wrap: anywhere; }
+      .compare-header__card .btn { padding-left: 8px; padding-right: 8px; }
+      .compare-cell { font-size: 0.84rem; overflow-wrap: anywhere; min-width: 0; }
       .compare-cell--label-inline {
         font-weight: 600;
         font-size: 0.82rem;
@@ -280,7 +291,7 @@
       .compare-cell {
         flex-direction: column;
         align-items: flex-start;
-        padding: 12px 18px;
+        padding: 10px 12px;
       }
       .compare-row--category {
         background: var(--primary-soft);
@@ -502,9 +513,9 @@
 
       <div class="compare-row">
         <div class="compare-cell compare-cell--label">Overall rating</div>
-        <div class="compare-cell"><span class="rating-inline"><span class="star">★</span> No reviews yet</span></div>
-        <div class="compare-cell"><span class="rating-inline"><span class="star">★</span> No reviews yet</span></div>
-        <div class="compare-cell"><span class="rating-inline"><span class="star">★</span> No reviews yet</span></div>
+        <div class="compare-cell"><span class="rating-inline"><span class="star" style="color:var(--muted);">☆</span> No reviews yet</span></div>
+        <div class="compare-cell"><span class="rating-inline"><span class="star" style="color:var(--muted);">☆</span> No reviews yet</span></div>
+        <div class="compare-cell"><span class="rating-inline"><span class="star" style="color:var(--muted);">☆</span> No reviews yet</span></div>
       </div>
 
       <div class="compare-row">
@@ -555,6 +566,10 @@
 <script type="module">
   import { getSchoolById } from './assets/schools-data.js?v=20261002';
 
+  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;',
+  })[c]);
+
   const params = new URLSearchParams(location.search);
   const ids    = (params.get('ids') || '').split(',').map(s => s.trim()).filter(Boolean);
 
@@ -579,14 +594,14 @@
           <div class="compare-photo" style="
             width:100%;height:160px;border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;
             background:linear-gradient(135deg,var(--primary),#1d7a4e) center/cover no-repeat;
-            ${s.photo_url ? `background-image:url('${s.photo_url}');` : ''}
-            display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:var(--font-serif);flex-shrink:0;">
-            ${s.photo_url ? '' : (s.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}
+            display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:var(--font-serif);flex-shrink:0;"
+            ${s.photo_url ? `data-photo="${esc(s.photo_url)}"` : ''}>
+            ${esc(s.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}
           </div>
-          <strong style="font-size:1rem;">${s.name}</strong>
+          <strong style="font-size:1rem;">${esc(s.name)}</strong>
           ${s.verified ? '<span style="font-size:0.75rem;background:var(--primary-soft);color:var(--primary);padding:2px 8px;border-radius:99px;font-weight:700;">Verified</span>' : ''}
-          <div style="font-size:0.85rem;color:var(--muted);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${s.city}, ${s.state}</div>
-          <a href="school?id=${s.id}" class="btn btn--primary btn--sm" style="margin-top:8px;text-align:center;">View profile</a>
+          <div style="font-size:0.85rem;color:var(--muted);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${esc(s.city)}, ${esc(s.state)}</div>
+          <a href="school?id=${encodeURIComponent(s.id)}" class="btn btn--primary btn--sm" style="margin-top:8px;text-align:center;">View profile</a>
         </div>`).join('');
 
       // Use correct CSS classes: compare-cell and compare-cell--label
@@ -598,19 +613,19 @@
       }
 
       const tableHTML = `
-        <div class="compare-table">
+        <div class="compare-table" style="--n:${n}">
           <div class="compare-header" style="grid-template-columns:${gridCols}">
             <div class="compare-header__spacer"></div>
             ${cols}
           </div>
-          ${row('Grades',        schools.map(s => s.grades))}
-          ${row('Tuition',       schools.map(s => s.tuition_range))}
-          ${row('Location',      schools.map(s => `${s.city}, ${s.state}`))}
-          ${row('Address',       schools.map(s => s.address))}
-          ${row('Phone',         schools.map(s => s.phone ? `<a href="tel:${s.phone}">${s.phone}</a>` : null))}
-          ${row('Website',       schools.map(s => s.website ? `<a href="${s.website}" target="_blank" rel="noopener">${s.website.replace(/^https?:\/\//,'')}</a>` : null))}
-          ${row('Accreditation', schools.map(s => s.accreditation))}
-          ${row('Enrollment',    schools.map(s => s.enrollment))}
+          ${row('Grades',        schools.map(s => esc(s.grades)))}
+          ${row('Tuition',       schools.map(s => esc(s.tuition_range)))}
+          ${row('Location',      schools.map(s => esc(`${s.city}, ${s.state}`)))}
+          ${row('Address',       schools.map(s => esc(s.address)))}
+          ${row('Phone',         schools.map(s => s.phone ? `<a href="tel:${esc(s.phone)}">${esc(s.phone)}</a>` : null))}
+          ${row('Website',       schools.map(s => /^https?:\/\//i.test(s.website || '') ? `<a href="${esc(s.website)}" target="_blank" rel="noopener">${esc(s.website.replace(/^https?:\/\//,''))}</a>` : null))}
+          ${row('Accreditation', schools.map(s => esc(s.accreditation)))}
+          ${row('Enrollment',    schools.map(s => esc(s.enrollment)))}
           ${row('Status',        schools.map(s => s.verified ? '✓ Verified' : 'Preview listing'))}
         </div>`;
 
@@ -621,6 +636,15 @@
           <p style="color:var(--ink-soft);margin-bottom:32px;">Side-by-side comparison · <a href="directory">← Back to directory</a></p>
           ${tableHTML}
         </div>`;
+        // Initials stay until the photo actually loads, so a dead URL never leaves a blank block.
+        section.querySelectorAll('.compare-photo[data-photo]').forEach((el) => {
+          const probe = new Image();
+          probe.onload = () => {
+            el.style.backgroundImage = `url('${el.dataset.photo}')`;
+            el.textContent = '';
+          };
+          probe.src = el.dataset.photo;
+        });
       }
       document.title = `Compare: ${schools.map(s=>s.name).join(' vs ')} — Islamic School Review`;
     } catch (err) {

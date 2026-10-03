@@ -33,7 +33,10 @@
         const countEl = block.querySelector(".rating-block__count");
 
         if (!list.length) {
-          if (starsEl) starsEl.style.opacity = "0.35";
+          if (starsEl) {
+            starsEl.style.opacity = "0.35";
+            starsEl.textContent = "☆☆☆☆☆";
+          }
           if (countEl) countEl.textContent = "No reviews yet";
           return;
         }

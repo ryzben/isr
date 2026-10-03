@@ -599,11 +599,15 @@
     $("schoolLocation").innerHTML = locationParts.join(" · ");
 
     const photo = $("schoolPhoto");
+    // Initials stay until the photo actually loads, so a dead URL never leaves a blank block.
+    $("schoolPhotoFallback").textContent = initials(s.name);
     if (s.photo_url) {
-      photo.style.backgroundImage = `url('${s.photo_url}')`;
-      $("schoolPhotoFallback").textContent = "";
-    } else {
-      $("schoolPhotoFallback").textContent = initials(s.name);
+      const probe = new Image();
+      probe.onload = () => {
+        photo.style.backgroundImage = `url('${s.photo_url}')`;
+        $("schoolPhotoFallback").textContent = "";
+      };
+      probe.src = s.photo_url;
     }
 
     // ---- QUICK FACTS ----
@@ -707,7 +711,7 @@
         <div class="card__body">
           <h3 class="card__title">${escapeHtml(s.name)}</h3>
           <div class="card__meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${escapeHtml(where)}${s.grades ? ` · ${escapeHtml(s.grades)}` : ""}</div>
-          <span class="rating"><span class="rating__star">★</span> — <span class="rating__count">${s.verified ? "Verified" : "Preview"}</span></span>
+          <span class="rating"><span class="rating__count">${s.verified ? "Verified" : "Preview"}</span></span>
         </div>
       </a>
     `;
