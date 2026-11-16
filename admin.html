@@ -409,9 +409,6 @@
             · ${new Date(r.created_at).toLocaleDateString()}
             ${subs ? '<br>' + subs : ''}
           </div>
-          <label style="display:inline-flex;align-items:center;gap:6px;font-size:0.88rem;margin-right:12px;">
-            <input type="checkbox" id="vp-${r.id}" /> Verified parent (identity checked)
-          </label>
           <button class="btn-publish" style="width:auto;padding:8px 16px;margin:0 8px 0 0;"
             onclick="moderateReview('${r.id}', 'approved')">Approve</button>
           <button style="width:auto;padding:8px 16px;background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;border-radius:8px;cursor:pointer;"
@@ -424,9 +421,7 @@
   }
 
   async function moderateReview(id, status) {
-    const verified = document.getElementById('vp-' + id)?.checked || false;
     const body = { status };
-    if (status === 'approved' && verified) body.verified_parent = true;
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?id=eq.${encodeURIComponent(id)}`, {
         method: 'PATCH',

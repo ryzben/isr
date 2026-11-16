@@ -257,13 +257,13 @@
       review: {
         eyebrow: 'Review submitted',
         title: 'Thank you — your review is in.',
-        lede: "We've received your review" + (school ? ' for <strong>' + escapeHtml(school) + '</strong>' : '') + ". It's now with our moderation team, typically published within 24 – 48 hours.",
+        lede: "We've received your review" + (school ? ' for <strong>' + escapeHtml(school) + '</strong>' : '') + ". It is awaiting moderation before publication.",
         summaryLabel: 'Review details',
         summaryRows: [
           ['Submitted', 'Just now'],
           ['School', school || 'Al-Furqan Academy'],
           ['Status', 'Awaiting moderation'],
-          ['Estimated publish time', 'Within 24 – 48 hours']
+          ['Status', 'Awaiting moderation']
         ],
         actions: [
           { label: 'View my reviews', href: 'account#reviews', kind: 'primary' },
@@ -321,12 +321,12 @@
       contact: {
         eyebrow: 'Message sent',
         title: 'Thanks — we\u2019ll be in touch soon.',
-        lede: "We received your message. Depending on the topic, you'll hear from us within 1 business day.",
+        lede: "We received your message. We aim to reply within 1–2 business days.",
         summaryLabel: 'Message details',
         summaryRows: [
           ['Sent', 'Just now'],
           ['Routed to', 'The right team at Islamic School Review'],
-          ['Expected reply', 'Within 1 business day']
+          ['Expected reply', 'We aim to reply within 1–2 business days']
         ],
         actions: [
           { label: 'Back to home', href: 'index', kind: 'primary' },
@@ -336,12 +336,11 @@
       newsletter: {
         eyebrow: 'Subscribed',
         title: "You're on the list.",
-        lede: "We'll send our weekly digest of guides, news, and community voices every Friday morning. No spam — unsubscribe in one click anytime.",
+        lede: "We've received your email address. Mailing-list updates do not yet have a regular schedule.",
         summaryLabel: 'Subscription',
         summaryRows: [
           ['Subscribed', 'Just now'],
-          ['Frequency', 'Weekly — Friday mornings'],
-          ['Unsubscribe', 'One click, any time from the footer']
+          ['Frequency', 'No regular schedule yet']
         ],
         actions: [
           { label: 'Browse the directory', href: 'directory', kind: 'primary' },

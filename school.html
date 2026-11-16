@@ -863,7 +863,6 @@
                   ${roleBits ? `<span class="review-card__chip"> · ${escapeHtml(roleBits)}</span>` : ''}
                 </span>
               </div>
-              ${r.verified_parent ? '<span class="review-card__verified">✓ Verified parent</span>' : ''}
             </div>
             <div class="review-card__stars" aria-label="Rated ${r.rating} out of 5">${filled}</div>
             <h3 class="review-card__title">${escapeHtml(r.title || '')}</h3>
