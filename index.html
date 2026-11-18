@@ -63,13 +63,19 @@
     }
     .hero__inner {
       display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      align-items: flex-start;
-      gap: 56px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        "content image"
+        "search search"
+        "popular popular";
+      align-items: stretch;
+      column-gap: 48px;
+      row-gap: 24px;
       max-width: 1280px;
       margin: 0 auto;
     }
     .hero__content {
+      grid-area: content;
       position: relative;
       isolation: isolate;
       min-width: 0;
@@ -85,7 +91,7 @@
     }
     .hero__eyebrow {
       display: block;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
       color: var(--primary);
       font-size: 13px;
       font-weight: 700;
@@ -93,7 +99,7 @@
     }
     .hero h1 {
       max-width: 13ch;
-      margin: 0 0 18px;
+      margin: 0 0 12px;
       font-size: 60px;
       line-height: 1.04;
       letter-spacing: -0.02em;
@@ -105,12 +111,13 @@
     }
     .hero p.lede {
       max-width: 54ch;
-      margin: 0 0 24px;
+      margin: 0 0 16px;
       color: #2F3632;
       font-size: 19px;
       line-height: 1.55;
     }
     .hero-search {
+      grid-area: search;
       background: var(--surface);
       border: 1px solid #E6DFD0;
       border-radius: 16px;
@@ -119,18 +126,36 @@
     }
     .hero-search__row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(200px, 0.9fr);
+      align-items: end;
       gap: 18px;
     }
     .hero-search__field {
+      position: relative;
       min-width: 0;
     }
+    .hero-search__field:not(:first-child)::before {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: -10px;
+      border-left: 1px solid var(--line);
+      content: "";
+    }
     .hero-search__label {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       margin-bottom: 8px;
       color: #2F3632;
       font-size: 15px;
       font-weight: 600;
+    }
+    .hero-search__label svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      color: var(--primary);
     }
     .hero-search__select {
       width: 100%;
@@ -151,7 +176,6 @@
       outline-offset: 3px;
     }
     .hero-search__submit {
-      grid-column: 1 / -1;
       width: 100%;
       min-height: 58px;
       margin: 0;
@@ -166,11 +190,13 @@
     }
     .hero-search__submit svg { width: 20px; height: 20px; }
     .hero__popular {
+      grid-area: popular;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 8px;
-      margin-top: 20px;
+      margin: -4px 0 0;
       color: #2F3632;
       font-size: 15px;
     }
@@ -193,13 +219,14 @@
     }
     .hero__popular strong { color: #2F3632; font-weight: 600; }
     .hero__count {
-      margin: 14px 0 0;
+      margin: 10px 0 0;
       color: #2F3632;
       font-size: 15px;
     }
     .hero__figure {
+      grid-area: image;
       min-width: 0;
-      margin: 36px 0 0;
+      margin: 0;
     }
     .hero__figure img {
       display: block;
@@ -208,6 +235,7 @@
       aspect-ratio: 1746 / 901;
       border-radius: 20px;
       object-fit: cover;
+      object-position: center;
     }
     .hero__figure figcaption {
       margin-top: 9px;
@@ -809,14 +837,15 @@
     .section .section-title { margin-bottom: 40px; }
 
     /* ----- MOBILE ----- */
-    @media (max-width: 1023px) {
-      .hero { padding: 48px 24px; }
-      .hero__inner { grid-template-columns: 1fr; gap: 24px; }
-      .hero__content::before { inset: -48px 0 0 -12px; }
-      .hero__figure { margin: 0; }
-      .hero-search__row { grid-template-columns: 1fr; }
+    @media (max-width: 1100px) {
+      .hero { padding: 48px 32px; }
+      .hero__inner { column-gap: 32px; }
+      .hero h1 { margin-bottom: 10px; font-size: 40px; line-height: 1.04; }
+      .hero p.lede { margin-bottom: 10px; font-size: 18px; }
+      .hero__count { margin-top: 0; }
+      .hero-search__row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-search__submit { grid-column: 1 / -1; }
       .hero-search__field { padding: 0; }
-      .hero-search__select { height: 54px; }
       .trust-band { padding: 56px 0 64px; }
       .trust-grid { grid-template-columns: 1fr; gap: 16px; }
       .trust-stat { padding: 24px 20px; }
@@ -829,8 +858,29 @@
     }
     @media (max-width: 767px) {
       .hero { padding: 40px 20px; }
-      .hero h1 { font-size: 38px; }
-      .hero__content::before { inset: -40px 0 0 -12px; }
+      .hero__inner {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+          "eyebrow"
+          "heading"
+          "lede"
+          "search"
+          "popular"
+          "count"
+          "image";
+        gap: 16px;
+      }
+      .hero__content { display: contents; }
+      .hero__content::before { display: none; }
+      .hero__eyebrow { grid-area: eyebrow; margin-bottom: 0; }
+      .hero h1 { grid-area: heading; margin-bottom: 0; font-size: 38px; }
+      .hero p.lede { grid-area: lede; margin-bottom: 0; }
+      .hero__count { grid-area: count; margin: 0; }
+      .hero-search__row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+      .hero-search { padding: 18px; }
+      .hero-search__field:not(:first-child)::before { display: none; }
+      .hero-search__submit { grid-column: auto; }
+      .hero__popular { margin-top: 0; }
     }
     @media (max-width: 600px) {
       .school-grid, .blog-grid, .review-strip { grid-template-columns: 1fr; }
@@ -859,53 +909,6 @@
       <h1>Find an Islamic school where your child can <span>thrive.</span></h1>
 
       <p class="lede">Explore schools, compare programs, and read parent experiences — all in one place.</p>
-
-      <form class="hero-search" action="directory" method="get" aria-label="School search">
-        <div class="hero-search__row">
-        <!-- State -->
-        <div class="hero-search__field">
-          <label class="hero-search__label" for="hero-state">State</label>
-          <select id="hero-state" name="state" class="hero-search__select">
-            <option value="">Any state</option>
-          </select>
-        </div>
-
-        <!-- City (populated dynamically) -->
-        <div class="hero-search__field">
-          <label class="hero-search__label" for="hero-city">City</label>
-          <select id="hero-city" name="city" class="hero-search__select">
-            <option value="">Any city</option>
-          </select>
-        </div>
-
-        <!-- Grade level -->
-        <div class="hero-search__field">
-          <label class="hero-search__label" for="hero-grade">Grade level</label>
-          <select id="hero-grade" name="grade" class="hero-search__select">
-            <option value="">Any grade</option>
-            <option value="elementary">Elementary (K–5)</option>
-            <option value="middle">Middle school (6–8)</option>
-            <option value="high">High school (9–12)</option>
-          </select>
-        </div>
-
-        <!-- Submit -->
-        <button class="btn btn--cta btn--xl hero-search__submit" type="submit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          Search schools
-        </button>
-      </div>
-      </form>
-
-      <div class="hero__popular">
-        <strong>Popular:</strong>
-        <a href="directory?city=Jacksonville">Jacksonville</a>
-        <a href="directory?city=Tampa">Tampa</a>
-        <a href="directory?city=Orlando">Orlando</a>
-        <a href="directory?city=Miami">Miami</a>
-        <a href="directory?q=Hifz">Hifz programs</a>
-        <a href="directory?q=Montessori">Montessori</a>
-      </div>
       <p class="hero__count"><span data-school-count>—</span> schools listed across <span data-state-count>—</span> states</p>
     </div>
 
@@ -913,6 +916,55 @@
       <img src="assets/hero-reading.webp" alt="A smiling teacher in a hijab reading a picture book with four children at a library table." width="1746" height="901" loading="eager" fetchpriority="high" />
       <figcaption>Illustrative classroom image</figcaption>
     </figure>
+
+    <form class="hero-search" action="directory" method="get" aria-label="School search">
+      <div class="hero-search__row">
+        <div class="hero-search__field">
+          <label class="hero-search__label" for="hero-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" /></svg>
+            State
+          </label>
+          <select id="hero-state" name="state" class="hero-search__select">
+            <option value="">Any state</option>
+          </select>
+        </div>
+        <div class="hero-search__field">
+          <label class="hero-search__label" for="hero-city">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m-1 4h1m-1 4h1m4-8h1m-1 4h1m-1 4h1" /></svg>
+            City
+          </label>
+          <select id="hero-city" name="city" class="hero-search__select">
+            <option value="">Any city</option>
+          </select>
+        </div>
+        <div class="hero-search__field">
+          <label class="hero-search__label" for="hero-grade">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5L2 9Z" /><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v6" /></svg>
+            Grade level
+          </label>
+          <select id="hero-grade" name="grade" class="hero-search__select">
+            <option value="">Any grade</option>
+            <option value="elementary">Elementary (K–5)</option>
+            <option value="middle">Middle school (6–8)</option>
+            <option value="high">High school (9–12)</option>
+          </select>
+        </div>
+        <button class="btn btn--cta btn--xl hero-search__submit" type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Search schools
+        </button>
+      </div>
+    </form>
+
+    <div class="hero__popular">
+      <strong>Popular:</strong>
+      <a href="directory?city=Jacksonville">Jacksonville</a>
+      <a href="directory?city=Tampa">Tampa</a>
+      <a href="directory?city=Orlando">Orlando</a>
+      <a href="directory?city=Miami">Miami</a>
+      <a href="directory?q=Hifz">Hifz programs</a>
+      <a href="directory?q=Montessori">Montessori</a>
+    </div>
   </div>
 </section>
 
