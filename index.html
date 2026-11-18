@@ -50,7 +50,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/hero-classroom.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/hero-reading.webp" fetchpriority="high">
   <link rel="stylesheet" href="assets/styles.css?v=20261002" />
   <style>
     /* =========================================================
@@ -63,7 +63,7 @@
     }
     .hero__inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
       align-items: flex-start;
       gap: 56px;
       max-width: 1280px;
@@ -204,7 +204,8 @@
     .hero__figure img {
       display: block;
       width: 100%;
-      height: 440px;
+      height: auto;
+      aspect-ratio: 1746 / 901;
       border-radius: 20px;
       object-fit: cover;
     }
@@ -813,7 +814,6 @@
       .hero__inner { grid-template-columns: 1fr; gap: 24px; }
       .hero__content::before { inset: -48px 0 0 -12px; }
       .hero__figure { margin: 0; }
-      .hero__figure img { height: 360px; }
       .hero-search__row { grid-template-columns: 1fr; }
       .hero-search__field { padding: 0; }
       .hero-search__select { height: 54px; }
@@ -831,7 +831,6 @@
       .hero { padding: 40px 20px; }
       .hero h1 { font-size: 38px; }
       .hero__content::before { inset: -40px 0 0 -12px; }
-      .hero__figure img { height: 230px; }
     }
     @media (max-width: 600px) {
       .school-grid, .blog-grid, .review-strip { grid-template-columns: 1fr; }
@@ -911,7 +910,7 @@
     </div>
 
     <figure class="hero__figure">
-      <img src="assets/hero-classroom.webp" alt="A teacher in a hijab smiling with four young students building with colorful blocks at a classroom table." width="756" height="390" loading="eager" fetchpriority="high" />
+      <img src="assets/hero-reading.webp" alt="A smiling teacher in a hijab reading a picture book with four children at a library table." width="1746" height="901" loading="eager" fetchpriority="high" />
       <figcaption>Illustrative classroom image</figcaption>
     </figure>
   </div>
