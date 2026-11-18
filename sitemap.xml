@@ -1,88 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/directory</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/school</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/blog</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/blog-post</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/jobs</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/membership</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/about</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/contact</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/compare</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/privacy</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://www.islamicschoolreview.com/terms</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
+  <url><loc>https://www.islamicschoolreview.com/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/directory</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/about</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/blog</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/blog-post</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/contact</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/claim</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/add-school</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/privacy</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/terms</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/al-furqan-academy</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/alazhar-school</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/american-youth-academy</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/clara-mohammed-school-of-miami</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/ibn-seena-academy</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/islamic-school-of-miami</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/muslim-academy-of-greater-orlando</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/muslim-center-school</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/my-academy</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/noor-ul-iman-school</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/nur-ul-islam-academy</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/rising-star-academy</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/salah-tawfik-elementary-and-middle-school</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/ties-the-islamic-education-school</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/the-lighthouse-schools</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/schools/universal-academy-of-florida</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/states/CA</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/states/FL</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/states/IA</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/states/NJ</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/states/NY</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/states/TX</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/CA/santa-clara</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/FL/cooper-city</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/FL/jacksonville</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/FL/miami</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/FL/orlando</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/FL/tampa</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/IA/clinton</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/NJ/monmouth-junction</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/NJ/union-city</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/NY/queens</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/TX/houston</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://www.islamicschoolreview.com/cities/TX/san-antonio</loc><lastmod>2026-11-18</lastmod></url>
 </urlset>

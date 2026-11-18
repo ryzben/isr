@@ -40,8 +40,6 @@
   window.ISR = Object.assign(window.ISR || {}, { getSession, signOut, toast });
 
   // ---------- Icons ----------
-  const ICON_GLOBE =
-    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
   const ICON_BURGER =
     '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
   const ICON_CHEVRON =
@@ -66,13 +64,12 @@
         <button class="nav-more__btn" aria-expanded="false" aria-haspopup="true">More ${ICON_CHEVRON}</button>
         <div class="nav-more__menu" hidden>
           <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
-          <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
+          <a href="membership">Memberships <span class="nav-more__cs">coming soon</span></a>
           <a href="blog">Community <span class="nav-more__cs">coming soon</span></a>
         </div>
       </div>
     </nav>
     <div class="nav-utility">
-      <button type="button" class="lang-toggle" aria-label="Language: English">${ICON_GLOBE} EN</button>
       <span class="nav-utility__auth"></span>
       <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">${ICON_BURGER}</button>
     </div>
@@ -82,7 +79,7 @@
     <a href="blog">Resources</a>
     <a href="about">About</a>
     <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
-    <a href="membership">Membership <span class="nav-more__cs">coming soon</span></a>
+    <a href="membership">Memberships <span class="nav-more__cs">coming soon</span></a>
     <div class="mobile-nav__auth"></div>
   </nav>
 </header>`;
@@ -100,9 +97,9 @@
         <form class="newsletter-inline" action="https://formspree.io/f/mjglvggk" method="POST">
           <input type="hidden" name="form-name" value="newsletter-signup" />
           <input type="hidden" name="_subject" value="Newsletter signup" />
-          <label class="sr-only" for="footerNewsletterEmail">Email address for the weekly newsletter</label>
-          <input type="email" id="footerNewsletterEmail" name="email" autocomplete="email" placeholder="Join our weekly newsletter" required />
-          <button type="submit">Subscribe</button>
+          <label class="sr-only" for="footerNewsletterEmail">Email address for future updates</label>
+          <input type="email" id="footerNewsletterEmail" name="email" autocomplete="email" placeholder="Get future email updates" required />
+          <button type="submit">Sign up</button>
         </form>
       </div>
       <div class="footer-col">
@@ -120,7 +117,7 @@
           <li><a href="blog">Guides &amp; stories</a></li>
           <li><a href="write-review">Write a review</a></li>
           <li><a href="jobs">For educators</a></li>
-          <li><a href="membership">For schools</a></li>
+          <li><a href="claim">For schools: claim a listing</a></li>
         </ul>
       </div>
       <div class="footer-col">

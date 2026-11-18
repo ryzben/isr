@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
     // Password-reset emails can land here; hand them to the sign-in page, which owns that flow.
     if (/type=recovery|error_description=/.test(location.hash)) location.replace('signin' + location.hash);
   </script>
-  <meta name="description" content="A growing directory of Islamic schools across the U.S. Find programs near you, see who serves your community, and help us build the most trusted resource for Islamic education." />
+  <meta name="description" content="Explore Islamic school listings across the U.S. Find programs near you and compare available school details." />
   <link rel="canonical" href="https://www.islamicschoolreview.com/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
@@ -16,23 +16,23 @@
   <meta property="og:site_name" content="Islamic School Review" />
   <meta property="og:url" content="https://www.islamicschoolreview.com/" />
   <meta property="og:title" content="Islamic School Review — Find the best Islamic school for your child" />
-  <meta property="og:description" content="A growing directory of Islamic schools across the U.S. Find programs near you and help us build the most trusted resource for Islamic education." />
-  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta property="og:description" content="Explore Islamic school listings across the U.S. Find programs near you and compare available school details." />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Islamic School Review — Find the best Islamic school for your child" />
   <meta name="twitter:description" content="Honest parent reviews of Islamic schools across the country. Compare tuition, Quran programs, and community." />
-  <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Islamic School Review",
-    "url": "https://islamicschoolreview.com/",
+    "url": "https://www.islamicschoolreview.com/",
     "description": "Directory, reviews, and resources for Islamic schools.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://islamicschoolreview.com/directory?q={search_term_string}",
+      "target": "https://www.islamicschoolreview.com/directory?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }
@@ -42,8 +42,8 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Islamic School Review",
-    "url": "https://islamicschoolreview.com/",
-    "logo": "https://islamicschoolreview.com/favicon.svg",
+    "url": "https://www.islamicschoolreview.com/",
+    "logo": "https://www.islamicschoolreview.com/favicon.svg",
     "sameAs": []
   }
   </script>
@@ -929,9 +929,9 @@
         <span class="trust-stat__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/></svg>
         </span>
-        <div class="trust-stat__num">35</div>
+        <div class="trust-stat__num" data-school-count>—</div>
         <div class="trust-stat__label">Schools listed</div>
-        <div class="trust-stat__sub">Across FL, TX, CA, NY, NJ &amp; IA — growing weekly</div>
+        <div class="trust-stat__sub">Across <span data-state-count>—</span> states</div>
       </div>
       <div class="trust-stat">
         <span class="trust-stat__icon" aria-hidden="true">
@@ -939,7 +939,7 @@
         </span>
         <div class="trust-stat__num">Open</div>
         <div class="trust-stat__label">Parent reviews</div>
-        <div class="trust-stat__sub">Tied to a real account and screened before going live</div>
+        <div class="trust-stat__sub">Submitted through an account and screened before publication</div>
       </div>
       <div class="trust-stat">
         <span class="trust-stat__icon" aria-hidden="true">
@@ -959,26 +959,26 @@
     <div class="section-title">
       <div>
         <span class="eyebrow">Featured schools</span>
-        <h2>Handpicked institutions this month</h2>
+        <h2>Explore Islamic schools</h2>
       </div>
       <a href="directory" class="btn btn--ghost">Browse all schools →</a>
     </div>
 
     <div class="school-grid reveal">
       <!-- Card 1: Al-Furqan Academy -->
-      <a href="school?id=al-furqan-academy" class="school-card">
+      <a href="schools/al-furqan-academy" class="school-card" data-school-card="al-furqan-academy">
         <div class="school-card__photo">
           <img class="school-card__photo-img"
                src="assets/images/schools/al-furqan-academy/AFA1.jpg"
                alt="Al-Furqan Academy campus" loading="lazy" />
-          <span class="school-card__badge">Preview listing</span>
-          <span class="school-card__photo-caption">Full-time day school · Est. 1997</span>
+          <span class="school-card__badge" data-school-status="al-furqan-academy">Unclaimed</span>
+          <span class="school-card__photo-caption" data-school-grades="al-furqan-academy"></span>
         </div>
         <div class="school-card__body">
           <h3 class="school-card__title">Al-Furqan Academy</h3>
           <div class="school-card__loc">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Jacksonville, FL · PreK–12 · 270+ students
+            <span data-school-summary="al-furqan-academy">Loading school details…</span>
           </div>
           <div class="rating-block" data-school-id="al-furqan-academy">
             <span class="rating-block__num">—</span>
@@ -988,29 +988,27 @@
             </div>
             <div class="rating-block__tuition">
               <span class="rating-block__tuition-label">Tuition</span>
-              $9,300 / yr
+              <span data-school-tuition="al-furqan-academy">—</span>
             </div>
           </div>
           <div class="school-card__tags">
-            <span class="school-card__tag">ICNEF</span>
-            <span class="school-card__tag">FCIS · CISNA</span>
-            <span class="school-card__tag">Step Up accepted</span>
+            <span data-school-accreditation="al-furqan-academy"></span>
           </div>
         </div>
       </a>
 
       <!-- Card 2: Universal Academy of Florida -->
-      <a href="school?id=universal-academy-of-florida" class="school-card">
+      <a href="schools/universal-academy-of-florida" class="school-card" data-school-card="universal-academy-of-florida">
         <div class="school-card__photo">
           <div class="school-card__photo-initials" aria-hidden="true">UA</div>
-          <span class="school-card__badge">Preview listing</span>
-          <span class="school-card__photo-caption">PreK through 12th</span>
+          <span class="school-card__badge" data-school-status="universal-academy-of-florida">Unclaimed</span>
+          <span class="school-card__photo-caption" data-school-grades="universal-academy-of-florida"></span>
         </div>
         <div class="school-card__body">
           <h3 class="school-card__title">Universal Academy of Florida</h3>
           <div class="school-card__loc">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Tampa, FL · PreK–12
+            <span data-school-summary="universal-academy-of-florida">Loading school details…</span>
           </div>
           <div class="rating-block" data-school-id="universal-academy-of-florida">
             <span class="rating-block__num">—</span>
@@ -1020,29 +1018,27 @@
             </div>
             <div class="rating-block__tuition">
               <span class="rating-block__tuition-label">Tuition</span>
-              Up to $13,820
+              <span data-school-tuition="universal-academy-of-florida">—</span>
             </div>
           </div>
           <div class="school-card__tags">
-            <span class="school-card__tag">Cognia</span>
-            <span class="school-card__tag">FCIS</span>
-            <span class="school-card__tag">CISNA</span>
+            <span data-school-accreditation="universal-academy-of-florida"></span>
           </div>
         </div>
       </a>
 
       <!-- Card 3: Ibn Seena Academy -->
-      <a href="school?id=ibn-seena-academy" class="school-card">
+      <a href="schools/ibn-seena-academy" class="school-card" data-school-card="ibn-seena-academy">
         <div class="school-card__photo">
           <div class="school-card__photo-initials" aria-hidden="true">IS</div>
-          <span class="school-card__badge">Preview listing</span>
-          <span class="school-card__photo-caption">Co-ed · PreK–12</span>
+          <span class="school-card__badge" data-school-status="ibn-seena-academy">Unclaimed</span>
+          <span class="school-card__photo-caption" data-school-grades="ibn-seena-academy"></span>
         </div>
         <div class="school-card__body">
           <h3 class="school-card__title">Ibn Seena Academy</h3>
           <div class="school-card__loc">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Orlando, FL · PreK–12
+            <span data-school-summary="ibn-seena-academy">Loading school details…</span>
           </div>
           <div class="rating-block" data-school-id="ibn-seena-academy">
             <span class="rating-block__num">—</span>
@@ -1052,12 +1048,11 @@
             </div>
             <div class="rating-block__tuition">
               <span class="rating-block__tuition-label">Tuition</span>
-              ~$5,250
+              <span data-school-tuition="ibn-seena-academy">—</span>
             </div>
           </div>
           <div class="school-card__tags">
-            <span class="school-card__tag">Arabic</span>
-            <span class="school-card__tag">Quran</span>
+            <span data-school-accreditation="ibn-seena-academy"></span>
           </div>
         </div>
       </a>
@@ -1082,7 +1077,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <h3>Find the best Islamic school for your child</h3>
-        <p>Search, compare, save favorites, and request info from verified schools, all in minutes.</p>
+        <p>Search school listings, compare available details, and save favorites.</p>
         <span class="audience-card__link">For parents →</span>
       </a>
 
@@ -1091,7 +1086,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
         </div>
         <h3>Explore programs and scholarships</h3>
-        <p>Quran &amp; Arabic tools, scholarship listings, study planners, and peer stories.</p>
+        <p>Read practical guides to help you research Islamic schools and compare your options.</p>
         <span class="audience-card__link">For students →</span>
       </a>
 
@@ -1099,17 +1094,17 @@
         <div class="audience-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
-        <h3>Find teaching opportunities</h3>
-        <p>Islamic-school jobs worldwide, plus a community of peers and lesson resources.</p>
+        <h3>Jobs board coming soon</h3>
+        <p>Register your interest while we prepare the Islamic-school jobs board.</p>
         <span class="audience-card__link">For educators →</span>
       </a>
 
-      <a href="membership" class="audience-card">
+      <a href="claim" class="audience-card">
         <div class="audience-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/><path d="M14 9h1"/><path d="M14 13h1"/><path d="M14 17h1"/></svg>
         </div>
-        <h3>Grow your school and reach families</h3>
-        <p>Claim your listing, recruit great teachers, and reach the right families with membership.</p>
+        <h3>Manage your school listing</h3>
+        <p>Submit a request to claim an existing listing or add a school to the directory.</p>
         <span class="audience-card__link">For schools →</span>
       </a>
     </div>
@@ -1176,18 +1171,17 @@
         <path d="M660,110 L720,100 L730,140 L690,150 Z" fill="rgba(15,81,50,0.10)" stroke="rgba(15,81,50,0.35)" stroke-width="1"/>
       </svg>
 
-      <!-- Pin counts must add up to the "schools listed" total below. -->
-      <div class="map-pin is-featured" style="left: 35%; top: 62%;" title="Texas: 11 schools">11</div>
-      <div class="map-pin" style="left: 52%; top: 38%;" title="Iowa: 1 school">1</div>
-      <div class="map-pin" style="left: 76%; top: 44%;" title="New Jersey: 3 schools">3</div>
-      <div class="map-pin is-featured" style="left: 72%; top: 66%;" title="Florida: 13 schools">13</div>
-      <div class="map-pin" style="left: 22%; top: 70%;" title="California: 3 schools">3</div>
-      <div class="map-pin" style="left: 80%; top: 32%;" title="New York: 4 schools">4</div>
+      <div class="map-pin is-featured" data-state="TX" style="left: 35%; top: 62%;" hidden></div>
+      <div class="map-pin" data-state="IA" style="left: 52%; top: 38%;" hidden></div>
+      <div class="map-pin" data-state="NJ" style="left: 76%; top: 44%;" hidden></div>
+      <div class="map-pin is-featured" data-state="FL" style="left: 72%; top: 66%;" hidden></div>
+      <div class="map-pin" data-state="CA" style="left: 22%; top: 70%;" hidden></div>
+      <div class="map-pin" data-state="NY" style="left: 80%; top: 32%;" hidden></div>
 
       <div class="map-overlay">
         <div>
-          <strong>35 schools listed</strong>
-          <div class="small muted">across 6 states — growing weekly</div>
+          <strong><span data-school-count>—</span> schools listed</strong>
+          <div class="small muted">across <span data-state-count>—</span> states</div>
         </div>
         <a href="directory" class="btn btn--primary btn--sm">Browse directory</a>
       </div>
@@ -1206,7 +1200,7 @@
     </div>
 
     <p style="max-width: 60ch; color: var(--ink-soft);">
-      Parent reviews are open — every review is tied to a real account and screened before going live. If you've been part of an Islamic school as a parent or student, share your experience to help other families decide.
+      Parent reviews are open — each review is submitted through an account and screened before publication. If you've been part of an Islamic school as a parent or student, share your experience to help other families decide.
     </p>
     <p style="margin-top: 16px;">
       <a class="btn btn--primary btn--sm" href="write-review">Write a review</a>
@@ -1227,7 +1221,7 @@
     </div>
 
     <p style="max-width: 60ch; color: var(--ink-soft);">
-      We're building a place where teachers, administrators, and staff can find openings at Islamic schools, and where schools can reach educators who share their mission. Leave your email and we'll tell you when the first postings go live.
+      The jobs board is not open yet. Visit the jobs page to register your interest.
     </p>
   </div>
 </section>
@@ -1282,26 +1276,24 @@
       <div class="school-cta-text">
         <span class="eyebrow" style="color: var(--primary-soft); opacity: 0.85;">For Islamic schools</span>
         <h2>Is your school listed?</h2>
-        <p>Over 35 schools are already on Islamic School Review, and families are actively searching. Get listed free in under 5 minutes, or claim your existing profile to keep it accurate.</p>
+        <p>Submit a new school listing or request to claim an existing profile. Claim requests are reviewed manually.</p>
         <ul class="school-cta-bullets">
-          <li><span class="bullet-check">✓</span> Free basic listing, no credit card needed</li>
-          <li><span class="bullet-check">✓</span> Reach families actively searching for Islamic schools</li>
-          <li><span class="bullet-check">✓</span> Update your info, photos, and grades any time</li>
-          <li><span class="bullet-check">✓</span> Job postings and review responses are on the way</li>
+          <li><span class="bullet-check">✓</span> Submit school information for review</li>
+          <li><span class="bullet-check">✓</span> Request corrections to an existing listing</li>
+          <li><span class="bullet-check">✓</span> Review responses and job postings are coming soon</li>
         </ul>
         <div class="school-cta-actions">
           <a href="add-school?mode=add" class="btn btn--cta btn--lg">Add your school — it's free</a>
-          <a href="add-school?mode=claim" class="btn btn--ghost-light btn--lg">Claim existing listing →</a>
+          <a href="claim" class="btn btn--ghost-light btn--lg">Claim existing listing →</a>
         </div>
       </div>
       <div class="school-cta-card">
         <div class="cta-card-eyebrow">Already listed</div>
-        <div class="cta-card-count">35</div>
-        <div class="cta-card-label">Islamic schools across<br>FL · TX · CA · NY · NJ · IA</div>
+        <div class="cta-card-count" data-school-count>—</div>
+        <div class="cta-card-label">Islamic schools across<br><span data-state-codes>—</span></div>
         <div class="cta-card-divider"></div>
-        <div class="cta-card-stat"><span>6 states</span><span class="cta-stat-label">covered</span></div>
-        <div class="cta-card-stat"><span>Free</span><span class="cta-stat-label">to list</span></div>
-        <div class="cta-card-stat"><span>&lt; 5 min</span><span class="cta-stat-label">to submit</span></div>
+        <div class="cta-card-stat"><span data-state-count>—</span><span class="cta-stat-label">states</span></div>
+        <div class="cta-card-stat"><span>Manual</span><span class="cta-stat-label">claim review</span></div>
         <a href="add-school" class="btn btn--surface btn--block" style="margin-top: 20px;">Get started →</a>
       </div>
     </div>
@@ -1446,16 +1438,16 @@
   <div class="container">
     <div class="newsletter">
       <div>
-        <span class="eyebrow" style="color: var(--accent-soft)">Free · No spam</span>
-        <h2>The weekly digest for Muslim families and educators</h2>
-        <p>Get an email when we add new schools to the directory and new reviews come in. We'll only email when there's something genuinely new.</p>
+        <span class="eyebrow" style="color: var(--accent-soft)">Email updates</span>
+        <h2>Get future email updates</h2>
+        <p>Leave your email address for future updates. No regular mailing schedule is set yet.</p>
       </div>
       <form class="newsletter__form" action="https://formspree.io/f/mjglvggk" method="POST">
         <input type="hidden" name="form-name" value="newsletter-signup" />
         <input type="hidden" name="_subject" value="Newsletter signup" />
-        <label class="label" for="newsletter-email" style="color: #fff; margin-bottom: 8px;">Get the free 10-point school checklist too</label>
+        <label class="label" for="newsletter-email" style="color: #fff; margin-bottom: 8px;">Email address</label>
         <input id="newsletter-email" class="input" type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
-        <button class="btn btn--cta btn--block btn--lg" type="submit">Subscribe &amp; get checklist</button>
+        <button class="btn btn--cta btn--block btn--lg" type="submit">Sign up for updates</button>
       </form>
     </div>
   </div>
@@ -1484,43 +1476,6 @@
 <script src="assets/main.js?v=20261002"></script>
 <script src="assets/prayer-times.js?v=20261002"></script>
 <script src="assets/featured-ratings.js?v=20261003"></script>
-<script>
-// Populate hero state + city dropdowns dynamically from Supabase
-document.addEventListener('DOMContentLoaded', async function() {
-  const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
-  const STATE_NAMES = { FL:'Florida', TX:'Texas', CA:'California', NY:'New York', NJ:'New Jersey', IA:'Iowa', IL:'Illinois', MI:'Michigan', VA:'Virginia', MD:'Maryland', GA:'Georgia', OH:'Ohio', PA:'Pennsylvania', MN:'Minnesota', CO:'Colorado', WA:'Washington' };
-  const stateSel = document.getElementById('hero-state');
-  const citySel  = document.getElementById('hero-city');
-  if (!stateSel || !citySel) return;
-
-  // Load states dynamically
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/schools?select=state&order=state.asc`,
-      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
-    const rows = await res.json();
-    const states = [...new Set(rows.map(r => r.state).filter(Boolean))].sort();
-    stateSel.innerHTML = '<option value="">Any state</option>' +
-      states.map(s => `<option value="${s}">${STATE_NAMES[s] || s}</option>`).join('');
-  } catch(e) { console.error('State load failed:', e); }
-
-  async function loadCities(stateCode) {
-    citySel.innerHTML = '<option value="">Any city</option>';
-    if (!stateCode) return;
-    try {
-      const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/schools?state=eq.${stateCode}&select=city&order=city.asc`,
-        { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
-      );
-      const rows = await res.json();
-      const cities = [...new Set(rows.map(r => r.city).filter(Boolean))].sort();
-      citySel.innerHTML = '<option value="">Any city</option>' +
-        cities.map(c => `<option value="${c}">${c}</option>`).join('');
-    } catch(e) { console.error('City load failed:', e); }
-  }
-
-  stateSel.addEventListener('change', () => loadCities(stateSel.value));
-});
-</script>
+<script type="module" src="assets/homepage-data.js?v=20261116"></script>
 </body>
 </html>

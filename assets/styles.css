@@ -560,6 +560,11 @@ button.lang-toggle {
   color: #B7BDBA;
   font-size: 0.88rem;
 }
+.newsletter-error {
+  margin: 10px 0 0;
+  color: #b42318;
+  font-size: 0.88rem;
+}
 
 /* ---------- Utility ---------- */
 .stack-4 { display: grid; gap: 4px; }

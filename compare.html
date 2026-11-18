@@ -1,656 +1,236 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Compare schools — Islamic School Review</title>
-  <meta name="description" content="Compare Islamic schools side by side. Location, grades, tuition, accreditation, Islamic program, and more — all in one view." />
+  <meta name="description" content="Compare available details for Islamic schools side by side." />
   <link rel="canonical" href="https://www.islamicschoolreview.com/compare" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Islamic School Review" />
-  <meta property="og:url" content="https://www.islamicschoolreview.com/compare" />
-  <meta property="og:title" content="Compare schools — Islamic School Review" />
-  <meta property="og:description" content="Compare Islamic schools side by side — location, grades, tuition, Islamic program, and more." />
-  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Compare schools — Islamic School Review" />
-  <meta name="twitter:description" content="Side-by-side comparison of Islamic schools." />
-  <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css?v=20261002" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Compare Islamic schools",
-    "url": "https://islamicschoolreview.com/compare",
-    "description": "Side-by-side comparison of Islamic schools — location, grades, tuition, Islamic program, and more.",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Islamic School Review",
-      "url": "https://islamicschoolreview.com/"
-    },
-    "mainEntity": {
-      "@type": "ItemList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "item": { "@type": "School", "name": "Al-Furqan Academy", "url": "https://islamicschoolreview.com/school" } },
-        { "@type": "ListItem", "position": 2, "item": { "@type": "School", "name": "MY Academy of Jacksonville" } },
-        { "@type": "ListItem", "position": 3, "item": { "@type": "School", "name": "Al-Zahra Academy" } }
-      ]
-    }
-  }
-  </script>
   <style>
-    .compare-hero {
-      padding: 48px 0 24px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-    }
-    .compare-hero .breadcrumbs {
-      font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;
-    }
-    .compare-hero .breadcrumbs a { color: var(--ink-soft); }
-    .compare-hero h1 { font-size: clamp(1.8rem, 3.6vw, 2.4rem); margin: 0 0 8px; }
-    .compare-hero p.lede { color: var(--ink-soft); margin: 0; max-width: 65ch; }
-
-    .compare-section { padding: 40px 0 80px; }
-
-    .compare-table {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--r-lg);
-      /* clip, not hidden: hidden makes the table the sticky header's scroll box,
-         which pushed the header 64px down over the first row. */
-      overflow: clip;
-    }
-
-    /* Header row — sticky school cards */
-    .compare-header {
+    .compare-hero { padding: 48px 0 32px; background: var(--surface-alt, #f7f8f6); }
+    .compare-section { padding: 32px 0 72px; }
+    .compare-table-wrap { overflow-x: auto; }
+    .compare-table { min-width: 720px; }
+    .compare-header, .compare-row {
       display: grid;
-      grid-template-columns: 220px repeat(3, 1fr);
-      gap: 0;
-      background: var(--surface);
-      border-bottom: 2px solid var(--line-strong);
-      position: sticky;
-      top: 64px;
-      z-index: 5;
+      grid-template-columns: minmax(150px, .8fr) repeat(var(--school-count), minmax(190px, 1fr));
     }
-    .compare-header__spacer {
-      background: var(--surface-alt);
-      border-right: 1px solid var(--line);
-    }
-    .compare-header__card {
-      padding: 20px 18px;
-      border-right: 1px solid var(--line);
-      display: flex; flex-direction: column; gap: 8px;
-      position: relative;
-    }
-    .compare-header__card:last-child { border-right: 0; }
-    .compare-header__remove {
-      position: absolute;
-      top: 10px; right: 10px;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: var(--surface-alt);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      cursor: pointer;
-      display: grid; place-items: center;
-      font-size: 1rem; line-height: 1;
-    }
-    .compare-header__remove:hover { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
-    .compare-header__mark {
-      width: 48px; height: 48px; border-radius: 10px;
-      color: #fff; display: grid; place-items: center;
-      font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem;
-    }
-    .compare-header__mark--1 { background: linear-gradient(135deg, var(--primary) 0%, #1d7a4e 100%); }
-    .compare-header__mark--2 { background: linear-gradient(135deg, #3e5e48 0%, #5a8666 100%); }
-    .compare-header__mark--3 { background: linear-gradient(135deg, #5c2e2e 0%, #894848 100%); }
-    .compare-header__card h3 {
-      margin: 0; font-size: 1rem; line-height: 1.3;
-    }
-    .compare-header__card .small { color: var(--muted); font-size: 0.82rem; }
-    .compare-header__card a.profile-link {
-      margin-top: auto;
-      font-size: 0.82rem; color: var(--primary); font-weight: 600;
-      text-decoration: none;
-    }
-    .compare-header__card a.profile-link:hover { text-decoration: underline; }
-
-    .compare-header__add {
-      padding: 20px; border-right: 1px solid var(--line);
-      display: grid; place-items: center;
-      background: var(--surface-alt);
-    }
-    .compare-header__add:last-child { border-right: 0; }
-    .compare-header__add .add-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      padding: 18px;
-      border: 2px dashed var(--line-strong);
-      border-radius: var(--r-md);
-      width: 100%;
-      background: transparent;
-      color: var(--ink-soft);
-      cursor: pointer;
-      font-size: 0.88rem;
-      text-decoration: none;
-    }
-    .compare-header__add .add-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--surface);
-    }
-    .compare-header__add .add-btn .plus {
-      font-size: 1.6rem; line-height: 1;
-    }
-
-    /* Category headers */
-    .compare-row--category {
-      background: var(--surface-alt);
-      padding: 14px 20px;
-      font-family: var(--font-sans);
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-    }
-
-    /* Data row */
-    .compare-row {
-      display: grid;
-      grid-template-columns: 220px repeat(3, 1fr);
-      gap: 0;
-      border-top: 1px solid var(--line);
-    }
-    .compare-row:hover .compare-cell { background: var(--surface-alt); }
-    .compare-cell {
-      padding: 14px 18px;
-      border-right: 1px solid var(--line);
-      font-size: 0.92rem;
-      color: var(--ink);
-      min-height: 48px;
-      display: flex; align-items: center;
-    }
-    .compare-cell:last-child { border-right: 0; }
-    .compare-cell--label {
-      background: var(--surface-alt);
-      font-weight: 600;
-      color: var(--ink-soft);
-      font-size: 0.88rem;
-    }
-    .compare-cell--missing { color: var(--muted); font-style: italic; }
-    .compare-cell .best {
-      display: inline-flex; align-items: center; gap: 6px;
-      color: var(--primary); font-weight: 600;
-    }
-    .compare-cell .best::before {
-      content: "✓"; font-size: 0.9rem;
-    }
-    .compare-cell .chip {
-      display: inline-block;
-      padding: 3px 9px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      margin-right: 4px;
-    }
-    .compare-cell .rating-inline {
-      display: inline-flex; align-items: center; gap: 4px;
-    }
-    .compare-cell .rating-inline .star { color: #f59e0b; }
-
-    /* CTA row at bottom */
-    .compare-footer {
-      display: grid;
-      grid-template-columns: 220px repeat(3, 1fr);
-      border-top: 2px solid var(--line-strong);
-      background: var(--surface);
-    }
-    .compare-footer__spacer {
-      background: var(--surface-alt);
-      border-right: 1px solid var(--line);
-    }
-    .compare-footer__cta {
-      padding: 20px; border-right: 1px solid var(--line);
-      display: flex; flex-direction: column; gap: 8px;
-    }
-    .compare-footer__cta:last-child { border-right: 0; }
-
-    .compare-toolbar {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .compare-toolbar .count {
-      font-size: 0.92rem; color: var(--ink-soft);
-    }
-    .compare-toolbar .count strong { color: var(--ink); }
-
-    .bulk-cta {
-      background: linear-gradient(135deg, var(--primary-soft) 0%, var(--accent-soft) 100%);
-      border-radius: var(--r-lg);
-      padding: 28px;
-      display: flex; gap: 24px; align-items: center;
-      margin-top: 32px;
-    }
-    .bulk-cta__icon {
-      width: 56px; height: 56px; flex-shrink: 0;
-      border-radius: 14px;
-      background: var(--surface);
-      display: grid; place-items: center;
-      font-size: 1.6rem;
-    }
-    .bulk-cta__body { flex: 1; }
-    .bulk-cta__body h3 { margin: 0 0 4px; font-size: 1.15rem; }
-    .bulk-cta__body p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
-
-    /* Mobile — collapse into stacked columns */
-    @media (max-width: 900px) {
-      /* One column per school; each row's label spans the full width above its values. */
-      .compare-header, .compare-row, .compare-footer {
-        grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)) !important;
+    .compare-header { align-items: stretch; gap: 12px; margin-bottom: 16px; }
+    .compare-header__card { display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface, #fff); }
+    .compare-photo { position: relative; display: grid; place-items: center; height: 128px; overflow: hidden; border-radius: var(--r-sm); color: #fff; background: linear-gradient(135deg, var(--primary), #1d7a4e); font: 600 1.8rem var(--font-serif); }
+    .compare-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .compare-row { border-bottom: 1px solid var(--line); }
+    .compare-cell { padding: 14px 12px; overflow-wrap: anywhere; }
+    .compare-cell--label { font-weight: 600; color: var(--ink-soft); }
+    .compare-empty { max-width: 640px; padding: 44px 24px; margin: 0 auto; text-align: center; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface, #fff); }
+    .compare-actions { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+    .compare-add-school, .compare-print { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .compare-add-school label { font-weight: 600; }
+    .compare-add-school select { min-width: 220px; }
+    .compare-print { justify-content: flex-end; }
+    .compare-print-hint { width: 100%; margin: 0; text-align: right; }
+    .compare-remove { align-self: flex-start; }
+    @media print {
+      .site-header, .site-footer, #site-footer, .compare-hero .breadcrumbs, .compare-actions, .compare-remove { display: none !important; }
+      .compare-hero { padding: 0 0 16px; background: none; }
+      .compare-section { padding: 0; }
+      .compare-section .container { width: 100%; max-width: none; padding: 0; }
+      .compare-table-wrap { overflow: visible; }
+      .compare-table { min-width: 0; width: 100%; }
+      .compare-header, .compare-row {
+        grid-template-columns: minmax(90px, .65fr) repeat(var(--school-count), minmax(0, 1fr));
+        gap: 0;
+        break-inside: avoid;
       }
-      .compare-header {
-        position: static;
-      }
-      .compare-header__spacer,
-      .compare-footer__spacer {
-        display: none;
-      }
-      .compare-cell--label {
-        grid-column: 1 / -1;
-        min-height: 0;
-        padding: 8px 12px 6px !important;
-        border-right: 0;
-        font-size: 0.74rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .compare-header__card { padding: 12px 10px; min-width: 0; }
-      .compare-header__card .compare-photo { height: 84px !important; }
-      .compare-header__card strong { font-size: 0.9rem !important; overflow-wrap: anywhere; }
-      .compare-header__card .btn { padding-left: 8px; padding-right: 8px; }
-      .compare-cell { font-size: 0.84rem; overflow-wrap: anywhere; min-width: 0; }
-      .compare-cell--label-inline {
-        font-weight: 600;
-        font-size: 0.82rem;
-        color: var(--muted);
-        display: block;
-        margin-bottom: 2px;
-      }
-      .compare-cell {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 12px;
-      }
-      .compare-row--category {
-        background: var(--primary-soft);
-        color: var(--primary);
-        padding-top: 18px;
-      }
+      .compare-cell { padding: 8px 6px; }
+      .compare-header__card { box-shadow: none; }
+    }
+    @media (max-width: 640px) {
+      .compare-hero { padding: 32px 0 24px; }
+      .compare-section { padding: 24px 0 48px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ========== HEADER ========== -->
 <script src="assets/site-chrome.js?v=20261002"></script>
 
 <main id="main">
-
-<!-- ========== HERO ========== -->
-<section class="compare-hero">
-  <div class="container">
-    <div class="breadcrumbs">
-      <a href="index">Home</a> · <a href="directory">Directory</a> · <span>Compare schools</span>
+  <section class="compare-hero">
+    <div class="container">
+      <div class="breadcrumbs"><a href="index">Home</a> · <a href="directory">Directory</a> · <span>Compare schools</span></div>
+      <h1>Compare schools</h1>
+      <p class="lede">Compare available listing details side by side. Missing information is shown as a dash.</p>
     </div>
-    <h1>Compare schools side by side</h1>
-    <p class="lede">See location, grades, tuition, accreditation, and Islamic program details for up to three schools at once. Drop schools in from the directory with the <span style="white-space:nowrap;">✓ Compare</span> checkbox.</p>
-  </div>
-</section>
-
-<!-- ========== COMPARE TABLE ========== -->
-<section class="compare-section">
-  <div class="container">
-
-    <div class="compare-toolbar">
-      <div class="count"><strong>3 of 3</strong> schools — all in Jacksonville, FL</div>
-      <div style="display:flex; gap:8px;">
-        <a href="directory" class="btn btn--ghost btn--sm">← Back to directory</a>
-        <button class="btn btn--ghost btn--sm" onclick="window.print()">Print</button>
-        <a href="#" class="btn btn--ghost btn--sm">Share</a>
-      </div>
+  </section>
+  <section class="compare-section">
+    <div class="container" id="compareContent" aria-live="polite">
+      <p class="muted">Loading comparison…</p>
     </div>
-
-    <div class="compare-table">
-
-      <!-- Header row -->
-      <div class="compare-header">
-        <div class="compare-header__spacer"></div>
-
-        <div class="compare-header__card">
-          <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
-          <div class="compare-header__mark compare-header__mark--1">AF</div>
-          <h3>Al-Furqan Academy</h3>
-          <div class="small"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jacksonville, FL</div>
-          <a href="school" class="profile-link">View full profile →</a>
-        </div>
-
-        <div class="compare-header__card">
-          <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
-          <div class="compare-header__mark compare-header__mark--2">MY</div>
-          <h3>MY Academy</h3>
-          <div class="small"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jacksonville, FL</div>
-          <a href="school" class="profile-link">View full profile →</a>
-        </div>
-
-        <div class="compare-header__card">
-          <button class="compare-header__remove" aria-label="Remove from comparison">×</button>
-          <div class="compare-header__mark compare-header__mark--3">AZ</div>
-          <h3>Al-Zahra Academy</h3>
-          <div class="small"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jacksonville, FL</div>
-          <a href="school" class="profile-link">View full profile →</a>
-        </div>
-      </div>
-
-      <!-- Category: Overview -->
-      <div class="compare-row--category">Overview</div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Location</div>
-        <div class="compare-cell">Jacksonville, FL</div>
-        <div class="compare-cell">Jacksonville, FL</div>
-        <div class="compare-cell">Jacksonville, FL</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Grades</div>
-        <div class="compare-cell">PreK – 12</div>
-        <div class="compare-cell">VPK – 12</div>
-        <div class="compare-cell">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">School type</div>
-        <div class="compare-cell">Private, non-profit · Full-time day · Co-ed</div>
-        <div class="compare-cell">Private · Muslim · Co-ed</div>
-        <div class="compare-cell compare-cell--missing">Awaiting claim</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Founded</div>
-        <div class="compare-cell">1997</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Enrollment</div>
-        <div class="compare-cell">270+ students</div>
-        <div class="compare-cell">~165 students</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Student-teacher ratio</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell"><span class="best">7 : 1</span></div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Affiliation</div>
-        <div class="compare-cell">Islamic Center of Northeast Florida (ICNEF)</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Address</div>
-        <div class="compare-cell">2333 Saint Johns Bluff Rd S, 32246</div>
-        <div class="compare-cell">5940 Beach Blvd Ste A, 32207</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Phone</div>
-        <div class="compare-cell">(904) 645-0810</div>
-        <div class="compare-cell">(904) 980-8337</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Website</div>
-        <div class="compare-cell"><a href="https://www.alfurqanacademy.org/" target="_blank" rel="noopener" style="color:var(--primary);">alfurqanacademy.org ↗</a></div>
-        <div class="compare-cell"><a href="https://www.myacademyjax.com/" target="_blank" rel="noopener" style="color:var(--primary);">myacademyjax.com ↗</a></div>
-        <div class="compare-cell"><a href="https://alzahrajax.org/school/" target="_blank" rel="noopener" style="color:var(--primary);">alzahrajax.org ↗</a></div>
-      </div>
-
-      <!-- Category: Academics -->
-      <div class="compare-row--category">Academics</div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Student / teacher ratio</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Accreditation</div>
-        <div class="compare-cell">FCIS · CISNA · Cognia</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">AP / honors</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <!-- Category: Islamic program -->
-      <div class="compare-row--category">Islamic program</div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Quran program</div>
-        <div class="compare-cell"><span class="best">Yes — daily</span></div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Hifz track</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Arabic instruction</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Madhab orientation</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <!-- Category: Tuition & aid -->
-      <div class="compare-row--category">Tuition &amp; aid</div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Annual tuition</div>
-        <div class="compare-cell">$9,300 / yr (K–12, 2025–26)</div>
-        <div class="compare-cell compare-cell--missing">Contact school</div>
-        <div class="compare-cell compare-cell--missing">Contact school</div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Scholarships accepted</div>
-        <div class="compare-cell"><span class="best">Step Up For Students</span></div>
-        <div class="compare-cell"><span class="best">Step Up For Students</span></div>
-        <div class="compare-cell compare-cell--missing">Pending</div>
-      </div>
-
-      <!-- Category: Community -->
-      <div class="compare-row--category">Community &amp; reviews</div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Overall rating</div>
-        <div class="compare-cell"><span class="rating-inline"><span class="star" style="color:var(--muted);">☆</span> No reviews yet</span></div>
-        <div class="compare-cell"><span class="rating-inline"><span class="star" style="color:var(--muted);">☆</span> No reviews yet</span></div>
-        <div class="compare-cell"><span class="rating-inline"><span class="star" style="color:var(--muted);">☆</span> No reviews yet</span></div>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell compare-cell--label">Listing status</div>
-        <div class="compare-cell"><span class="chip" style="background:var(--accent-soft);color:var(--accent);">Preview listing</span></div>
-        <div class="compare-cell"><span class="chip" style="background:var(--accent-soft);color:var(--accent);">Unclaimed</span></div>
-        <div class="compare-cell"><span class="chip" style="background:var(--accent-soft);color:var(--accent);">Unclaimed</span></div>
-      </div>
-
-      <!-- Action row -->
-      <div class="compare-footer">
-        <div class="compare-footer__spacer"></div>
-        <div class="compare-footer__cta">
-          <a href="school" class="btn btn--primary btn--block btn--sm">Request info</a>
-          <a href="write-review" class="btn btn--ghost btn--block btn--sm">Write a review</a>
-        </div>
-        <div class="compare-footer__cta">
-          <a href="school" class="btn btn--primary btn--block btn--sm">Request info</a>
-          <a href="write-review" class="btn btn--ghost btn--block btn--sm">Write a review</a>
-        </div>
-        <div class="compare-footer__cta">
-          <a href="school" class="btn btn--primary btn--block btn--sm">Request info</a>
-          <a href="write-review" class="btn btn--ghost btn--block btn--sm">Write a review</a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Bulk CTA -->
-    <div class="bulk-cta">
-      <div class="bulk-cta__icon">📨</div>
-      <div class="bulk-cta__body">
-        <h3>Send one inquiry to all three</h3>
-        <p>Save time — we'll forward your question to the admissions team at every school in your comparison.</p>
-      </div>
-      <a href="confirmation?action=inquiry" class="btn btn--primary">Contact all 3</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ========== FOOTER ========== -->
+  </section>
 </main>
 
 <div id="site-footer"></div>
-
 <script src="assets/main.js?v=20261002"></script>
 <script type="module">
-  import { getSchoolById } from './assets/schools-data.js?v=20261002';
+  import { getSchools, schoolInitials, schoolPagePath, schoolStatus } from './assets/schools-data.js?v=20261002';
 
-  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;',
-  })[c]);
+  const content = document.getElementById('compareContent');
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  })[character]);
+  let selectedIds = [...new Set((new URLSearchParams(location.search).get('ids') || '')
+    .split(',').map((id) => id.trim()).filter(Boolean))].slice(0, 3);
+  let allSchools = [];
+  let selectedSchools = [];
 
-  const params = new URLSearchParams(location.search);
-  const ids    = (params.get('ids') || '').split(',').map(s => s.trim()).filter(Boolean);
-
-  if (!ids.length) {
-    // No schools in URL — redirect to directory
-    location.replace('directory');
-  } else {
-    loadCompare(ids);
+  function showEmptyState(message) {
+    content.innerHTML = `<div class="compare-actions">
+      <div class="compare-print">
+        <button type="button" class="btn btn--ghost" data-print-comparison disabled>Print comparison</button>
+        <p class="compare-print-hint muted">Select at least 2 schools to print.</p>
+      </div>
+    </div><div class="compare-empty">
+      <h2>${escapeHtml(message)}</h2>
+      <p>Choose schools from the directory to compare the information available in their listings.</p>
+      <a href="directory" class="btn btn--primary">Browse schools</a>
+    </div>`;
   }
 
-  async function loadCompare(ids) {
-    try {
-      const schools = (await Promise.all(ids.map(id => getSchoolById(id)))).filter(Boolean);
-      if (!schools.length) { location.replace('directory'); return; }
+  function renderComparison(schools) {
+    const columnCount = Math.max(schools.length, 1);
+    const availableSchools = allSchools.filter((school) => !schools.some((selected) => selected.id === school.id));
+    const schoolOptions = availableSchools.map((school) => {
+      const location = [school.city, school.state].filter(Boolean).join(', ');
+      return `<option value="${escapeHtml(school.id)}">${escapeHtml(`${school.name}${location ? ` — ${location}` : ''}`)}</option>`;
+    }).join('');
+    const headers = schools.map((school) => `
+      <div class="compare-header__card">
+        <div class="compare-photo" data-school-id="${escapeHtml(school.id)}">${escapeHtml(schoolInitials(school.name))}</div>
+        <strong>${escapeHtml(school.name)}</strong>
+        <span class="muted small">${escapeHtml([school.city, school.state].filter(Boolean).join(', ') || 'Location unavailable')}</span>
+        <span class="badge">${escapeHtml(schoolStatus(school))}</span>
+        <a href="${schoolPagePath(school.id)}" class="btn btn--ghost btn--sm">View profile</a>
+        <button type="button" class="btn btn--ghost btn--sm compare-remove" data-remove-school="${escapeHtml(school.id)}" aria-label="Remove ${escapeHtml(school.name)} from comparison">Remove</button>
+      </div>`).join('');
 
-      const n = schools.length;
-      // Adjust grid to match actual number of schools
-      const gridCols = `220px repeat(${n}, 1fr)`;
-
-      const cols = schools.map(s => `
-        <div class="compare-header__card">
-          <div class="compare-photo" style="
-            width:100%;height:160px;border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;
-            background:linear-gradient(135deg,var(--primary),#1d7a4e) center/cover no-repeat;
-            display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-family:var(--font-serif);flex-shrink:0;"
-            ${s.photo_url ? `data-photo="${esc(s.photo_url)}"` : ''}>
-            ${esc(s.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}
-          </div>
-          <strong style="font-size:1rem;">${esc(s.name)}</strong>
-          ${s.verified ? '<span style="font-size:0.75rem;background:var(--primary-soft);color:var(--primary);padding:2px 8px;border-radius:99px;font-weight:700;">Verified</span>' : ''}
-          <div style="font-size:0.85rem;color:var(--muted);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${esc(s.city)}, ${esc(s.state)}</div>
-          <a href="school?id=${encodeURIComponent(s.id)}" class="btn btn--primary btn--sm" style="margin-top:8px;text-align:center;">View profile</a>
-        </div>`).join('');
-
-      // Use correct CSS classes: compare-cell and compare-cell--label
-      function row(label, vals) {
-        return `<div class="compare-row" style="grid-template-columns:${gridCols}">
-          <div class="compare-cell compare-cell--label">${label}</div>
-          ${vals.map(v => `<div class="compare-cell">${v || '<span style="color:var(--muted)">—</span>'}</div>`).join('')}
-        </div>`;
-      }
-
-      const tableHTML = `
-        <div class="compare-table" style="--n:${n}">
-          <div class="compare-header" style="grid-template-columns:${gridCols}">
-            <div class="compare-header__spacer"></div>
-            ${cols}
-          </div>
-          ${row('Grades',        schools.map(s => esc(s.grades)))}
-          ${row('Tuition',       schools.map(s => esc(s.tuition_range)))}
-          ${row('Location',      schools.map(s => esc(`${s.city}, ${s.state}`)))}
-          ${row('Address',       schools.map(s => esc(s.address)))}
-          ${row('Phone',         schools.map(s => s.phone ? `<a href="tel:${esc(s.phone)}">${esc(s.phone)}</a>` : null))}
-          ${row('Website',       schools.map(s => /^https?:\/\//i.test(s.website || '') ? `<a href="${esc(s.website)}" target="_blank" rel="noopener">${esc(s.website.replace(/^https?:\/\//,''))}</a>` : null))}
-          ${row('Accreditation', schools.map(s => esc(s.accreditation)))}
-          ${row('Enrollment',    schools.map(s => esc(s.enrollment)))}
-          ${row('Status',        schools.map(s => s.verified ? '✓ Verified' : 'Preview listing'))}
-        </div>`;
-
-      const section = document.querySelector('.compare-section');
-      if (section) {
-        section.innerHTML = `<div class="container">
-          <h2 style="margin-bottom:8px;">Compare ${n} school${n>1?'s':''}</h2>
-          <p style="color:var(--ink-soft);margin-bottom:32px;">Side-by-side comparison · <a href="directory">← Back to directory</a></p>
-          ${tableHTML}
-        </div>`;
-        // Initials stay until the photo actually loads, so a dead URL never leaves a blank block.
-        section.querySelectorAll('.compare-photo[data-photo]').forEach((el) => {
-          const probe = new Image();
-          probe.onload = () => {
-            el.style.backgroundImage = `url('${el.dataset.photo}')`;
-            el.textContent = '';
-          };
-          probe.src = el.dataset.photo;
-        });
-      }
-      document.title = `Compare: ${schools.map(s=>s.name).join(' vs ')} — Islamic School Review`;
-    } catch (err) {
-      const section = document.querySelector('.compare-section');
-      if (section) section.innerHTML = `<div class="container"><p style="color:var(--danger);padding:40px 0;">Failed to load comparison. <a href="directory">← Back to directory</a></p></div>`;
+    function row(label, values) {
+      return `<div class="compare-row">
+        <div class="compare-cell compare-cell--label">${escapeHtml(label)}</div>
+        ${values.map((value) => `<div class="compare-cell">${value ? escapeHtml(value) : '<span class="muted">—</span>'}</div>`).join('')}
+      </div>`;
     }
+
+    const rows = [
+      ['Grades', schools.map((school) => school.grades)],
+      ['Tuition', schools.map((school) => school.tuition_range)],
+      ['Location', schools.map((school) => [school.city, school.state].filter(Boolean).join(', '))],
+      ['Address', schools.map((school) => school.address)],
+      ['Phone', schools.map((school) => school.phone)],
+      ['Website', schools.map((school) => school.website)],
+      ['Accreditation', schools.map((school) => school.accreditation)],
+      ['Enrollment', schools.map((school) => school.enrollment)],
+    ].map(([label, values]) => row(label, values)).join('');
+
+    content.innerHTML = `<div class="compare-actions">
+        <div class="compare-add-school">
+          <label for="compareAddSchool">Add a school</label>
+          <select class="select" id="compareAddSchool" aria-label="Add a school to this comparison" ${schools.length >= 3 || !availableSchools.length ? 'disabled' : ''}>
+            <option value="">Choose a school</option>${schoolOptions}
+          </select>
+          <button type="button" class="btn btn--ghost" data-add-school ${schools.length >= 3 || !availableSchools.length ? 'disabled' : ''}>Add</button>
+        </div>
+        <div class="compare-print">
+          <button type="button" class="btn btn--ghost" data-print-comparison ${schools.length < 2 ? 'disabled' : ''}>Print comparison</button>
+          ${schools.length < 2 ? '<p class="compare-print-hint muted">Select at least 2 schools to print.</p>' : ''}
+        </div>
+      </div>
+      <h2>Compare ${schools.length} school${schools.length === 1 ? '' : 's'}</h2>
+      <p class="muted">Information shown is based on the available school listings.</p>
+      <div class="compare-table-wrap">
+        <div class="compare-table" style="--school-count:${columnCount}">
+          <div class="compare-header">
+            <div></div>${headers}
+          </div>${rows}
+        </div>
+      </div>`;
+
+    content.querySelectorAll('.compare-photo[data-school-id]').forEach((photo) => {
+      const school = schools.find((item) => item.id === photo.dataset.schoolId);
+      if (!school || !/^https?:\/\//i.test(school.photo_url || '')) return;
+      const image = document.createElement('img');
+      image.src = school.photo_url;
+      image.alt = '';
+      image.loading = 'lazy';
+      image.addEventListener('error', () => image.remove(), { once: true });
+      photo.append(image);
+    });
+  }
+
+  content.addEventListener('click', (event) => {
+    const removeButton = event.target.closest('[data-remove-school]');
+    if (removeButton) {
+      selectedSchools = selectedSchools.filter((school) => school.id !== removeButton.dataset.removeSchool);
+      updateComparison();
+      return;
+    }
+
+    const addButton = event.target.closest('[data-add-school]');
+    if (addButton && !addButton.disabled) {
+      const select = content.querySelector('#compareAddSchool');
+      const school = allSchools.find((item) => item.id === select.value);
+      if (school && selectedSchools.length < 3) {
+        selectedSchools = [...selectedSchools, school];
+        updateComparison();
+      }
+      return;
+    }
+
+    const printButton = event.target.closest('[data-print-comparison]');
+    if (printButton && !printButton.disabled) window.print();
+  });
+
+  content.addEventListener('change', (event) => {
+    if (event.target.matches('#compareAddSchool')) {
+      const addButton = content.querySelector('[data-add-school]');
+      if (addButton) addButton.disabled = !event.target.value || selectedSchools.length >= 3;
+    }
+  });
+
+  function updateComparison() {
+    const url = new URL(window.location.href);
+    if (selectedSchools.length) url.searchParams.set('ids', selectedSchools.map((school) => school.id).join(','));
+    else url.searchParams.delete('ids');
+    history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    selectedIds = selectedSchools.map((school) => school.id);
+
+    if (!selectedSchools.length) {
+      showEmptyState('No schools selected');
+      return;
+    }
+    renderComparison(selectedSchools);
+    document.title = `Compare: ${selectedSchools.map((school) => school.name).join(' vs ')} — Islamic School Review`;
+  }
+
+  try {
+    allSchools = await getSchools();
+    selectedSchools = selectedIds
+      .map((id) => allSchools.find((school) => school.id === id))
+      .filter(Boolean);
+    if (!selectedSchools.length) {
+      showEmptyState(selectedIds.length ? 'No matching school listings found' : 'No schools selected');
+    } else {
+      updateComparison();
+    }
+  } catch (error) {
+    console.error('Could not load school comparison:', error);
+    showEmptyState('Could not load the comparison');
   }
 </script>
 </body>

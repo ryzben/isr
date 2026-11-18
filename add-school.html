@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Add Your School — Islamic School Review</title>
-  <meta name="description" content="List your Islamic school on IslamicSchoolReview.com. Submit your details and our team will publish your listing within 24–48 hours." />
+  <meta name="description" content="List your Islamic school on IslamicSchoolReview.com. Share your school's details with families researching Islamic education options." />
   <link rel="canonical" href="https://www.islamicschoolreview.com/add-school" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://www.islamicschoolreview.com/add-school" />
   <meta property="og:title" content="Add Your School — Islamic School Review" />
   <meta property="og:description" content="Get your Islamic school listed on IslamicSchoolReview.com." />
-  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -364,7 +364,7 @@
   <div class="container">
     <span class="eyebrow">For schools</span>
     <h1>Add Your School</h1>
-    <p class="lede">Connect your school with thousands of Muslim families actively searching for Islamic education.</p>
+    <p class="lede">Share your school's details with families researching Islamic education options across the U.S.</p>
   </div>
 </section>
 
@@ -376,7 +376,7 @@
     <div class="notice-banner">
       <span class="notice-banner__icon">📋</span>
       <p class="notice-banner__text">
-        <strong>No account required.</strong> Submit your school in under 2 minutes. Our team will review and publish your listing within <strong>24–48 hours</strong>. All listings start free — no credit card needed.
+        <strong>No account required.</strong> The form takes under 2 minutes to complete. We review submissions manually and publish approved listings when they are ready.
       </p>
     </div>
 
@@ -507,7 +507,7 @@
             </label>
           </div>
           <p class="hint">📸 Photos are uploaded automatically when you submit. Clear photos of the building, classrooms, and activities help families get a feel for your school.</p>
-          <p class="upload-status" id="uploadStatus"></p>
+          <p class="upload-status" id="uploadStatus" role="status" aria-live="polite"></p>
         </div>
 
         <!-- ── Submit ── -->
@@ -515,8 +515,11 @@
           <button type="submit" class="btn btn--primary btn--submit">
             Submit school listing
           </button>
+          <p class="upload-status error" id="submissionError" role="alert" hidden>
+            We could not submit your listing. Please try again or use the <a href="contact">contact form</a>.
+          </p>
           <p class="privacy">
-            We'll review your submission and reply to your email within 24–48 hours.
+            We'll review your submission and follow up by email if needed.
             Your listing is free — no credit card needed.
           </p>
         </div>
@@ -527,7 +530,7 @@
       <div class="success-screen" id="successScreen">
         <div class="success-screen__icon">✓</div>
         <h2>JazakAllah Khair!</h2>
-        <p>Your school has been submitted. We'll review the details and reach out to you within 24–48 hours.</p>
+        <p>Your school has been submitted. We'll review the details and follow up by email if needed.</p>
         <a href="directory" class="btn btn--primary">Browse the directory →</a>
       </div>
 
@@ -609,17 +612,29 @@
       }
     }
 
-    const res = await fetch(this.action, {
-      method : 'POST',
-      body   : data,
-      headers: { 'Accept': 'application/json' },
-    });
+    const submissionError = document.getElementById('submissionError');
+    submissionError.hidden = true;
+    let res;
+    try {
+      res = await fetch(this.action, {
+        method : 'POST',
+        body   : data,
+        headers: { 'Accept': 'application/json' },
+      });
+    } catch (err) {
+      console.error('Could not submit school listing:', err);
+      btn.disabled    = false;
+      btn.textContent = 'Submit school listing';
+      submissionError.hidden = false;
+      return;
+    }
 
     if (res.ok) {
       // Also save to Supabase submissions table for the admin inbox
       const photoUrls = [1, 2, 3].map(i => data.get('photo_url_' + i) || null);
       const programs  = data.getAll('programs').join(', ') || null;
-      await fetch(`${SUPABASE_URL}/rest/v1/school_submissions`, {
+      try {
+        const submissionRes = await fetch(`${SUPABASE_URL}/rest/v1/school_submissions`, {
         method : 'POST',
         headers: {
           'Content-Type' : 'application/json',
@@ -641,7 +656,13 @@
           photo_url_2  : photoUrls[1],
           photo_url_3  : photoUrls[2],
         }),
-      }).catch(() => {}); // non-blocking — Formspree email is the primary notification
+        });
+        if (!submissionRes.ok) {
+          throw new Error(`Supabase submission save failed (${submissionRes.status}).`);
+        }
+      } catch (err) {
+        console.error('Could not save school submission to the admin inbox:', err);
+      }
 
       this.style.display = 'none';
       document.getElementById('successScreen').style.display = 'block';
@@ -649,10 +670,10 @@
     } else {
       btn.disabled    = false;
       btn.textContent = 'Submit school listing';
-      ISR.toast('Something went wrong — please try again or email us at schools@islamicschoolreview.com', 'error');
+      console.error(`School submission failed (${res.status}).`);
+      submissionError.hidden = false;
     }
   });
 </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

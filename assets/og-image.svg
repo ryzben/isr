@@ -21,27 +21,22 @@
 
   <!-- headline -->
   <text x="80" y="280" font-family="Georgia, 'Times New Roman', serif" font-weight="600" font-size="76" fill="#fff">
-    Find the best Islamic
+    Find an Islamic school
   </text>
   <text x="80" y="370" font-family="Georgia, 'Times New Roman', serif" font-weight="600" font-size="76" fill="#fff">
-    school for your child.
+    for your family.
   </text>
 
   <!-- subhead -->
   <text x="80" y="450" font-family="Inter, sans-serif" font-size="28" fill="rgba(255,255,255,0.85)">
-    Honest parent reviews · 2,400+ verified schools · tuition, Quran, admissions.
+    Explore listings, compare details, and read parent reviews.
   </text>
 
-  <!-- trust row -->
+  <!-- Available tools -->
   <g transform="translate(80, 510)">
-    <text x="0" y="40" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#fff">2,400+</text>
-    <text x="0" y="70" font-family="Inter, sans-serif" font-size="18" fill="rgba(255,255,255,0.7)">Verified schools</text>
-
-    <text x="280" y="40" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#fff">18,000</text>
-    <text x="280" y="70" font-family="Inter, sans-serif" font-size="18" fill="rgba(255,255,255,0.7)">Parent reviews</text>
-
-    <text x="560" y="40" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#fff">92%</text>
-    <text x="560" y="70" font-family="Inter, sans-serif" font-size="18" fill="rgba(255,255,255,0.7)">School response rate</text>
+    <text x="0" y="40" font-family="Inter, sans-serif" font-size="24" font-weight="500" fill="rgba(255,255,255,0.85)">School listings</text>
+    <text x="260" y="40" font-family="Inter, sans-serif" font-size="24" font-weight="500" fill="rgba(255,255,255,0.85)">Comparisons</text>
+    <text x="500" y="40" font-family="Inter, sans-serif" font-size="24" font-weight="500" fill="rgba(255,255,255,0.85)">Parent reviews</text>
   </g>
 
   <!-- accent strip -->

@@ -93,11 +93,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".newsletter-inline, .newsletter__form, .side-newsletter form").forEach((form) => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const previousError = form.nextElementSibling;
+      if (previousError && previousError.classList.contains("newsletter-error")) previousError.remove();
       const button = form.querySelector("button");
       const originalLabel = button ? button.textContent : "";
       if (button) {
         button.disabled = true;
-        button.textContent = "Subscribing…";
+        button.textContent = "Submitting…";
       }
       try {
         const res = await fetch(form.action, {
@@ -105,16 +107,19 @@ document.addEventListener("DOMContentLoaded", () => {
           body: new FormData(form),
           headers: { Accept: "application/json" },
         });
-        if (!res.ok) throw new Error("Submission failed");
-        form.outerHTML = '<p class="newsletter-soon">Subscribed. Thanks for joining!</p>';
-      } catch {
+        if (!res.ok) throw new Error(`Form submission failed (${res.status}).`);
+        form.outerHTML = '<p class="newsletter-soon" role="status" aria-live="polite">Thanks — your email was submitted. No regular update schedule is set yet.</p>';
+      } catch (error) {
+        console.error("Could not submit email signup:", error);
         if (button) {
           button.disabled = false;
           button.textContent = originalLabel;
         }
-        const msg = "Something went wrong. Please try again.";
-        if (window.ISR && ISR.toast) ISR.toast(msg, "error");
-        else if (button) button.textContent = "Try again";
+        const errorMessage = document.createElement("p");
+        errorMessage.className = "newsletter-error";
+        errorMessage.setAttribute("role", "alert");
+        errorMessage.textContent = "We could not submit your email. Please try again.";
+        form.insertAdjacentElement("afterend", errorMessage);
       }
     });
   });

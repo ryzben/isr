@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Claim Your School Listing — Islamic School Review</title>
-  <meta name="description" content="Claim your Islamic school's listing on IslamicSchoolReview.com. Update your information, respond to reviews, and connect with families." />
+  <meta name="description" content="Submit a request to claim an Islamic school listing on Islamic School Review." />
   <link rel="canonical" href="https://www.islamicschoolreview.com/claim" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0F5132" />
@@ -139,17 +139,15 @@
   <div class="container">
     <p class="eyebrow">For school administrators</p>
     <h1>Claim your school's listing</h1>
-    <p>Your school is already listed. Take control — update your information, respond to reviews, and connect with families actively searching for Islamic education.</p>
+    <p>Submit a request for your school listing. A request is reviewed and does not immediately grant editing access.</p>
   </div>
 </section>
 
 <div class="benefits-strip">
   <div class="container">
     <div class="benefits-row">
-      <div class="benefit-item"><span>✓</span> Free forever for basic listing</div>
-      <div class="benefit-item"><span>✓</span> Verified badge on your profile</div>
-      <div class="benefit-item"><span>✓</span> Respond to parent reviews</div>
-      <div class="benefit-item"><span>✓</span> Post jobs & find educators</div>
+      <div class="benefit-item"><span>1</span> Submit a claim request</div>
+      <div class="benefit-item"><span>2</span> The request is reviewed</div>
     </div>
   </div>
 </div>
@@ -162,7 +160,7 @@
       <div>
         <div class="form-card">
           <h2>Claim your listing</h2>
-          <p>Fill in your details and we'll verify your connection to the school within 24 hours.</p>
+          <p>Provide your contact details and explain your connection to the school. Submission does not automatically verify the listing.</p>
 
           <form id="claimForm" action="https://formspree.io/f/mjglvggk" method="POST">
             <input type="hidden" name="_subject" value="School claim request — IslamicSchoolReview.com" />
@@ -213,14 +211,15 @@
 
             <div class="submit-area">
               <button type="submit" class="btn btn--primary btn--submit">Submit claim request →</button>
-              <p class="note">We verify all claims within 24 hours. You'll receive a confirmation email.</p>
+              <p class="note">Your request will be sent for review. We do not promise a response time.</p>
+              <p class="note" id="claimSubmitError" role="alert" hidden></p>
             </div>
           </form>
 
           <div class="success-screen" id="successScreen">
             <div class="success-screen__icon">✓</div>
             <h2>Request received!</h2>
-            <p>JazakAllah Khair. We'll verify your connection to the school and reach out within 24 hours to complete your verified listing.</p>
+            <p>Thank you. Your claim request was submitted for review. Submission does not automatically verify the listing or provide editing access.</p>
             <a href="directory" class="btn btn--primary">Browse the directory →</a>
           </div>
         </div>
@@ -229,47 +228,9 @@
       <!-- Sidebar -->
       <aside class="claim-sidebar">
         <div class="side-block">
-          <h3>What you get as a verified school</h3>
-          <ul class="feature-list">
-            <li>
-              <span class="icon">✓</span>
-              <div><strong>Verified badge</strong><span>Families trust verified listings more — yours stands out in search results.</span></div>
-            </li>
-            <li>
-              <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
-              <div><strong>Full photo gallery</strong><span>Upload building photos, classrooms, events, and activities.</span></div>
-            </li>
-            <li>
-              <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-              <div><strong>Respond to reviews</strong><span>Address parent feedback publicly and professionally.</span></div>
-            </li>
-            <li>
-              <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span>
-              <div><strong>Post job openings</strong><span>Reach qualified Islamic educators actively looking for positions.</span></div>
-            </li>
-            <li>
-              <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
-              <div><strong>Listing analytics</strong><span>See how many families viewed your school this month. <em>Coming soon.</em></span></div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="side-block">
-          <h3>Platform at a glance</h3>
-          <div class="stat-row">
-            <div class="stat-box"><div class="num">35</div><div class="lbl">Schools listed</div></div>
-            <div class="stat-box"><div class="num">5</div><div class="lbl">States covered</div></div>
-            <div class="stat-box"><div class="num">Free</div><div class="lbl">Basic listing</div></div>
-            <div class="stat-box"><div class="num">24h</div><div class="lbl">Claim response</div></div>
-          </div>
-        </div>
-
-        <div class="side-block" style="background: var(--primary-soft); border-color: #A8D5BC;">
-          <p style="font-size:0.92rem; color: var(--primary-ink); margin:0;">
-            <strong>Questions?</strong> Email us at
-            <a href="mailto:schools@islamicschoolreview.com" style="color:var(--primary);font-weight:600;">schools@islamicschoolreview.com</a>
-            — we respond within 24 hours.
-          </p>
+          <h3>What happens next</h3>
+          <p>Claim requests are currently reviewed manually. Review responses, job postings, and listing-management tools are coming soon.</p>
+          <p>For another question, use the <a href="contact">contact form</a>.</p>
         </div>
       </aside>
 
@@ -287,24 +248,33 @@
   const params = new URLSearchParams(location.search);
   const schoolId   = params.get('school_id')   || '';
   const schoolName = params.get('school_name') || '';
-  if (schoolName) document.getElementById('school_name').value = decodeURIComponent(schoolName);
+  if (schoolName) document.getElementById('school_name').value = schoolName;
   if (schoolId)   document.getElementById('hidden_school_id').value = schoolId;
 
   // Formspree AJAX submit
   document.getElementById('claimForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('button[type="submit"]');
-    btn.disabled = true; btn.textContent = 'Submitting…';
-    const data = new FormData(this);
-    const res = await fetch(this.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-    if (res.ok) {
+    const errorEl = document.getElementById('claimSubmitError');
+    errorEl.hidden = true;
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    try {
+      const res = await fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!res.ok) throw new Error(`Claim submission failed (${res.status}).`);
       this.style.display = 'none';
       document.getElementById('successScreen').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
+    } catch (error) {
+      console.error('Could not submit claim request:', error);
       btn.disabled = false;
       btn.textContent = 'Submit claim request →';
-      ISR.toast('Something went wrong — please email schools@islamicschoolreview.com directly.', 'error');
+      errorEl.textContent = 'We could not submit your request. Please try again later.';
+      errorEl.hidden = false;
     }
   });
 </script>

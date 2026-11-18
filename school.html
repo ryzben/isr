@@ -16,11 +16,11 @@
   <meta property="og:url" content="https://www.islamicschoolreview.com/school" />
   <meta property="og:title" content="School profile — Islamic School Review" />
   <meta property="og:description" content="Grades, tuition, location, and program highlights for Islamic schools listed on IslamicSchoolReview.com." />
-  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="School profile — Islamic School Review" />
   <meta name="twitter:description" content="Grades, tuition, and program highlights for Islamic schools listed on IslamicSchoolReview.com." />
-  <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <!-- JSON-LD School schema, populated by JS. Empty by default. -->
   <script id="schoolJsonLd" type="application/ld+json">{}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -307,7 +307,7 @@
         <div>
           <div class="hero-title">
             <h1 id="schoolName">School name</h1>
-            <span class="badge" id="schoolStatusBadge">Preview listing</span>
+            <span class="badge" id="schoolStatusBadge">Unclaimed</span>
           </div>
           <div class="hero-location" id="schoolLocation"></div>
 
@@ -321,16 +321,16 @@
             <span style="font-size: 1.5rem;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></span>
             <div style="flex:1;">
               <strong>Is this your school?</strong>
-              <p>Tuition, contact info, and other details on this page come from publicly available sources. <span id="schoolClaimNudge">School administrators</span> can claim this listing to update information, respond to reviews, and post jobs, free in under 5 minutes.</p>
+              <p>Some listing details may need updates. <span id="schoolClaimNudge">School administrators</span> can submit a claim request for review. Review responses and job postings are coming soon.</p>
             </div>
-            <a id="schoolClaimLink" href="add-school?mode=claim" class="btn btn--accent btn--sm">Claim this listing →</a>
+            <a id="schoolClaimLink" href="claim" class="btn btn--accent btn--sm">Claim this listing →</a>
           </div>
 
           <div class="claim-banner" id="schoolVerifiedBanner" hidden style="background: var(--primary-soft); border-color: var(--primary);">
             <span style="font-size: 1.5rem;">✓</span>
             <div style="flex:1;">
-              <strong>Verified by IslamicSchoolReview.com</strong>
-              <p>Address, phone number, grades, and tuition were verified against the school's own materials.</p>
+              <strong>Verified listing</strong>
+              <p>Confirm current details directly with the school.</p>
             </div>
           </div>
         </div>
@@ -367,7 +367,7 @@
                 oninput="filterCompareList(this.value)" />
               <div id="comparePickerList" style="max-height:200px;overflow-y:auto;"></div>
             </div>
-            <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditMailto" href="mailto:hello@islamicschoolreview.com">Email us</a> — we respond within 24 hours.</p>
+            <p class="small muted" style="margin: 14px 0 0;">Found something out of date? <a id="schoolSidebarEditLink" href="contact">Use the contact form</a> to suggest an update.</p>
           </div>
         </aside>
       </div>
@@ -389,7 +389,7 @@
         <section id="contact">
           <h2>Contact</h2>
           <div class="facts-grid" id="schoolContact"></div>
-          <p class="small muted mt-16">Phone numbers and websites are pulled from publicly available materials. If anything is out of date, please <a id="schoolOutOfDateMailto" href="mailto:hello@islamicschoolreview.com">let us know</a>.</p>
+          <p class="small muted mt-16">Confirm contact details directly with the school. To suggest a listing correction, use the <a id="schoolOutOfDateLink" href="contact">contact form</a>.</p>
         </section>
 
         <section id="reviews">
@@ -426,7 +426,7 @@
               <a href="directory">← Back to all schools</a>
             </li>
             <li style="padding:10px 0;">
-              <a id="schoolEditMailto" href="mailto:hello@islamicschoolreview.com">Suggest an edit</a>
+              <a id="schoolEditLink" href="contact">Suggest an edit</a>
             </li>
           </ul>
         </div>
@@ -448,6 +448,10 @@
     getSchoolById,
     getSchools,
     filterSchools,
+    schoolInitials,
+    schoolPagePath,
+    schoolSlug,
+    schoolStatus,
   } from "./assets/schools-data.js?v=20261002";
 
   const SUPABASE_URL      = 'https://vprltwjduekabkizlbkv.supabase.co';
@@ -455,18 +459,12 @@
   const STATE_NAMES = {
     FL: "Florida", TX: "Texas", CA: "California", NY: "New York", NJ: "New Jersey", IA: "Iowa",
   };
-  const SITE = "https://islamicschoolreview.com";
+  const SITE = "https://www.islamicschoolreview.com";
 
   function escapeHtml(s) {
     return String(s ?? "").replace(/[&<>"']/g, (c) => ({
       "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;",
     })[c]);
-  }
-  function initials(name) {
-    const w = String(name || "").split(/\s+/).filter(Boolean);
-    if (!w.length) return "?";
-    if (w.length === 1) return w[0].slice(0, 2).toUpperCase();
-    return (w[0][0] + w[1][0]).toUpperCase();
   }
   function $(id) { return document.getElementById(id); }
 
@@ -512,7 +510,7 @@
   }
 
   function setJsonLd(school) {
-    const url = `${SITE}/school?id=${encodeURIComponent(school.id)}`;
+    const url = `${SITE}/${schoolPagePath(school.id)}`;
     const data = {
       "@context": "https://schema.org",
       "@type": "School",
@@ -536,7 +534,7 @@
   }
 
   function renderSchool(s) {
-    const url = `${SITE}/school?id=${encodeURIComponent(s.id)}`;
+    const url = `${SITE}/${schoolPagePath(s.id)}`;
     const where = [s.city, s.state].filter(Boolean).join(", ");
 
     // ---- HEAD ----
@@ -554,8 +552,8 @@
 
     // ---- BREADCRUMBS ----
     const stateName = STATE_NAMES[s.state] || s.state || "";
-    const stateHref = s.state ? `directory?state=${encodeURIComponent(s.state)}` : "directory";
-    const cityHref  = s.city  ? `directory?city=${encodeURIComponent(s.city)}`   : "directory";
+    const stateHref = s.state ? `states/${encodeURIComponent(String(s.state).toUpperCase())}` : "directory";
+    const cityHref  = s.city && s.state ? `cities/${encodeURIComponent(String(s.state).toUpperCase())}/${schoolSlug(s.city)}` : stateHref;
     $("schoolBreadcrumbs").innerHTML = `
       <a href="index">Home</a> ·
       <a href="directory">Directory</a>
@@ -568,10 +566,10 @@
     $("schoolName").textContent = s.name;
     const badge = $("schoolStatusBadge");
     if (s.verified) {
-      badge.textContent = "Verified";
+      badge.textContent = schoolStatus(s);
       badge.className = "badge badge--accent";
     } else {
-      badge.textContent = "Preview listing";
+      badge.textContent = schoolStatus(s);
       badge.className = "badge";
     }
 
@@ -585,7 +583,7 @@
 
     const photo = $("schoolPhoto");
     // Initials stay until the photo actually loads, so a dead URL never leaves a blank block.
-    $("schoolPhotoFallback").textContent = initials(s.name);
+    $("schoolPhotoFallback").textContent = schoolInitials(s.name);
     if (s.photo_url) {
       const probe = new Image();
       probe.onload = () => {
@@ -600,7 +598,7 @@
     if (s.grades) qf.push(quickFact("Grades", s.grades));
     if (s.tuition_range) qf.push(quickFact("Tuition", s.tuition_range));
     qf.push(quickFact("Location", where || "—"));
-    qf.push(quickFact("Status", s.verified ? "Verified" : "Preview"));
+    qf.push(quickFact("Status", schoolStatus(s)));
     $("schoolQuickFacts").innerHTML = qf.join("");
 
     // ---- BANNERS ----
@@ -611,23 +609,19 @@
       $("schoolClaimNudge").textContent = s.name;
     }
 
-    // ---- BETA FEEDBACK MAILTO LINKS ----
-    // Pre-fill subject + body so admin emails are easy to triage by school.
     const enc = encodeURIComponent;
-    const subjClaim   = `Claim listing: ${s.name}`;
-    const subjEdit    = `Listing edit: ${s.name}`;
-    const subjOutdate = `Out of date: ${s.name}`;
-    const body =
-      `School: ${s.name}\n` +
-      `Listing URL: ${url}\n\n` +
-      `What needs to change (please be specific — address, phone, grades, tuition, photo, anything):\n\n` +
-      `Your name and role at the school:\n\n`;
     const claim = $("schoolClaimLink");
     if (claim) claim.href = `claim?school_id=${enc(s.id)}&school_name=${enc(s.name)}`;
-    const edit = $("schoolEditMailto");
-    if (edit) edit.href = `mailto:hello@islamicschoolreview.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
-    const ood = $("schoolOutOfDateMailto");
-    if (ood) ood.href = `mailto:hello@islamicschoolreview.com?subject=${enc(subjOutdate)}&body=${enc(body)}`;
+    const contactParams = new URLSearchParams({
+      school_name: s.name,
+      school_url: url,
+      topic: "A specific school",
+    });
+    const contactUrl = `contact?${contactParams.toString()}`;
+    ["schoolSidebarEditLink", "schoolOutOfDateLink", "schoolEditLink"].forEach((id) => {
+      const link = $(id);
+      if (link) link.href = contactUrl;
+    });
 
     // ---- SIDE CARD TUITION ----
     if (s.tuition_range) {
@@ -652,9 +646,6 @@
       sidePhone.textContent = `Call ${s.phone}`;
       sidePhone.hidden = false;
     }
-    const sideEdit = $("schoolSidebarEditMailto");
-    if (sideEdit) sideEdit.href = `mailto:hello@islamicschoolreview.com?subject=${enc(subjEdit)}&body=${enc(body)}`;
-
     // ---- WRITE A REVIEW LINK ----
     const reviewLink = $("schoolReviewLink");
     if (reviewLink) reviewLink.href = `write-review?school_id=${encodeURIComponent(s.id)}&school_name=${encodeURIComponent(s.name)}`;
@@ -668,7 +659,7 @@
     if (s.grades)        facts.push(fact("Grades served", s.grades));
     if (where)           facts.push(fact("Location", where));
     if (s.tuition_range) facts.push(fact("Tuition", s.tuition_range));
-    facts.push(fact("Listing status", s.verified ? "Verified" : "Preview / awaiting claim"));
+    facts.push(fact("Listing status", schoolStatus(s)));
     $("schoolFacts").innerHTML = facts.join("");
 
     // ---- CONTACT ----
@@ -691,12 +682,12 @@
       ? `style="background-image:url('${escapeHtml(s.photo_url)}'); background-size:cover; background-position:center;"`
       : `style="background: linear-gradient(135deg, var(--primary) 0%, #1d7a4e 100%);"`;
     return `
-      <a href="school?id=${encodeURIComponent(s.id)}" class="card school-card">
-        <div class="card__media" ${photo}>${s.photo_url ? "" : `<span>${escapeHtml(initials(s.name))}</span>`}</div>
+      <a href="${schoolPagePath(s.id)}" class="card school-card">
+        <div class="card__media" ${photo}>${s.photo_url ? "" : `<span>${escapeHtml(schoolInitials(s.name))}</span>`}</div>
         <div class="card__body">
           <h3 class="card__title">${escapeHtml(s.name)}</h3>
           <div class="card__meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${escapeHtml(where)}${s.grades ? ` · ${escapeHtml(s.grades)}` : ""}</div>
-          <span class="rating"><span class="rating__count">${s.verified ? "Verified" : "Preview"}</span></span>
+          <span class="rating"><span class="rating__count">${schoolStatus(s)}</span></span>
         </div>
       </a>
     `;

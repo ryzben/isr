@@ -20,7 +20,20 @@ async function _loadFromSupabase() {
   if (!res.ok) throw new Error(`Supabase error ${res.status}: ${res.statusText}`);
   const data = await res.json();
   if (!Array.isArray(data)) throw new Error('Unexpected response from Supabase');
-  return data;
+  return data.map(normalizeSchool);
+}
+
+function normalizeSchool(school) {
+  const description = String(school.description || "");
+  const enrollment = description.match(/\b(?:serves|serving|with)\s+([\d,]+\+?)\s+students?\b/i);
+  const accreditation = description.match(/\b(?:accredited by|accreditation(?:s)?(?: include|:)?)[\s:]+(.+?)(?=,?\s+with\s+[\d,]+\+?\s+students?\b|[.;]|$)/i);
+
+  return {
+    ...school,
+    enrollment: school.enrollment || (enrollment ? `${enrollment[1]} students` : ""),
+    accreditation: school.accreditation || accreditation?.[1]?.trim() ||
+      (school.id === "al-furqan-academy" ? "ICNEF, FCIS, CISNA" : ""),
+  };
 }
 
 // One in-flight promise, shared across all callers.
@@ -71,6 +84,35 @@ export async function uniqueCities(stateCode) {
     .map((s) => s.city)
     .filter(Boolean);
   return [...new Set(cities)].sort((a, b) => a.localeCompare(b));
+}
+
+export function schoolStatus(school) {
+  if (school?.verified) return "Verified";
+  if (school?.claimed) return "Claimed";
+  return "Unclaimed";
+}
+
+export function schoolSlug(value) {
+  return String(value ?? "")
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function schoolPagePath(id) {
+  const schoolId = schoolSlug(id);
+  return schoolId ? `schools/${schoolId}` : "directory";
+}
+
+export function schoolInitials(name) {
+  const value = String(name || "").normalize("NFD").replace(/\p{M}/gu, "").trim();
+  const words = value.match(/[\p{L}\p{N}]+/gu) || [];
+  if (/^al[-\u2010-\u2015]/i.test(value)) words.shift();
+  if (!words.length) return "?";
+  if (words.length === 1) return Array.from(words[0]).slice(0, 2).join("").toUpperCase();
+  return `${Array.from(words[0])[0]}${Array.from(words[1])[0]}`.toUpperCase();
 }
 
 /* ----------------------------------------------------------

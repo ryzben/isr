@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -13,17 +13,17 @@
   <meta property="og:url" content="https://www.islamicschoolreview.com/contact" />
   <meta property="og:title" content="Contact us — Islamic School Review" />
   <meta property="og:description" content="Get in touch with the Islamic School Review team — editorial, partnerships, press, and support." />
-  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Contact us — Islamic School Review" />
   <meta name="twitter:description" content="Get in touch with the Islamic School Review team." />
-  <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "name": "Contact Islamic School Review",
-    "url": "https://islamicschoolreview.com/contact"
+    "url": "https://www.islamicschoolreview.com/contact"
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -265,7 +265,7 @@
 
     <form class="form-card" id="contactForm" action="https://formspree.io/f/mjglvggk" method="POST">
       <h2>Or, send us a message</h2>
-      <p class="muted">Use this form for all messages. We aim to reply within 1–2 business days.</p>
+      <p class="muted">Use this form for general questions and messages.</p>
 
       <input type="hidden" name="form-name" value="contact" />
       <input type="hidden" name="_subject" value="Contact form message" />
@@ -306,6 +306,7 @@
           <label class="radio-pill"><input type="radio" name="topic" value="A specific school" /><span>A specific school</span></label>
           <label class="radio-pill"><input type="radio" name="topic" value="A review I posted" /><span>A review I posted</span></label>
           <label class="radio-pill"><input type="radio" name="topic" value="Claiming a listing" /><span>Claiming a listing</span></label>
+          <label class="radio-pill"><input type="radio" name="topic" value="Membership interest" /><span>Membership interest</span></label>
           <label class="radio-pill"><input type="radio" name="topic" value="Editorial pitch" /><span>Editorial pitch</span></label>
           <label class="radio-pill"><input type="radio" name="topic" value="Bug report" /><span>Bug report</span></label>
         </div>
@@ -317,7 +318,7 @@
       </div>
 
       <button type="submit" class="btn btn--primary btn--lg">Send message</button>
-      <p class="small muted mt-16" style="margin-bottom:0;">We aim to reply within 1–2 business days.</p>
+      <p class="small muted mt-16" style="margin-bottom:0;">Response times are not currently published.</p>
     </form>
 
     <aside class="info-aside">
@@ -384,6 +385,42 @@
 
 <script src="assets/main.js?v=20261002"></script>
 <script>
+const contactParams = new URLSearchParams(window.location.search);
+const schoolName = contactParams.get('school_name')?.trim();
+const schoolUrl = contactParams.get('school_url');
+const requestedTopic = contactParams.get('topic');
+if (schoolName) {
+  const subject = document.getElementById('subject');
+  const message = document.getElementById('message');
+  const schoolLink = (() => {
+    try {
+      const url = new URL(schoolUrl);
+      return url.origin === 'https://www.islamicschoolreview.com' ? url.href : '';
+    } catch {
+      return '';
+    }
+  })();
+  if (subject) subject.value = `School listing update: ${schoolName}`;
+  if (message) {
+    message.value = `School: ${schoolName}${schoolLink ? `\nListing: ${schoolLink}` : ''}\n\nWhat would you like corrected or updated?`;
+  }
+  const schoolTopic = document.querySelector('input[name="topic"][value="A specific school"]');
+  if (schoolTopic) schoolTopic.checked = true;
+}
+if (requestedTopic) {
+  const topicOption = Array.from(document.querySelectorAll('input[name="topic"]'))
+    .find((option) => option.value === requestedTopic);
+  if (topicOption) {
+    topicOption.checked = true;
+    if (!schoolName) {
+      const subject = document.getElementById('subject');
+      const emailSubject = document.querySelector('input[name="_subject"]');
+      if (subject) subject.value = requestedTopic;
+      if (emailSubject) emailSubject.value = `Contact form: ${requestedTopic}`;
+    }
+  }
+}
+
 // Contact form — AJAX POST to Formspree, then hand off to the confirmation page.
 document.getElementById('contactForm')?.addEventListener('submit', async function (e) {
   e.preventDefault();

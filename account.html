@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -13,11 +13,11 @@
   <meta property="og:site_name" content="Islamic School Review" />
   <meta property="og:title" content="My account — Islamic School Review" />
   <meta property="og:description" content="Manage your saved schools, reviews, inquiries, and settings." />
-  <meta property="og:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta property="og:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="My account — Islamic School Review" />
   <meta name="twitter:description" content="Manage your saved schools, reviews, inquiries, and settings." />
-  <meta name="twitter:image" content="https://islamicschoolreview.com/assets/og-image.svg" />
+  <meta name="twitter:image" content="https://www.islamicschoolreview.com/assets/og-image.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -715,50 +715,14 @@
           </div>
 
           <div class="settings-card" id="notifications">
-            <h3>Notifications</h3>
-            <p class="helper">Choose what you want to hear about, and how often.</p>
-
-            <div class="settings-row">
-              <label>Replies to my inquiries</label>
-              <span class="val">Email you when a school responds.</span>
-              <label class="toggle"><input type="checkbox" data-pref="notify_inquiry_replies" checked /><span class="toggle__slider"></span></label>
-            </div>
-            <div class="settings-row">
-              <label>Review helpful votes</label>
-              <span class="val">Weekly summary of your review activity.</span>
-              <label class="toggle"><input type="checkbox" data-pref="notify_review_votes" checked /><span class="toggle__slider"></span></label>
-            </div>
-            <div class="settings-row">
-              <label>Saved-school updates</label>
-              <span class="val">Open houses, tuition changes, new reviews on your saved schools.</span>
-              <label class="toggle"><input type="checkbox" data-pref="notify_saved_updates" checked /><span class="toggle__slider"></span></label>
-            </div>
-            <div class="settings-row">
-              <label>Weekly digest</label>
-              <span class="val">Our weekly roundup of guides, news, and community voices.</span>
-              <label class="toggle"><input type="checkbox" data-pref="notify_weekly_digest" /><span class="toggle__slider"></span></label>
-            </div>
-            <div class="settings-row">
-              <label>Product announcements</label>
-              <span class="val">New features on Islamic School Review. Rare.</span>
-              <label class="toggle"><input type="checkbox" data-pref="notify_product_news" checked /><span class="toggle__slider"></span></label>
-            </div>
+            <h3>Email notifications</h3>
+            <p class="helper">Email notifications and regular newsletters are not available yet.</p>
           </div>
 
           <div class="settings-card" id="privacy">
             <h3>Privacy</h3>
-            <p class="helper">Control how you appear to schools and other members.</p>
+            <p class="helper">Review display-name controls and school messaging are not available yet.</p>
 
-            <div class="settings-row">
-              <label>Show my display name on reviews</label>
-              <span class="val">When off, reviews show as "A parent in Jacksonville."</span>
-              <label class="toggle"><input type="checkbox" data-pref="privacy_show_name" checked /><span class="toggle__slider"></span></label>
-            </div>
-            <div class="settings-row">
-              <label>Allow schools to message me</label>
-              <span class="val">Only schools you've inquired with can message you back.</span>
-              <label class="toggle"><input type="checkbox" data-pref="privacy_allow_messages" checked /><span class="toggle__slider"></span></label>
-            </div>
             <div class="settings-row">
               <label>Download my data</label>
               <span class="val">Export a .json file of your profile, reviews, and saved schools.</span>
@@ -880,7 +844,7 @@
   // Close account: we cannot delete auth users from the browser (needs a
   // service-role key), so this files a deletion request and signs the user out.
   document.getElementById('closeAccountBtn')?.addEventListener('click', async () => {
-    if (!confirm('This will permanently delete your account, reviews, and saved schools. File a deletion request?')) return;
+    if (!confirm('This submits a request to delete your account and associated data. It does not delete your account immediately. Continue?')) return;
     const msg = document.getElementById('closeAccountMsg');
     msg.textContent = 'Submitting deletion request…';
     try {
@@ -894,10 +858,11 @@
         method: 'POST', body: fd, headers: { Accept: 'application/json' },
       });
       if (!res.ok) throw new Error('Request failed');
-      msg.textContent = 'Request received. We process deletions within 7 days and will confirm by email. Signing you out…';
+      msg.textContent = 'Deletion request submitted. Signing you out…';
       setTimeout(() => { localStorage.removeItem('isr_session'); window.location.href = 'index'; }, 3500);
     } catch (err) {
-      msg.textContent = 'Could not submit the request. Please email hello@islamicschoolreview.com instead.';
+      console.error('Could not submit account deletion request:', err);
+      msg.textContent = 'Could not submit the request. Please use the contact form to ask for help.';
       msg.style.color = 'var(--danger)';
     }
   });
@@ -958,7 +923,7 @@
                 ${school.name.split(' ').map(w => w[0]).join('').toUpperCase()}
               </div>
               <div class="saved-card__body">
-                <h3><a href="school?id=${school.id}">${school.name}</a></h3>
+                <h3><a href="schools/${encodeURIComponent(school.id)}">${school.name}</a></h3>
                 <p class="saved-card__loc">${school.city}, ${school.state}</p>
                 <div class="saved-card__meta">
                   <span class="stars">${school.verified ? '★'.repeat(4) + '☆' : '★'.repeat(3) + '☆'.repeat(2)}</span>
@@ -966,7 +931,7 @@
                 </div>
               </div>
               <div class="saved-card__footer">
-                <a href="school?id=${school.id}" class="primary">View school</a>
+                <a href="schools/${encodeURIComponent(school.id)}" class="primary">View school</a>
                 <a href="compare" class="ghost">Compare</a>
               </div>
             </div>
@@ -1017,9 +982,9 @@
             <div class="review-item">
               <div class="review-item__top">
                 <div>
-                  <h3><a href="school?id=${review.school_id}">${school ? school.name : 'Unknown School'}</a></h3>
+                  <h3><a href="schools/${encodeURIComponent(review.school_id)}">${school ? school.name : 'Unknown School'}</a></h3>
                   <p class="review-item__school">
-                    <a href="school?id=${review.school_id}">${school ? `${school.city}, ${school.state}` : ''}</a>
+                    <a href="schools/${encodeURIComponent(review.school_id)}">${school ? `${school.city}, ${school.state}` : ''}</a>
                   </p>
                   <div class="review-item__stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
                 </div>
