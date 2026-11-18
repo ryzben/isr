@@ -7,7 +7,7 @@ A directory and review platform for Islamic schools across the United States. He
 
 ---
 
-## Current state (as of June 2026)
+## Current state (as of November 2026)
 
 - **35 schools** across FL, TX, CA, NY, NJ, IA
 - Reviews are live and real end-to-end — school pages, the directory, and the homepage all pull actual Supabase review data (no more "coming soon" placeholders anywhere reviews should show)
@@ -16,6 +16,10 @@ A directory and review platform for Islamic schools across the United States. He
 - Admin dashboard fully functional (publish, edit, delete, approve submissions)
 - Auth working (signup, signin, forgot password, account page) — see **Pending** below for the one real gap (email delivery)
 - Homepage search uses dynamic state/city dropdowns from Supabase
+- Homepage hero uses the classroom-reading photo, with the search form and popular searches beneath the intro row
+- Shared header uses **Schools** for the directory link, **Find a School** as the primary action, and **List Your School** as a secondary link
+- About page team section includes approved bios for Dr. Abdellah Benaoussar (Founder), Dr. Houda Rabah (VP Customer Satisfaction), and Rayane Yahya (IT Director)
+- Footer has a dedicated **For Schools** section with listing and claim links
 - Account page (`/account`) now has working password change, TOTP two-factor setup, a JSON data export, and inline review editing
 - Newsletter sign-up (footer + homepage + blog sidebar) is wired to Formspree and actually captures emails
 - Homepage prayer times widget pulls live data from the Aladhan API
@@ -24,7 +28,6 @@ A directory and review platform for Islamic schools across the United States. He
 ### Pending before full launch
 - [ ] Set up Resend SMTP (see Auth section below) — Supabase's default mailer is capped at ~2 emails/hour, so signup confirmation and password-reset emails are unreliable. Confirmed via DNS on 2026-06-21 that Resend has not been set up yet (no `resend._domainkey` TXT record, SPF only includes Hostinger).
 - [ ] Customize email templates in Supabase → Auth → Email Templates
-- [ ] Replace "Ibrahim Karim" placeholder on About page with real team member
 - [ ] Test the new TOTP two-factor enrollment flow on `/account` end-to-end with a real account + authenticator app (built this session but not yet verified live — see June 2026 work below)
 
 ---
