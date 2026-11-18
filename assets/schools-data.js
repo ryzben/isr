@@ -43,8 +43,27 @@ let _cache = null;
  * Returns the full list of schools (cached after first call).
  * @returns {Promise<Array<Object>>}
  */
+async function _loadFromStaticCopy() {
+  // Fallback: the static copy published with the site (data/schools.json).
+  // Used only when Supabase cannot be reached, so visitors never see empty sections.
+  const res = await fetch('/data/schools.json', { cache: 'no-cache' });
+  if (!res.ok) throw new Error(`Static school data error ${res.status}`);
+  const data = await res.json();
+  if (!Array.isArray(data)) throw new Error('Unexpected static school data');
+  return data.map(normalizeSchool);
+}
+
+async function _loadSchools() {
+  try {
+    return await _loadFromSupabase();
+  } catch (err) {
+    console.warn('Supabase unavailable, using static school list:', err);
+    return _loadFromStaticCopy();
+  }
+}
+
 export async function getSchools() {
-  if (!_cache) _cache = _loadFromSupabase();
+  if (!_cache) _cache = _loadSchools();
   try {
     return await _cache;
   } catch (err) {

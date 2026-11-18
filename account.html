@@ -689,8 +689,8 @@
               <a href="#" id="changePasswordToggle" style="color: var(--primary); font-size: 0.88rem; text-decoration: none;">Change password</a>
             </div>
             <form id="changePasswordForm" hidden style="margin: -6px 0 16px; display: grid; gap: 8px; max-width: 360px;">
-              <input type="password" id="newPassword" class="input" placeholder="New password (min 6 characters)" minlength="6" required autocomplete="new-password" />
-              <input type="password" id="confirmPassword" class="input" placeholder="Confirm new password" minlength="6" required autocomplete="new-password" />
+              <input type="password" id="newPassword" class="input" aria-label="New password" placeholder="New password (min 6 characters)" minlength="6" required autocomplete="new-password" />
+              <input type="password" id="confirmPassword" class="input" aria-label="Confirm new password" placeholder="Confirm new password" minlength="6" required autocomplete="new-password" />
               <div style="display:flex; gap:8px;">
                 <button type="submit" class="btn btn--primary btn--sm">Save new password</button>
                 <button type="button" class="btn btn--ghost btn--sm" id="cancelPasswordChange">Cancel</button>
@@ -706,7 +706,7 @@
               <p class="small muted" style="margin: 0 0 10px;">Scan this QR code with an authenticator app (Google Authenticator, Authy, etc.), then enter the 6-digit code it gives you.</p>
               <div id="mfaQrCode" style="margin-bottom: 10px;"></div>
               <div style="display:flex; gap:8px;">
-                <input type="text" id="mfaCode" class="input" placeholder="6-digit code" maxlength="6" inputmode="numeric" style="max-width:140px;" />
+                <input type="text" id="mfaCode" class="input" aria-label="Six-digit authenticator code" placeholder="6-digit code" maxlength="6" inputmode="numeric" style="max-width:140px;" />
                 <button type="button" class="btn btn--primary btn--sm" id="mfaVerifyBtn">Verify &amp; enable</button>
                 <button type="button" class="btn btn--ghost btn--sm" id="mfaCancelBtn">Cancel</button>
               </div>
