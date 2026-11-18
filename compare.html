@@ -91,12 +91,7 @@
   let selectedSchools = [];
 
   function showEmptyState(message) {
-    content.innerHTML = `<div class="compare-actions">
-      <div class="compare-print">
-        <button type="button" class="btn btn--ghost" data-print-comparison disabled>Print comparison</button>
-        <p class="compare-print-hint muted">Select at least 2 schools to print.</p>
-      </div>
-    </div><div class="compare-empty">
+    content.innerHTML = `<div class="compare-empty">
       <h2>${escapeHtml(message)}</h2>
       <p>Choose schools from the directory to compare the information available in their listings.</p>
       <a href="directory" class="btn btn--primary">Browse schools</a>
