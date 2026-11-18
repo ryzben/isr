@@ -57,7 +57,7 @@
       Islamic School Review
     </a>
     <nav class="nav-primary" aria-label="Primary">
-      <a href="directory">Directory</a>
+      <a href="/directory">Schools</a>
       <a href="blog">Resources</a>
       <a href="about">About</a>
       <div class="nav-more">
@@ -75,7 +75,7 @@
     </div>
   </div>
   <nav class="mobile-nav" id="mobileNav" aria-label="Mobile" hidden>
-    <a href="directory">Directory</a>
+    <a href="/directory">Schools</a>
     <a href="blog">Resources</a>
     <a href="about">About</a>
     <a href="jobs">Jobs <span class="nav-more__cs">coming soon</span></a>
@@ -103,12 +103,17 @@
         </form>
       </div>
       <div class="footer-col">
-        <h2 class="footer-heading">Directory</h2>
+        <h2 class="footer-heading">Schools</h2>
         <ul>
-          <li><a href="directory">Browse all schools</a></li>
-          <li><a href="compare">Compare schools</a></li>
-          <li><a href="add-school">Add your school</a></li>
-          <li><a href="claim">Claim your school</a></li>
+          <li><a href="/directory">Browse all schools</a></li>
+          <li><a href="/compare">Compare schools</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">For Schools</h2>
+        <ul>
+          <li><a href="/add-school">List Your School</a></li>
+          <li><a href="/claim">Claim your school</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -117,7 +122,6 @@
           <li><a href="blog">Guides &amp; stories</a></li>
           <li><a href="write-review">Write a review</a></li>
           <li><a href="jobs">For educators</a></li>
-          <li><a href="claim">For schools: claim a listing</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -153,20 +157,24 @@
   if (session && session.user) {
     const name = session.user.user_metadata?.full_name?.split(" ")[0] || "Account";
     authSlot.innerHTML = `
-      <a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
       <a href="account" class="nav-link">Hi, ${name}</a>
-      <a href="#" class="nav-link" data-signout>Sign Out</a>`;
+      <a href="#" class="nav-link" data-signout>Sign Out</a>
+      <a href="/add-school" class="nav-link">List Your School</a>
+      <a href="/directory" class="btn btn--cta btn--sm">Find a School</a>`;
     mobileAuthSlot.innerHTML = `
       <a href="account" class="btn btn--ghost btn--sm">My account</a>
-      <a href="add-school" class="btn btn--cta btn--sm">List Your School</a>
-      <a href="#" class="nav-link" data-signout>Sign Out</a>`;
+      <a href="#" class="nav-link" data-signout>Sign Out</a>
+      <a href="/add-school" class="nav-link">List Your School</a>
+      <a href="/directory" class="btn btn--cta btn--sm">Find a School</a>`;
   } else {
     authSlot.innerHTML = `
       <a href="signin" class="nav-link">Sign In</a>
-      <a href="add-school" class="btn btn--cta btn--sm">List Your School</a>`;
+      <a href="/add-school" class="nav-link">List Your School</a>
+      <a href="/directory" class="btn btn--cta btn--sm">Find a School</a>`;
     mobileAuthSlot.innerHTML = `
       <a href="signin" class="btn btn--ghost btn--sm">Sign In</a>
-      <a href="add-school" class="btn btn--cta btn--sm">List Your School</a>`;
+      <a href="/add-school" class="nav-link">List Your School</a>
+      <a href="/directory" class="btn btn--cta btn--sm">Find a School</a>`;
   }
   header.querySelectorAll("[data-signout]").forEach((el) =>
     el.addEventListener("click", (e) => { e.preventDefault(); signOut(); })
@@ -175,7 +183,7 @@
   // ---------- Active nav highlighting ----------
   let page = (location.pathname.split("/").pop() || "index").toLowerCase().replace(/\.html$/, "");
   header.querySelectorAll(".nav-primary a, .mobile-nav > a").forEach((a) => {
-    const href = (a.getAttribute("href") || "").toLowerCase().replace(/\.html$/, "");
+    const href = (a.getAttribute("href") || "").toLowerCase().replace(/\.html$/, "").replace(/^\/+/, "");
     if (href === page) {
       a.classList.add("is-active");
       a.setAttribute("aria-current", "page");
