@@ -94,5 +94,7 @@ try {
   });
 } catch (error) {
   console.error("Could not load homepage school data:", error);
-  setAll("[data-school-count], [data-state-count], [data-state-codes]", "Unavailable");
+  // Hide count lines instead of showing "Unavailable" text to visitors.
+  document.querySelectorAll(".hero__count, .trust-stat, [data-count-line]").forEach((el) => { el.hidden = true; });
+  setAll("[data-school-count], [data-state-count], [data-state-codes]", "");
 }

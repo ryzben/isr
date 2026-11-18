@@ -177,7 +177,7 @@
   <div class="auth-box">
     <h1>ISR Admin</h1>
     <p>Enter your admin password to continue. To make changes you must also be <a href="signin" target="_blank">signed in on the site</a> with the admin account.</p>
-    <input type="password" id="adminPass" placeholder="Password" />
+    <input type="password" id="adminPass" aria-label="Admin password" placeholder="Password" />
     <button onclick="checkPass()">Sign In</button>
     <p class="auth-error" id="authError"></p>
   </div>
@@ -207,68 +207,68 @@
         <div class="grid-2">
           <div class="field">
             <label>School Name *</label>
-            <input type="text" id="f-name" placeholder="Al-Furqan Academy" />
+            <input type="text" id="f-name" aria-label="School name" placeholder="Al-Furqan Academy" />
           </div>
           <div class="field">
             <label>URL Slug * <span class="field-hint">(auto-generated)</span></label>
-            <input type="text" id="f-id" placeholder="al-furqan-academy" />
+            <input type="text" id="f-id" aria-label="School ID (URL slug)" placeholder="al-furqan-academy" />
           </div>
         </div>
         <div class="grid-2">
           <div class="field">
             <label>City *</label>
-            <input type="text" id="f-city" placeholder="Jacksonville" />
+            <input type="text" id="f-city" aria-label="City" placeholder="Jacksonville" />
           </div>
           <div class="field">
             <label>State * <span class="field-hint">(2-letter)</span></label>
-            <input type="text" id="f-state" placeholder="FL" maxlength="2" style="text-transform:uppercase" />
+            <input type="text" id="f-state" aria-label="State" placeholder="FL" maxlength="2" style="text-transform:uppercase" />
           </div>
         </div>
         <div class="field">
           <label>Address</label>
-          <input type="text" id="f-address" placeholder="123 Main St, Jacksonville, FL 32204" />
+          <input type="text" id="f-address" aria-label="Street address" placeholder="123 Main St, Jacksonville, FL 32204" />
         </div>
         <div class="grid-2">
           <div class="field">
             <label>Phone</label>
-            <input type="text" id="f-phone" placeholder="(904) 123-4567" />
+            <input type="text" id="f-phone" aria-label="Phone" placeholder="(904) 123-4567" />
           </div>
           <div class="field">
             <label>Website</label>
-            <input type="url" id="f-website" placeholder="https://school.org" />
+            <input type="url" id="f-website" aria-label="Website" placeholder="https://school.org" />
           </div>
         </div>
         <div class="grid-2">
           <div class="field">
             <label>Grades</label>
-            <input type="text" id="f-grades" placeholder="PreK–12" />
+            <input type="text" id="f-grades" aria-label="Grades" placeholder="PreK–12" />
           </div>
           <div class="field">
             <label>Tuition Range</label>
-            <input type="text" id="f-tuition" placeholder="$8,000/yr" />
+            <input type="text" id="f-tuition" aria-label="Tuition range" placeholder="$8,000/yr" />
           </div>
         </div>
         <div class="field">
           <label>Description</label>
-          <textarea id="f-desc" placeholder="Brief description of the school..."></textarea>
+          <textarea id="f-desc" aria-label="Description" placeholder="Brief description of the school..."></textarea>
         </div>
         <div class="field">
           <label>Photo URL</label>
-          <input type="url" id="f-photo" placeholder="https://..." />
+          <input type="url" id="f-photo" aria-label="Photo URL" placeholder="https://..." />
         </div>
         <div class="grid-2">
           <div class="field">
             <label>Accreditation</label>
-            <input type="text" id="f-accred" placeholder="Cognia, CISNA..." />
+            <input type="text" id="f-accred" aria-label="Accreditation" placeholder="Cognia, CISNA..." />
           </div>
           <div class="field">
             <label>Enrollment</label>
-            <input type="text" id="f-enrollment" placeholder="250 students" />
+            <input type="text" id="f-enrollment" aria-label="Enrollment" placeholder="250 students" />
           </div>
         </div>
         <div class="field">
           <label>Verified listing?</label>
-          <select id="f-verified">
+          <select id="f-verified" aria-label="Verified listing">
             <option value="false">No</option>
             <option value="true">Yes — show verified badge</option>
           </select>
