@@ -201,7 +201,8 @@
       color: var(--muted);
       margin-top: 4px;
     }
-    .saved-card__meta .stars { color: var(--accent); letter-spacing: 0.5px; font-size: 0.95rem; }
+    .saved-card__meta .saved-card__rating { color: var(--muted); }
+    .saved-card__meta .saved-card__rating .stars { color: var(--accent); letter-spacing: 0.5px; font-size: 0.95rem; }
     .saved-card__footer {
       display: flex;
       gap: 8px;
@@ -601,7 +602,7 @@
         <!-- Reviews will be loaded here -->
         <div class="empty-state" id="reviews-empty">
           <div class="empty-state__icon">✍️</div>
-          <h3>No reviews yet</h3>
+          <h3>You have not written a review yet</h3>
           <p>Share your family's experience to help other parents make informed decisions.</p>
           <a href="write-review" class="btn btn--primary btn--sm">Write a review</a>
         </div>
@@ -912,9 +913,35 @@
         const schoolMap = {};
         schools.forEach(school => schoolMap[school.id] = school);
 
+        const { data: schoolReviews, error: ratingsError } = await sb
+          .from('reviews')
+          .select('school_id, rating')
+          .in('school_id', schoolIds)
+          .eq('status', 'approved');
+        if (ratingsError) console.error('Error loading school ratings:', ratingsError);
+
+        const ratingsBySchool = {};
+        (schoolReviews || []).forEach(review => {
+          if (!ratingsBySchool[review.school_id]) ratingsBySchool[review.school_id] = [];
+          ratingsBySchool[review.school_id].push(review.rating);
+        });
+
         favoritesGrid.innerHTML = favorites.map(fav => {
           const school = schoolMap[fav.school_id];
           if (!school) return '';
+
+          const ratings = ratingsBySchool[school.id] || [];
+          const average = ratings.length
+            ? (ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1)
+            : '';
+          const stars = ratings.length
+            ? `<span class="stars" aria-label="Rated ${average} out of 5">${'★'.repeat(Math.round(Number(average)))}${'☆'.repeat(5 - Math.round(Number(average)))}</span>`
+            : '';
+          const ratingText = ratingsError
+            ? 'Reviews unavailable'
+            : ratings.length
+              ? `${average} (${ratings.length} review${ratings.length === 1 ? '' : 's'})`
+              : 'Be the first to review';
 
           return `
             <div class="saved-card">
@@ -926,7 +953,7 @@
                 <h3><a href="schools/${encodeURIComponent(school.id)}">${school.name}</a></h3>
                 <p class="saved-card__loc">${school.city}, ${school.state}</p>
                 <div class="saved-card__meta">
-                  <span class="stars">${school.verified ? '★'.repeat(4) + '☆' : '★'.repeat(3) + '☆'.repeat(2)}</span>
+                  <span class="saved-card__rating">${stars} ${ratingText}</span>
                   <span>${school.verified ? 'Verified' : 'Unverified'}</span>
                 </div>
               </div>

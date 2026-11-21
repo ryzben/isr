@@ -816,15 +816,12 @@
       const reviews = await res.json();
 
       if (!Array.isArray(reviews) || !reviews.length) {
-        summary.textContent = 'No reviews yet';
+        summary.textContent = 'Be the first to review';
         list.innerHTML = `
           <div class="empty-state">
-            <div class="empty-state__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <h3>No reviews yet</h3>
+            <h3>Share your experience</h3>
             <p>Be the first to share your experience with this school and help the next family decide.</p>
-            <a href="${writeUrl}" class="btn btn--primary btn--sm">Write the first review</a>
+            <a href="${writeUrl}" class="btn btn--primary btn--sm">Write a review</a>
           </div>`;
         return;
       }

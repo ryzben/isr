@@ -33,27 +33,36 @@
         const countEl = block.querySelector(".rating-block__count");
 
         if (!list.length) {
+          if (numEl) numEl.hidden = true;
           if (starsEl) {
-            starsEl.style.opacity = "0.35";
-            starsEl.textContent = "☆☆☆☆☆";
+            starsEl.hidden = true;
+            starsEl.textContent = "";
           }
-          if (countEl) countEl.textContent = "No reviews yet";
+          if (countEl) countEl.textContent = "Be the first to review";
           return;
         }
 
         const avg = list.reduce((s, r) => s + r, 0) / list.length;
         const rounded = Math.round(avg);
-        if (numEl) numEl.textContent = avg.toFixed(1);
+        if (numEl) {
+          numEl.textContent = avg.toFixed(1);
+          numEl.hidden = false;
+        }
         if (starsEl) {
-          starsEl.style.opacity = "1";
+          starsEl.hidden = false;
           starsEl.textContent = "★".repeat(rounded) + "☆".repeat(5 - rounded);
         }
         if (countEl) countEl.textContent = `${list.length} review${list.length === 1 ? "" : "s"}`;
       });
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error("Could not load school ratings:", error);
       blocks.forEach((block) => {
+        const numEl = block.querySelector(".rating-block__num");
+        const starsEl = block.querySelector(".rating-block__stars");
         const countEl = block.querySelector(".rating-block__count");
+        if (numEl) numEl.hidden = true;
+        if (starsEl) starsEl.hidden = true;
         if (countEl) countEl.textContent = "Reviews unavailable";
       });
     });
