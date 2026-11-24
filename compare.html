@@ -25,6 +25,9 @@
     .compare-header__card { display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface, #fff); }
     .compare-photo { position: relative; display: grid; place-items: center; height: 128px; overflow: hidden; border-radius: var(--r-sm); color: #fff; background: linear-gradient(135deg, var(--primary), #1d7a4e); font: 600 1.8rem var(--font-serif); }
     .compare-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* Logo covers (schools.photos[0].logo): show the whole image on white, never cropped */
+    .compare-photo.is-logo { background: #fff; border: 1px solid var(--line); }
+    .compare-photo.is-logo img { object-fit: contain; padding: 10px; box-sizing: border-box; }
     .compare-row { border-bottom: 1px solid var(--line); }
     .compare-cell { padding: 14px 12px; overflow-wrap: anywhere; }
     .compare-cell--label { font-weight: 600; color: var(--ink-soft); }
@@ -163,7 +166,10 @@
       image.src = school.photo_url;
       image.alt = '';
       image.loading = 'lazy';
-      image.addEventListener('error', () => image.remove(), { once: true });
+      image.addEventListener('error', () => { image.remove(); photo.classList.remove('is-logo'); }, { once: true });
+      // Cover = photos[0] (migration 06); photo_url mirrors it.
+      const cover = Array.isArray(school.photos) ? school.photos[0] : null;
+      photo.classList.toggle('is-logo', cover?.logo === true && cover.url === school.photo_url);
       photo.append(image);
     });
   }

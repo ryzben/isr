@@ -40,6 +40,7 @@ Schools can now have up to 3 photos (submissions already allowed 3, but only the
 - `/admin` Edit form: a photo manager replaces the single Photo URL field. Add, remove, reorder (↑ ↓), Make cover, alt text per photo, and a "Logo / graphic" tick that shows the whole image on white instead of cropping it
 - Publish from Pending copies all submitted photos (web addresses only); cover = photo 1
 - `/schools/<slug>` shows a "Photos" gallery (alt text; first image loads eagerly, the rest are lazy). The interactive profile (`school.html`) shows thumbnails under the hero when there are 2 or more photos. Directory cards show a logo cover uncropped
+- Logo covers are never cropped: /schools pages, school.html hero and related-school cards, directory cards and the compare page all show a logo whole on white. Homepage featured cards are hard-coded (no database photos); they have an `is-logo` class ready if a logo is ever used there
 - Schools with no `photos` fall back to `photo_url`, so nothing changes for them until edited
 - Backfill: Arqams Academy gets its 3 submission photos, logo as cover
 

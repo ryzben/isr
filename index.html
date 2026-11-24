@@ -401,6 +401,11 @@
       transition: transform 0.4s ease;
     }
     .school-card:hover .school-card__photo-img { transform: scale(1.04); }
+    /* If a featured card ever uses a school logo, add class="school-card__photo-img is-logo":
+       the whole logo shows on white, uncropped, without the dark overlays. */
+    .school-card__photo-img.is-logo { object-fit: contain; padding: 16px; box-sizing: border-box; background: #fff; }
+    .school-card__photo:has(.is-logo)::before, .school-card__photo:has(.is-logo)::after { display: none; }
+    .school-card:hover .school-card__photo-img.is-logo { transform: none; }
     .school-card__photo-initials {
       position: absolute;
       inset: 0;

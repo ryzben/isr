@@ -747,8 +747,13 @@
 
   function similarCard(s) {
     const where = [s.city, s.state].filter(Boolean).join(", ");
+    // Cover = photos[0] (migration 06); a logo cover is shown whole on white, never cropped.
+    const cover = Array.isArray(s.photos) ? s.photos[0] : null;
+    const coverIsLogo = cover?.logo === true && cover.url === s.photo_url;
     const photo = s.photo_url
-      ? `style="background-image:url('${escapeHtml(s.photo_url)}'); background-size:cover; background-position:center;"`
+      ? (coverIsLogo
+          ? `style="background:#fff url('${escapeHtml(s.photo_url)}') center / contain no-repeat; background-origin:content-box; padding:12px; border-bottom:1px solid var(--line);"`
+          : `style="background-image:url('${escapeHtml(s.photo_url)}'); background-size:cover; background-position:center;"`)
       : `style="background: linear-gradient(135deg, var(--primary) 0%, #1d7a4e 100%);"`;
     return `
       <a href="${schoolPagePath(s.id)}" class="card school-card">
