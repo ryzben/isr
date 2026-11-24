@@ -21,6 +21,24 @@ export function schoolPagePath(id) {
   return schoolId ? `schools/${schoolId}` : "directory";
 }
 
+// A school's photos as [{url, alt, logo}], cover first (max 3, http(s) only).
+// Falls back to the single photo_url for schools whose photos list is empty.
+// Keep in sync with the copies in school.html and admin.html.
+export function schoolPhotos(school) {
+  const isHttp = (u) => /^https?:\/\//i.test(String(u || ""));
+  const list = Array.isArray(school?.photos) && school.photos.length
+    ? school.photos
+    : (school?.photo_url ? [{ url: school.photo_url }] : []);
+  return list
+    .filter((p) => p && isHttp(p.url))
+    .slice(0, 3)
+    .map((p, i) => ({
+      url: String(p.url),
+      alt: String(p.alt || "").trim() || `${school.name || "School"} photo ${i + 1}`,
+      logo: p.logo === true,
+    }));
+}
+
 export function normalizeSchool(school) {
   const description = String(school.description || "");
   const enrollment = description.match(/\b(?:serves|serving|with)\s+([\d,]+\+?)\s+students?\b/i);
@@ -106,6 +124,9 @@ export function pageTemplate({ title, description, canonical, content, robots: r
     .seo-details { display: grid; grid-template-columns: minmax(140px,1fr) 2fr; gap: 10px 20px; }
     .seo-details dt { font-weight: 600; color: var(--ink-soft); }
     .seo-details dd { margin: 0; overflow-wrap: anywhere; }
+    .seo-gallery { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 12px; margin: 0 0 24px; padding: 0; list-style: none; }
+    .seo-gallery img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--bg,#f4f6f9); }
+    .seo-gallery img.is-logo { object-fit: contain; background: #fff; padding: 12px; }
   </style>
 </head>
 <body>
@@ -164,6 +185,14 @@ export function renderSchoolPage(school) {
     email ? `<dt>Email</dt><dd>${email}</dd>` : "",
     school.website ? `<dt>Website</dt><dd>${website}</dd>` : "",
   ].filter(Boolean).join("\n        ");
+  const photos = schoolPhotos(school);
+  const gallery = photos.length
+    ? `
+    <h2>Photos</h2>
+    <ul class="seo-gallery">
+      ${photos.map((p, i) => `<li><img src="${escapeHtml(p.url)}" alt="${escapeHtml(p.alt)}" loading="${i === 0 ? "eager" : "lazy"}" decoding="async"${p.logo ? ' class="is-logo"' : ""} /></li>`).join("\n      ")}
+    </ul>`
+    : "";
   const actions = [
     school.city && school.state ? `<a class="btn btn--ghost" href="/cities/${escapeHtml(String(school.state).toUpperCase())}/${schoolSlug(school.city)}">More schools in ${escapeHtml(school.city)}</a>` : "",
     `<a class="btn btn--ghost" href="/school?id=${encodeURIComponent(school.id)}">Open interactive profile</a>`,
@@ -178,7 +207,7 @@ export function renderSchoolPage(school) {
       <dl class="seo-details">
         ${details}
       </dl>
-    </div>
+    </div>${gallery}
     <div class="seo-list">
       ${actions}
     </div>`;

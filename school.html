@@ -99,6 +99,25 @@
       font-family: var(--font-serif);
       font-size: 3rem; font-weight: 600;
     }
+    /* Logos and graphics: show the whole image instead of cropping it. */
+    .hero-photo.is-logo {
+      background-color: #fff;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-origin: content-box;
+      padding: 24px;
+      border: 1px solid var(--line);
+    }
+    .hero-thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin: -6px 0 18px; }
+    .hero-thumb {
+      width: 96px; aspect-ratio: 4/3; padding: 0;
+      border: 2px solid var(--line); border-radius: var(--r-md);
+      overflow: hidden; background: #fff; cursor: pointer;
+    }
+    .hero-thumb[aria-pressed="true"] { border-color: var(--primary); }
+    .hero-thumb:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .hero-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .hero-thumb img.is-logo { object-fit: contain; padding: 6px; }
 
     .quick-facts {
       display: grid;
@@ -311,9 +330,10 @@
           </div>
           <div class="hero-location" id="schoolLocation"></div>
 
-          <div class="hero-photo" id="schoolPhoto" aria-label="School photograph">
-            <span id="schoolPhotoFallback"></span>
+          <div class="hero-photo" id="schoolPhoto" role="img" aria-label="School photograph">
+            <span id="schoolPhotoFallback" aria-hidden="true"></span>
           </div>
+          <div class="hero-thumbs" id="schoolThumbs" role="group" aria-label="School photos" hidden></div>
 
           <div class="quick-facts" id="schoolQuickFacts"></div>
 
@@ -533,6 +553,65 @@
     $("schoolJsonLd").textContent = JSON.stringify(data, null, 2);
   }
 
+  // A school's photos as [{url, alt, logo}], cover first (max 3, http(s) only).
+  // Falls back to photo_url. Keep in sync with api/_lib/school-page.mjs.
+  function schoolPhotos(s) {
+    const isHttp = (u) => /^https?:\/\//i.test(String(u || ""));
+    const list = Array.isArray(s?.photos) && s.photos.length
+      ? s.photos
+      : (s?.photo_url ? [{ url: s.photo_url }] : []);
+    return list
+      .filter((p) => p && isHttp(p.url))
+      .slice(0, 3)
+      .map((p, i) => ({
+        url: String(p.url),
+        alt: String(p.alt || "").trim() || `${s.name || "School"} photo ${i + 1}`,
+        logo: p.logo === true,
+      }));
+  }
+
+  // Hero shows one photo at a time; thumbnails (only when there are 2+) swap it.
+  function renderPhotos(s) {
+    const hero = $("schoolPhoto");
+    const fallback = $("schoolPhotoFallback");
+    const thumbs = $("schoolThumbs");
+    const photos = schoolPhotos(s);
+    // Initials stay until a photo actually loads, so a dead URL never leaves a blank block.
+    fallback.textContent = schoolInitials(s.name);
+    hero.setAttribute("aria-label", photos[0]?.alt || `${s.name}: no photo yet`);
+
+    let shown = -1;
+    function show(i) {
+      const p = photos[i];
+      if (!p) return;
+      shown = i;
+      const probe = new Image();
+      probe.onload = () => {
+        if (shown !== i) return;          // a later click won
+        hero.style.backgroundImage = `url("${p.url.replace(/["\\]/g, "\\$&")}")`;
+        hero.classList.toggle("is-logo", p.logo);
+        hero.setAttribute("aria-label", p.alt);
+        fallback.textContent = "";
+      };
+      probe.src = p.url;
+      thumbs.querySelectorAll(".hero-thumb").forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
+    }
+
+    if (photos.length > 1) {
+      thumbs.innerHTML = photos.map((p, i) => `
+        <button type="button" class="hero-thumb" data-i="${i}" aria-pressed="${i === 0}"
+          aria-label="Show photo ${i + 1} of ${photos.length}: ${escapeHtml(p.alt)}">
+          <img src="${escapeHtml(p.url)}" alt="" loading="lazy" decoding="async"${p.logo ? ' class="is-logo"' : ""}>
+        </button>`).join("");
+      thumbs.hidden = false;
+      thumbs.onclick = (e) => {
+        const btn = e.target.closest(".hero-thumb");
+        if (btn) show(Number(btn.dataset.i));
+      };
+    }
+    show(0);
+  }
+
   function renderSchool(s) {
     const url = `${SITE}/${schoolPagePath(s.id)}`;
     const where = [s.city, s.state].filter(Boolean).join(", ");
@@ -581,17 +660,7 @@
     if (s.website) locationParts.push(`<a href="${escapeHtml(s.website)}" target="_blank" rel="noopener">Visit website</a>`);
     $("schoolLocation").innerHTML = locationParts.join(" · ");
 
-    const photo = $("schoolPhoto");
-    // Initials stay until the photo actually loads, so a dead URL never leaves a blank block.
-    $("schoolPhotoFallback").textContent = schoolInitials(s.name);
-    if (s.photo_url) {
-      const probe = new Image();
-      probe.onload = () => {
-        photo.style.backgroundImage = `url('${s.photo_url}')`;
-        $("schoolPhotoFallback").textContent = "";
-      };
-      probe.src = s.photo_url;
-    }
+    renderPhotos(s);
 
     // ---- QUICK FACTS ----
     const qf = [];

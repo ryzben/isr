@@ -32,6 +32,21 @@ A directory and review platform for Islamic schools across the United States. He
 
 ---
 
+## Work done — 24 November 2026: school photo gallery
+
+Schools can now have up to 3 photos (submissions already allowed 3, but only the first was kept).
+
+- New column `schools.photos` (jsonb list of `{url, alt, logo}`, max 3). The first photo is the cover. `photo_url` stays and always mirrors the cover's URL, so cards and older code keep working
+- `/admin` Edit form: a photo manager replaces the single Photo URL field. Add, remove, reorder (↑ ↓), Make cover, alt text per photo, and a "Logo / graphic" tick that shows the whole image on white instead of cropping it
+- Publish from Pending copies all submitted photos (web addresses only); cover = photo 1
+- `/schools/<slug>` shows a "Photos" gallery (alt text; first image loads eagerly, the rest are lazy). The interactive profile (`school.html`) shows thumbnails under the hero when there are 2 or more photos. Directory cards show a logo cover uncropped
+- Schools with no `photos` fall back to `photo_url`, so nothing changes for them until edited
+- Backfill: Arqams Academy gets its 3 submission photos, logo as cover
+
+**Deploy order:** run `supabase-migration-06-school-photos.sql`, then `supabase-migration-06-checks.sql` (all PASS), then push. Saving from `/admin` fails until the column exists. Rollback: `supabase-migration-06-rollback.sql` (drops the column and its photos; `photo_url` is untouched).
+
+---
+
 ## Work done — 24 November 2026: new schools 404'd
 
 **Bug:** schools published from `/admin` (Arqams Academy, Al Tahoor Quran Institute) showed in `/directory` but `/schools/<slug>` returned 404. School pages were static files written by `scripts/generate-seo-pages.mjs` and committed, so a school added after the last generate-and-deploy had no file. (This is a plain static site with no build step, so the fix is a Vercel function rather than Next.js revalidation.)
@@ -139,7 +154,8 @@ islamicschoolreview/
 ├── supabase-sample-reviews.sql   # Sample parent reviews for AFA + MY Academy
 ├── supabase-lighthouse-reviews.sql # Sample parent reviews for The Lighthouse Schools
 ├── supabase-migration-01 … 04    # Review moderation, votes, favorites, launch lockdown
-└── supabase-migration-05-admin-hardening.sql # Blocks self-promotion to admin; adds schools.programs
+├── supabase-migration-05-admin-hardening.sql # Blocks self-promotion to admin; adds schools.programs
+└── supabase-migration-06-school-photos.sql   # schools.photos (up to 3, first = cover); backfills Arqams Academy
 ```
 
 ---
@@ -159,7 +175,8 @@ islamicschoolreview/
 | grades | text | e.g. `PreK-12` |
 | tuition_range | text | |
 | description | text | |
-| photo_url | text | Main image URL (hosted on Vercel or external) |
+| photo_url | text | Cover image URL. Mirrors `photos[0].url` when photos are set |
+| photos | jsonb | Up to 3 `{url, alt, logo}` objects; first is the cover; default `[]` (migration 06) |
 | accreditation | text | |
 | enrollment | text | |
 | verified | boolean | Shows verified badge in directory |
@@ -215,9 +232,9 @@ User-specific data protected by RLS — each user can only read/write their own 
 ### Admin dashboard (`admin.html`)
 - Access: sign in at `/signin` with an account whose `user_profiles.user_type = 'admin'`, then open `/admin`. There is no shared password any more. The page check is only for the UI; the database enforces admin-only access through `is_admin()` RLS policies
 - To make someone admin, run in the Supabase SQL Editor: `UPDATE user_profiles SET user_type = 'admin' WHERE email = '…';` (the API refuses this since migration 05)
-- **Add School** — manual publish directly to Supabase (includes Programs and a public contact email)
+- **Add School** — manual publish directly to Supabase (includes Programs, a public contact email and up to 3 photos with alt text, reorder and cover choice)
 - **All Schools** — list with Edit (PATCH) and Delete buttons
-- **Pending** — submissions inbox, red badge count, one-click approve (copies name, city, state, phone, website, description, programs and the first photo; the submitter's contact email stays private)
+- **Pending** — submissions inbox, red badge count, one-click approve (copies name, city, state, phone, website, description, programs and all submitted photos, cover = photo 1; the submitter's contact email stays private)
 - Changes show on `/schools/<slug>` within about a minute, with no redeploy (see "School pages" below)
 
 ### School, state, city pages and sitemap (all on demand)

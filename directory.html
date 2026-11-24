@@ -119,6 +119,15 @@
       background-color: var(--primary); /* fallback under image */
     }
     .result__media--photo > span { display: none; }
+    /* Logo covers: show the whole logo on white instead of cropping it */
+    .result__media--logo {
+      background-color: #fff;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-origin: content-box;
+      padding: 12px;
+      border: 1px solid var(--line);
+    }
 
     /* Loading skeleton */
     .skel-list { display: grid; gap: 16px; }
@@ -659,10 +668,16 @@
 
   function cardHTML(s) {
     // Gradient sits under the photo so a dead URL still shows a colored tile.
+    // Cover = photos[0] when set (see migration 06); photo_url mirrors it.
+    const coverIsLogo = Array.isArray(s.photos) && s.photos[0]?.logo === true && s.photos[0]?.url === s.photo_url;
     const photo = s.photo_url
-      ? `style="background-image:url('${escapeHtml(s.photo_url)}'), ${gradientFor(s.name)};" data-photo="${escapeHtml(s.photo_url)}"`
+      ? (coverIsLogo
+          ? `style="background-image:url('${escapeHtml(s.photo_url)}');" data-photo="${escapeHtml(s.photo_url)}"`
+          : `style="background-image:url('${escapeHtml(s.photo_url)}'), ${gradientFor(s.name)};" data-photo="${escapeHtml(s.photo_url)}"`)
       : `style="background:${gradientFor(s.name)};"`;
-    const photoCls = s.photo_url ? "result__media result__media--photo" : "result__media";
+    const photoCls = s.photo_url
+      ? `result__media result__media--photo${coverIsLogo ? " result__media--logo" : ""}`
+      : "result__media";
     const verifiedBadge = s.verified
       ? `<span class="badge badge--accent result__badge-top badge--verified">Verified</span>`
       : "";
@@ -758,7 +773,7 @@
     // If a photo fails to load, drop back to the initials-on-gradient tile.
     target.querySelectorAll(".result__media--photo[data-photo]").forEach((el) => {
       const probe = new Image();
-      probe.onerror = () => el.classList.remove("result__media--photo");
+      probe.onerror = () => el.classList.remove("result__media--photo", "result__media--logo");
       probe.src = el.dataset.photo;
     });
   }

@@ -169,6 +169,33 @@
     }
     .btn-reject:hover { background: #e5e7eb; }
     .empty { text-align: center; padding: 40px; color: #9ca3af; }
+
+    /* Photo manager (Add / Edit School) */
+    .photo-list { display: flex; flex-direction: column; gap: 10px; }
+    .photo-list:empty::before { content: 'No photos yet.'; color: #9ca3af; font-size: 0.85rem; }
+    .photo-row {
+      display: grid; grid-template-columns: 96px 1fr; gap: 12px;
+      padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fafafa;
+    }
+    .photo-row__thumb {
+      width: 96px; aspect-ratio: 4/3; border-radius: 6px; border: 1px solid #e5e7eb;
+      background: #fff center / cover no-repeat; display: grid; place-items: center;
+      font-size: 0.7rem; color: #9ca3af;
+    }
+    .photo-row__thumb.is-logo { background-size: contain; background-origin: content-box; padding: 4px; }
+    .photo-row__fields { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .photo-row__fields input[type="url"], .photo-row__fields input[type="text"] {
+      width: 100%; padding: 7px 10px; border: 1.5px solid #e5e7eb; border-radius: 6px; font: inherit; font-size: 0.85rem;
+    }
+    .photo-row__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 0.8rem; color: #4b5563; }
+    .photo-row__meta label { display: inline-flex; align-items: center; gap: 4px; font-weight: 400; margin-right: auto; }
+    .photo-row__cover { background: #d1fae5; color: #065f46; border-radius: 99px; padding: 1px 8px; font-weight: 600; font-size: 0.75rem; }
+    .photo-row__meta button, .btn-add-photo {
+      background: #fff; border: 1px solid #d1d5db; border-radius: 6px; padding: 4px 10px;
+      font: inherit; font-size: 0.8rem; cursor: pointer; color: #374151;
+    }
+    .photo-row__meta button:disabled, .btn-add-photo:disabled { opacity: 0.45; cursor: default; }
+    .btn-add-photo { align-self: flex-start; margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -252,8 +279,9 @@
           <textarea id="f-desc" aria-label="Description" placeholder="Brief description of the school..."></textarea>
         </div>
         <div class="field">
-          <label>Photo URL</label>
-          <input type="url" id="f-photo" aria-label="Photo URL" placeholder="https://..." />
+          <label id="photosLabel">Photos <span class="field-hint">(up to 3 · the first one is the cover)</span></label>
+          <div id="photoList" class="photo-list" role="list" aria-labelledby="photosLabel"></div>
+          <button type="button" class="btn-add-photo" id="addPhotoBtn">+ Add photo</button>
         </div>
         <div class="grid-2">
           <div class="field">
@@ -511,7 +539,7 @@
     document.getElementById('f-grades').value     = s.grades      || '';
     document.getElementById('f-tuition').value    = s.tuition_range || '';
     document.getElementById('f-desc').value       = s.description || '';
-    document.getElementById('f-photo').value      = s.photo_url   || '';
+    setPhotos(storedPhotos(s));
     document.getElementById('f-programs').value   = s.programs    || '';
     document.getElementById('f-email').value      = s.email       || '';
     document.getElementById('f-accred').value     = s.accreditation || '';
@@ -543,6 +571,91 @@
     document.querySelectorAll('#tab-add input, #tab-add textarea').forEach(el => el.value = '');
     document.getElementById('f-verified').value = 'false';
     document.getElementById('statusMsg').className = 'status-msg';
+    setPhotos([]);
+  }
+
+  // ---- Photo manager: up to 3 photos, first = cover (schools.photos, migration 06) ----
+  const MAX_PHOTOS = 3;
+  let photosState = [];   // [{url, alt, logo}]
+  const isHttpUrl = u => /^https?:\/\//i.test(String(u || '').trim());
+
+  // A school's saved photos for editing. Falls back to the single photo_url
+  // for schools saved before migration 06.
+  function storedPhotos(s) {
+    const list = Array.isArray(s.photos) && s.photos.length
+      ? s.photos
+      : (s.photo_url ? [{ url: s.photo_url }] : []);
+    return list.slice(0, MAX_PHOTOS).map(p => ({ url: p.url || '', alt: p.alt || '', logo: p.logo === true }));
+  }
+
+  function setPhotos(list) {
+    photosState = list.map(p => ({ ...p }));
+    renderPhotoRows();
+  }
+
+  function renderPhotoRows() {
+    const e = escapeAdmin;
+    const n = photosState.length;
+    document.getElementById('photoList').innerHTML = photosState.map((p, i) => `
+      <div class="photo-row" role="listitem" data-i="${i}">
+        <div class="photo-row__thumb${p.logo ? ' is-logo' : ''}"
+          ${isHttpUrl(p.url) ? `style="background-image:url(&quot;${e(p.url.trim())}&quot;)"` : ''}>${isHttpUrl(p.url) ? '' : 'No image'}</div>
+        <div class="photo-row__fields">
+          <input type="url" data-field="url" value="${e(p.url)}" placeholder="https://…" aria-label="Photo ${i + 1} URL" />
+          <input type="text" data-field="alt" value="${e(p.alt)}" placeholder="Describe the photo for screen readers (alt text)" aria-label="Photo ${i + 1} description" />
+          <div class="photo-row__meta">
+            <label><input type="checkbox" data-field="logo" ${p.logo ? 'checked' : ''} /> Logo / graphic (show whole image)</label>
+            ${i === 0 ? '<span class="photo-row__cover">Cover</span>' : '<button type="button" data-act="cover">Make cover</button>'}
+            <button type="button" data-act="up" ${i === 0 ? 'disabled' : ''} aria-label="Move photo ${i + 1} up">↑</button>
+            <button type="button" data-act="down" ${i === n - 1 ? 'disabled' : ''} aria-label="Move photo ${i + 1} down">↓</button>
+            <button type="button" data-act="remove" aria-label="Remove photo ${i + 1}">Remove</button>
+          </div>
+        </div>
+      </div>`).join('');
+    document.getElementById('addPhotoBtn').disabled = n >= MAX_PHOTOS;
+  }
+
+  document.getElementById('addPhotoBtn').addEventListener('click', () => {
+    if (photosState.length >= MAX_PHOTOS) return;
+    photosState.push({ url: '', alt: '', logo: false });
+    renderPhotoRows();
+    document.querySelector(`.photo-row[data-i="${photosState.length - 1}"] input[data-field="url"]`)?.focus();
+  });
+
+  document.getElementById('photoList').addEventListener('input', ev => {
+    const row = ev.target.closest('.photo-row');
+    const field = ev.target.dataset.field;
+    if (!row || !field) return;
+    const p = photosState[Number(row.dataset.i)];
+    if (field === 'logo') p.logo = ev.target.checked;
+    else p[field] = ev.target.value;
+    // Refresh just this row's thumbnail; re-rendering would steal focus while typing.
+    const thumb = row.querySelector('.photo-row__thumb');
+    thumb.classList.toggle('is-logo', p.logo);
+    thumb.style.backgroundImage = isHttpUrl(p.url) ? `url("${p.url.trim().replace(/["\\]/g, '\\$&')}")` : '';
+    thumb.textContent = isHttpUrl(p.url) ? '' : 'No image';
+  });
+
+  document.getElementById('photoList').addEventListener('click', ev => {
+    const btn = ev.target.closest('button[data-act]');
+    if (!btn) return;
+    const i = Number(btn.closest('.photo-row').dataset.i);
+    const swap = (a, b) => { [photosState[a], photosState[b]] = [photosState[b], photosState[a]]; };
+    if (btn.dataset.act === 'up' && i > 0) swap(i, i - 1);
+    if (btn.dataset.act === 'down' && i < photosState.length - 1) swap(i, i + 1);
+    if (btn.dataset.act === 'cover') photosState.unshift(...photosState.splice(i, 1));
+    if (btn.dataset.act === 'remove') photosState.splice(i, 1);
+    renderPhotoRows();
+  });
+
+  // Photos ready to save, or an error message.
+  function collectPhotos() {
+    const rows = photosState
+      .map(p => ({ url: String(p.url || '').trim(), alt: String(p.alt || '').trim(), logo: !!p.logo }))
+      .filter(p => p.url || p.alt);
+    const bad = rows.findIndex(p => !isHttpUrl(p.url));
+    if (bad !== -1) return { error: `Photo ${bad + 1}: enter a web address starting with https://` };
+    return { photos: rows.map(p => ({ url: p.url, ...(p.alt ? { alt: p.alt } : {}), ...(p.logo ? { logo: true } : {}) })) };
   }
 
   async function publishSchool() {
@@ -561,7 +674,6 @@
       grades:        document.getElementById('f-grades').value.trim() || null,
       tuition_range: document.getElementById('f-tuition').value.trim() || null,
       description:   document.getElementById('f-desc').value.trim() || null,
-      photo_url:     document.getElementById('f-photo').value.trim() || null,
       programs:      document.getElementById('f-programs').value.trim() || null,
       email:         document.getElementById('f-email').value.trim() || null,
       accreditation: document.getElementById('f-accred').value.trim() || null,
@@ -574,6 +686,16 @@
       msg.textContent = 'Name, slug, city and state are required.';
       return;
     }
+
+    const collected = collectPhotos();
+    if (collected.error) {
+      msg.className = 'status-msg error';
+      msg.textContent = collected.error;
+      return;
+    }
+    // photos[0] is the cover; photo_url mirrors it so older pages and cards keep working.
+    school.photos = collected.photos;
+    school.photo_url = collected.photos[0]?.url || null;
 
     btn.disabled = true;
     btn.textContent = editingId ? 'Saving...' : 'Publishing...';
@@ -749,6 +871,12 @@
       const slug = s.school_name.toLowerCase().trim()
         .replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
 
+      // Copy every submitted photo (web addresses only); cover = photo 1.
+      const photos = [s.photo_url_1, s.photo_url_2, s.photo_url_3]
+        .map(u => String(u || '').trim())
+        .filter(isHttpUrl)
+        .map(url => ({ url }));
+
       const publishRes = await fetch(`${SUPABASE_URL}/rest/v1/schools`, {
         method: 'POST',
         headers: {
@@ -765,7 +893,8 @@
           phone      : s.phone      || null,
           website    : s.website    || null,
           description: s.description || null,
-          photo_url  : s.photo_url_1 || null,
+          photo_url  : photos[0]?.url || null,
+          photos     : photos,
           programs   : s.programs    || null,
           verified   : false,
         }),
