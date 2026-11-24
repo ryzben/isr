@@ -32,6 +32,25 @@ A directory and review platform for Islamic schools across the United States. He
 
 ---
 
+## Work done — 24 November 2026: new schools 404'd
+
+**Bug:** schools published from `/admin` (Arqams Academy, Al Tahoor Quran Institute) showed in `/directory` but `/schools/<slug>` returned 404. School pages were static files written by `scripts/generate-seo-pages.mjs` and committed, so a school added after the last generate-and-deploy had no file. (This is a plain static site with no build step, so the fix is a Vercel function rather than Next.js revalidation.)
+
+**Fix:**
+- `/schools/<slug>` is now rendered on request by `api/school-page.mjs` (rewrite in `vercel.json`), from the same template as before. Existing pages render byte-for-byte the same as the old static files. The 35 static `schools/*.html` files were removed; `/schools/<slug>.html` 301-redirects to the clean URL
+- Unknown slugs return a real, uncached 404. Found pages are edge-cached for 60 s, so publish/edit/delete show within a minute. No revalidate endpoint is needed
+- `/admin`: the hard-coded password (visible in page source) is gone. The dashboard opens only for a signed-in `admin` account
+- **Security:** migration 05 blocks any signed-in user from setting their own `user_profiles.user_type` to `admin` (previously one API call did it and unlocked every admin RLS policy). It also stops `/account`'s role picker from demoting the admin
+- **Security:** the Pending inbox now HTML-escapes submission fields. Before, a crafted public submission could run script in the admin's session
+- Admin Edit form: new **Programs** and **Public contact email** fields; Publish now copies Programs from the submission and reports if marking the submission as published fails
+
+- State pages, city pages and `sitemap.xml` are on demand too (`api/seo-page.mjs`); the 6 static state pages, 26 city pages and the static sitemap were removed. Before removal, 33 of 35 rendered pages were byte-identical to the static ones; the 2 Georgia pages now say "Georgia" instead of "GA" (state names now cover all 50 states + DC)
+- Data: cleared the placeholder address "1234 Queens Blvd…" and phone "(718) 555-0123" on Muslim Center School (now blank). Its page is now under 60 words, so it is `noindex` and out of the sitemap until real details are added
+
+**Deploy order:** run `supabase-migration-05-admin-hardening.sql` first, then push (the admin page writes the new `programs` column). Rollback: `supabase-migration-05-rollback.sql`.
+
+---
+
 ## Work done — June 2026 session
 
 **Site audit fixes** (fake/stale content, broken links, data accuracy):
@@ -84,7 +103,12 @@ islamicschoolreview/
 ├── directory.html                # School directory with state/city/grade filters
 ├── school.html                   # School detail page — reviews, photos, claim button
 ├── add-school.html               # Public submission form → Formspree + Supabase inbox
-├── admin.html                    # Admin dashboard (password: isr-admin-2026)
+├── admin.html                    # Admin dashboard (sign in with an admin account)
+├── api/
+│   ├── school-page.mjs           # Renders /schools/<slug> on request from Supabase
+│   ├── seo-page.mjs              # Renders /states/<ST>, /cities/<ST>/<city>, /sitemap.xml on request
+│   └── _lib/                     # Shared templates (school-page.mjs), Supabase reads (data.mjs), headers (http.mjs)
+├── scripts/generate-seo-pages.mjs # Only refreshes the crawler copy of "Browse by state" in directory.html
 ├── claim.html                    # Claim Your School form → Formspree + verified badge
 ├── jobs.html                     # Jobs board waitlist page (full launch Q3 2026)
 ├── signin.html                   # Sign in + forgot password (Supabase recover endpoint)
@@ -113,7 +137,9 @@ islamicschoolreview/
 ├── supabase-add-lighthouse.sql   # Adds The Lighthouse Schools + INSERT policy fix
 ├── supabase-fix-schools.sql      # Fixes wrong city/state data for the original 33 schools — run June 2026
 ├── supabase-sample-reviews.sql   # Sample parent reviews for AFA + MY Academy
-└── supabase-lighthouse-reviews.sql # Sample parent reviews for The Lighthouse Schools
+├── supabase-lighthouse-reviews.sql # Sample parent reviews for The Lighthouse Schools
+├── supabase-migration-01 … 04    # Review moderation, votes, favorites, launch lockdown
+└── supabase-migration-05-admin-hardening.sql # Blocks self-promotion to admin; adds schools.programs
 ```
 
 ---
@@ -137,6 +163,9 @@ islamicschoolreview/
 | accreditation | text | |
 | enrollment | text | |
 | verified | boolean | Shows verified badge in directory |
+| programs | text | Comma-separated, e.g. `PreK / VPK, Islamic Studies` (migration 05) |
+| email | text | **Public** contact email shown on the listing. Never copy a submitter's private email here without their OK |
+| status | text | Unused: every row is `pending` by default. A row existing in `schools` is what makes it live |
 
 ### `school_submissions`
 Stores public submissions from `add-school.html` for admin review in Pending tab.
@@ -184,10 +213,22 @@ User-specific data protected by RLS — each user can only read/write their own 
 - Submits to Formspree → admin manually verifies + sets `verified = true` in Supabase
 
 ### Admin dashboard (`admin.html`)
-- Password: `isr-admin-2026` — **change this before wider sharing**
-- **Add School** — manual publish directly to Supabase
+- Access: sign in at `/signin` with an account whose `user_profiles.user_type = 'admin'`, then open `/admin`. There is no shared password any more. The page check is only for the UI; the database enforces admin-only access through `is_admin()` RLS policies
+- To make someone admin, run in the Supabase SQL Editor: `UPDATE user_profiles SET user_type = 'admin' WHERE email = '…';` (the API refuses this since migration 05)
+- **Add School** — manual publish directly to Supabase (includes Programs and a public contact email)
 - **All Schools** — list with Edit (PATCH) and Delete buttons
-- **Pending** — submissions inbox, red badge count, one-click approve
+- **Pending** — submissions inbox, red badge count, one-click approve (copies name, city, state, phone, website, description, programs and the first photo; the submitter's contact email stays private)
+- Changes show on `/schools/<slug>` within about a minute, with no redeploy (see "School pages" below)
+
+### School, state, city pages and sitemap (all on demand)
+- `vercel.json` rewrites these paths to two serverless functions that read Supabase and render with the shared templates in `api/_lib/school-page.mjs`:
+  - `/schools/:slug` → `api/school-page.mjs`
+  - `/states/:state`, `/cities/:state/:city`, `/sitemap.xml` → `api/seo-page.mjs`
+- There are no static copies of these any more (a static file at the same path would win over the rewrite, so don't add one back). Old `.html` URLs 301 to the clean ones; lower-case state codes 301 to upper-case
+- Found: `200`, edge-cached 60 s (`s-maxage=60, stale-while-revalidate=60`). Unknown or malformed: real `404`, `no-store`, so a URL that 404'd before publishing works the moment the school is published
+- If Supabase is down they fall back to `/data/schools.json`, then a `503`
+- Pages under 60 words get `noindex` and are left out of the sitemap (unchanged rule). Sitemap `lastmod` = newest `updated_at` of the school(s) on the page
+- Publishing never needs a redeploy. `node scripts/generate-seo-pages.mjs` now only refreshes the "Browse by state" block baked into `directory.html` for crawlers; the directory rebuilds that list from live data in the browser anyway
 
 ### Reviews (`school.html` + `write-review.html`)
 - Each school detail page loads reviews from Supabase and shows avg rating

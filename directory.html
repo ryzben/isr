@@ -525,6 +525,7 @@
       <ul class="directory-state-links__list">
         <li><a href="/states/CA">California (CA)</a></li>
         <li><a href="/states/FL">Florida (FL)</a></li>
+        <li><a href="/states/GA">Georgia (GA)</a></li>
         <li><a href="/states/IA">Iowa (IA)</a></li>
         <li><a href="/states/NJ">New Jersey (NJ)</a></li>
         <li><a href="/states/NY">New York (NY)</a></li>
@@ -614,8 +615,19 @@
   // module scope and let readUrl() seed it once at boot.
   let currentQ = "";
 
+  // All 50 states + DC (keep in sync with api/_lib/school-page.mjs).
   const STATE_NAMES = {
-    FL: "Florida", TX: "Texas", CA: "California", NY: "New York", NJ: "New Jersey", IA: "Iowa",
+    AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California",
+    CO: "Colorado", CT: "Connecticut", DE: "Delaware", DC: "District of Columbia",
+    FL: "Florida", GA: "Georgia", HI: "Hawaii", ID: "Idaho", IL: "Illinois",
+    IN: "Indiana", IA: "Iowa", KS: "Kansas", KY: "Kentucky", LA: "Louisiana",
+    ME: "Maine", MD: "Maryland", MA: "Massachusetts", MI: "Michigan", MN: "Minnesota",
+    MS: "Mississippi", MO: "Missouri", MT: "Montana", NE: "Nebraska", NV: "Nevada",
+    NH: "New Hampshire", NJ: "New Jersey", NM: "New Mexico", NY: "New York",
+    NC: "North Carolina", ND: "North Dakota", OH: "Ohio", OK: "Oklahoma", OR: "Oregon",
+    PA: "Pennsylvania", RI: "Rhode Island", SC: "South Carolina", SD: "South Dakota",
+    TN: "Tennessee", TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia",
+    WA: "Washington", WV: "West Virginia", WI: "Wisconsin", WY: "Wyoming",
   };
 
   // ---- State helpers ----
@@ -879,6 +891,17 @@
     _statesList = await uniqueStates();
     stateSel.innerHTML = `<option value="">All states</option>` +
       _statesList.map((s) => `<option value="${s}">${STATE_NAMES[s] || s}</option>`).join("");
+    renderStateLinks();
+  }
+
+  // The "Browse by state" list is baked into the HTML for crawlers; rebuild it
+  // from live data so a newly published state shows without a redeploy.
+  function renderStateLinks() {
+    const list = document.querySelector(".directory-state-links__list");
+    if (!list || !_statesList.length) return;
+    list.innerHTML = _statesList
+      .map((s) => `<li><a href="/states/${encodeURIComponent(s)}">${escapeHtml(STATE_NAMES[s] || s)} (${escapeHtml(s)})</a></li>`)
+      .join("");
   }
 
   async function rebuildCityOptions(stateCode, preserve) {

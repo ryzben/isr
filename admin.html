@@ -176,10 +176,9 @@
 <div class="auth-wrap" id="authWrap">
   <div class="auth-box">
     <h1>ISR Admin</h1>
-    <p>Enter your admin password to continue. To make changes you must also be <a href="signin" target="_blank">signed in on the site</a> with the admin account.</p>
-    <input type="password" id="adminPass" aria-label="Admin password" placeholder="Password" />
-    <button onclick="checkPass()">Sign In</button>
-    <p class="auth-error" id="authError"></p>
+    <p id="authMsg">Checking your account…</p>
+    <button id="authSignIn" hidden onclick="location.href='signin?next=' + encodeURIComponent('/admin')">Sign in with the admin account</button>
+    <p class="auth-error" id="authError" role="alert"></p>
   </div>
 </div>
 
@@ -258,6 +257,16 @@
         </div>
         <div class="grid-2">
           <div class="field">
+            <label for="f-programs">Programs</label>
+            <input type="text" id="f-programs" placeholder="PreK / VPK, Elementary (K-5), Islamic Studies" />
+          </div>
+          <div class="field">
+            <label for="f-email">Public contact email <span class="field-hint">(shown on the listing)</span></label>
+            <input type="email" id="f-email" placeholder="office@school.org" />
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
             <label>Accreditation</label>
             <input type="text" id="f-accred" aria-label="Accreditation" placeholder="Cognia, CISNA..." />
           </div>
@@ -309,28 +318,55 @@
 <script>
   const SUPABASE_URL = 'https://vprltwjduekabkizlbkv.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcmx0d2pkdWVrYWJraXpsYmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NDE3MzEsImV4cCI6MjA5MzIxNzczMX0.oHNRX6q9jXbR8W3yULzWf1bstHVulYJOGghmthQazTA';
-  const ADMIN_PASS  = 'isr-admin-2026';
-
   let editingId   = null;   // null = publish mode, string = edit mode (school id)
   let schoolsCache = {};    // id → school object, populated by loadSchools
 
-  function checkPass() {
-    if (document.getElementById('adminPass').value === ADMIN_PASS) {
-      document.getElementById('authWrap').style.display = 'none';
-      document.getElementById('dash').classList.add('active');
-      loadSchools();
-      loadPendingBadge();
-      loadReviewBadge();
-    } else {
-      document.getElementById('authError').textContent = 'Incorrect password.';
-    }
-  }
-  document.getElementById('adminPass').addEventListener('keydown', e => { if (e.key === 'Enter') checkPass(); });
-
-  function signOut() {
+  // Access: the dashboard opens only for a signed-in account whose
+  // user_profiles.user_type is 'admin'. This check is for the UI only. The
+  // database enforces the same rule on every read and write (is_admin() RLS
+  // policies, migrations 04 and 05), so bypassing this page gains nothing.
+  function showGate(message, { signIn = true, error = '' } = {}) {
+    document.getElementById('authMsg').textContent = message;
+    document.getElementById('authSignIn').hidden = !signIn;
+    document.getElementById('authError').textContent = error;
     document.getElementById('authWrap').style.display = 'flex';
     document.getElementById('dash').classList.remove('active');
-    document.getElementById('adminPass').value = '';
+  }
+
+  async function initAdmin() {
+    const session = getIsrSession();
+    if (!session || !session.user) {
+      showGate('Sign in with the admin account to open the dashboard.');
+      return;
+    }
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/user_profiles?id=eq.${encodeURIComponent(session.user.id)}&select=user_type`,
+        { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${session.access_token}` } }
+      );
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const [profile] = await res.json();
+      if (!profile || profile.user_type !== 'admin') {
+        showGate(`You're signed in as ${session.user.email || 'this account'}, which is not an admin account.`,
+          { signIn: true });
+        document.getElementById('authSignIn').textContent = 'Sign in with a different account';
+        return;
+      }
+    } catch (err) {
+      showGate('Could not check your account. Please reload the page.',
+        { signIn: false, error: err.message });
+      return;
+    }
+    document.getElementById('authWrap').style.display = 'none';
+    document.getElementById('dash').classList.add('active');
+    loadSchools();
+    loadPendingBadge();
+    loadReviewBadge();
+  }
+
+  function signOut() {
+    localStorage.removeItem('isr_session');
+    location.reload();
   }
 
   function switchTab(name, btn) {
@@ -476,6 +512,8 @@
     document.getElementById('f-tuition').value    = s.tuition_range || '';
     document.getElementById('f-desc').value       = s.description || '';
     document.getElementById('f-photo').value      = s.photo_url   || '';
+    document.getElementById('f-programs').value   = s.programs    || '';
+    document.getElementById('f-email').value      = s.email       || '';
     document.getElementById('f-accred').value     = s.accreditation || '';
     document.getElementById('f-enrollment').value = s.enrollment  || '';
     document.getElementById('f-verified').value   = s.verified ? 'true' : 'false';
@@ -524,6 +562,8 @@
       tuition_range: document.getElementById('f-tuition').value.trim() || null,
       description:   document.getElementById('f-desc').value.trim() || null,
       photo_url:     document.getElementById('f-photo').value.trim() || null,
+      programs:      document.getElementById('f-programs').value.trim() || null,
+      email:         document.getElementById('f-email').value.trim() || null,
       accreditation: document.getElementById('f-accred').value.trim() || null,
       enrollment:    document.getElementById('f-enrollment').value.trim() || null,
       verified:      document.getElementById('f-verified').value === 'true',
@@ -603,12 +643,12 @@
       list.innerHTML = schools.map(s => `
         <div class="school-row">
           <div class="school-row__info">
-            <h3>${s.name}${s.verified ? ' ✓' : ''}</h3>
-            <p>${s.city}, ${s.state} · ${s.grades || 'Grades not listed'}</p>
+            <h3>${escapeAdmin(s.name)}${s.verified ? ' ✓' : ''}</h3>
+            <p>${escapeAdmin(s.city)}, ${escapeAdmin(s.state)} · ${escapeAdmin(s.grades || 'Grades not listed')}</p>
           </div>
           <div class="school-row__actions">
-            <button class="btn-edit" onclick="editSchool('${s.id}')">Edit</button>
-            <button class="btn-delete" onclick="deleteSchool('${s.id}', '${s.name.replace(/'/g,"\\'")}', this)">Delete</button>
+            <button class="btn-edit" data-id="${escapeAdmin(s.id)}" onclick="editSchool(this.dataset.id)">Edit</button>
+            <button class="btn-delete" data-id="${escapeAdmin(s.id)}" onclick="deleteSchool(this.dataset.id, this)">Delete</button>
           </div>
         </div>
       `).join('');
@@ -617,7 +657,8 @@
     }
   }
 
-  async function deleteSchool(id, name, btn) {
+  async function deleteSchool(id, btn) {
+    const name = schoolsCache[id]?.name || id;
     if (!confirm('Delete "' + name + '"? This cannot be undone.')) return;
     btn.disabled = true; btn.textContent = 'Deleting...';
     try {
@@ -660,28 +701,33 @@
       const subs = await res.json();
       document.getElementById('pendingCount').textContent = subs.length;
       if (!subs.length) { list.innerHTML = '<div class="empty">No pending submissions.</div>'; return; }
+      // Every field below comes from the public add-school form, so escape it all
+      // before it goes into innerHTML (this page runs with the admin's session).
+      const e = escapeAdmin;
+      const httpUrl = u => /^https?:\/\//i.test(String(u || '')) ? u : '';
       list.innerHTML = subs.map(s => {
-        const photos = [s.photo_url_1, s.photo_url_2, s.photo_url_3].filter(Boolean);
+        const photos = [s.photo_url_1, s.photo_url_2, s.photo_url_3].map(httpUrl).filter(Boolean);
+        const website = httpUrl(s.website);
         const date   = new Date(s.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         return `
-          <div class="sub-card" id="sub-${s.id}">
+          <div class="sub-card" id="sub-${e(s.id)}">
             <div class="sub-card__header">
               <div>
-                <div class="sub-card__name">${s.school_name}</div>
-                <div class="sub-card__meta">${s.city}, ${s.state} · Submitted ${date}</div>
+                <div class="sub-card__name">${e(s.school_name)}</div>
+                <div class="sub-card__meta">${e(s.city)}, ${e(s.state)} · Submitted ${date}</div>
               </div>
             </div>
-            ${s.description ? `<div class="sub-card__body">${s.description}</div>` : ''}
-            ${photos.length ? `<div class="sub-card__photos">${photos.map(u => `<img src="${u}" alt="photo">`).join('')}</div>` : ''}
+            ${s.description ? `<div class="sub-card__body">${e(s.description)}</div>` : ''}
+            ${photos.length ? `<div class="sub-card__photos">${photos.map(u => `<img src="${e(u)}" alt="photo">`).join('')}</div>` : ''}
             <div class="sub-card__contact">
-              Contact: <strong>${s.contact_name}</strong> · <a href="mailto:${s.contact_email}">${s.contact_email}</a>
-              ${s.phone ? ' · ' + s.phone : ''}
-              ${s.website ? ' · <a href="' + s.website + '" target="_blank">' + s.website + '</a>' : ''}
-              ${s.programs ? '<br>Programs: ' + s.programs : ''}
+              Contact (private, from the submitter): <strong>${e(s.contact_name)}</strong> · <a href="mailto:${e(s.contact_email)}">${e(s.contact_email)}</a>
+              ${s.phone ? ' · ' + e(s.phone) : ''}
+              ${website ? ' · <a href="' + e(website) + '" target="_blank" rel="noopener noreferrer">' + e(website) + '</a>' : (s.website ? ' · ' + e(s.website) : '')}
+              ${s.programs ? '<br>Programs: ' + e(s.programs) : ''}
             </div>
             <div class="sub-card__actions">
-              <button class="btn-approve" onclick="approveSubmission('${s.id}', this)">✓ Publish to directory</button>
-              <button class="btn-reject"  onclick="rejectSubmission('${s.id}', this)">Reject</button>
+              <button class="btn-approve" onclick="approveSubmission('${e(s.id)}', this)">✓ Publish to directory</button>
+              <button class="btn-reject"  onclick="rejectSubmission('${e(s.id)}', this)">Reject</button>
             </div>
           </div>`;
       }).join('');
@@ -720,6 +766,7 @@
           website    : s.website    || null,
           description: s.description || null,
           photo_url  : s.photo_url_1 || null,
+          programs   : s.programs    || null,
           verified   : false,
         }),
       });
@@ -728,7 +775,7 @@
         throw new Error(err.message || err.details || 'Publish failed');
       }
 
-      await fetch(`${SUPABASE_URL}/rest/v1/school_submissions?id=eq.${id}`, {
+      const markRes = await fetch(`${SUPABASE_URL}/rest/v1/school_submissions?id=eq.${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -738,6 +785,11 @@
         },
         body: JSON.stringify({ status: 'published' }),
       });
+      if (!markRes.ok) {
+        alert(`"${s.school_name}" is now live, but the submission could not be marked as published ` +
+              `(HTTP ${markRes.status}), so it may still show in Pending. Click Reject to clear it; ` +
+              `that does not unpublish the school.`);
+      }
 
       document.getElementById('sub-' + id).remove();
       loadPendingBadge();
@@ -775,6 +827,8 @@
       btn.disabled = false; btn.textContent = 'Reject';
     }
   }
+
+  initAdmin();
 </script>
 </body>
 </html>
